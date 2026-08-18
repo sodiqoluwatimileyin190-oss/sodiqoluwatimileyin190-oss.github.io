@@ -3,10 +3,10 @@
 >
 > JRAD Retail is a fictional and simulated retail environment created for portfolio and analytical purposes. The project is not affiliated with, endorsed by, or based on proprietary data from any real retailer.
 >
-> The business scenarios and operational behavior's were informed by real-world observations of Nigeria superstores environments and were translated into custom business rules, probability distributions, and simulation logic.
+> The business scenarios and operational behaviors were informed by real-world observations of Nigerian supermarket environments and were translated into custom business rules, probability distributions, and simulation logic.
 ## Project Overview
 
-The JRAD Retail Data System is a full-scale retail data engineering and analytics project inspired by real-life Nigeria Superstores operations and customer shopping behavior.
+The JRAD Retail Data System is a full-scale retail data engineering and analytics project inspired by real-world Nigerian supermarket operations and customer shopping behavior.
 
 The project was designed to simulate a realistic retail environment, covering customer behavior, product purchasing patterns, branch performance, loyalty activity, operational events, and customer experience.
 

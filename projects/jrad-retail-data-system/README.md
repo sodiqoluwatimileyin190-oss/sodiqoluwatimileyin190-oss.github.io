@@ -1,5 +1,9 @@
 # JRAD Retail Data System
-
+> **Project Disclaimer**
+>
+> JRAD Retail is a fictional and simulated retail environment created for portfolio and analytical purposes. The project is not affiliated with, endorsed by, or based on proprietary data from any real retailer.
+>
+> The business scenarios and operational behavior's were informed by real-world observations of Nigeria superstores environments and were translated into custom business rules, probability distributions, and simulation logic.
 ## Project Overview
 
 The JRAD Retail Data System is a full-scale retail data engineering and analytics project inspired by real-life Nigeria Superstores operations and customer shopping behavior.
@@ -50,6 +54,16 @@ The dataset was designed to contain realistic business relationships rather than
 
 A major part of this project involved building the data architecture before generating the final transactional dataset.
 
+
+## Building the Retail Foundation
+
+Before generating customers or transactions, the commercial structure of the simulated retail environment had to be defined.
+
+### Product Master
+
+The Product Master served as the commercial foundation of the JRAD Retail ecosystem. It defined the products available across the simulated business and established the attributes required to influence purchasing, pricing, demand, storage, and other downstream transaction behavior.
+
+![JRAD Retail Product Master](images/01-product-master.png)
 ### Distribution Library
 
 A custom Distribution Library was created in Excel to define realistic distributions and business rules.
@@ -66,7 +80,7 @@ This included:
 - Customer acquisition channels
 
 These distributions were used as controlled inputs during data generation.
-
+![JRAD Retail Distribution Library](images/02-distribution-library.png)
 ### Identity Library
 
 A separate Identity Library was also created to generate realistic Nigerian customer identities.
@@ -79,7 +93,7 @@ The library included structured pools of:
 - Ethnic name groups
 
 This helped create more realistic and diverse customer records.
-
+![JRAD Retail Nigerian Identity Library](images/03-nigerian-identity-library.png)
 ### Python Data Generation
 
 Python was used to generate and combine the datasets using the business rules and distributions created in Excel.
@@ -94,7 +108,11 @@ The generation process ensured relationships between different parts of the syst
 - Seasonal events and demand patterns
 
 ---
+### Customer Master Output
 
+The generation process produced structured customer records by combining identity data, demographic distributions, branch logic, registration behaviour, loyalty status, acquisition channels, and other defined business rules.
+
+![JRAD Retail Customer Master](images/04-customer-master.png)
 ## Business Events and Seasonality
 
 The system incorporates simulated business events that influence retail activity.
@@ -120,10 +138,10 @@ Each event can influence:
 - Product demand
 - Peak shopping hours
 
-This allows the dataset to simulate more realistic changes in customer behaviour throughout the year.
+This allows the dataset to simulate more realistic changes in customer behavior throughout the year.
 
 ---
-
+![JRAD Retail Business Events](images/05-business-events.png)
 ## Data Architecture
 
 The project consists of multiple interconnected datasets representing different areas of the retail business.

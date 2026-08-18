@@ -1,1 +1,894 @@
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>JRAD Retail | SQL Business Analysis</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #f7f7f7;
+            color: #222;
+            line-height: 1.7;
+        }
+
+        header {
+            background: #1f1f1f;
+            color: white;
+            padding: 70px 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 42px;
+        }
+
+        header p {
+            margin-top: 15px;
+            font-size: 18px;
+            color: #d6d6d6;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1100px;
+            margin: auto;
+        }
+
+        section {
+            background: white;
+            margin: 35px 0;
+            padding: 45px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+        }
+
+        h2 {
+            margin-top: 0;
+            font-size: 30px;
+            color: #222;
+            border-bottom: 2px solid #e5e5e5;
+            padding-bottom: 12px;
+        }
+
+        h3 {
+            font-size: 22px;
+            margin-top: 30px;
+        }
+
+        p {
+            font-size: 16px;
+        }
+
+        ul {
+            padding-left: 22px;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        .highlight-box {
+            background: #f3edf5;
+            border-left: 5px solid #5e3568;
+            padding: 25px;
+            margin: 25px 0;
+            border-radius: 6px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .stat-card {
+            background: #f8f8f8;
+            padding: 25px;
+            text-align: center;
+            border-radius: 10px;
+            border: 1px solid #e5e5e5;
+        }
+
+        .stat-card h3 {
+            margin: 0;
+            font-size: 30px;
+            color: #5e3568;
+        }
+
+        .stat-card p {
+            margin: 8px 0 0;
+            font-size: 14px;
+            color: #666;
+        }
+
+        .project-image {
+            width: 100%;
+            margin-top: 25px;
+            border-radius: 10px;
+            border: 1px solid #ddd;
+        }
+
+        .workflow {
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            line-height: 2;
+        }
+
+        .next-stage {
+            background: #1f1f1f;
+            color: white;
+        }
+
+        .next-stage h2 {
+            color: white;
+            border-bottom-color: #444;
+        }
+
+        .next-stage p {
+            color: #dddddd;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 25px;
+            background: #5e3568;
+            color: white;
+            padding: 12px 22px;
+            text-decoration: none;
+            border-radius: 6px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            color: #777;
+        }
+
+        @media (max-width: 700px) {
+
+            header h1 {
+                font-size: 30px;
+            }
+
+            section {
+                padding: 25px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+    <!-- HEADER -->
+
+    <header>
+
+        <div class="container">
+
+            <h1>Inside the Retail Engine</h1>
+
+            <p>
+                SQL Data Modeling, Validation & Business Analysis
+            </p>
+
+        </div>
+
+    </header>
+
+
+    <main class="container">
+
+
+        <!-- PROJECT DISCLAIMER -->
+
+        <section>
+
+            <div class="highlight-box">
+
+                <strong>Project Disclaimer</strong>
+
+                <p>
+                    JRAD Retail is a fictional and simulated retail environment
+                    created for portfolio and analytical purposes. The project is
+                    not affiliated with, endorsed by, or based on proprietary data
+                    from any real retailer.
+                </p>
+
+                <p>
+                    The SQL analysis was performed using the simulated JRAD Retail
+                    Data System developed from custom business rules, behavioural
+                    logic, probability distributions and transaction-generation
+                    processes.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- PROJECT OVERVIEW -->
+
+        <section>
+
+            <h2>Project Overview</h2>
+
+            <p>
+                The JRAD Retail Data System was designed to simulate a realistic
+                retail environment from the ground up.
+            </p>
+
+            <p>
+                After designing the business logic, customer behaviour,
+                product ecosystem, branch activity, seasonal events and
+                transaction rules, Python was used to generate a large-scale
+                interconnected retail dataset.
+            </p>
+
+            <p>
+                This project represents the next stage of that journey:
+                moving inside the retail engine to structure, validate and
+                analyze the generated data using SQL.
+            </p>
+
+            <div class="highlight-box">
+
+                <strong>The objective was not simply to run SQL queries.</strong>
+
+                <p>
+                    The goal was to examine how millions of interconnected
+                    retail records could be transformed into a reliable
+                    analytical environment capable of answering meaningful
+                    business questions.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- DATASET SCALE -->
+
+        <section>
+
+            <h2>The Scale of the Retail Engine</h2>
+
+            <p>
+                The SQL environment was built around a large interconnected
+                retail dataset containing transactional, customer, product,
+                branch, payment and operational information.
+            </p>
+
+            <div class="stats-grid">
+
+                <div class="stat-card">
+
+                    <h3>1.8M+</h3>
+
+                    <p>Transaction Lines</p>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <h3>225K+</h3>
+
+                    <p>Receipts Generated</p>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <h3>525</h3>
+
+                    <p>Products</p>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <h3>5</h3>
+
+                    <p>Retail Branches</p>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <h3>800</h3>
+
+                    <p>Registered Customers</p>
+
+                </div>
+
+
+                <div class="stat-card">
+
+                    <h3>40</h3>
+
+                    <p>Cashier / Employee Records</p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- SQL ENVIRONMENT -->
+
+        <section>
+
+            <h2>Building the SQL Environment</h2>
+
+            <p>
+                Before meaningful analysis could begin, the different datasets
+                had to be examined as part of one interconnected retail system.
+            </p>
+
+            <p>
+                The SQL environment brought together multiple business entities,
+                including:
+            </p>
+
+            <ul>
+
+                <li>Customers</li>
+
+                <li>Products</li>
+
+                <li>Branches</li>
+
+                <li>Sales Transactions</li>
+
+                <li>Receipts</li>
+
+                <li>Payments</li>
+
+                <li>Employees and Cashiers</li>
+
+                <li>Inventory</li>
+
+                <li>Business Events</li>
+
+                <li>Customer Experience Data</li>
+
+                <li>Queue and Operational Metrics</li>
+
+                <li>Product Pricing History</li>
+
+            </ul>
+
+            <p>
+                The challenge was understanding how these datasets connected
+                and ensuring that the relationships could support reliable
+                downstream analysis.
+            </p>
+
+        </section>
+
+
+        <!-- DATA VALIDATION -->
+
+        <section>
+
+            <h2>Data Validation & Quality Checks</h2>
+
+            <p>
+                Before drawing business conclusions, the data environment was
+                subjected to validation checks.
+            </p>
+
+            <p>
+                SQL was used to investigate potential issues including:
+            </p>
+
+            <ul>
+
+                <li>Duplicate records</li>
+
+                <li>Orphan records</li>
+
+                <li>Missing relationships between datasets</li>
+
+                <li>Referential integrity issues</li>
+
+                <li>Receipt and payment consistency</li>
+
+                <li>Transaction-level validation</li>
+
+                <li>Revenue reconciliation</li>
+
+            </ul>
+
+            <div class="highlight-box">
+
+                <strong>Why this mattered:</strong>
+
+                <p>
+                    Business analysis is only as reliable as the underlying
+                    relationships between the data. Validation was therefore
+                    treated as part of the analytical process rather than
+                    something skipped before reporting.
+                </p>
+
+            </div>
+
+            <!-- ADD SQL VALIDATION SCREENSHOT HERE -->
+
+            <!--
+            <img
+                src="images/01-data-validation.png"
+                alt="JRAD Retail SQL Data Validation"
+                class="project-image">
+            -->
+
+        </section>
+
+
+        <!-- ANALYTICAL FOUNDATION -->
+
+        <section>
+
+            <h2>Building the Analytical Foundation</h2>
+
+            <p>
+                Once the relationships between the datasets had been examined,
+                the retail system could be structured for analysis across
+                multiple business dimensions.
+            </p>
+
+            <p>
+                A central sales structure was used to connect transactional
+                activity with relevant dimensions such as customers, products,
+                branches, payments and operational records.
+            </p>
+
+            <p>
+                This created an analytical foundation capable of supporting
+                questions across the entire retail ecosystem rather than
+                analyzing each dataset in isolation.
+            </p>
+
+            <div class="highlight-box">
+
+                <strong>Analytical flow:</strong>
+
+                <div class="workflow">
+
+                    Transaction Activity
+
+                    ↓
+
+                    Customer, Product & Branch Relationships
+
+                    ↓
+
+                    Validation
+
+                    ↓
+
+                    Central Sales Analysis
+
+                    ↓
+
+                    Business Insights
+
+                </div>
+
+            </div>
+
+            <!-- ADD FACT SALES / DATA MODEL SCREENSHOT HERE -->
+
+            <!--
+            <img
+                src="images/02-analytical-foundation.png"
+                alt="JRAD Retail SQL Analytical Foundation"
+                class="project-image">
+            -->
+
+        </section>
+
+
+        <!-- SALES AND REVENUE -->
+
+        <section>
+
+            <h2>Sales & Revenue Analysis</h2>
+
+            <p>
+                SQL was used to investigate how commercial activity was
+                distributed across the JRAD Retail environment.
+            </p>
+
+            <p>
+                The analysis explored:
+            </p>
+
+            <ul>
+
+                <li>Total transaction activity</li>
+
+                <li>Revenue patterns</li>
+
+                <li>Daily sales performance</li>
+
+                <li>Branch-level performance</li>
+
+                <li>Product demand</li>
+
+                <li>Transaction volume</li>
+
+                <li>Basket behaviour</li>
+
+            </ul>
+
+            <p>
+                This stage moved the project beyond raw transactional data and
+                into questions around where retail activity was concentrated
+                and how performance differed across the business.
+            </p>
+
+            <!-- ADD SALES ANALYSIS SCREENSHOT HERE -->
+
+            <!--
+            <img
+                src="images/03-sales-analysis.png"
+                alt="JRAD Retail Sales and Revenue Analysis"
+                class="project-image">
+            -->
+
+        </section>
+
+
+        <!-- CUSTOMER AND PAYMENT -->
+
+        <section>
+
+            <h2>Customer & Payment Behaviour</h2>
+
+            <p>
+                The customer and payment datasets were analyzed to understand
+                how shoppers interacted with the retail environment.
+            </p>
+
+            <p>
+                Areas investigated included:
+            </p>
+
+            <ul>
+
+                <li>Customer transaction behaviour</li>
+
+                <li>Registered and unregistered customer activity</li>
+
+                <li>Payment method distribution</li>
+
+                <li>Receipt-level purchasing patterns</li>
+
+                <li>Basket size behaviour</li>
+
+                <li>Customer contribution to retail activity</li>
+
+            </ul>
+
+            <div class="highlight-box">
+
+                <strong>The larger analytical question:</strong>
+
+                <p>
+                    Revenue tells us how much was spent. Customer analysis
+                    helps explain who is driving that activity and how those
+                    shopping behaviours can later support loyalty, retention
+                    and targeted engagement strategies.
+                </p>
+
+            </div>
+
+            <!-- ADD CUSTOMER / PAYMENT SCREENSHOT HERE -->
+
+            <!--
+            <img
+                src="images/04-customer-payment-analysis.png"
+                alt="JRAD Retail Customer and Payment Analysis"
+                class="project-image">
+            -->
+
+        </section>
+
+
+        <!-- PRODUCT AND BRANCH -->
+
+        <section>
+
+            <h2>Product Demand & Branch Performance</h2>
+
+            <p>
+                Product and branch analysis was performed to investigate how
+                demand and commercial activity varied across the simulated
+                retail network.
+            </p>
+
+            <ul>
+
+                <li>Product-level sales activity</li>
+
+                <li>High-demand products</li>
+
+                <li>Branch performance</li>
+
+                <li>Revenue contribution</li>
+
+                <li>Transaction volume differences</li>
+
+                <li>Product availability patterns</li>
+
+            </ul>
+
+            <p>
+                These analyses provide the foundation for later decisions around
+                inventory allocation, branch operations, product planning and
+                performance optimization.
+            </p>
+
+            <!-- ADD PRODUCT / BRANCH SCREENSHOT HERE -->
+
+            <!--
+            <img
+                src="images/05-product-branch-analysis.png"
+                alt="JRAD Retail Product and Branch Analysis"
+                class="project-image">
+            -->
+
+        </section>
+
+
+        <!-- INVENTORY -->
+
+        <section>
+
+            <h2>Inventory & Stock Risk Analysis</h2>
+
+            <p>
+                One of the important operational areas investigated was product
+                availability.
+            </p>
+
+            <p>
+                Inventory records were classified into operational categories:
+            </p>
+
+            <ul>
+
+                <li><strong>In Stock</strong></li>
+
+                <li><strong>Low Stock</strong></li>
+
+                <li><strong>Out of Stock</strong></li>
+
+            </ul>
+
+            <p>
+                This is particularly important in a retail environment because
+                stock availability directly affects both revenue and customer
+                experience.
+            </p>
+
+            <div class="highlight-box">
+
+                <strong>Potential outcomes of stock-outs include:</strong>
+
+                <ul>
+
+                    <li>A substituted purchase</li>
+
+                    <li>A delayed purchase</li>
+
+                    <li>Customer dissatisfaction</li>
+
+                    <li>A completely lost sale</li>
+
+                </ul>
+
+            </div>
+
+            <p>
+                This analysis creates an important bridge to the next stage of
+                the JRAD project, where inventory risks, customer behaviour and
+                operational performance will be visualized and investigated
+                further.
+            </p>
+
+            <!-- ADD INVENTORY SCREENSHOT HERE -->
+
+            <!--
+            <img
+                src="images/06-inventory-analysis.png"
+                alt="JRAD Retail Inventory and Stock Analysis"
+                class="project-image">
+            -->
+
+        </section>
+
+
+        <!-- SQL WORKFLOW -->
+
+        <section>
+
+            <h2>SQL Analysis Workflow</h2>
+
+            <div class="workflow">
+
+                Generated Retail Data
+
+                ↓
+
+                SQL Data Environment
+
+                ↓
+
+                Relationship Investigation
+
+                ↓
+
+                Data Validation
+
+                ↓
+
+                Analytical Foundation
+
+                ↓
+
+                Sales & Revenue Analysis
+
+                ↓
+
+                Customer & Payment Analysis
+
+                ↓
+
+                Product & Branch Performance
+
+                ↓
+
+                Inventory & Stock Risk Analysis
+
+            </div>
+
+        </section>
+
+
+        <!-- SKILLS -->
+
+        <section>
+
+            <h2>Key Skills Demonstrated</h2>
+
+            <ul>
+
+                <li>SQL Querying</li>
+
+                <li>Relational Data Analysis</li>
+
+                <li>Data Validation</li>
+
+                <li>Data Quality Assessment</li>
+
+                <li>Referential Integrity Checks</li>
+
+                <li>Data Modeling</li>
+
+                <li>Fact and Dimensional Analysis</li>
+
+                <li>JOINs</li>
+
+                <li>Common Table Expressions (CTEs)</li>
+
+                <li>Aggregations</li>
+
+                <li>Window Functions</li>
+
+                <li>Revenue Analysis</li>
+
+                <li>Customer Analysis</li>
+
+                <li>Product Performance Analysis</li>
+
+                <li>Branch Performance Analysis</li>
+
+                <li>Inventory Analysis</li>
+
+            </ul>
+
+        </section>
+
+
+        <!-- NEXT STAGE -->
+
+        <section class="next-stage">
+
+            <h2>What Comes Next?</h2>
+
+            <p>
+                The SQL stage established the analytical foundation for the
+                JRAD Retail ecosystem.
+            </p>
+
+            <p>
+                The next challenge is not simply to create charts.
+            </p>
+
+            <p>
+                It is to transform the validated data and business findings
+                into an advanced decision-making system.
+            </p>
+
+            <div class="highlight-box">
+
+                <strong>Next Stage: Advanced Power BI & Visual Engineering</strong>
+
+                <p>
+                    The next project will explore executive performance,
+                    branch operations, customer behaviour, loyalty and
+                    retention, hidden high-value shoppers, product demand,
+                    stock-out risks, customer experience and operational
+                    efficiency.
+                </p>
+
+            </div>
+
+            <p>
+                The question now becomes:
+            </p>
+
+            <h3>
+                What story is hiding inside the data?
+            </h3>
+
+        </section>
+
+
+        <a href="../../index.html#projects" class="back-link">
+
+            ← Back to Portfolio
+
+        </a>
+
+
+    </main>
+
+
+    <footer>
+
+        <p>
+            © 2026 Sodiq Oluwatimileyin. JRAD Retail Portfolio Project.
+        </p>
+
+    </footer>
+
+
+</body>
+
+</html>

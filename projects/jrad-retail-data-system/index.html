@@ -1,1 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>JRAD Retail Data System | Sodiq Oluwatimileyin</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f4f6f9;
+            color: #1f2937;
+            line-height: 1.7;
+        }
+
+        .hero {
+            background: #1f2f4a;
+            color: white;
+            padding: 80px 20px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            margin: 0;
+            font-size: 42px;
+        }
+
+        .hero p {
+            max-width: 750px;
+            margin: 20px auto 0;
+            font-size: 18px;
+            color: #dbe4f0;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1100px;
+            margin: auto;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin: 30px 0;
+            text-decoration: none;
+            color: #1f2f4a;
+            font-weight: bold;
+        }
+
+        section {
+            background: white;
+            padding: 45px;
+            margin-bottom: 30px;
+            border-radius: 10px;
+        }
+
+        h2 {
+            color: #1f2f4a;
+            margin-top: 0;
+        }
+
+        h3 {
+            color: #2d4365;
+            margin-top: 35px;
+        }
+
+        .disclaimer {
+            background: #eef3f9;
+            border-left: 5px solid #1f2f4a;
+            padding: 25px;
+            margin-bottom: 30px;
+        }
+
+        ul {
+            padding-left: 22px;
+        }
+
+        .image-section {
+            margin-top: 35px;
+        }
+
+        .project-image {
+            width: 100%;
+            margin-top: 15px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+        }
+
+        .tools {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .tool {
+            background: #1f2f4a;
+            color: white;
+            padding: 10px 18px;
+            border-radius: 5px;
+        }
+
+        .workflow {
+            padding-left: 25px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 35px;
+            color: #6b7280;
+        }
+
+        @media (max-width: 768px) {
+
+            .hero h1 {
+                font-size: 30px;
+            }
+
+            section {
+                padding: 25px;
+            }
+
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="hero">
+        <div class="container">
+            <h1>JRAD Retail Data System</h1>
+
+            <p>
+                From Real-Life Observation to a 2M+ Row Retail Data System
+            </p>
+        </div>
+    </header>
+
+
+    <main class="container">
+
+        <a href="../../index.html" class="back-link">
+            ← Back to Portfolio
+        </a>
+
+
+        <section>
+
+            <div class="disclaimer">
+
+                <h2>Project Disclaimer</h2>
+
+                <p>
+                    JRAD Retail is a fictional and simulated retail environment
+                    created for portfolio and analytical purposes. The project is
+                    not affiliated with, endorsed by, or based on proprietary data
+                    from any real retailer.
+                </p>
+
+                <p>
+                    The business scenarios and operational behaviours were informed
+                    by real-world observations of Nigerian superstore environments
+                    and were translated into custom business rules, probability
+                    distributions, and simulation logic.
+                </p>
+
+            </div>
+
+
+            <h2>Project Overview</h2>
+
+            <p>
+                The JRAD Retail Data System is a full-scale retail data engineering
+                and analytics project inspired by real-life Nigerian superstore
+                operations and customer shopping behaviour.
+            </p>
+
+            <p>
+                The project was designed to simulate a realistic retail environment,
+                covering customer behaviour, product purchasing patterns, branch
+                performance, loyalty activity, operational events, and customer
+                experience.
+            </p>
+
+            <p>
+                Rather than using a simple ready-made dataset, the project involved
+                designing and building a structured retail data ecosystem from the
+                ground up.
+            </p>
+
+        </section>
+
+
+        <section>
+
+            <h2>Business Problem</h2>
+
+            <p>
+                Retail businesses generate large volumes of transactional and
+                operational data. However, raw data alone does not provide
+                meaningful business value.
+            </p>
+
+            <p>
+                The objective of this project was to create a realistic retail
+                data environment that could be used to analyze:
+            </p>
+
+            <ul>
+                <li>Sales and revenue performance</li>
+                <li>Customer purchasing behaviour</li>
+                <li>Branch performance</li>
+                <li>Product and category performance</li>
+                <li>Customer loyalty and retention</li>
+                <li>Payment behaviour</li>
+                <li>Operational efficiency</li>
+                <li>Seasonal and event-driven shopping patterns</li>
+            </ul>
+
+        </section>
+
+
+        <section>
+
+            <h2>Project Scope</h2>
+
+            <p>
+                The JRAD Retail Data System simulates retail activity across
+                multiple branches and includes:
+            </p>
+
+            <ul>
+                <li>Customer master data</li>
+                <li>Product master data</li>
+                <li>Sales transactions</li>
+                <li>Branch information</li>
+                <li>Customer loyalty behaviour</li>
+                <li>Payment behaviour</li>
+                <li>Business events and seasonal patterns</li>
+                <li>Customer experience and ratings</li>
+                <li>Queue and operational metrics</li>
+                <li>Product pricing history</li>
+            </ul>
+
+        </section>
+
+
+        <section>
+
+            <h2>Building the Retail Foundation</h2>
+
+
+            <div class="image-section">
+
+                <h3>Product Master</h3>
+
+                <p>
+                    The Product Master served as the commercial foundation of
+                    the JRAD Retail ecosystem. It defined the products available
+                    across the simulated business and established attributes that
+                    influence purchasing, pricing, demand, storage, and downstream
+                    transaction behaviour.
+                </p>
+
+                <img
+                    src="images/01-product-master.png"
+                    alt="JRAD Retail Product Master"
+                    class="project-image">
+
+            </div>
+
+
+            <div class="image-section">
+
+                <h3>Distribution Library</h3>
+
+                <p>
+                    A custom Distribution Library was created in Excel to define
+                    realistic distributions and business rules.
+                </p>
+
+                <ul>
+                    <li>Branch-level customer distribution</li>
+                    <li>Age distributions</li>
+                    <li>Demographic distributions</li>
+                    <li>Registration behaviour</li>
+                    <li>Loyalty membership behaviour</li>
+                    <li>Payment method distribution</li>
+                    <li>Basket size distribution</li>
+                    <li>Customer acquisition channels</li>
+                </ul>
+
+                <img
+                    src="images/02-distribution-library.png"
+                    alt="JRAD Retail Distribution Library"
+                    class="project-image">
+
+            </div>
+
+
+            <div class="image-section">
+
+                <h3>Nigerian Identity Library</h3>
+
+                <p>
+                    A separate Identity Library was created to generate realistic
+                    Nigerian customer identities using structured pools of first
+                    names, surnames, gender-specific names, and ethnic name groups.
+                </p>
+
+                <img
+                    src="images/03-nigerian-identity-library.png"
+                    alt="JRAD Retail Nigerian Identity Library"
+                    class="project-image">
+
+            </div>
+
+
+            <div class="image-section">
+
+                <h3>Customer Master Output</h3>
+
+                <p>
+                    The generation process produced structured customer records by
+                    combining identity data, demographic distributions, branch logic,
+                    registration behaviour, loyalty status, acquisition channels,
+                    and other defined business rules.
+                </p>
+
+                <img
+                    src="images/04-customer-master.png"
+                    alt="JRAD Retail Customer Master"
+                    class="project-image">
+
+            </div>
+
+
+            <div class="image-section">
+
+                <h3>Business Events and Seasonality</h3>
+
+                <p>
+                    The system incorporates simulated business events that influence
+                    customer traffic, basket size, customer spending, product demand,
+                    and peak shopping hours.
+                </p>
+
+                <img
+                    src="images/05-business-events.png"
+                    alt="JRAD Retail Business Events"
+                    class="project-image">
+
+            </div>
+
+        </section>
+
+
+        <section>
+
+            <h2>Tools Used</h2>
+
+            <div class="tools">
+                <div class="tool">Microsoft Excel</div>
+                <div class="tool">Python</div>
+                <div class="tool">SQL</div>
+                <div class="tool">Power BI</div>
+            </div>
+
+        </section>
+
+
+        <section>
+
+            <h2>Key Skills Demonstrated</h2>
+
+            <ul>
+                <li>Data generation</li>
+                <li>Data modelling</li>
+                <li>Business rule design</li>
+                <li>Synthetic data generation</li>
+                <li>Distribution modelling</li>
+                <li>Data architecture</li>
+                <li>Data cleaning</li>
+                <li>SQL analysis</li>
+                <li>Business intelligence</li>
+                <li>Dashboard development</li>
+            </ul>
+
+        </section>
+
+
+        <section>
+
+            <h2>Project Workflow</h2>
+
+            <ol class="workflow">
+                <li>Observed and documented realistic retail business behaviour.</li>
+                <li>Designed the retail data structure.</li>
+                <li>Created the Product Master dataset.</li>
+                <li>Created the Distribution Library in Excel.</li>
+                <li>Created the Nigerian Identity Library.</li>
+                <li>Defined customer and business behaviour rules.</li>
+                <li>Used Python to generate interconnected datasets.</li>
+                <li>Loaded and prepared the data for SQL analysis.</li>
+                <li>Developed analytical models and dashboards.</li>
+            </ol>
+
+        </section>
+
+
+        <section>
+
+            <h2>Project Outcome</h2>
+
+            <p>
+                The final result is a structured retail data ecosystem designed
+                for end-to-end analytics.
+            </p>
+
+            <p>
+                The project demonstrates how real-world observations and business
+                logic can be transformed into a scalable synthetic data system that
+                supports analysis, reporting, and business intelligence.
+            </p>
+
+        </section>
+
+    </main>
+
+
+    <footer>
+
+        <p>
+            © 2026 Sodiq Oluwatimileyin — Data Analysis Portfolio
+        </p>
+
+    </footer>
+
+</body>
+
+</html>

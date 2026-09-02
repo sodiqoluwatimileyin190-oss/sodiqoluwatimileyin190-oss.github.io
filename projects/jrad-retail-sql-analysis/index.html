@@ -1,876 +1,1448 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>JRAD Retail | SQL Business Analysis</title>
+    <title>JRAD Retail SQL Business Analysis | Sodiq Oluwatimileyin</title>
+
+    <link rel="stylesheet"
+          href="../../assets/css/style.css">
 
     <style>
+        /* =========================================================
+           JRAD RETAIL SQL — CASE STUDY PAGE
+           Visual language aligned with Project 3
+           ========================================================= */
 
-        * {
-            box-sizing: border-box;
+        .jrad-page {
+            background: #ffffff;
+            color: #171717;
         }
 
-        body {
+        .jrad-container {
+            width: min(1180px, 92%);
+            margin: 0 auto;
+        }
+
+        /* =========================================================
+           HERO
+           ========================================================= */
+
+        .jrad-hero {
+            padding: 70px 0 50px;
+            text-align: center;
+        }
+
+        .jrad-eyebrow {
+            display: inline-block;
+            margin-bottom: 18px;
+            padding: 8px 15px;
+            border-radius: 999px;
+            background: #f0e9ff;
+            color: #6d42c7;
+            font-size: 0.78rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .jrad-hero h1 {
             margin: 0;
-            font-family: Arial, Helvetica, sans-serif;
-            background-color: #f7f7f7;
-            color: #222;
+            font-size: clamp(2.2rem, 5vw, 4.2rem);
+            line-height: 1.05;
+            letter-spacing: -0.04em;
+        }
+
+        .jrad-hero h1 span {
+            color: #7046c6;
+        }
+
+        .jrad-subtitle {
+            max-width: 760px;
+            margin: 22px auto 0;
+            font-size: 1.12rem;
             line-height: 1.7;
-        }
-
-        header {
-            background: #1f1f1f;
-            color: white;
-            padding: 70px 20px;
-            text-align: center;
-        }
-
-        header h1 {
-            margin: 0;
-            font-size: 42px;
-        }
-
-        header p {
-            margin-top: 15px;
-            font-size: 18px;
-            color: #d6d6d6;
-        }
-
-        .container {
-            width: 90%;
-            max-width: 1100px;
-            margin: auto;
-        }
-
-        section {
-            background: white;
-            margin: 35px 0;
-            padding: 45px;
-            border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
-        }
-
-        h2 {
-            margin-top: 0;
-            font-size: 30px;
-            color: #222;
-            border-bottom: 2px solid #e5e5e5;
-            padding-bottom: 12px;
-        }
-
-        h3 {
-            font-size: 22px;
-            margin-top: 30px;
-        }
-
-        p {
-            font-size: 16px;
-        }
-
-        ul {
-            padding-left: 22px;
-        }
-
-        li {
-            margin-bottom: 8px;
-        }
-
-        .highlight-box {
-            background: #f3edf5;
-            border-left: 5px solid #5e3568;
-            padding: 25px;
-            margin: 25px 0;
-            border-radius: 6px;
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-            gap: 20px;
-            margin-top: 30px;
-        }
-
-        .stat-card {
-            background: #f8f8f8;
-            padding: 25px;
-            text-align: center;
-            border-radius: 10px;
-            border: 1px solid #e5e5e5;
-        }
-
-        .stat-card h3 {
-            margin: 0;
-            font-size: 30px;
-            color: #5e3568;
-        }
-
-        .stat-card p {
-            margin: 8px 0 0;
-            font-size: 14px;
             color: #666;
         }
 
-        .project-image {
+        .jrad-hero-image {
+            margin: 55px auto 0;
+            overflow: hidden;
+            border-radius: 22px;
+            box-shadow: 0 25px 70px rgba(45, 29, 91, 0.18);
+        }
+
+        .jrad-hero-image img {
+            display: block;
             width: 100%;
-            margin-top: 25px;
+            height: auto;
+        }
+
+        /* =========================================================
+           BUTTONS
+           ========================================================= */
+
+        .jrad-actions {
+            display: flex;
+            justify-content: center;
+            gap: 14px;
+            flex-wrap: wrap;
+            margin-top: 32px;
+        }
+
+        .jrad-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 13px 23px;
             border-radius: 10px;
-            border: 1px solid #ddd;
-        }
-
-        .workflow {
-            text-align: center;
-            font-size: 18px;
-            font-weight: bold;
-            line-height: 2;
-        }
-
-        .next-stage {
-            background: #1f1f1f;
-            color: white;
-        }
-
-        .next-stage h2 {
-            color: white;
-            border-bottom-color: #444;
-        }
-
-        .next-stage p {
-            color: #dddddd;
-        }
-
-        .back-link {
-            display: inline-block;
-            margin-top: 25px;
-            background: #5e3568;
-            color: white;
-            padding: 12px 22px;
             text-decoration: none;
-            border-radius: 6px;
+            font-weight: 700;
+            transition:
+                transform 0.2s ease,
+                box-shadow 0.2s ease;
         }
 
-        footer {
-            text-align: center;
+        .jrad-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .jrad-btn-primary {
+            background: #7046c6;
+            color: #ffffff;
+            box-shadow: 0 10px 25px rgba(112, 70, 198, 0.25);
+        }
+
+        .jrad-btn-secondary {
+            background: #f4f1fa;
+            color: #5d3baa;
+        }
+
+        /* =========================================================
+           GENERAL SECTION
+           ========================================================= */
+
+        .jrad-section {
+            padding: 85px 0;
+        }
+
+        .jrad-section-light {
+            background: #f8f7fb;
+        }
+
+        .jrad-section-heading {
+            max-width: 760px;
+            margin-bottom: 42px;
+        }
+
+        .jrad-section-heading .label {
+            color: #7046c6;
+            font-size: 0.78rem;
+            font-weight: 800;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        .jrad-section-heading h2 {
+            margin: 10px 0 15px;
+            font-size: clamp(1.8rem, 4vw, 2.7rem);
+            letter-spacing: -0.035em;
+        }
+
+        .jrad-section-heading p {
+            margin: 0;
+            color: #666;
+            line-height: 1.75;
+        }
+
+        /* =========================================================
+           PROJECT AT A GLANCE
+           ========================================================= */
+
+        .jrad-stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+        }
+
+        .jrad-stat {
+            padding: 28px 22px;
+            border: 1px solid #e8e4ef;
+            border-radius: 16px;
+            background: #ffffff;
+            transition:
+                transform 0.2s ease,
+                box-shadow 0.2s ease;
+        }
+
+        .jrad-stat:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(45, 29, 91, 0.08);
+        }
+
+        .jrad-stat strong {
+            display: block;
+            margin-bottom: 7px;
+            font-size: 1.7rem;
+            color: #7046c6;
+        }
+
+        .jrad-stat span {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        /* =========================================================
+           BUSINESS QUESTION
+           ========================================================= */
+
+        .jrad-question {
+            display: grid;
+            grid-template-columns: 0.8fr 1.2fr;
+            gap: 55px;
+            align-items: center;
+        }
+
+        .jrad-question-title {
+            font-size: clamp(2rem, 4vw, 3rem);
+            line-height: 1.15;
+            letter-spacing: -0.04em;
+        }
+
+        .jrad-question-copy {
+            color: #555;
+            font-size: 1.05rem;
+            line-height: 1.8;
+        }
+
+        /* =========================================================
+           ANALYTICAL AREAS
+           ========================================================= */
+
+        .jrad-analysis-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 18px;
+        }
+
+        .jrad-analysis-card {
+            padding: 28px;
+            border: 1px solid #e7e2ef;
+            border-radius: 17px;
+            background: #ffffff;
+            transition:
+                transform 0.2s ease,
+                box-shadow 0.2s ease;
+        }
+
+        .jrad-analysis-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(45, 29, 91, 0.08);
+        }
+
+        .jrad-analysis-number {
+            color: #7046c6;
+            font-size: 0.8rem;
+            font-weight: 800;
+        }
+
+        .jrad-analysis-card h3 {
+            margin: 12px 0 10px;
+            font-size: 1.15rem;
+        }
+
+        .jrad-analysis-card p {
+            margin: 0;
+            color: #666;
+            line-height: 1.65;
+            font-size: 0.94rem;
+        }
+
+        /* =========================================================
+           PROJECT ARTIFACTS
+           ========================================================= */
+
+        .jrad-artifact {
+            margin-bottom: 75px;
+        }
+
+        .jrad-artifact:last-child {
+            margin-bottom: 0;
+        }
+
+        .jrad-artifact-header {
+            margin-bottom: 24px;
+        }
+
+        .jrad-artifact-number {
+            color: #7046c6;
+            font-size: 0.78rem;
+            font-weight: 800;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        .jrad-artifact-header h3 {
+            margin: 7px 0 8px;
+            font-size: 1.7rem;
+        }
+
+        .jrad-artifact-header p {
+            max-width: 760px;
+            margin: 0;
+            color: #666;
+            line-height: 1.65;
+        }
+
+        .jrad-artifact-image {
+            overflow: hidden;
+            border-radius: 18px;
+            background: #eeeeee;
+            box-shadow: 0 20px 55px rgba(0, 0, 0, 0.12);
+        }
+
+        .jrad-artifact-image img {
+            display: block;
+            width: 100%;
+            height: auto;
+        }
+
+        .jrad-artifact-note {
+            margin-top: 18px;
+            padding: 22px 24px;
+            border-radius: 14px;
+            background: #f7f4fc;
+            border-left: 4px solid #7046c6;
+            color: #555;
+            line-height: 1.7;
+        }
+
+        /* =========================================================
+           SQL WORKFLOW
+           ========================================================= */
+
+        .jrad-workflow {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 12px;
+        }
+
+        .jrad-workflow-step {
+            position: relative;
+            padding: 25px 18px;
+            border: 1px solid #e7e2ef;
+            border-radius: 14px;
+            background: #ffffff;
+        }
+
+        .jrad-workflow-step span {
+            display: block;
+            margin-bottom: 9px;
+            color: #7046c6;
+            font-size: 0.75rem;
+            font-weight: 800;
+            letter-spacing: 0.08em;
+        }
+
+        .jrad-workflow-step strong {
+            display: block;
+            margin-bottom: 7px;
+            font-size: 0.95rem;
+        }
+
+        .jrad-workflow-step p {
+            margin: 0;
+            color: #666;
+            line-height: 1.55;
+            font-size: 0.83rem;
+        }
+
+        /* =========================================================
+           TECHNICAL STACK
+           ========================================================= */
+
+        .jrad-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 30px;
+        }
+
+        .jrad-stack-item {
+            padding: 13px 18px;
+            border-radius: 10px;
+            background: #f2edfb;
+            color: #5d3baa;
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+
+        /* =========================================================
+           TECHNICAL CARDS
+           ========================================================= */
+
+        .jrad-tech-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 18px;
+        }
+
+        .jrad-tech-card {
+            padding: 28px;
+            border-radius: 16px;
+            background: #ffffff;
+            border: 1px solid #e7e2ef;
+        }
+
+        .jrad-tech-card h3 {
+            margin: 0 0 10px;
+            font-size: 1.05rem;
+        }
+
+        .jrad-tech-card p {
+            margin: 0;
+            color: #666;
+            line-height: 1.65;
+            font-size: 0.94rem;
+        }
+
+        /* =========================================================
+           BUSINESS IMPACT
+           ========================================================= */
+
+        .jrad-impact {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+        }
+
+        .jrad-impact-card {
             padding: 30px;
-            color: #777;
+            border-radius: 17px;
+            background: #21143b;
+            color: #ffffff;
         }
 
-        @media (max-width: 700px) {
-
-            header h1 {
-                font-size: 30px;
-            }
-
-            section {
-                padding: 25px;
-            }
-
+        .jrad-impact-card h3 {
+            margin: 0 0 12px;
+            font-size: 1.1rem;
         }
 
+        .jrad-impact-card p {
+            margin: 0;
+            color: #d9d2e6;
+            line-height: 1.7;
+            font-size: 0.93rem;
+        }
+
+        /* =========================================================
+           DISCLAIMER
+           ========================================================= */
+
+        .jrad-disclaimer {
+            margin-top: 30px;
+            padding: 20px 22px;
+            border-radius: 13px;
+            background: #f8f7fb;
+            border: 1px solid #e7e2ef;
+            color: #666;
+            font-size: 0.88rem;
+            line-height: 1.65;
+        }
+
+        /* =========================================================
+           FINAL CTA
+           ========================================================= */
+
+        .jrad-final {
+            padding: 90px 0;
+            text-align: center;
+        }
+
+        .jrad-final h2 {
+            margin: 0 0 15px;
+            font-size: clamp(2rem, 4vw, 3rem);
+            letter-spacing: -0.04em;
+        }
+
+        .jrad-final p {
+            max-width: 620px;
+            margin: 0 auto;
+            color: #666;
+            line-height: 1.7;
+        }
+
+        /* =========================================================
+           RESPONSIVE
+           ========================================================= */
+
+        @media (max-width: 1000px) {
+
+            .jrad-stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .jrad-workflow {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .jrad-impact {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 900px) {
+
+            .jrad-question {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .jrad-analysis-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .jrad-tech-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 650px) {
+
+            .jrad-section {
+                padding: 60px 0;
+            }
+
+            .jrad-hero {
+                padding: 50px 0 35px;
+            }
+
+            .jrad-stats {
+                grid-template-columns: 1fr;
+            }
+
+            .jrad-workflow {
+                grid-template-columns: 1fr;
+            }
+
+            .jrad-hero-image,
+            .jrad-artifact-image {
+                border-radius: 12px;
+            }
+        }
     </style>
-
 </head>
 
 
-<body>
+<body class="jrad-page">
 
-    <!-- HEADER -->
 
-    <header>
+    <!-- =========================================================
+         HERO
+         ========================================================= -->
 
-        <div class="container">
+    <section class="jrad-hero">
 
-            <h1>Inside the Retail Engine</h1>
+        <div class="jrad-container">
 
-            <p>
-                SQL Data Modeling, Validation & Business Analysis
+            <div class="jrad-eyebrow">
+                SQL Retail Business Analysis
+            </div>
+
+            <h1>
+                JRAD Retail<br>
+                <span>Analytical Foundations</span>
+            </h1>
+
+            <p class="jrad-subtitle">
+                A SQL-driven retail analytics project built to validate,
+                structure and interrogate the JRAD Superstores 2026
+                retail ecosystem before translating the findings into
+                executive Power BI intelligence.
             </p>
+
+            <div class="jrad-actions">
+
+                <a
+                    href="https://github.com/sodiqoluwatimileyin190-oss/sodiqoluwatimileyin190-oss.github.io/tree/main/projects/jrad-retail-sql-analysis"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="jrad-btn jrad-btn-primary">
+                    View Project on GitHub
+                </a>
+
+            </div>
+
+            <div class="jrad-hero-image">
+
+                <img
+                    src="images/01-dataset-scale-sql-environment.png"
+                    alt="JRAD Retail SQL analysis dataset scale and SQL environment">
+
+            </div>
 
         </div>
 
-    </header>
+    </section>
 
 
-    <main class="container">
+    <!-- =========================================================
+         PROJECT AT A GLANCE
+         ========================================================= -->
 
+    <section class="jrad-section jrad-section-light">
 
-        <!-- PROJECT DISCLAIMER -->
+        <div class="jrad-container">
 
-        <section>
+            <div class="jrad-section-heading">
 
-            <div class="highlight-box">
+                <div class="label">
+                    Project at a Glance
+                </div>
 
-                <strong>Project Disclaimer</strong>
-
-                <p>
-                    JRAD Retail is a fictional and simulated retail environment
-                    created for portfolio and analytical purposes. The project is
-                    not affiliated with, endorsed by, or based on proprietary data
-                    from any real retailer.
-                </p>
-
-                <p>
-                    The SQL analysis was performed using the simulated JRAD Retail
-                    Data System developed from custom business rules, behavioural
-                    logic, probability distributions and transaction-generation
-                    processes.
-                </p>
-
-            </div>
-
-        </section>
-
-
-        <!-- PROJECT OVERVIEW -->
-
-        <section>
-
-            <h2>Project Overview</h2>
-
-            <p>
-                The JRAD Retail Data System was designed to simulate a realistic
-                retail environment from the ground up.
-            </p>
-
-            <p>
-                After designing the business logic, customer behaviour,
-                product ecosystem, branch activity, seasonal events and
-                transaction rules, Python was used to generate a large-scale
-                interconnected retail dataset.
-            </p>
-
-            <p>
-                This project represents the next stage of that journey:
-                moving inside the retail engine to structure, validate and
-                analyze the generated data using SQL.
-            </p>
-
-            <div class="highlight-box">
-
-                <strong>The objective was not simply to run SQL queries.</strong>
+                <h2>
+                    Building the analytical foundation behind JRAD Retail.
+                </h2>
 
                 <p>
-                    The goal was to examine how millions of interconnected
-                    retail records could be transformed into a reliable
-                    analytical environment capable of answering meaningful
-                    business questions.
+                    The SQL project forms the analytical foundation for the
+                    wider JRAD retail intelligence solution, moving from
+                    raw transactional data through validation, business
+                    analysis and structured outputs.
                 </p>
 
             </div>
 
-        </section>
+            <div class="jrad-stats">
+
+                <div class="jrad-stat">
+                    <strong>1.8M+</strong>
+                    <span>Transaction Lines</span>
+                </div>
+
+                <div class="jrad-stat">
+                    <strong>225K+</strong>
+                    <span>Receipts / Baskets</span>
+                </div>
+
+                <div class="jrad-stat">
+                    <strong>525</strong>
+                    <span>Products / SKUs</span>
+                </div>
+
+                <div class="jrad-stat">
+                    <strong>5</strong>
+                    <span>Retail Branches</span>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
 
 
-        <!-- DATASET SCALE -->
+    <!-- =========================================================
+         BUSINESS QUESTION
+         ========================================================= -->
 
-        <section>
+    <section class="jrad-section">
 
-            <h2>The Scale of the Retail Engine</h2>
+        <div class="jrad-container">
 
-            <p>
-                The SQL environment was built around a large interconnected
-                retail dataset containing transactional, customer, product,
-                branch, payment and operational information.
-            </p>
+            <div class="jrad-question">
 
-            <div class="stats-grid">
+                <div>
 
-                <div class="stat-card">
+                    <div class="jrad-section-heading">
 
-                    <h3>1.8M+</h3>
+                        <div class="label">
+                            The Business Question
+                        </div>
 
-                    <p>Transaction Lines</p>
+                        <h2 class="jrad-question-title">
+                            What does the underlying retail data actually reveal?
+                        </h2>
+
+                    </div>
 
                 </div>
 
+                <div class="jrad-question-copy">
 
-                <div class="stat-card">
+                    <p>
+                        Before building executive dashboards, the dataset
+                        needed to be interrogated at the source.
+                    </p>
 
-                    <h3>225K+</h3>
+                    <p>
+                        The SQL analysis was designed to answer questions
+                        around <strong>sales performance, revenue movement,
+                        customer behaviour, payment patterns, product
+                        performance, branch execution and inventory risk.</strong>
+                    </p>
 
-                    <p>Receipts Generated</p>
-
-                </div>
-
-
-                <div class="stat-card">
-
-                    <h3>525</h3>
-
-                    <p>Products</p>
-
-                </div>
-
-
-                <div class="stat-card">
-
-                    <h3>5</h3>
-
-                    <p>Retail Branches</p>
-
-                </div>
-
-
-                <div class="stat-card">
-
-                    <h3>800</h3>
-
-                    <p>Registered Customers</p>
-
-                </div>
-
-
-                <div class="stat-card">
-
-                    <h3>40</h3>
-
-                    <p>Cashier / Employee Records</p>
+                    <p>
+                        This created a validated analytical foundation for
+                        the subsequent Power BI reporting layer.
+                    </p>
 
                 </div>
 
             </div>
-<img
-    src="images/01-dataset-scale-sql-environment.png"
-    alt="JRAD Retail dataset scale and SQL environment"
-    class="project-image">
-        </section>
+
+        </div>
+
+    </section>
 
 
-        <!-- SQL ENVIRONMENT -->
+    <!-- =========================================================
+         ANALYTICAL AREAS
+         ========================================================= -->
 
-        <section>
+    <section class="jrad-section jrad-section-light">
 
-            <h2>Building the SQL Environment</h2>
+        <div class="jrad-container">
 
-            <p>
-                Before meaningful analysis could begin, the different datasets
-                had to be examined as part of one interconnected retail system.
-            </p>
+            <div class="jrad-section-heading">
 
-            <p>
-                The SQL environment brought together multiple business entities,
-                including:
-            </p>
+                <div class="label">
+                    Analytical Scope
+                </div>
 
-            <ul>
-
-                <li>Customers</li>
-
-                <li>Products</li>
-
-                <li>Branches</li>
-
-                <li>Sales Transactions</li>
-
-                <li>Receipts</li>
-
-                <li>Payments</li>
-
-                <li>Employees and Cashiers</li>
-
-                <li>Inventory</li>
-
-                <li>Business Events</li>
-
-                <li>Customer Experience Data</li>
-
-                <li>Queue and Operational Metrics</li>
-
-                <li>Product Pricing History</li>
-
-            </ul>
-
-            <p>
-                The challenge was understanding how these datasets connected
-                and ensuring that the relationships could support reliable
-                downstream analysis.
-            </p>
-
-        </section>
-
-
-        <!-- DATA VALIDATION -->
-
-        <section>
-
-            <h2>Data Validation & Quality Checks</h2>
-
-            <p>
-                Before drawing business conclusions, the data environment was
-                subjected to validation checks.
-            </p>
-
-            <p>
-                SQL was used to investigate potential issues including:
-            </p>
-
-            <ul>
-
-                <li>Duplicate records</li>
-
-                <li>Orphan records</li>
-
-                <li>Missing relationships between datasets</li>
-
-                <li>Referential integrity issues</li>
-
-                <li>Receipt and payment consistency</li>
-
-                <li>Transaction-level validation</li>
-
-                <li>Revenue reconciliation</li>
-
-            </ul>
-
-            <div class="highlight-box">
-
-                <strong>Why this mattered:</strong>
+                <h2>
+                    From transactional records to business questions.
+                </h2>
 
                 <p>
-                    Business analysis is only as reliable as the underlying
-                    relationships between the data. Validation was therefore
-                    treated as part of the analytical process rather than
-                    something skipped before reporting.
+                    SQL was used to move beyond simple querying and establish
+                    a structured understanding of how the retail business behaves.
                 </p>
 
             </div>
 
-           <img
-    src="images/03-data-validation-quality-checks.png"
-    alt="JRAD Retail SQL data validation and quality checks"
-    class="project-image">
 
-        </section>
+            <div class="jrad-analysis-grid">
+
+                <div class="jrad-analysis-card">
+
+                    <div class="jrad-analysis-number">
+                        01
+                    </div>
+
+                    <h3>
+                        Sales & Revenue
+                    </h3>
+
+                    <p>
+                        Examining revenue movement, transaction behaviour,
+                        sales patterns and the underlying performance of
+                        the retail operation.
+                    </p>
+
+                </div>
 
 
-        <!-- ANALYTICAL FOUNDATION -->
+                <div class="jrad-analysis-card">
 
-        <section>
+                    <div class="jrad-analysis-number">
+                        02
+                    </div>
 
-            <h2>Building the Analytical Foundation</h2>
+                    <h3>
+                        Customer & Payment Behaviour
+                    </h3>
 
-            <p>
-                Once the relationships between the datasets had been examined,
-                the retail system could be structured for analysis across
-                multiple business dimensions.
-            </p>
+                    <p>
+                        Analysing customer activity, basket behaviour and
+                        payment-method patterns to understand how customers
+                        interact with the business.
+                    </p>
 
-            <p>
-                A central sales structure was used to connect transactional
-                activity with relevant dimensions such as customers, products,
-                branches, payments and operational records.
-            </p>
+                </div>
 
-            <p>
-                This created an analytical foundation capable of supporting
-                questions across the entire retail ecosystem rather than
-                analyzing each dataset in isolation.
-            </p>
 
-            <div class="highlight-box">
+                <div class="jrad-analysis-card">
 
-                <strong>Analytical flow:</strong>
+                    <div class="jrad-analysis-number">
+                        03
+                    </div>
 
-                <div class="workflow">
+                    <h3>
+                        Product & Branch Performance
+                    </h3>
 
-                    Transaction Activity
+                    <p>
+                        Comparing product-level and branch-level performance
+                        to identify important contributors and areas of
+                        operational variation.
+                    </p>
 
-                    ↓
+                </div>
 
-                    Customer, Product & Branch Relationships
 
-                    ↓
+                <div class="jrad-analysis-card">
 
-                    Validation
+                    <div class="jrad-analysis-number">
+                        04
+                    </div>
 
-                    ↓
+                    <h3>
+                        Inventory & Stock Risk
+                    </h3>
 
-                    Central Sales Analysis
-
-                    ↓
-
-                    Business Insights
+                    <p>
+                        Using inventory information to identify stock exposure,
+                        product availability issues and potential operational
+                        risks.
+                    </p>
 
                 </div>
 
             </div>
 
-           <img
-    src="images/02-data-model-factsales-architecture.png"
-    alt="JRAD Retail SQL data model and FactSales architecture"
-    class="project-image">
+        </div>
 
-        </section>
+    </section>
 
 
-        <!-- SALES AND REVENUE -->
+    <!-- =========================================================
+         PROJECT ARTIFACTS
+         ========================================================= -->
 
-        <section>
+    <section class="jrad-section">
 
-            <h2>Sales & Revenue Analysis</h2>
+        <div class="jrad-container">
 
-            <p>
-                SQL was used to investigate how commercial activity was
-                distributed across the JRAD Retail environment.
-            </p>
+            <div class="jrad-section-heading">
 
-            <p>
-                The analysis explored:
-            </p>
+                <div class="label">
+                    Project Evidence
+                </div>
 
-            <ul>
-
-                <li>Total transaction activity</li>
-
-                <li>Revenue patterns</li>
-
-                <li>Daily sales performance</li>
-
-                <li>Branch-level performance</li>
-
-                <li>Product demand</li>
-
-                <li>Transaction volume</li>
-
-                <li>Basket behaviour</li>
-
-            </ul>
-
-            <p>
-                This stage moved the project beyond raw transactional data and
-                into questions around where retail activity was concentrated
-                and how performance differed across the business.
-            </p>
-
-           <img
-    src="images/04-factsales-validation-revenue-analysis.png"
-    alt="JRAD Retail FactSales validation and revenue analysis"
-    class="project-image">
-
-        </section>
-
-
-        <!-- CUSTOMER AND PAYMENT -->
-
-        <section>
-
-            <h2>Customer & Payment Behaviour</h2>
-
-            <p>
-                The customer and payment datasets were analyzed to understand
-                how shoppers interacted with the retail environment.
-            </p>
-
-            <p>
-                Areas investigated included:
-            </p>
-
-            <ul>
-
-                <li>Customer transaction behaviour</li>
-
-                <li>Registered and unregistered customer activity</li>
-
-                <li>Payment method distribution</li>
-
-                <li>Receipt-level purchasing patterns</li>
-
-                <li>Basket size behaviour</li>
-
-                <li>Customer contribution to retail activity</li>
-
-            </ul>
-
-            <div class="highlight-box">
-
-                <strong>The larger analytical question:</strong>
+                <h2>
+                    The analytical work behind the final dashboard.
+                </h2>
 
                 <p>
-                    Revenue tells us how much was spent. Customer analysis
-                    helps explain who is driving that activity and how those
-                    shopping behaviours can later support loyalty, retention
-                    and targeted engagement strategies.
+                    The following artifacts document the SQL environment,
+                    data validation process and business analysis performed
+                    before the Power BI reporting layer.
                 </p>
 
             </div>
 
-           <img
-    src="images/05-customer-branch-product-analysis.png"
-    alt="JRAD Retail customer, product and transaction analysis"
-    class="project-image">
 
-        </section>
+            <!-- DATA MODEL -->
 
+            <article class="jrad-artifact">
 
-        <!-- PRODUCT AND BRANCH -->
+                <div class="jrad-artifact-header">
 
-        <section>
+                    <div class="jrad-artifact-number">
+                        Artifact 01
+                    </div>
 
-            <h2>Product Demand & Branch Performance</h2>
+                    <h3>
+                        Data Model & FactSales Architecture
+                    </h3>
 
-            <p>
-                Product and branch analysis was performed to investigate how
-                demand and commercial activity varied across the simulated
-                retail network.
-            </p>
+                    <p>
+                        Establishing the structure of the transactional
+                        environment and understanding how the FactSales
+                        table connects to the wider retail ecosystem.
+                    </p>
 
-            <ul>
+                </div>
 
-                <li>Product-level sales activity</li>
+                <div class="jrad-artifact-image">
 
-                <li>High-demand products</li>
+                    <img
+                        src="images/02-data-model-factsales-architecture.png"
+                        alt="JRAD Retail SQL data model and FactSales architecture">
 
-                <li>Branch performance</li>
+                </div>
 
-                <li>Revenue contribution</li>
+            </article>
 
-                <li>Transaction volume differences</li>
 
-                <li>Product availability patterns</li>
+            <!-- DATA VALIDATION -->
 
-            </ul>
+            <article class="jrad-artifact">
 
-            <p>
-                These analyses provide the foundation for later decisions around
-                inventory allocation, branch operations, product planning and
-                performance optimization.
-            </p>
+                <div class="jrad-artifact-header">
 
-            <!-- ADD PRODUCT / BRANCH SCREENSHOT HERE -->
+                    <div class="jrad-artifact-number">
+                        Artifact 02
+                    </div>
 
-            <!--
-            <img
-                src="images/05-product-branch-analysis.png"
-                alt="JRAD Retail Product and Branch Analysis"
-                class="project-image">
-            -->
+                    <h3>
+                        Data Validation & Quality Checks
+                    </h3>
 
-        </section>
+                    <p>
+                        Validating the underlying data before using it for
+                        analytical reporting and business decision-making.
+                    </p>
 
+                </div>
 
-        <!-- INVENTORY -->
+                <div class="jrad-artifact-image">
 
-        <section>
+                    <img
+                        src="images/03-data-validation-quality-checks.png"
+                        alt="JRAD Retail SQL data validation and quality checks">
 
-            <h2>Inventory & Stock Risk Analysis</h2>
+                </div>
 
-            <p>
-                One of the important operational areas investigated was product
-                availability.
-            </p>
+            </article>
 
-            <p>
-                Inventory records were classified into operational categories:
-            </p>
 
-            <ul>
+            <!-- REVENUE ANALYSIS -->
 
-                <li><strong>In Stock</strong></li>
+            <article class="jrad-artifact">
 
-                <li><strong>Low Stock</strong></li>
+                <div class="jrad-artifact-header">
 
-                <li><strong>Out of Stock</strong></li>
+                    <div class="jrad-artifact-number">
+                        Artifact 03
+                    </div>
 
-            </ul>
+                    <h3>
+                        Revenue & Sales Analysis
+                    </h3>
 
-            <p>
-                This is particularly important in a retail environment because
-                stock availability directly affects both revenue and customer
-                experience.
-            </p>
+                    <p>
+                        SQL analysis of FactSales to establish the underlying
+                        revenue and sales-performance patterns later surfaced
+                        through the Power BI executive dashboard.
+                    </p>
 
-            <div class="highlight-box">
+                </div>
 
-                <strong>Potential outcomes of stock-outs include:</strong>
+                <div class="jrad-artifact-image">
 
-                <ul>
+                    <img
+                        src="images/04-factsales-validation-revenue-analysis.png"
+                        alt="JRAD Retail FactSales validation and revenue analysis">
 
-                    <li>A substituted purchase</li>
+                </div>
 
-                    <li>A delayed purchase</li>
+            </article>
 
-                    <li>Customer dissatisfaction</li>
 
-                    <li>A completely lost sale</li>
+            <!-- CUSTOMER BRANCH PRODUCT -->
 
-                </ul>
+            <article class="jrad-artifact">
 
-            </div>
+                <div class="jrad-artifact-header">
 
-            <p>
-                This analysis creates an important bridge to the next stage of
-                the JRAD project, where inventory risks, customer behaviour and
-                operational performance will be visualized and investigated
-                further.
-            </p>
+                    <div class="jrad-artifact-number">
+                        Artifact 04
+                    </div>
 
-            <img
-    src="images/06-inventory-stock-risk-analysis.png"
-    alt="JRAD Retail inventory and stock risk analysis"
-    class="project-image">
-        </section>
+                    <h3>
+                        Customer, Branch & Product Analysis
+                    </h3>
 
+                    <p>
+                        Connecting customer behaviour with branch and product
+                        performance to understand the different dimensions
+                        contributing to retail value.
+                    </p>
 
-        <!-- SQL WORKFLOW -->
+                </div>
 
-        <section>
+                <div class="jrad-artifact-image">
 
-            <h2>SQL Analysis Workflow</h2>
+                    <img
+                        src="images/05-customer-branch-product-analysis.png"
+                        alt="JRAD Retail customer branch and product SQL analysis">
 
-            <div class="workflow">
+                </div>
 
-                Generated Retail Data
+            </article>
 
-                ↓
 
-                SQL Data Environment
+            <!-- INVENTORY -->
 
-                ↓
+            <article class="jrad-artifact">
 
-                Relationship Investigation
+                <div class="jrad-artifact-header">
 
-                ↓
+                    <div class="jrad-artifact-number">
+                        Artifact 05
+                    </div>
 
-                Data Validation
+                    <h3>
+                        Inventory & Stock Risk Analysis
+                    </h3>
 
-                ↓
+                    <p>
+                        Exploring inventory conditions and identifying
+                        potential stock-related risks within the retail
+                        operating environment.
+                    </p>
 
-                Analytical Foundation
+                </div>
 
-                ↓
+                <div class="jrad-artifact-image">
 
-                Sales & Revenue Analysis
+                    <img
+                        src="images/06-inventory-stock-risk-analysis.png"
+                        alt="JRAD Retail inventory and stock risk SQL analysis">
 
-                ↓
+                </div>
 
-                Customer & Payment Analysis
+            </article>
 
-                ↓
+        </div>
 
-                Product & Branch Performance
+    </section>
 
-                ↓
 
-                Inventory & Stock Risk Analysis
+    <!-- =========================================================
+         SQL WORKFLOW
+         ========================================================= -->
 
-            </div>
+    <section class="jrad-section jrad-section-light">
 
-        </section>
+        <div class="jrad-container">
 
+            <div class="jrad-section-heading">
 
-        <!-- SKILLS -->
+                <div class="label">
+                    SQL Workflow
+                </div>
 
-        <section>
-
-            <h2>Key Skills Demonstrated</h2>
-
-            <ul>
-
-                <li>SQL Querying</li>
-
-                <li>Relational Data Analysis</li>
-
-                <li>Data Validation</li>
-
-                <li>Data Quality Assessment</li>
-
-                <li>Referential Integrity Checks</li>
-
-                <li>Data Modeling</li>
-
-                <li>Fact and Dimensional Analysis</li>
-
-                <li>JOINs</li>
-
-                <li>Common Table Expressions (CTEs)</li>
-
-                <li>Aggregations</li>
-
-                <li>Window Functions</li>
-
-                <li>Revenue Analysis</li>
-
-                <li>Customer Analysis</li>
-
-                <li>Product Performance Analysis</li>
-
-                <li>Branch Performance Analysis</li>
-
-                <li>Inventory Analysis</li>
-
-            </ul>
-
-        </section>
-
-
-        <!-- NEXT STAGE -->
-
-        <section class="next-stage">
-
-            <h2>What Comes Next?</h2>
-
-            <p>
-                The SQL stage established the analytical foundation for the
-                JRAD Retail ecosystem.
-            </p>
-
-            <p>
-                The next challenge is not simply to create charts.
-            </p>
-
-            <p>
-                It is to transform the validated data and business findings
-                into an advanced decision-making system.
-            </p>
-
-            <div class="highlight-box">
-
-                <strong>Next Stage: Advanced Power BI & Visual Engineering</strong>
+                <h2>
+                    From raw data to analytical output.
+                </h2>
 
                 <p>
-                    The next project will explore executive performance,
-                    branch operations, customer behaviour, loyalty and
-                    retention, hidden high-value shoppers, product demand,
-                    stock-out risks, customer experience and operational
-                    efficiency.
+                    The workflow was structured around validating the data
+                    first, then progressively moving into business analysis.
                 </p>
 
             </div>
 
+
+            <div class="jrad-workflow">
+
+                <div class="jrad-workflow-step">
+
+                    <span>01</span>
+
+                    <strong>Load</strong>
+
+                    <p>
+                        Import and structure the retail data environment.
+                    </p>
+
+                </div>
+
+
+                <div class="jrad-workflow-step">
+
+                    <span>02</span>
+
+                    <strong>Validate</strong>
+
+                    <p>
+                        Check completeness, consistency and data quality.
+                    </p>
+
+                </div>
+
+
+                <div class="jrad-workflow-step">
+
+                    <span>03</span>
+
+                    <strong>Explore</strong>
+
+                    <p>
+                        Profile sales, customers, products and branches.
+                    </p>
+
+                </div>
+
+
+                <div class="jrad-workflow-step">
+
+                    <span>04</span>
+
+                    <strong>Analyse</strong>
+
+                    <p>
+                        Answer business questions through SQL analysis.
+                    </p>
+
+                </div>
+
+
+                <div class="jrad-workflow-step">
+
+                    <span>05</span>
+
+                    <strong>Translate</strong>
+
+                    <p>
+                        Convert findings into decision-ready BI.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================================================
+         TECHNICAL IMPLEMENTATION
+         ========================================================= -->
+
+    <section class="jrad-section">
+
+        <div class="jrad-container">
+
+            <div class="jrad-section-heading">
+
+                <div class="label">
+                    Technical Implementation
+                </div>
+
+                <h2>
+                    The analytical foundation behind the reporting layer.
+                </h2>
+
+                <p>
+                    SQL provided the structured analytical foundation that
+                    allowed the later Power BI dashboard to focus on
+                    interpretation, storytelling and decision support.
+                </p>
+
+            </div>
+
+
+            <div class="jrad-tech-grid">
+
+                <div class="jrad-tech-card">
+
+                    <h3>
+                        SQL Analysis
+                    </h3>
+
+                    <p>
+                        SQL queries were used to interrogate transactional,
+                        customer, product, branch and inventory data across
+                        the JRAD retail ecosystem.
+                    </p>
+
+                </div>
+
+
+                <div class="jrad-tech-card">
+
+                    <h3>
+                        Data Validation
+                    </h3>
+
+                    <p>
+                        Data-quality checks were performed before relying
+                        on the underlying tables for business analysis.
+                    </p>
+
+                </div>
+
+
+                <div class="jrad-tech-card">
+
+                    <h3>
+                        Relational Thinking
+                    </h3>
+
+                    <p>
+                        The analysis required understanding relationships
+                        between transactional facts and the wider retail
+                        dimensions surrounding them.
+                    </p>
+
+                </div>
+
+
+                <div class="jrad-tech-card">
+
+                    <h3>
+                        Business Analysis
+                    </h3>
+
+                    <p>
+                        Technical SQL outputs were translated into business
+                        questions around revenue, customers, products,
+                        branches and inventory.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="jrad-stack">
+
+                <div class="jrad-stack-item">
+                    SQL
+                </div>
+
+                <div class="jrad-stack-item">
+                    MySQL
+                </div>
+
+                <div class="jrad-stack-item">
+                    Data Validation
+                </div>
+
+                <div class="jrad-stack-item">
+                    Relational Data Analysis
+                </div>
+
+                <div class="jrad-stack-item">
+                    Business Intelligence
+                </div>
+
+                <div class="jrad-stack-item">
+                    Data Storytelling
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================================================
+         BUSINESS IMPACT
+         ========================================================= -->
+
+    <section class="jrad-section jrad-section-light">
+
+        <div class="jrad-container">
+
+            <div class="jrad-section-heading">
+
+                <div class="label">
+                    Business Impact
+                </div>
+
+                <h2>
+                    Why the SQL layer matters.
+                </h2>
+
+                <p>
+                    SQL was not treated as an isolated technical exercise.
+                    It was used to establish the analytical foundation for
+                    the broader JRAD retail intelligence solution.
+                </p>
+
+            </div>
+
+
+            <div class="jrad-impact">
+
+                <div class="jrad-impact-card">
+
+                    <h3>
+                        Validate before visualizing
+                    </h3>
+
+                    <p>
+                        Data-quality checks establish greater confidence
+                        that downstream KPIs and dashboard insights are
+                        based on a reliable analytical foundation.
+                    </p>
+
+                </div>
+
+
+                <div class="jrad-impact-card">
+
+                    <h3>
+                        Understand the retail engine
+                    </h3>
+
+                    <p>
+                        Sales, customers, products, branches and inventory
+                        can be examined independently and then connected
+                        into a broader business narrative.
+                    </p>
+
+                </div>
+
+
+                <div class="jrad-impact-card">
+
+                    <h3>
+                        Prepare decision-ready BI
+                    </h3>
+
+                    <p>
+                        The SQL analysis establishes the groundwork for
+                        the executive Power BI layer, where the findings
+                        can be communicated through interactive visual
+                        storytelling.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================================================
+         TECHNICAL SKILLS
+         ========================================================= -->
+
+    <section class="jrad-section">
+
+        <div class="jrad-container">
+
+            <div class="jrad-section-heading">
+
+                <div class="label">
+                    Skills Demonstrated
+                </div>
+
+                <h2>
+                    Technical capability demonstrated through the project.
+                </h2>
+
+            </div>
+
+
+            <div class="jrad-stack">
+
+                <div class="jrad-stack-item">
+                    SQL
+                </div>
+
+                <div class="jrad-stack-item">
+                    MySQL
+                </div>
+
+                <div class="jrad-stack-item">
+                    Data Validation
+                </div>
+
+                <div class="jrad-stack-item">
+                    Data Exploration
+                </div>
+
+                <div class="jrad-stack-item">
+                    Business Analysis
+                </div>
+
+                <div class="jrad-stack-item">
+                    Relational Data
+                </div>
+
+                <div class="jrad-stack-item">
+                    Retail Analytics
+                </div>
+
+                <div class="jrad-stack-item">
+                    Power BI Preparation
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================================================
+         DISCLAIMER
+         ========================================================= -->
+
+    <section class="jrad-section jrad-section-light">
+
+        <div class="jrad-container">
+
+            <div class="jrad-section-heading">
+
+                <div class="label">
+                    Project Context
+                </div>
+
+                <h2>
+                    A simulated retail environment.
+                </h2>
+
+                <p>
+                    JRAD Superstores is a fictional retail business created
+                    as a portfolio analytics project. The dataset and
+                    business environment were designed to simulate realistic
+                    retail operations and provide a complete analytical
+                    case study.
+                </p>
+
+            </div>
+
+            <div class="jrad-disclaimer">
+
+                <strong>Note:</strong>
+                The business, transactional data and operational scenarios
+                presented in this project are simulated for portfolio and
+                analytical demonstration purposes.
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================================================
+         FINAL CTA
+         ========================================================= -->
+
+    <section class="jrad-final">
+
+        <div class="jrad-container">
+
+            <h2>
+                Explore the project.
+            </h2>
+
             <p>
-                The question now becomes:
+                Explore the complete SQL analysis repository and see how
+                the analytical foundation connects to the wider JRAD
+                retail intelligence project.
             </p>
 
-            <h3>
-                What story is hiding inside the data?
-            </h3>
+            <div class="jrad-actions">
 
-        </section>
+                <a
+                    href="https://github.com/sodiqoluwatimileyin190-oss/sodiqoluwatimileyin190-oss.github.io/tree/main/projects/jrad-retail-sql-analysis"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="jrad-btn jrad-btn-primary">
+                    View Project on GitHub
+                </a>
 
+            </div>
 
-        <a href="../../index.html#projects" class="back-link">
+        </div>
 
-            ← Back to Portfolio
-
-        </a>
-
-
-    </main>
-
-
-    <footer>
-
-        <p>
-            © 2026 Sodiq Oluwatimileyin. JRAD Retail Portfolio Project.
-        </p>
-
-    </footer>
+    </section>
 
 
 </body>
-
 </html>

@@ -1,981 +1,2433 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+/* =========================================================
+   JRAD PORTFOLIO — GLOBAL DESIGN SYSTEM
+========================================================= */
 
-    <title>Sodiq Oluwatimileyin | Data Analysis Portfolio</title>
+:root {
 
-    <link rel="icon" type="image/png" href="/favicon-32x32.png">
-    <link rel="apple-touch-icon" href="/favicon-32x32.png">
+    --primary: #17113f;
+    --primary-dark: #0d0928;
 
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+    --purple: #7c5cd6;
+    --purple-light: #a68be0;
+    --purple-soft: #eee9ff;
 
-    <!-- Font Awesome -->
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    --lavender: #f5f2ff;
 
-    <!-- Main stylesheet -->
-    <link rel="stylesheet" href="assets/css/style.css">
-</head>
+    --text: #17152b;
+    --text-soft: #66627a;
+    --text-light: #8b879e;
 
-<body>
+    --white: #ffffff;
 
-<!-- =========================================================
-     HERO
-========================================================= -->
+    --border: #e8e3f3;
 
-<header class="hero">
+    --surface: #ffffff;
+    --surface-soft: #faf9fd;
 
-    <div class="hero-glow hero-glow-one"></div>
-    <div class="hero-glow hero-glow-two"></div>
+    --shadow-sm:
+        0 8px 25px rgba(35, 20, 80, 0.06);
 
-    <div class="hero-grid"></div>
+    --shadow-md:
+        0 18px 50px rgba(35, 20, 80, 0.10);
 
-    <div class="container hero-inner">
+    --shadow-lg:
+        0 30px 80px rgba(35, 20, 80, 0.16);
 
-        <div class="hero-kicker hero-animate">
-            <span class="status-dot"></span>
-            DATA ANALYST · BUSINESS INTELLIGENCE
-        </div>
+    --font-heading:
+        'Playfair Display',
+        serif;
 
-        <h1 class="hero-title hero-animate">
-            Sodiq
-            <span>Oluwatimileyin</span>
-        </h1>
+    --font-body:
+        'Inter',
+        sans-serif;
 
-        <p class="hero-role hero-animate">
-            Data Analyst | Business Intelligence |
-            SQL • Power BI • Excel • Python
-        </p>
+}
 
-        <p class="portfolio-tagline hero-animate">
-            Turning real-world business observations into data systems,
-            analytical insights, and decision-driven solutions.
-        </p>
 
-        <div class="social-links hero-animate">
+/* =========================================================
+   RESET
+========================================================= */
 
-            <a href="[YOUR_LINKEDIN_URL]"
-               target="_blank"
-               rel="noopener"
-               title="LinkedIn"
-               aria-label="LinkedIn">
-                <i class="fab fa-linkedin"></i>
-            </a>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-            <a href="https://github.com/sodiqoluwatimileyin190-oss"
-               target="_blank"
-               rel="noopener"
-               title="GitHub"
-               aria-label="GitHub">
-                <i class="fab fa-github"></i>
-            </a>
 
-            <a href="https://x.com/timmyyo0?s=21"
-               target="_blank"
-               rel="noopener"
-               title="X"
-               aria-label="X">
-                <i class="fab fa-x-twitter"></i>
-            </a>
+html {
+    scroll-behavior: smooth;
+}
 
-            <a href="assets/Your_Name_CV.pdf"
-               download
-               title="Download CV"
-               aria-label="Download CV">
-                <i class="fas fa-file-arrow-down"></i>
-            </a>
 
-        </div>
+body {
 
-        <div class="hero-scroll hero-animate">
-            <span>SCROLL TO EXPLORE</span>
-            <i class="fas fa-arrow-down"></i>
-        </div>
+    font-family: var(--font-body);
 
-    </div>
-</header>
+    font-weight: 400;
 
+    line-height: 1.7;
 
-<!-- =========================================================
-     NAVIGATION
-========================================================= -->
-
-<nav>
-    <div class="container nav-inner">
-
-        <div class="nav-brand">
-            <span>ST</span>
-        </div>
-
-        <ul>
-            <li><a href="#about">About</a></li>
-            <li><a href="#projects">Projects</a></li>
-            <li><a href="#skills">Skills</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
-
-    </div>
-</nav>
-
-
-<!-- =========================================================
-     SKILLS MARQUEE
-========================================================= -->
-
-<div class="skills-marquee">
-
-    <div class="marquee-track">
-
-        <div class="marquee-content">
-
-            <span>DATA ANALYSIS</span>
-            <b>◆</b>
-
-            <span>BUSINESS INTELLIGENCE</span>
-            <b>◆</b>
-
-            <span>POWER BI</span>
-            <b>◆</b>
-
-            <span>DAX</span>
-            <b>◆</b>
-
-            <span>SQL</span>
-            <b>◆</b>
-
-            <span>DENEB / VEGA-LITE</span>
-            <b>◆</b>
-
-            <span>VISUAL ENGINEERING</span>
-            <b>◆</b>
-
-            <span>DATA MODELLING</span>
-            <b>◆</b>
-
-            <span>EXECUTIVE STORYTELLING</span>
-            <b>◆</b>
-
-            <span>RETAIL ANALYTICS</span>
-            <b>◆</b>
-
-        </div>
-
-        <div class="marquee-content">
-
-            <span>DATA ANALYSIS</span>
-            <b>◆</b>
-
-            <span>BUSINESS INTELLIGENCE</span>
-            <b>◆</b>
-
-            <span>POWER BI</span>
-            <b>◆</b>
-
-            <span>DAX</span>
-            <b>◆</b>
-
-            <span>SQL</span>
-            <b>◆</b>
-
-            <span>DENEB / VEGA-LITE</span>
-            <b>◆</b>
-
-            <span>VISUAL ENGINEERING</span>
-            <b>◆</b>
-
-            <span>DATA MODELLING</span>
-            <b>◆</b>
-
-            <span>EXECUTIVE STORYTELLING</span>
-            <b>◆</b>
-
-            <span>RETAIL ANALYTICS</span>
-            <b>◆</b>
-
-        </div>
-
-    </div>
-</div>
-
-
-<!-- =========================================================
-     ABOUT
-========================================================= -->
-
-<section id="about" class="section about-section">
-
-    <div class="container">
-
-        <div class="section-heading reveal">
-
-            <span class="section-eyebrow">01 · PROFILE</span>
-
-            <h2>
-                About <span>Me</span>
-            </h2>
-
-            <div class="heading-line"></div>
-
-        </div>
-
-
-        <div class="about-content">
-
-            <div class="about-image-wrap reveal">
-
-                <div class="about-image-glow"></div>
-
-                <div class="about-image-frame">
-
-                    <img src="assets/images/profile-placeholder.png"
-                         alt="Sodiq Oluwatimileyin"
-                         class="profile-photo">
-
-                </div>
-
-                <div class="about-image-label">
-                    <span>DATA</span>
-                    <strong>ANALYST</strong>
-                </div>
-
-            </div>
-
-
-            <div class="about-text reveal">
-
-                <p>
-                    I’m a Data Analyst focused on transforming real-world
-                    business observations into structured data systems,
-                    analytical insights, and decision-driven solutions.
-                    My work combines business understanding with SQL,
-                    Excel, Python, Power BI, and data visualization to
-                    investigate how customers behave, where businesses
-                    lose revenue, and where operational improvements can
-                    create measurable impact.
-                </p>
-
-                <p>
-                    Beyond analyzing existing datasets, I am particularly
-                    interested in understanding how data is created.
-                    I design business rules, customer behaviours,
-                    distributions, events, and transactional logic to
-                    build realistic simulated data environments when
-                    suitable real-world data is unavailable.
-                </p>
-
-                <p>
-                    My portfolio demonstrates the complete analytical
-                    journey — from observing a business problem and
-                    designing the underlying data logic, to generating
-                    and engineering large-scale datasets, querying them
-                    with SQL, and communicating insights through
-                    interactive dashboards and visual storytelling.
-                </p>
-
-                <div class="about-signature">
-                    <span>Business Thinking</span>
-                    <i class="fas fa-arrow-right"></i>
-                    <span>Data Systems</span>
-                    <i class="fas fa-arrow-right"></i>
-                    <span>Decision Intelligence</span>
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- =========================================================
-     PROJECTS
-========================================================= -->
-
-<section id="projects" class="section projects-section">
-
-    <div class="container">
-
-        <div class="section-heading reveal">
-
-            <span class="section-eyebrow">02 · SELECTED WORK</span>
-
-            <h2>
-                Featured <span>Projects</span>
-            </h2>
-
-            <div class="heading-line"></div>
-
-            <p class="section-intro">
-                A portfolio built around the complete analytical journey —
-                from business observation and data architecture to SQL
-                analysis, Power BI intelligence, and strategic decision-making.
-            </p>
-
-        </div>
-
-
-        <div class="projects-grid">
-
-
-            <!-- =================================================
-                 PROJECT 1
-            ================================================== -->
-
-            <article class="project-card reveal">
-
-                <div class="project-number">
-                    01
-                </div>
-
-                <div class="project-image-wrap">
-
-                    <img src="projects/jrad-retail-data-system/images/jrad-retail-data-system.jpeg"
-                         alt="JRAD Retail Data System">
-
-                    <div class="project-image-overlay"></div>
-
-                    <span class="project-category">
-                        DATA ENGINEERING
-                    </span>
-
-                </div>
-
-
-                <div class="project-card-content">
-
-                    <div class="project-meta">
-                        <span>EXCEL</span>
-                        <span>PYTHON</span>
-                        <span>DATA SYSTEMS</span>
-                    </div>
-
-                    <h3>
-                        From Real-Life Observation to a
-                        2M+ Row Retail Data System
-                    </h3>
-
-                    <p>
-                        A full-scale retail data engineering project
-                        inspired by real-life Jendol superstores
-                        observations. I designed the business logic,
-                        customer behaviour, product ecosystem, branch
-                        patterns, seasonal events, loyalty mechanics
-                        and transaction rules before building a scalable
-                        simulated retail data system using Excel and Python.
-                    </p>
-
-                    <div class="project-buttons">
-
-                        <a href="projects/jrad-retail-data-system/"
-                           target="_blank"
-                           class="btn">
-                            Explore Data System
-                            <i class="fas fa-arrow-right"></i>
-                        </a>
-
-                        <a href="https://github.com/sodiqoluwatimileyin190-oss/sodiqoluwatimileyin190-oss.github.io/tree/main/projects/jrad-retail-data-system"
-                           target="_blank"
-                           rel="noopener"
-                           class="btn btn-secondary">
-                            GitHub
-                            <i class="fab fa-github"></i>
-                        </a>
-
-                    </div>
-
-                </div>
-
-            </article>
-
-
-            <!-- =================================================
-                 PROJECT 2
-            ================================================== -->
-
-            <article class="project-card reveal">
-
-                <div class="project-number">
-                    02
-                </div>
-
-                <div class="project-image-wrap">
-
-                    <img src="projects/jrad-retail-sql-analysis/images/jrad-retail-sql-analysis.jpeg"
-                         alt="JRAD Retail SQL Business Analysis">
-
-                    <div class="project-image-overlay"></div>
-
-                    <span class="project-category">
-                        SQL ANALYTICS
-                    </span>
-
-                </div>
-
-
-                <div class="project-card-content">
-
-                    <div class="project-meta">
-                        <span>SQL</span>
-                        <span>MYSQL</span>
-                        <span>BUSINESS ANALYSIS</span>
-                    </div>
-
-                    <h3>
-                        Inside the Retail Engine:
-                        SQL Business Analysis
-                    </h3>
-
-                    <p>
-                        Transforming a large-scale simulated retail
-                        system into actionable business intelligence
-                        using SQL. The analysis explores customer
-                        behaviour, loyalty performance, anonymous
-                        high-value shoppers, product demand, branch
-                        performance, stock-out risks and revenue
-                        opportunities.
-                    </p>
-
-                    <div class="project-buttons">
-
-                        <a href="projects/jrad-retail-sql-analysis/"
-                           target="_blank"
-                           class="btn">
-                            Explore Analysis
-                            <i class="fas fa-arrow-right"></i>
-                        </a>
-
-                        <a href="https://github.com/sodiqoluwatimileyin190-oss/sodiqoluwatimileyin190-oss.github.io/tree/main/projects/jrad-retail-sql-analysis"
-                           target="_blank"
-                           rel="noopener"
-                           class="btn btn-secondary">
-                            GitHub
-                            <i class="fab fa-github"></i>
-                        </a>
-
-                    </div>
-
-                </div>
-
-            </article>
-
-
-            <!-- =================================================
-                 PROJECT 3
-            ================================================== -->
-
-            <article class="project-card project-card-featured reveal">
-
-                <div class="project-number">
-                    03
-                </div>
-
-                <div class="project-image-wrap">
-
-                    <img src="projects/jrad-retail-powerbi-dashboard/images/executive-overview.png"
-                         alt="JRAD Retail Power BI Dashboard">
-
-                    <div class="project-image-overlay"></div>
-
-                    <span class="project-category">
-                        BUSINESS INTELLIGENCE
-                    </span>
-
-                </div>
-
-
-                <div class="project-card-content">
-
-                    <div class="project-meta">
-                        <span>POWER BI</span>
-                        <span>DAX</span>
-                        <span>DENEB</span>
-                        <span>VEGA-LITE</span>
-                    </div>
-
-                    <h3>
-                        JRAD Retail Power BI:
-                        Executive Intelligence & Visual Engineering
-                    </h3>
-
-                    <p>
-                        A Power BI retail intelligence solution built
-                        from the JRAD Superstores 2026 data ecosystem.
-                        The project combines Power BI, DAX, time
-                        intelligence, Deneb and custom visual engineering
-                        to transform 1.8M+ transaction lines into
-                        decision-ready insights across revenue,
-                        branches, departments, customer personas
-                        and business performance.
-                    </p>
-
-                    <div class="project-buttons">
-
-                        <a href="projects/jrad-retail-powerbi-dashboard/"
-                           target="_blank"
-                           class="btn">
-                            Explore Dashboard
-                            <i class="fas fa-arrow-right"></i>
-                        </a>
-
-                        <a href="https://github.com/sodiqoluwatimileyin190-oss/sodiqoluwatimileyin190-oss.github.io/tree/main/projects/jrad-retail-powerbi-dashboard"
-                           target="_blank"
-                           rel="noopener"
-                           class="btn btn-secondary">
-                            GitHub
-                            <i class="fab fa-github"></i>
-                        </a>
-
-                    </div>
-
-                </div>
-
-            </article>
-
-
-            <!-- =================================================
-                 PROJECT 4
-            ================================================== -->
-
-            <article class="project-card reveal">
-
-                <div class="project-number">
-                    04
-                </div>
-
-                <div class="project-image-wrap">
-
-                    <img src="assets/images/jendol-strategy.jpg"
-                         alt="Jendol Customer Strategy">
-
-                    <div class="project-image-overlay"></div>
-
-                    <span class="project-category">
-                        BUSINESS STRATEGY
-                    </span>
-
-                </div>
-
-
-                <div class="project-card-content">
-
-                    <div class="project-meta">
-                        <span>STRATEGY</span>
-                        <span>LOYALTY</span>
-                        <span>RETENTION</span>
-                    </div>
-
-                    <h3>
-                        Finding the Hidden Customers:
-                        Loyalty, Retention & Customer Experience Strategy
-                    </h3>
-
-                    <p>
-                        A strategic business case focused on identifying
-                        high-value anonymous shoppers, loyalty migration
-                        opportunities, customer retention risks, stock-out
-                        impact, queue pressure and customer experience
-                        gaps within a Nigerian retail environment.
-                    </p>
-
-                    <div class="project-buttons">
-
-                        <a href="[PROJECT_4_DOCUMENTATION]"
-                           target="_blank"
-                           class="btn">
-                            Read Business Case
-                            <i class="fas fa-arrow-right"></i>
-                        </a>
-
-                        <a href="[PROJECT_4_GITHUB]"
-                           target="_blank"
-                           class="btn btn-secondary">
-                            GitHub
-                            <i class="fab fa-github"></i>
-                        </a>
-
-                    </div>
-
-                </div>
-
-            </article>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- =========================================================
-     SKILLS
-========================================================= -->
-
-<section id="skills" class="section skills-section">
-
-    <div class="container">
-
-        <div class="section-heading reveal">
-
-            <span class="section-eyebrow">03 · CAPABILITIES</span>
-
-            <h2>
-                Technical <span>Skillset</span>
-            </h2>
-
-            <div class="heading-line"></div>
-
-        </div>
-
-
-        <div class="skills-table">
-
-
-            <div class="skill-column reveal">
-
-                <div class="skill-header">
-
-                    <div class="skill-icon">
-                        <i class="fas fa-chart-pie"></i>
-                    </div>
-
-                    <div>
-                        <span class="skill-index">01</span>
-                        <h3>Data Visualization</h3>
-                    </div>
-
-                </div>
-
-                <ul class="skill-list">
-
-                    <li>
-                        <span>Power BI</span>
-                        <i class="fas fa-arrow-right"></i>
-                    </li>
-
-                    <li>
-                        <span>Tableau</span>
-                        <i class="fas fa-arrow-right"></i>
-                    </li>
-
-                    <li>
-                        <span>Figma</span>
-                        <i class="fas fa-arrow-right"></i>
-                    </li>
-
-                    <li>
-                        <span>Excel Dashboards</span>
-                        <i class="fas fa-arrow-right"></i>
-                    </li>
-
-                </ul>
-
-            </div>
-
-
-            <div class="skill-column reveal">
-
-                <div class="skill-header">
-
-                    <div class="skill-icon">
-                        <i class="fas fa-magnifying-glass-chart"></i>
-                    </div>
-
-                    <div>
-                        <span class="skill-index">02</span>
-                        <h3>Data Analysis</h3>
-                    </div>
-
-                </div>
-
-                <ul class="skill-list">
-
-                    <li>
-                        <span>SQL</span>
-                        <i class="fas fa-arrow-right"></i>
-                    </li>
-
-                    <li>
-                        <span>Advanced Excel</span>
-                        <i class="fas fa-arrow-right"></i>
-                    </li>
-
-                    <li>
-                        <span>Python / Pandas</span>
-                        <i class="fas fa-arrow-right"></i>
-                    </li>
-
-                    <li>
-                        <span>Google Sheets</span>
-                        <i class="fas fa-arrow-right"></i>
-                    </li>
-
-                </ul>
-
-            </div>
-
-
-            <div class="skill-column reveal">
-
-                <div class="skill-header">
-
-                    <div class="skill-icon">
-                        <i class="fas fa-diagram-project"></i>
-                    </div>
-
-                    <div>
-                        <span class="skill-index">03</span>
-                        <h3>Data Modeling & ETL</h3>
-                    </div>
-
-                </div>
-
-                <ul class="skill-list">
-
-                    <li>
-                        <span>Power Query / M</span>
-                        <i class="fas fa-arrow-right"></i>
-                    </li>
-
-                    <li>
-                        <span>DAX</span>
-                        <i class="fas fa-arrow-right"></i>
-                    </li>
-
-                    <li>
-                        <span>Star Schema Design</span>
-                        <i class="fas fa-arrow-right"></i>
-                    </li>
-
-                    <li>
-                        <span>ETL Processes</span>
-                        <i class="fas fa-arrow-right"></i>
-                    </li>
-
-                </ul>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- =========================================================
-     CONTACT
-========================================================= -->
-
-<section id="contact" class="section contact-section">
-
-    <div class="container">
-
-        <div class="section-heading reveal">
-
-            <span class="section-eyebrow">04 · CONTACT</span>
-
-            <h2>
-                Let's Build Something <span>Meaningful</span>
-            </h2>
-
-            <div class="heading-line"></div>
-
-            <p class="section-intro">
-                Interested in collaborating, discussing a data problem,
-                or exploring an analytical project? Send me a message.
-            </p>
-
-        </div>
-
-
-        <form action="https://formsubmit.co/your-email@example.com"
-              method="POST"
-              class="contact-form reveal">
-
-            <div class="contact-form-top">
-
-                <span>GET IN TOUCH</span>
-
-                <div class="contact-form-line"></div>
-
-            </div>
-
-
-            <div class="form-group">
-
-                <label for="name">Name</label>
-
-                <input type="text"
-                       name="name"
-                       id="name"
-                       placeholder="Your name"
-                       required>
-
-            </div>
-
-
-            <div class="form-group">
-
-                <label for="email">Email</label>
-
-                <input type="email"
-                       name="email"
-                       id="email"
-                       placeholder="Your email"
-                       required>
-
-            </div>
-
-
-            <div class="form-group">
-
-                <label for="subject">Subject</label>
-
-                <input type="text"
-                       name="subject"
-                       id="subject"
-                       placeholder="What would you like to discuss?"
-                       required>
-
-            </div>
-
-
-            <div class="form-group">
-
-                <label for="message">Message</label>
-
-                <textarea name="message"
-                          id="message"
-                          rows="6"
-                          placeholder="Tell me about it..."
-                          required></textarea>
-
-            </div>
-
-
-            <button type="submit" class="btn contact-btn">
-
-                Send Message
-
-                <i class="fas fa-paper-plane"></i>
-
-            </button>
-
-        </form>
-
-    </div>
-
-</section>
-
-
-<!-- =========================================================
-     FOOTER
-========================================================= -->
-
-<footer>
-
-    <div class="container footer-inner">
-
-        <div class="footer-brand">
-
-            <span>ST</span>
-
-            <p>
-                Data Analysis · Business Intelligence ·
-                Decision Intelligence
-            </p>
-
-        </div>
-
-        <div class="footer-socials">
-
-            <a href="[YOUR_LINKEDIN_URL]"
-               target="_blank"
-               rel="noopener"
-               aria-label="LinkedIn">
-                <i class="fab fa-linkedin"></i>
-            </a>
-
-            <a href="https://github.com/sodiqoluwatimileyin190-oss"
-               target="_blank"
-               rel="noopener"
-               aria-label="GitHub">
-                <i class="fab fa-github"></i>
-            </a>
-
-            <a href="https://x.com/timmyyo0?s=21"
-               target="_blank"
-               rel="noopener"
-               aria-label="X">
-                <i class="fab fa-x-twitter"></i>
-            </a>
-
-        </div>
-
-        <p class="footer-copy">
-            © 2026 Sodiq Oluwatimileyin. All rights reserved.
-        </p>
-
-    </div>
-
-</footer>
-
-
-<!-- =========================================================
-     SCROLL REVEAL
-========================================================= -->
-
-<script>
-
-document.addEventListener("DOMContentLoaded", function () {
-
-    const revealElements =
-        document.querySelectorAll(".reveal");
-
-    const observer =
-        new IntersectionObserver(
-            (entries, observer) => {
-
-                entries.forEach((entry) => {
-
-                    if (entry.isIntersecting) {
-
-                        entry.target.classList.add("visible");
-
-                        observer.unobserve(entry.target);
-
-                    }
-
-                });
-
-            },
-            {
-                threshold: 0.12,
-                rootMargin: "0px 0px -50px 0px"
-            }
+    background:
+        linear-gradient(
+            180deg,
+            #ffffff 0%,
+            #faf9fd 50%,
+            #ffffff 100%
         );
 
+    color: var(--text);
 
-    revealElements.forEach((element) => {
+    overflow-x: hidden;
 
-        observer.observe(element);
-
-    });
-
-});
-
-</script>
+}
 
 
-<!-- Existing JS -->
-<script src="assets/js/main.js"></script>
+body::selection {
+    background: var(--purple);
+    color: white;
+}
 
-</body>
-</html>
+
+img {
+    display: block;
+    max-width: 100%;
+}
+
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+
+button,
+input,
+textarea {
+    font: inherit;
+}
+
+
+.container {
+
+    width: 90%;
+
+    max-width: 1180px;
+
+    margin: 0 auto;
+
+}
+
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.hero {
+
+    min-height: 680px;
+
+    position: relative;
+
+    overflow: hidden;
+
+    display: flex;
+
+    align-items: center;
+
+    text-align: center;
+
+    color: white;
+
+    background:
+
+        radial-gradient(
+            circle at 15% 20%,
+            rgba(166, 139, 224, 0.35),
+            transparent 28%
+        ),
+
+        radial-gradient(
+            circle at 85% 70%,
+            rgba(124, 92, 214, 0.30),
+            transparent 30%
+        ),
+
+        linear-gradient(
+            135deg,
+            #0c0828 0%,
+            #17113f 45%,
+            #30216e 100%
+        );
+
+}
+
+
+.hero-grid {
+
+    position: absolute;
+
+    inset: 0;
+
+    opacity: 0.08;
+
+    background-image:
+
+        linear-gradient(
+            rgba(255,255,255,0.25) 1px,
+            transparent 1px
+        ),
+
+        linear-gradient(
+            90deg,
+            rgba(255,255,255,0.25) 1px,
+            transparent 1px
+        );
+
+    background-size: 55px 55px;
+
+    mask-image:
+        linear-gradient(
+            to bottom,
+            black,
+            transparent
+        );
+
+}
+
+
+.hero-glow {
+
+    position: absolute;
+
+    width: 420px;
+
+    height: 420px;
+
+    border-radius: 50%;
+
+    filter: blur(80px);
+
+    opacity: 0.35;
+
+    pointer-events: none;
+
+    animation:
+        heroFloat 9s ease-in-out infinite alternate;
+
+}
+
+
+.hero-glow-one {
+
+    top: -180px;
+
+    left: -100px;
+
+    background: #a68be0;
+
+}
+
+
+.hero-glow-two {
+
+    right: -120px;
+
+    bottom: -180px;
+
+    background: #6f4fd3;
+
+    animation-delay: -4s;
+
+}
+
+
+.hero-inner {
+
+    position: relative;
+
+    z-index: 2;
+
+    padding: 100px 0 80px;
+
+}
+
+
+.hero-kicker {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    padding: 8px 16px;
+
+    border: 1px solid rgba(255,255,255,0.18);
+
+    border-radius: 100px;
+
+    background: rgba(255,255,255,0.06);
+
+    backdrop-filter: blur(10px);
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    letter-spacing: 2px;
+
+    color: #e8e1ff;
+
+}
+
+
+.status-dot {
+
+    width: 7px;
+
+    height: 7px;
+
+    border-radius: 50%;
+
+    background: #bca6ff;
+
+    box-shadow:
+        0 0 0 5px rgba(188,166,255,0.10);
+
+    animation: pulseDot 2s ease-in-out infinite;
+
+}
+
+
+.hero-title {
+
+    margin-top: 28px;
+
+    font-family: var(--font-heading);
+
+    font-size: clamp(3.6rem, 8vw, 6.7rem);
+
+    line-height: 0.95;
+
+    font-weight: 700;
+
+    letter-spacing: -3px;
+
+}
+
+
+.hero-title span {
+
+    display: block;
+
+    color: #bca6ff;
+
+}
+
+
+.hero-role {
+
+    margin-top: 30px;
+
+    font-size: clamp(1rem, 2vw, 1.3rem);
+
+    font-weight: 600;
+
+    color: #f4f1ff;
+
+}
+
+
+.portfolio-tagline {
+
+    max-width: 680px;
+
+    margin: 20px auto 0;
+
+    color: rgba(255,255,255,0.68);
+
+    font-size: 1rem;
+
+}
+
+
+.social-links {
+
+    display: flex;
+
+    justify-content: center;
+
+    gap: 14px;
+
+    margin-top: 32px;
+
+}
+
+
+.social-links a {
+
+    width: 44px;
+
+    height: 44px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 50%;
+
+    color: white;
+
+    border: 1px solid rgba(255,255,255,0.16);
+
+    background: rgba(255,255,255,0.06);
+
+    backdrop-filter: blur(10px);
+
+    transition:
+        transform 0.3s ease,
+        background 0.3s ease,
+        border-color 0.3s ease;
+
+}
+
+
+.social-links a:hover {
+
+    transform: translateY(-5px);
+
+    background: rgba(166,139,224,0.20);
+
+    border-color: rgba(188,166,255,0.55);
+
+}
+
+
+.hero-scroll {
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    gap: 8px;
+
+    margin-top: 70px;
+
+    color: rgba(255,255,255,0.48);
+
+    font-size: 9px;
+
+    font-weight: 700;
+
+    letter-spacing: 2px;
+
+}
+
+
+.hero-scroll i {
+
+    animation:
+        scrollArrow 1.8s ease-in-out infinite;
+
+}
+
+
+/* Hero entrance */
+
+.hero-animate {
+
+    opacity: 0;
+
+    transform: translateY(28px);
+
+    animation:
+        heroEntrance 0.9s cubic-bezier(.22,1,.36,1)
+        forwards;
+
+}
+
+
+.hero-animate:nth-child(1) {
+    animation-delay: 0.10s;
+}
+
+
+.hero-animate:nth-child(2) {
+    animation-delay: 0.22s;
+}
+
+
+.hero-animate:nth-child(3) {
+    animation-delay: 0.34s;
+}
+
+
+.hero-animate:nth-child(4) {
+    animation-delay: 0.46s;
+}
+
+
+.hero-animate:nth-child(5) {
+    animation-delay: 0.58s;
+}
+
+
+.hero-animate:nth-child(6) {
+    animation-delay: 0.72s;
+}
+
+
+/* =========================================================
+   NAVIGATION
+========================================================= */
+
+nav {
+
+    position: sticky;
+
+    top: 0;
+
+    z-index: 1000;
+
+    background:
+        rgba(23,17,63,0.94);
+
+    backdrop-filter: blur(16px);
+
+    border-bottom:
+        1px solid rgba(255,255,255,0.08);
+
+}
+
+
+.nav-inner {
+
+    min-height: 68px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+}
+
+
+.nav-brand {
+
+    width: 38px;
+
+    height: 38px;
+
+    border-radius: 11px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    background:
+        linear-gradient(
+            135deg,
+            #a68be0,
+            #6847c7
+        );
+
+    color: white;
+
+    font-size: 11px;
+
+    font-weight: 800;
+
+    box-shadow:
+        0 8px 25px rgba(124,92,214,0.35);
+
+}
+
+
+nav ul {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    list-style: none;
+
+}
+
+
+nav ul li a {
+
+    position: relative;
+
+    display: block;
+
+    padding: 24px 18px;
+
+    color: rgba(255,255,255,0.72);
+
+    font-size: 12px;
+
+    font-weight: 600;
+
+    letter-spacing: 0.5px;
+
+    transition:
+        color 0.3s ease;
+
+}
+
+
+nav ul li a::after {
+
+    content: '';
+
+    position: absolute;
+
+    left: 18px;
+
+    right: 18px;
+
+    bottom: 15px;
+
+    height: 2px;
+
+    transform: scaleX(0);
+
+    transform-origin: center;
+
+    background: #a68be0;
+
+    transition:
+        transform 0.3s ease;
+
+}
+
+
+nav ul li a:hover {
+
+    color: white;
+
+}
+
+
+nav ul li a:hover::after {
+
+    transform: scaleX(1);
+
+}
+
+
+/* =========================================================
+   MARQUEE
+========================================================= */
+
+.skills-marquee {
+
+    width: 100%;
+
+    overflow: hidden;
+
+    background: #f1edff;
+
+    border-top: 1px solid #e5def7;
+
+    border-bottom: 1px solid #e5def7;
+
+}
+
+
+.marquee-track {
+
+    display: flex;
+
+    width: max-content;
+
+    animation:
+        marquee 28s linear infinite;
+
+    will-change: transform;
+
+}
+
+
+.marquee-content {
+
+    display: flex;
+
+    align-items: center;
+
+    flex-shrink: 0;
+
+    padding: 13px 0;
+
+}
+
+
+.marquee-content span {
+
+    font-size: 10px;
+
+    font-weight: 800;
+
+    letter-spacing: 1.4px;
+
+    color: #33265d;
+
+    margin: 0 17px;
+
+    white-space: nowrap;
+
+}
+
+
+.marquee-content b {
+
+    font-size: 7px;
+
+    color: #7c5cd6;
+
+}
+
+
+.skills-marquee:hover
+.marquee-track {
+
+    animation-play-state: paused;
+
+}
+
+
+@keyframes marquee {
+
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(-50%);
+    }
+
+}
+
+
+/* =========================================================
+   SECTIONS
+========================================================= */
+
+.section {
+
+    padding: 120px 0;
+
+}
+
+
+.section-heading {
+
+    text-align: center;
+
+    margin-bottom: 70px;
+
+}
+
+
+.section-eyebrow {
+
+    display: block;
+
+    margin-bottom: 13px;
+
+    color: var(--purple);
+
+    font-size: 10px;
+
+    font-weight: 800;
+
+    letter-spacing: 2.5px;
+
+}
+
+
+.section-heading h2 {
+
+    font-family: var(--font-heading);
+
+    font-size: clamp(2.5rem, 5vw, 4rem);
+
+    line-height: 1.1;
+
+    color: var(--primary);
+
+}
+
+
+.section-heading h2 span {
+
+    color: var(--purple);
+
+}
+
+
+.heading-line {
+
+    width: 58px;
+
+    height: 3px;
+
+    margin: 24px auto 0;
+
+    border-radius: 20px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #a68be0,
+            #6847c7
+        );
+
+}
+
+
+.section-intro {
+
+    max-width: 720px;
+
+    margin: 24px auto 0;
+
+    color: var(--text-soft);
+
+    font-size: 0.95rem;
+
+}
+
+
+/* =========================================================
+   ABOUT
+========================================================= */
+
+.about-section {
+
+    background:
+        linear-gradient(
+            180deg,
+            #ffffff,
+            #faf9fd
+        );
+
+}
+
+
+.about-content {
+
+    max-width: 1020px;
+
+    margin: auto;
+
+    display: grid;
+
+    grid-template-columns: 320px 1fr;
+
+    gap: 75px;
+
+    align-items: center;
+
+}
+
+
+.about-image-wrap {
+
+    position: relative;
+
+}
+
+
+.about-image-frame {
+
+    position: relative;
+
+    z-index: 2;
+
+    padding: 9px;
+
+    background: white;
+
+    border: 1px solid var(--border);
+
+    border-radius: 24px;
+
+    box-shadow: var(--shadow-lg);
+
+    transform:
+        rotate(-2deg);
+
+    transition:
+        transform 0.5s ease;
+
+}
+
+
+.about-image-wrap:hover
+.about-image-frame {
+
+    transform:
+        rotate(0deg)
+        translateY(-6px);
+
+}
+
+
+.profile-photo {
+
+    width: 100%;
+
+    aspect-ratio: 1 / 1;
+
+    object-fit: cover;
+
+    border-radius: 17px;
+
+}
+
+
+.about-image-glow {
+
+    position: absolute;
+
+    width: 220px;
+
+    height: 220px;
+
+    left: 50%;
+
+    top: 50%;
+
+    transform:
+        translate(-50%, -50%);
+
+    background: #a68be0;
+
+    filter: blur(80px);
+
+    opacity: 0.23;
+
+}
+
+
+.about-image-label {
+
+    position: absolute;
+
+    z-index: 4;
+
+    right: -25px;
+
+    bottom: 25px;
+
+    padding: 13px 18px;
+
+    border-radius: 13px;
+
+    background: var(--primary);
+
+    color: white;
+
+    box-shadow: var(--shadow-md);
+
+    display: flex;
+
+    flex-direction: column;
+
+    line-height: 1.2;
+
+}
+
+
+.about-image-label span {
+
+    font-size: 8px;
+
+    color: #a68be0;
+
+    font-weight: 800;
+
+    letter-spacing: 2px;
+
+}
+
+
+.about-image-label strong {
+
+    font-size: 13px;
+
+    letter-spacing: 1px;
+
+}
+
+
+.about-text p {
+
+    color: var(--text-soft);
+
+    font-size: 0.96rem;
+
+    margin-bottom: 20px;
+
+}
+
+
+.about-signature {
+
+    display: flex;
+
+    align-items: center;
+
+    flex-wrap: wrap;
+
+    gap: 11px;
+
+    margin-top: 30px;
+
+    color: var(--primary);
+
+    font-size: 10px;
+
+    font-weight: 800;
+
+    letter-spacing: 0.5px;
+
+}
+
+
+.about-signature i {
+
+    color: var(--purple);
+
+    font-size: 9px;
+
+}
+
+
+/* =========================================================
+   PROJECTS
+========================================================= */
+
+.projects-section {
+
+    background: #f5f2ff;
+
+    position: relative;
+
+}
+
+
+.projects-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+    gap: 30px;
+
+}
+
+
+.project-card {
+
+    position: relative;
+
+    overflow: hidden;
+
+    display: flex;
+
+    flex-direction: column;
+
+    background: white;
+
+    border: 1px solid #e7e1f3;
+
+    border-radius: 20px;
+
+    box-shadow:
+        0 10px 35px rgba(48,32,91,0.07);
+
+    transition:
+        transform 0.5s cubic-bezier(.22,1,.36,1),
+        box-shadow 0.5s ease,
+        border-color 0.4s ease;
+
+}
+
+
+.project-card:hover {
+
+    transform:
+        translateY(-9px);
+
+    box-shadow:
+        0 28px 65px rgba(48,32,91,0.14);
+
+    border-color:
+        rgba(124,92,214,0.35);
+
+}
+
+
+.project-card-featured {
+
+    border-color:
+        rgba(124,92,214,0.30);
+
+}
+
+
+.project-number {
+
+    position: absolute;
+
+    z-index: 5;
+
+    top: 18px;
+
+    right: 20px;
+
+    width: 38px;
+
+    height: 38px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 50%;
+
+    color: white;
+
+    background:
+        rgba(23,17,63,0.84);
+
+    backdrop-filter: blur(10px);
+
+    font-size: 10px;
+
+    font-weight: 800;
+
+    border:
+        1px solid rgba(255,255,255,0.16);
+
+}
+
+
+.project-image-wrap {
+
+    height: 255px;
+
+    position: relative;
+
+    overflow: hidden;
+
+    background: #e9e5f4;
+
+}
+
+
+.project-image-wrap img {
+
+    width: 100%;
+
+    height: 100%;
+
+    object-fit: cover;
+
+    transition:
+        transform 0.7s cubic-bezier(.22,1,.36,1);
+
+}
+
+
+.project-card:hover
+.project-image-wrap img {
+
+    transform:
+        scale(1.045);
+
+}
+
+
+.project-image-overlay {
+
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        linear-gradient(
+            180deg,
+            rgba(23,17,63,0.04),
+            rgba(23,17,63,0.42)
+        );
+
+    pointer-events: none;
+
+}
+
+
+.project-category {
+
+    position: absolute;
+
+    left: 18px;
+
+    bottom: 18px;
+
+    padding: 7px 11px;
+
+    border-radius: 8px;
+
+    background:
+        rgba(23,17,63,0.86);
+
+    backdrop-filter: blur(10px);
+
+    color: white;
+
+    font-size: 8px;
+
+    font-weight: 800;
+
+    letter-spacing: 1.4px;
+
+}
+
+
+.project-card-content {
+
+    padding: 30px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    flex: 1;
+
+}
+
+
+.project-meta {
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 7px;
+
+    margin-bottom: 15px;
+
+}
+
+
+.project-meta span {
+
+    padding: 5px 8px;
+
+    border-radius: 5px;
+
+    background: #f0ebff;
+
+    color: #5b419c;
+
+    font-size: 8px;
+
+    font-weight: 800;
+
+    letter-spacing: 0.8px;
+
+}
+
+
+.project-card-content h3 {
+
+    font-family: var(--font-heading);
+
+    color: var(--primary);
+
+    font-size: 1.55rem;
+
+    line-height: 1.25;
+
+    margin-bottom: 15px;
+
+}
+
+
+.project-card-content p {
+
+    color: var(--text-soft);
+
+    font-size: 0.89rem;
+
+    line-height: 1.75;
+
+    margin-bottom: 28px;
+
+    flex-grow: 1;
+
+}
+
+
+.project-buttons {
+
+    display: flex;
+
+    gap: 10px;
+
+}
+
+
+.btn {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 9px;
+
+    min-height: 46px;
+
+    padding: 12px 17px;
+
+    border-radius: 9px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #24175a,
+            #17113f
+        );
+
+    color: white;
+
+    border: 1px solid transparent;
+
+    font-size: 10px;
+
+    font-weight: 800;
+
+    letter-spacing: 0.4px;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease,
+        background 0.3s ease,
+        color 0.3s ease,
+        border-color 0.3s ease;
+
+    flex: 1;
+
+}
+
+
+.btn i {
+
+    font-size: 9px;
+
+    transition:
+        transform 0.3s ease;
+
+}
+
+
+.btn:hover {
+
+    transform:
+        translateY(-3px);
+
+    background:
+        linear-gradient(
+            135deg,
+            #7c5cd6,
+            #5f43b8
+        );
+
+    box-shadow:
+        0 10px 25px rgba(124,92,214,0.25);
+
+}
+
+
+.btn:hover i {
+
+    transform:
+        translateX(3px);
+
+}
+
+
+.btn-secondary {
+
+    background: transparent;
+
+    color: var(--primary);
+
+    border-color:
+        #d9d2e9;
+
+}
+
+
+.btn-secondary:hover {
+
+    color: white;
+
+    border-color:
+        var(--purple);
+
+}
+
+
+/* =========================================================
+   SKILLS
+========================================================= */
+
+.skills-section {
+
+    background: white;
+
+}
+
+
+.skills-table {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 20px;
+
+}
+
+
+.skill-column {
+
+    position: relative;
+
+    padding: 30px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #ffffff,
+            #faf9fd
+        );
+
+    border:
+        1px solid var(--border);
+
+    border-radius: 18px;
+
+    box-shadow:
+        var(--shadow-sm);
+
+    transition:
+        transform 0.4s ease,
+        box-shadow 0.4s ease,
+        border-color 0.4s ease;
+
+}
+
+
+.skill-column:hover {
+
+    transform:
+        translateY(-7px);
+
+    box-shadow:
+        var(--shadow-md);
+
+    border-color:
+        rgba(124,92,214,0.3);
+
+}
+
+
+.skill-header {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+    margin-bottom: 25px;
+
+}
+
+
+.skill-icon {
+
+    width: 48px;
+
+    height: 48px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 13px;
+
+    color: #6b4bc1;
+
+    background:
+        #eee8ff;
+
+}
+
+
+.skill-icon i {
+
+    font-size: 18px;
+
+}
+
+
+.skill-index {
+
+    display: block;
+
+    margin-bottom: 3px;
+
+    color: var(--purple);
+
+    font-size: 8px;
+
+    font-weight: 800;
+
+    letter-spacing: 1.5px;
+
+}
+
+
+.skill-header h3 {
+
+    font-family: var(--font-heading);
+
+    font-size: 1.35rem;
+
+    line-height: 1.2;
+
+    color: var(--primary);
+
+}
+
+
+.skill-list {
+
+    list-style: none;
+
+}
+
+
+.skill-list li {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding: 13px 0;
+
+    border-bottom:
+        1px solid #eeeaf4;
+
+    color: var(--text-soft);
+
+    font-size: 0.87rem;
+
+}
+
+
+.skill-list li:last-child {
+
+    border-bottom: none;
+
+}
+
+
+.skill-list li i {
+
+    color: var(--purple-light);
+
+    font-size: 9px;
+
+    transition:
+        transform 0.3s ease;
+
+}
+
+
+.skill-list li:hover i {
+
+    transform:
+        translateX(4px);
+
+}
+
+
+/* =========================================================
+   CONTACT
+========================================================= */
+
+.contact-section {
+
+    background:
+        linear-gradient(
+            180deg,
+            #faf9fd,
+            #f2effb
+        );
+
+}
+
+
+.contact-form {
+
+    max-width: 780px;
+
+    margin: auto;
+
+    padding: 40px;
+
+    background: white;
+
+    border: 1px solid var(--border);
+
+    border-radius: 20px;
+
+    box-shadow:
+        var(--shadow-md);
+
+}
+
+
+.contact-form-top {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+    margin-bottom: 30px;
+
+    color: var(--purple);
+
+    font-size: 9px;
+
+    font-weight: 800;
+
+    letter-spacing: 2px;
+
+}
+
+
+.contact-form-line {
+
+    flex: 1;
+
+    height: 1px;
+
+    background:
+        var(--border);
+
+}
+
+
+.form-group {
+
+    margin-bottom: 21px;
+
+}
+
+
+.contact-form label {
+
+    display: block;
+
+    margin-bottom: 7px;
+
+    color: var(--primary);
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+}
+
+
+.contact-form input,
+.contact-form textarea {
+
+    width: 100%;
+
+    padding: 14px 16px;
+
+    border:
+        1px solid #ddd8e8;
+
+    border-radius: 9px;
+
+    background: #fcfbfe;
+
+    color: var(--text);
+
+    font-size: 0.9rem;
+
+    outline: none;
+
+    transition:
+        border-color 0.3s ease,
+        box-shadow 0.3s ease,
+        background 0.3s ease;
+
+}
+
+
+.contact-form textarea {
+
+    resize: vertical;
+
+}
+
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+
+    border-color:
+        var(--purple);
+
+    background: white;
+
+    box-shadow:
+        0 0 0 4px rgba(124,92,214,0.10);
+
+}
+
+
+.contact-btn {
+
+    width: 100%;
+
+    border: none;
+
+    margin-top: 5px;
+
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+footer {
+
+    padding: 45px 0;
+
+    color: white;
+
+    background:
+        linear-gradient(
+            135deg,
+            #0d0928,
+            #17113f,
+            #30216e
+        );
+
+}
+
+
+.footer-inner {
+
+    display: grid;
+
+    grid-template-columns:
+        1fr auto 1fr;
+
+    align-items: center;
+
+    gap: 30px;
+
+}
+
+
+.footer-brand {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+
+}
+
+
+.footer-brand > span {
+
+    width: 38px;
+
+    height: 38px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 10px;
+
+    background:
+        rgba(255,255,255,0.08);
+
+    color: #c0aaff;
+
+    font-size: 10px;
+
+    font-weight: 800;
+
+}
+
+
+.footer-brand p {
+
+    max-width: 270px;
+
+    color: rgba(255,255,255,0.50);
+
+    font-size: 9px;
+
+    line-height: 1.5;
+
+}
+
+
+.footer-socials {
+
+    display: flex;
+
+    gap: 9px;
+
+}
+
+
+.footer-socials a {
+
+    width: 36px;
+
+    height: 36px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 50%;
+
+    color: white;
+
+    background:
+        rgba(255,255,255,0.07);
+
+    border:
+        1px solid rgba(255,255,255,0.08);
+
+    transition:
+        transform 0.3s ease,
+        background 0.3s ease;
+
+}
+
+
+.footer-socials a:hover {
+
+    transform:
+        translateY(-3px);
+
+    background:
+        rgba(166,139,224,0.20);
+
+}
+
+
+.footer-copy {
+
+    text-align: right;
+
+    color: rgba(255,255,255,0.40);
+
+    font-size: 9px;
+
+}
+
+
+/* =========================================================
+   SCROLL REVEALS
+========================================================= */
+
+.reveal {
+
+    opacity: 0;
+
+    transform:
+        translateY(35px);
+
+    transition:
+        opacity 0.75s ease,
+        transform 0.75s cubic-bezier(.22,1,.36,1);
+
+}
+
+
+.reveal.visible {
+
+    opacity: 1;
+
+    transform:
+        translateY(0);
+
+}
+
+
+/* Stagger project cards */
+
+.project-card:nth-child(1) {
+    transition-delay: 0.05s;
+}
+
+
+.project-card:nth-child(2) {
+    transition-delay: 0.12s;
+}
+
+
+.project-card:nth-child(3) {
+    transition-delay: 0.19s;
+}
+
+
+.project-card:nth-child(4) {
+    transition-delay: 0.26s;
+}
+
+
+/* Stagger skill cards */
+
+.skill-column:nth-child(1) {
+    transition-delay: 0.05s;
+}
+
+
+.skill-column:nth-child(2) {
+    transition-delay: 0.14s;
+}
+
+
+.skill-column:nth-child(3) {
+    transition-delay: 0.23s;
+}
+
+
+/* =========================================================
+   HERO ANIMATIONS
+========================================================= */
+
+@keyframes heroEntrance {
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            translateY(0);
+
+    }
+
+}
+
+
+@keyframes heroFloat {
+
+    0% {
+
+        transform:
+            translate3d(0,0,0)
+            scale(1);
+
+    }
+
+    100% {
+
+        transform:
+            translate3d(40px,25px,0)
+            scale(1.08);
+
+    }
+
+}
+
+
+@keyframes pulseDot {
+
+    0%,
+    100% {
+
+        transform:
+            scale(1);
+
+        opacity: 1;
+
+    }
+
+    50% {
+
+        transform:
+            scale(1.35);
+
+        opacity: 0.65;
+
+    }
+
+}
+
+
+@keyframes scrollArrow {
+
+    0%,
+    100% {
+
+        transform:
+            translateY(0);
+
+    }
+
+    50% {
+
+        transform:
+            translateY(7px);
+
+    }
+
+}
+
+
+/* =========================================================
+   RESPONSIVE
+========================================================= */
+
+@media (max-width: 992px) {
+
+    .about-content {
+
+        grid-template-columns:
+            260px 1fr;
+
+        gap: 45px;
+
+    }
+
+
+    .skills-table {
+
+        grid-template-columns:
+            repeat(2, 1fr);
+
+    }
+
+
+    .footer-inner {
+
+        grid-template-columns:
+            1fr;
+
+        text-align: center;
+
+    }
+
+
+    .footer-brand {
+
+        justify-content: center;
+
+    }
+
+
+    .footer-socials {
+
+        justify-content: center;
+
+    }
+
+
+    .footer-copy {
+
+        text-align: center;
+
+    }
+
+}
+
+
+@media (max-width: 768px) {
+
+    .container {
+
+        width: 92%;
+
+        padding: 0 5px;
+
+    }
+
+
+    .hero {
+
+        min-height: 620px;
+
+    }
+
+
+    .hero-inner {
+
+        padding: 80px 0 65px;
+
+    }
+
+
+    .hero-title {
+
+        font-size:
+            clamp(3rem, 14vw, 4.5rem);
+
+        letter-spacing:
+            -2px;
+
+    }
+
+
+    .hero-role {
+
+        font-size: 0.9rem;
+
+    }
+
+
+    .portfolio-tagline {
+
+        font-size: 0.85rem;
+
+        max-width: 480px;
+
+    }
+
+
+    .hero-glow {
+
+        width: 280px;
+
+        height: 280px;
+
+        filter: blur(65px);
+
+    }
+
+
+    nav ul {
+
+        gap: 0;
+
+    }
+
+
+    nav ul li a {
+
+        padding:
+            22px 9px;
+
+        font-size: 10px;
+
+    }
+
+
+    nav ul li a::after {
+
+        left: 9px;
+
+        right: 9px;
+
+    }
+
+
+    .nav-brand {
+
+        display: none;
+
+    }
+
+
+    .section {
+
+        padding:
+            85px 0;
+
+    }
+
+
+    .section-heading {
+
+        margin-bottom:
+            50px;
+
+    }
+
+
+    .section-heading h2 {
+
+        font-size:
+            2.7rem;
+
+    }
+
+
+    .about-content {
+
+        grid-template-columns:
+            1fr;
+
+        gap: 45px;
+
+        text-align: center;
+
+    }
+
+
+    .about-image-wrap {
+
+        width: 250px;
+
+        margin: auto;
+
+    }
+
+
+    .about-image-label {
+
+        right: -20px;
+
+    }
+
+
+    .about-signature {
+
+        justify-content: center;
+
+    }
+
+
+    .projects-grid {
+
+        grid-template-columns:
+            1fr;
+
+    }
+
+
+    .project-image-wrap {
+
+        height:
+            240px;
+
+    }
+
+
+    .skills-table {
+
+        grid-template-columns:
+            1fr;
+
+    }
+
+
+    .contact-form {
+
+        padding:
+            28px 20px;
+
+    }
+
+}
+
+
+@media (max-width: 480px) {
+
+    .hero {
+
+        min-height: 600px;
+
+    }
+
+
+    .hero-title {
+
+        font-size:
+            3rem;
+
+    }
+
+
+    .hero-kicker {
+
+        font-size:
+            8px;
+
+        letter-spacing:
+            1.3px;
+
+    }
+
+
+    .hero-scroll {
+
+        margin-top:
+            50px;
+
+    }
+
+
+    nav ul li a {
+
+        padding:
+            21px 7px;
+
+        font-size:
+            9px;
+
+    }
+
+
+    .marquee-content span {
+
+        font-size:
+            8px;
+
+        margin:
+            0 11px;
+
+    }
+
+
+    .project-card-content {
+
+        padding:
+            24px 20px;
+
+    }
+
+
+    .project-card-content h3 {
+
+        font-size:
+            1.35rem;
+
+    }
+
+
+    .project-buttons {
+
+        flex-direction:
+            column;
+
+    }
+
+
+    .btn {
+
+        width: 100%;
+
+    }
+
+}
+
+
+/* =========================================================
+   ACCESSIBILITY — REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    html {
+
+        scroll-behavior:
+            auto;
+
+    }
+
+
+    *,
+    *::before,
+    *::after {
+
+        animation-duration:
+            0.01ms !important;
+
+        animation-iteration-count:
+            1 !important;
+
+        transition-duration:
+            0.01ms !important;
+
+        scroll-behavior:
+            auto !important;
+
+    }
+
+
+    .hero-animate {
+
+        opacity:
+            1;
+
+        transform:
+            none;
+
+    }
+
+
+    .reveal {
+
+        opacity:
+            1;
+
+        transform:
+            none;
+
+    }
+
+}

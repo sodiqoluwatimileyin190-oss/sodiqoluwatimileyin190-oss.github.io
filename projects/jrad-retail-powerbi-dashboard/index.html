@@ -4,66 +4,1908 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>JRAD Retail Power BI Dashboard | Sodiq Oluwatimileyin</title>
+    <title>JRAD Superstores — Executive Retail Performance Dashboard | Sodiq Oluwatimileyin</title>
 
+    <meta name="description"
+          content="JRAD Superstores 2026 retail intelligence dashboard built with Power BI, DAX, Deneb, Vega-Lite, data modeling and executive data storytelling.">
+
+    <!-- Existing portfolio stylesheet -->
     <link rel="stylesheet"
           href="../../assets/css/style.css">
+
+    <style>
+
+        /* =========================================================
+           JRAD PROJECT 3 — PAGE STYLES
+           ========================================================= */
+
+        .jrad-page {
+            --purple: #7047c8;
+            --purple-dark: #4e2d98;
+            --purple-light: #f1ecfb;
+            --dark: #17151d;
+            --text: #35313d;
+            --muted: #6d6875;
+            --border: rgba(112, 71, 200, 0.14);
+            --soft: #f7f5fb;
+            --white: #ffffff;
+
+            color: var(--text);
+        }
+
+        .jrad-container {
+            width: min(1180px, calc(100% - 40px));
+            margin: 0 auto;
+        }
+
+
+        /* =========================================================
+           HERO
+           ========================================================= */
+
+        .jrad-hero {
+            padding: 90px 0 70px;
+
+            background:
+                radial-gradient(
+                    circle at 85% 20%,
+                    rgba(112, 71, 200, 0.15),
+                    transparent 32%
+                ),
+                linear-gradient(
+                    180deg,
+                    #fbfaff 0%,
+                    #ffffff 100%
+                );
+        }
+
+        .jrad-eyebrow {
+            display: inline-flex;
+
+            padding: 8px 14px;
+
+            margin-bottom: 20px;
+
+            border: 1px solid var(--border);
+            border-radius: 999px;
+
+            background: rgba(112, 71, 200, 0.06);
+
+            color: var(--purple-dark);
+
+            font-size: 12px;
+            font-weight: 800;
+
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+        }
+
+        .jrad-hero h1 {
+            max-width: 950px;
+
+            margin: 0;
+
+            color: var(--dark);
+
+            font-size: clamp(42px, 6vw, 76px);
+            line-height: 0.98;
+
+            letter-spacing: -0.045em;
+        }
+
+        .jrad-hero h1 span {
+            display: block;
+
+            margin-top: 12px;
+
+            color: var(--purple);
+        }
+
+        .jrad-hero-description {
+            max-width: 760px;
+
+            margin: 28px 0 30px;
+
+            color: var(--muted);
+
+            font-size: 18px;
+            line-height: 1.7;
+        }
+
+
+        /* =========================================================
+           BUTTONS
+           ========================================================= */
+
+        .jrad-buttons {
+            display: flex;
+            flex-wrap: wrap;
+
+            gap: 12px;
+
+            margin-bottom: 55px;
+        }
+
+        .jrad-button {
+            display: inline-flex;
+
+            align-items: center;
+            justify-content: center;
+
+            min-height: 46px;
+
+            padding: 0 20px;
+
+            border-radius: 10px;
+
+            text-decoration: none;
+
+            font-size: 14px;
+            font-weight: 700;
+
+            transition:
+                transform 0.2s ease,
+                box-shadow 0.2s ease;
+        }
+
+        .jrad-button:hover {
+            transform: translateY(-2px);
+        }
+
+        .jrad-button-primary {
+            background: var(--purple);
+
+            color: white;
+
+            box-shadow:
+                0 10px 25px rgba(112, 71, 200, 0.25);
+        }
+
+        .jrad-button-secondary {
+            background: white;
+
+            color: var(--dark);
+
+            border: 1px solid rgba(23, 21, 29, 0.14);
+        }
+
+
+        /* =========================================================
+           HERO MOCKUP
+           ========================================================= */
+
+        .jrad-hero-image {
+            padding: 12px;
+
+            border: 1px solid var(--border);
+
+            border-radius: 22px;
+
+            background: white;
+
+            box-shadow:
+                0 20px 60px rgba(39, 25, 78, 0.12);
+        }
+
+        .jrad-hero-image img {
+            display: block;
+
+            width: 100%;
+            height: auto;
+
+            border-radius: 14px;
+        }
+
+
+        /* =========================================================
+           GENERAL SECTIONS
+           ========================================================= */
+
+        .jrad-section {
+            padding: 90px 0;
+        }
+
+        .jrad-section-soft {
+            background: var(--soft);
+        }
+
+        .jrad-section-header {
+            max-width: 760px;
+
+            margin-bottom: 42px;
+        }
+
+        .jrad-kicker {
+            margin-bottom: 10px;
+
+            color: var(--purple);
+
+            font-size: 12px;
+            font-weight: 800;
+
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+        }
+
+        .jrad-section-header h2 {
+            margin: 0 0 15px;
+
+            color: var(--dark);
+
+            font-size: clamp(30px, 4vw, 48px);
+
+            line-height: 1.08;
+
+            letter-spacing: -0.035em;
+        }
+
+        .jrad-section-header p {
+            margin: 0;
+
+            color: var(--muted);
+
+            font-size: 17px;
+
+            line-height: 1.7;
+        }
+
+
+        /* =========================================================
+           PROJECT AT A GLANCE
+           ========================================================= */
+
+        .jrad-glance {
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, 1fr);
+
+            gap: 15px;
+        }
+
+        .jrad-glance-card {
+            padding: 25px;
+
+            border: 1px solid var(--border);
+
+            border-radius: 16px;
+
+            background: white;
+
+            box-shadow:
+                0 10px 30px rgba(39, 25, 78, 0.05);
+        }
+
+        .jrad-glance-number {
+            display: block;
+
+            margin-bottom: 8px;
+
+            color: var(--dark);
+
+            font-size: 31px;
+            font-weight: 800;
+
+            letter-spacing: -0.04em;
+        }
+
+        .jrad-glance-label {
+            color: var(--muted);
+
+            font-size: 13px;
+        }
+
+
+        /* =========================================================
+           BUSINESS QUESTION
+           ========================================================= */
+
+        .jrad-question {
+            display: grid;
+
+            grid-template-columns:
+                1.1fr 0.9fr;
+
+            gap: 50px;
+
+            align-items: center;
+        }
+
+        .jrad-question-text {
+            color: var(--muted);
+
+            font-size: 19px;
+
+            line-height: 1.75;
+        }
+
+        .jrad-question-box {
+            padding: 34px;
+
+            border-radius: 20px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    var(--purple-dark),
+                    var(--purple)
+                );
+
+            color: white;
+
+            box-shadow:
+                0 20px 50px rgba(77, 44, 152, 0.22);
+        }
+
+        .jrad-question-box small {
+            display: block;
+
+            margin-bottom: 12px;
+
+            opacity: 0.7;
+
+            font-size: 11px;
+            font-weight: 800;
+
+            letter-spacing: 0.12em;
+
+            text-transform: uppercase;
+        }
+
+        .jrad-question-box strong {
+            display: block;
+
+            font-size: 24px;
+
+            line-height: 1.45;
+        }
+
+
+        /* =========================================================
+           DASHBOARD SHOWCASE
+           ========================================================= */
+
+        .jrad-dashboard-list {
+            display: grid;
+
+            gap: 75px;
+        }
+
+        .jrad-dashboard {
+            display: grid;
+
+            grid-template-columns:
+                minmax(0, 1.45fr)
+                minmax(280px, 0.55fr);
+
+            gap: 35px;
+
+            align-items: start;
+        }
+
+        .jrad-dashboard:nth-child(even) {
+            grid-template-columns:
+                minmax(280px, 0.55fr)
+                minmax(0, 1.45fr);
+        }
+
+        .jrad-dashboard:nth-child(even)
+        .jrad-dashboard-image {
+            order: 2;
+        }
+
+        .jrad-dashboard-image {
+            padding: 10px;
+
+            border: 1px solid var(--border);
+
+            border-radius: 18px;
+
+            background: white;
+
+            box-shadow:
+                0 18px 55px rgba(39, 25, 78, 0.10);
+        }
+
+        .jrad-dashboard-image img {
+            display: block;
+
+            width: 100%;
+            height: auto;
+
+            border-radius: 10px;
+        }
+
+        .jrad-dashboard-content {
+            padding-top: 8px;
+        }
+
+        .jrad-dashboard-number {
+            display: block;
+
+            margin-bottom: 12px;
+
+            color: var(--purple);
+
+            font-size: 12px;
+            font-weight: 800;
+
+            letter-spacing: 0.13em;
+        }
+
+        .jrad-dashboard-content h3 {
+            margin: 0 0 12px;
+
+            color: var(--dark);
+
+            font-size: 30px;
+
+            line-height: 1.1;
+        }
+
+        .jrad-purpose {
+            margin-bottom: 25px;
+
+            color: var(--muted);
+
+            line-height: 1.7;
+        }
+
+
+        /* =========================================================
+           INSIGHTS
+           ========================================================= */
+
+        .jrad-insights {
+            display: grid;
+
+            gap: 14px;
+
+            margin: 0 0 25px;
+
+            padding: 0;
+
+            list-style: none;
+        }
+
+        .jrad-insights li {
+            position: relative;
+
+            padding-left: 20px;
+
+            color: var(--text);
+
+            font-size: 14px;
+
+            line-height: 1.6;
+        }
+
+        .jrad-insights li::before {
+            content: "";
+
+            position: absolute;
+
+            top: 0.65em;
+            left: 0;
+
+            width: 7px;
+            height: 7px;
+
+            border-radius: 50%;
+
+            background: var(--purple);
+        }
+
+
+        /* =========================================================
+           STRATEGIC FOCUS
+           ========================================================= */
+
+        .jrad-focus {
+            padding: 17px 18px;
+
+            border-left:
+                3px solid var(--purple);
+
+            border-radius:
+                0 10px 10px 0;
+
+            background:
+                var(--purple-light);
+        }
+
+        .jrad-focus-title {
+            display: block;
+
+            margin-bottom: 6px;
+
+            color: var(--purple-dark);
+
+            font-size: 11px;
+            font-weight: 800;
+
+            letter-spacing: 0.1em;
+
+            text-transform: uppercase;
+        }
+
+        .jrad-focus p {
+            margin: 0;
+
+            color: var(--text);
+
+            font-size: 14px;
+
+            line-height: 1.55;
+        }
+
+
+        /* =========================================================
+           KEY FINDINGS
+           ========================================================= */
+
+        .jrad-findings {
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 16px;
+        }
+
+        .jrad-finding {
+            padding: 28px;
+
+            border: 1px solid var(--border);
+
+            border-radius: 18px;
+
+            background: white;
+
+            box-shadow:
+                0 10px 30px rgba(39, 25, 78, 0.05);
+        }
+
+        .jrad-finding-number {
+            display: block;
+
+            margin-bottom: 12px;
+
+            color: var(--purple);
+
+            font-size: 31px;
+            font-weight: 800;
+
+            letter-spacing: -0.04em;
+        }
+
+        .jrad-finding h3 {
+            margin: 0 0 9px;
+
+            color: var(--dark);
+
+            font-size: 17px;
+        }
+
+        .jrad-finding p {
+            margin: 0;
+
+            color: var(--muted);
+
+            font-size: 14px;
+
+            line-height: 1.6;
+        }
+
+
+        /* =========================================================
+           VISUAL ENGINEERING
+           ========================================================= */
+
+        .jrad-stack {
+            display: flex;
+
+            flex-wrap: wrap;
+
+            gap: 10px;
+        }
+
+        .jrad-chip {
+            padding: 11px 15px;
+
+            border: 1px solid var(--border);
+
+            border-radius: 999px;
+
+            background: white;
+
+            color: #332d3d;
+
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+
+        /* =========================================================
+           TECHNICAL IMPLEMENTATION
+           ========================================================= */
+
+        .jrad-technical {
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, 1fr);
+
+            gap: 16px;
+        }
+
+        .jrad-tech-card {
+            padding: 27px;
+
+            border: 1px solid var(--border);
+
+            border-radius: 17px;
+
+            background: white;
+        }
+
+        .jrad-tech-card h3 {
+            margin: 0 0 10px;
+
+            color: var(--dark);
+
+            font-size: 17px;
+        }
+
+        .jrad-tech-card p {
+            margin: 0;
+
+            color: var(--muted);
+
+            font-size: 14px;
+
+            line-height: 1.65;
+        }
+
+
+        /* =========================================================
+           BUSINESS IMPACT
+           ========================================================= */
+
+        .jrad-impact {
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, 1fr);
+
+            gap: 16px;
+        }
+
+        .jrad-impact-card {
+            padding: 28px;
+
+            border:
+                1px solid var(--border);
+
+            border-radius: 18px;
+
+            background: white;
+        }
+
+        .jrad-impact-card h3 {
+            margin: 0 0 10px;
+
+            color: var(--dark);
+
+            font-size: 18px;
+        }
+
+        .jrad-impact-card p {
+            margin: 0;
+
+            color: var(--muted);
+
+            font-size: 14px;
+
+            line-height: 1.65;
+        }
+
+
+        /* =========================================================
+           FINAL CTA
+           ========================================================= */
+
+        .jrad-cta {
+            padding: 80px 0;
+        }
+
+        .jrad-cta-box {
+            display: flex;
+
+            align-items: center;
+            justify-content: space-between;
+
+            gap: 30px;
+
+            padding: 42px;
+
+            border-radius: 24px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #211635,
+                    #5e39a7
+                );
+
+            color: white;
+
+            box-shadow:
+                0 24px 65px rgba(42, 25, 79, 0.22);
+        }
+
+        .jrad-cta-box h2 {
+            margin: 0 0 9px;
+
+            font-size: clamp(27px, 4vw, 39px);
+
+            letter-spacing: -0.03em;
+        }
+
+        .jrad-cta-box p {
+            max-width: 650px;
+
+            margin: 0;
+
+            color: rgba(255,255,255,0.75);
+
+            line-height: 1.6;
+        }
+
+
+        /* =========================================================
+           FOOTER
+           ========================================================= */
+
+        .jrad-footer {
+            padding: 0 0 45px;
+
+            text-align: center;
+
+            color: #85808e;
+
+            font-size: 12px;
+        }
+
+
+        /* =========================================================
+           TABLET
+           ========================================================= */
+
+        @media (max-width: 900px) {
+
+            .jrad-glance {
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+
+            .jrad-question {
+                grid-template-columns: 1fr;
+            }
+
+            .jrad-dashboard,
+            .jrad-dashboard:nth-child(even) {
+                grid-template-columns: 1fr;
+            }
+
+            .jrad-dashboard:nth-child(even)
+            .jrad-dashboard-image {
+                order: initial;
+            }
+
+            .jrad-findings {
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+
+            .jrad-technical {
+                grid-template-columns: 1fr;
+            }
+
+            .jrad-impact {
+                grid-template-columns:
+                    repeat(2, 1fr);
+            }
+
+            .jrad-cta-box {
+                flex-direction: column;
+
+                align-items: flex-start;
+            }
+        }
+
+
+        /* =========================================================
+           MOBILE
+           ========================================================= */
+
+        @media (max-width: 620px) {
+
+            .jrad-container {
+                width:
+                    min(
+                        calc(100% - 28px),
+                        1180px
+                    );
+            }
+
+            .jrad-hero,
+            .jrad-section {
+                padding-top: 60px;
+                padding-bottom: 60px;
+            }
+
+            .jrad-hero h1 {
+                font-size: 44px;
+            }
+
+            .jrad-glance,
+            .jrad-findings,
+            .jrad-impact {
+                grid-template-columns: 1fr;
+            }
+
+            .jrad-hero-image {
+                padding: 6px;
+
+                border-radius: 15px;
+            }
+
+            .jrad-cta-box {
+                padding: 28px;
+            }
+        }
+
+    </style>
 </head>
+
 
 <body>
 
-<section class="section">
-    <div class="container">
+<main class="jrad-page">
 
-        <h1>JRAD Retail Power BI Dashboard</h1>
 
-        <p>
-            Executive Intelligence & Visual Engineering
-        </p>
+    <!-- =========================================================
+         HERO
+         ========================================================= -->
 
-        <img src="images/executive-overview.png"
-             alt="JRAD Retail Power BI Executive Overview"
-             style="width:100%; max-width:1400px; margin:30px 0;">
+    <section class="jrad-hero">
 
-        <h2>Chapter 1 — Executive, Sales & Customer Intelligence</h2>
+        <div class="jrad-container">
 
-        <p>
-            A Power BI retail analytics solution built from the JRAD
-            Superstores 2026 retail data ecosystem. The project combines
-            Power BI, DAX, time intelligence, Deneb and custom visual
-            engineering to transform large-scale transactional data into
-            decision-ready business intelligence.
-        </p>
+            <span class="jrad-eyebrow">
+                Project 03 · Retail Intelligence
+            </span>
 
-        <h3>Chapter 1 Pages</h3>
 
-        <ul>
-            <li>Executive Overview</li>
-            <li>Sales & Time Intelligence</li>
-            <li>Customer Segmentation</li>
-        </ul>
+            <h1>
+                JRAD Retail Power BI
 
-        <h3>Technical Focus</h3>
+                <span>
+                    Executive Intelligence &amp;
+                    Visual Engineering
+                </span>
+            </h1>
 
-        <ul>
-            <li>Power BI</li>
-            <li>DAX & Time Intelligence</li>
-            <li>Deneb / Vega-Lite</li>
-            <li>Data Modelling</li>
-            <li>Visual Engineering</li>
-            <li>Executive Data Storytelling</li>
-        </ul>
 
-        <p>
-            <a href="https://github.com/sodiqoluwatimileyin190-oss/sodiqoluwatimileyin190-oss.github.io/tree/main/projects/jrad-retail-powerbi-dashboard"
-               target="_blank"
-               class="btn">
-                View Project on GitHub
-            </a>
-        </p>
+            <p class="jrad-hero-description">
+                A 2026 retail intelligence solution built for
+                JRAD Superstores, transforming full-year transaction
+                data into an executive view of revenue performance,
+                demand behavior and customer value.
+            </p>
+
+
+            <div class="jrad-buttons">
+
+                <a href="#dashboard"
+                   class="jrad-button jrad-button-primary">
+                    Explore Dashboard
+                </a>
+
+
+                <a href="https://github.com/sodiqoluwatimileyin190-oss/sodiqoluwatimileyin190-oss.github.io/tree/main/projects/jrad-retail-powerbi-dashboard"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   class="jrad-button jrad-button-secondary">
+                    View Project on GitHub
+                </a>
+
+            </div>
+
+
+            <!--
+                IMPORTANT:
+                This is the 3-dashboard MOCKUP image.
+                Keep this filename as executive-overview.png.
+            -->
+
+            <div class="jrad-hero-image">
+
+                <img src="images/executive-overview.png"
+                     alt="JRAD Superstores Power BI dashboard mockup showing all three intelligence pages">
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================================================
+         PROJECT AT A GLANCE
+         ========================================================= -->
+
+    <section class="jrad-section">
+
+        <div class="jrad-container">
+
+            <div class="jrad-section-header">
+
+                <div class="jrad-kicker">
+                    Project at a Glance
+                </div>
+
+                <h2>
+                    Built to move from
+                    transactions to decisions.
+                </h2>
+
+                <p>
+                    Three focused intelligence pages turn the JRAD
+                    Superstores 2026 retail transaction ecosystem
+                    into a decision-ready management view.
+                </p>
+
+            </div>
+
+
+            <div class="jrad-glance">
+
+
+                <div class="jrad-glance-card">
+
+                    <span class="jrad-glance-number">
+                        1.8M+
+                    </span>
+
+                    <span class="jrad-glance-label">
+                        Transaction Lines
+                    </span>
+
+                </div>
+
+
+                <div class="jrad-glance-card">
+
+                    <span class="jrad-glance-number">
+                        12
+                    </span>
+
+                    <span class="jrad-glance-label">
+                        Months · Jan–Dec 2026
+                    </span>
+
+                </div>
+
+
+                <div class="jrad-glance-card">
+
+                    <span class="jrad-glance-number">
+                        5
+                    </span>
+
+                    <span class="jrad-glance-label">
+                        Branches
+                    </span>
+
+                </div>
+
+
+                <div class="jrad-glance-card">
+
+                    <span class="jrad-glance-number">
+                        3
+                    </span>
+
+                    <span class="jrad-glance-label">
+                        Intelligence Pages
+                    </span>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================================================
+         BUSINESS QUESTION
+         ========================================================= -->
+
+    <section class="jrad-section jrad-section-soft">
+
+        <div class="jrad-container">
+
+            <div class="jrad-question">
+
+
+                <div>
+
+                    <div class="jrad-section-header"
+                         style="margin-bottom:0;">
+
+                        <div class="jrad-kicker">
+                            The Business Question
+                        </div>
+
+                        <h2>
+                            What is driving
+                            retail performance?
+                        </h2>
+
+                    </div>
+
+
+                    <p class="jrad-question-text">
+
+                        The dashboard was designed to answer four
+                        management-level questions: how the business
+                        is performing, when demand is concentrated,
+                        which branches and departments are strongest,
+                        and which customer personas create the most value.
+
+                    </p>
+
+                </div>
+
+
+                <div class="jrad-question-box">
+
+                    <small>
+                        Decision Lens
+                    </small>
+
+                    <strong>
+                        Revenue · Demand · Branches ·
+                        Departments · Customers
+                    </strong>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================================================
+         DASHBOARD INTELLIGENCE
+         ========================================================= -->
+
+    <section class="jrad-section"
+             id="dashboard">
+
+        <div class="jrad-container">
+
+
+            <div class="jrad-section-header">
+
+                <div class="jrad-kicker">
+                    Dashboard Intelligence
+                </div>
+
+                <h2>
+                    Three pages.
+                    One connected retail story.
+                </h2>
+
+                <p>
+                    Each page answers a different layer of the
+                    business question, moving from executive
+                    performance to demand behavior and customer value.
+                </p>
+
+            </div>
+
+
+
+            <div class="jrad-dashboard-list">
+
+
+                <!-- =================================================
+                     PAGE 1 — EXECUTIVE OVERVIEW
+                     ================================================= -->
+
+                <article class="jrad-dashboard">
+
+
+                    <div class="jrad-dashboard-image">
+
+                        <img src="images/executive-overview-page.png"
+                             alt="JRAD Superstores Executive Overview Power BI dashboard">
+
+                    </div>
+
+
+                    <div class="jrad-dashboard-content">
+
+                        <span class="jrad-dashboard-number">
+                            01 / EXECUTIVE OVERVIEW
+                        </span>
+
+
+                        <h3>
+                            Executive Performance Overview
+                        </h3>
+
+
+                        <p class="jrad-purpose">
+
+                            A single-glance leadership view of
+                            revenue, baskets, basket value, target
+                            achievement, branch performance,
+                            departments and customer personas.
+
+                        </p>
+
+
+                        <ul class="jrad-insights">
+
+                            <li>
+                                December delivered
+                                <strong>₦1.90bn</strong> in revenue,
+                                the strongest month of the year.
+                            </li>
+
+                            <li>
+                                June recorded the sharpest monthly
+                                decline, falling <strong>12.7%</strong>
+                                before recovery.
+                            </li>
+
+                            <li>
+                                Most individual branches fell short
+                                of target, while JRAD still maintained
+                                strong overall growth.
+                            </li>
+
+                        </ul>
+
+
+                        <div class="jrad-focus">
+
+                            <span class="jrad-focus-title">
+                                Strategic Focus
+                            </span>
+
+                            <p>
+                                Protect festive-season momentum,
+                                investigate the June slowdown,
+                                and tighten branch-level target setting.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+
+                <!-- =================================================
+                     PAGE 2 — SALES & TIME
+                     ================================================= -->
+
+                <article class="jrad-dashboard">
+
+
+                    <div class="jrad-dashboard-image">
+
+                        <img src="images/sales-time.png"
+                             alt="JRAD Superstores Sales and Time Intelligence Power BI dashboard">
+
+                    </div>
+
+
+                    <div class="jrad-dashboard-content">
+
+                        <span class="jrad-dashboard-number">
+                            02 / SALES &amp; TIME
+                        </span>
+
+
+                        <h3>
+                            Sales &amp; Time Intelligence
+                        </h3>
+
+
+                        <p class="jrad-purpose">
+
+                            A demand-behavior layer showing when
+                            and how customers spend across salary
+                            cycles, hours, weekdays, business events
+                            and shopping missions.
+
+                        </p>
+
+
+                        <ul class="jrad-insights">
+
+                            <li>
+                                Spending is strongest during
+                                <strong>Salary Week</strong>, with
+                                average basket value around
+                                <strong>₦79K</strong>.
+                            </li>
+
+                            <li>
+                                Demand peaks around
+                                <strong>6 PM</strong>, concentrated
+                                in the <strong>5–7 PM</strong>
+                                evening rush, with Saturday as the
+                                highest-demand day.
+                            </li>
+
+                            <li>
+                                Business events generated
+                                <strong>₦2.32bn</strong> in combined
+                                uplift, or <strong>+17.8%</strong>
+                                above baseline.
+                            </li>
+
+                        </ul>
+
+
+                        <div class="jrad-focus">
+
+                            <span class="jrad-focus-title">
+                                Strategic Focus
+                            </span>
+
+                            <p>
+                                Prioritize peak-hour staffing,
+                                event-driven inventory planning,
+                                and salary-cycle promotions.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+
+                <!-- =================================================
+                     PAGE 3 — CUSTOMER SEGMENTATION
+                     ================================================= -->
+
+                <article class="jrad-dashboard">
+
+
+                    <div class="jrad-dashboard-image">
+
+                        <img src="images/customer-segmentation.png"
+                             alt="JRAD Superstores Customer Segmentation Power BI dashboard">
+
+                    </div>
+
+
+                    <div class="jrad-dashboard-content">
+
+                        <span class="jrad-dashboard-number">
+                            03 / CUSTOMER SEGMENTATION
+                        </span>
+
+
+                        <h3>
+                            Customer Segmentation
+                        </h3>
+
+
+                        <p class="jrad-purpose">
+
+                            A customer-value layer explaining
+                            who shops, how they spend, how frequently
+                            they purchase, and where value concentrates.
+
+                        </p>
+
+
+                        <ul class="jrad-insights">
+
+                            <li>
+                                <strong>Premium</strong> and
+                                <strong>Family Shopper</strong>
+                                personas combine high basket value
+                                with strong purchase frequency.
+                            </li>
+
+                            <li>
+                                <strong>Weekly Grocery</strong>
+                                accounts for roughly
+                                <strong>85%</strong> of
+                                shopping-mission revenue.
+                            </li>
+
+                            <li>
+                                Walk-in customers dominate the mix,
+                                creating an opportunity to convert
+                                frequent walk-ins into registered customers.
+                            </li>
+
+                        </ul>
+
+
+                        <div class="jrad-focus">
+
+                            <span class="jrad-focus-title">
+                                Strategic Focus
+                            </span>
+
+                            <p>
+                                Prioritize Premium and Family Shoppers,
+                                convert high-frequency walk-ins,
+                                and reinforce Weekly Grocery.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================================================
+         KEY FINDINGS
+         ========================================================= -->
+
+    <section class="jrad-section jrad-section-soft">
+
+        <div class="jrad-container">
+
+
+            <div class="jrad-section-header">
+
+                <div class="jrad-kicker">
+                    Key Findings
+                </div>
+
+                <h2>
+                    The numbers tell
+                    a resilient retail story.
+                </h2>
+
+                <p>
+                    The strongest signals from the three dashboard
+                    pages reveal where JRAD is growing, where demand
+                    concentrates, and where management can act.
+                </p>
+
+            </div>
+
+
+
+            <div class="jrad-findings">
+
+
+                <article class="jrad-finding">
+
+                    <span class="jrad-finding-number">
+                        ₦15.33bn
+                    </span>
+
+                    <h3>
+                        Actual Revenue
+                    </h3>
+
+                    <p>
+                        Full-year revenue reached ₦15.33bn against
+                        a ₦16.00bn target, delivering 95.8% target
+                        achievement.
+                    </p>
+
+                </article>
+
+
+
+                <article class="jrad-finding">
+
+                    <span class="jrad-finding-number">
+                        ₦1.90bn
+                    </span>
+
+                    <h3>
+                        Strongest Month
+                    </h3>
+
+                    <p>
+                        December was the strongest month, reflecting
+                        the powerful contribution of the festive season.
+                    </p>
+
+                </article>
+
+
+
+                <article class="jrad-finding">
+
+                    <span class="jrad-finding-number">
+                        6 PM
+                    </span>
+
+                    <h3>
+                        Peak Demand Hour
+                    </h3>
+
+                    <p>
+                        Demand concentrates around the evening rush,
+                        making staffing and operational readiness
+                        especially important from 5–7 PM.
+                    </p>
+
+                </article>
+
+
+
+                <article class="jrad-finding">
+
+                    <span class="jrad-finding-number">
+                        ₦2.32bn
+                    </span>
+
+                    <h3>
+                        Event-Driven Uplift
+                    </h3>
+
+                    <p>
+                        Business events generated a combined 17.8%
+                        uplift above baseline, led by major promotional
+                        and festive periods.
+                    </p>
+
+                </article>
+
+
+
+                <article class="jrad-finding">
+
+                    <span class="jrad-finding-number">
+                        53.0%
+                    </span>
+
+                    <h3>
+                        Family Shopper Revenue
+                    </h3>
+
+                    <p>
+                        Family Shoppers contributed more than half
+                        of total revenue, making the persona strategically
+                        significant.
+                    </p>
+
+                </article>
+
+
+
+                <article class="jrad-finding">
+
+                    <span class="jrad-finding-number">
+                        75.05%
+                    </span>
+
+                    <h3>
+                        Walk-In Customer Mix
+                    </h3>
+
+                    <p>
+                        Walk-ins dominate the customer base,
+                        highlighting a clear registration and
+                        retention opportunity.
+                    </p>
+
+                </article>
+
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================================================
+         VISUAL ENGINEERING
+         ========================================================= -->
+
+    <section class="jrad-section">
+
+        <div class="jrad-container">
+
+
+            <div class="jrad-section-header">
+
+                <div class="jrad-kicker">
+                    Visual Engineering
+                </div>
+
+                <h2>
+                    Built beyond default
+                    dashboard visuals.
+                </h2>
+
+                <p>
+                    The report combines native Power BI capabilities
+                    with custom visual engineering to make analytical
+                    signals easier to read, compare and act on.
+                </p>
+
+            </div>
+
+
+
+            <div class="jrad-stack">
+
+                <span class="jrad-chip">
+                    Power BI
+                </span>
+
+                <span class="jrad-chip">
+                    DAX
+                </span>
+
+                <span class="jrad-chip">
+                    Time Intelligence
+                </span>
+
+                <span class="jrad-chip">
+                    Deneb
+                </span>
+
+                <span class="jrad-chip">
+                    Vega-Lite
+                </span>
+
+                <span class="jrad-chip">
+                    Star-Schema Modeling
+                </span>
+
+                <span class="jrad-chip">
+                    Conditional Formatting
+                </span>
+
+                <span class="jrad-chip">
+                    Dynamic Insight Measures
+                </span>
+
+                <span class="jrad-chip">
+                    Executive Data Storytelling
+                </span>
+
+                <span class="jrad-chip">
+                    UX Design
+                </span>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================================================
+         TECHNICAL IMPLEMENTATION
+         ========================================================= -->
+
+    <section class="jrad-section jrad-section-soft">
+
+        <div class="jrad-container">
+
+
+            <div class="jrad-section-header">
+
+                <div class="jrad-kicker">
+                    Technical Implementation
+                </div>
+
+                <h2>
+                    The analytical architecture
+                    behind the report.
+                </h2>
+
+            </div>
+
+
+
+            <div class="jrad-technical">
+
+
+                <article class="jrad-tech-card">
+
+                    <h3>
+                        Power BI &amp; Data Modeling
+                    </h3>
+
+                    <p>
+                        End-to-end report development using a
+                        star-schema architecture connecting sales,
+                        inventory and supporting fact tables to
+                        business dimensions and a dedicated measures layer.
+                    </p>
+
+                </article>
+
+
+
+                <article class="jrad-tech-card">
+
+                    <h3>
+                        DAX &amp; Time Intelligence
+                    </h3>
+
+                    <p>
+                        Dynamic measures support growth rates,
+                        target calculations, gauge logic, KPI
+                        indicators and natural-language insight
+                        text that responds to the selected context.
+                    </p>
+
+                </article>
+
+
+
+                <article class="jrad-tech-card">
+
+                    <h3>
+                        Conditional KPI Logic
+                    </h3>
+
+                    <p>
+                        KPI indicator colors are bound to DAX
+                        measure expressions, allowing visual states
+                        to update automatically with the underlying
+                        business results.
+                    </p>
+
+                </article>
+
+
+
+                <article class="jrad-tech-card">
+
+                    <h3>
+                        Deneb &amp; Vega-Lite
+                    </h3>
+
+                    <p>
+                        Custom KPI cards, gauges, flow visuals and
+                        insight callouts extend the native Power BI
+                        visual language where more controlled
+                        analytical presentation was required.
+                    </p>
+
+                </article>
+
+
+
+                <article class="jrad-tech-card">
+
+                    <h3>
+                        Interactive UX
+                    </h3>
+
+                    <p>
+                        Consistent visual theming, synchronized
+                        Month, Branch and Department slicers,
+                        and in-report page navigation create a
+                        connected analytical experience across
+                        all three pages.
+                    </p>
+
+                </article>
+
+
+
+                <article class="jrad-tech-card">
+
+                    <h3>
+                        Executive Data Storytelling
+                    </h3>
+
+                    <p>
+                        The report is structured around business
+                        questions rather than simply displaying
+                        metrics, guiding leadership from performance
+                        to demand behavior and customer value.
+                    </p>
+
+                </article>
+
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================================================
+         BUSINESS IMPACT
+         ========================================================= -->
+
+    <section class="jrad-section">
+
+        <div class="jrad-container">
+
+
+            <div class="jrad-section-header">
+
+                <div class="jrad-kicker">
+                    Business Impact
+                </div>
+
+                <h2>
+                    What management can
+                    do with the findings.
+                </h2>
+
+                <p>
+                    The dashboard converts descriptive analytics
+                    into practical operating priorities.
+                </p>
+
+            </div>
+
+
+
+            <div class="jrad-impact">
+
+
+                <article class="jrad-impact-card">
+
+                    <h3>
+                        Plan Around Demand
+                    </h3>
+
+                    <p>
+                        Align staffing, inventory and promotional
+                        execution with the 5–7 PM demand window,
+                        Saturday peaks and event-driven surges.
+                    </p>
+
+                </article>
+
+
+
+                <article class="jrad-impact-card">
+
+                    <h3>
+                        Protect High-Value Customers
+                    </h3>
+
+                    <p>
+                        Focus retention and engagement around
+                        Premium and Family Shoppers while
+                        strengthening the Weekly Grocery mission.
+                    </p>
+
+                </article>
+
+
+
+                <article class="jrad-impact-card">
+
+                    <h3>
+                        Improve Branch Execution
+                    </h3>
+
+                    <p>
+                        Use branch-level target performance to
+                        investigate execution gaps and make
+                        target setting more closely reflect local
+                        performance realities.
+                    </p>
+
+                </article>
+
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================================================
+         FINAL CTA
+         ========================================================= -->
+
+    <section class="jrad-cta">
+
+        <div class="jrad-container">
+
+
+            <div class="jrad-cta-box">
+
+
+                <div>
+
+                    <h2>
+                        Explore the full project.
+                    </h2>
+
+                    <p>
+                        Review the Power BI project structure,
+                        supporting assets, DAX work and custom
+                        visual engineering on GitHub.
+                    </p>
+
+                </div>
+
+
+                <a href="https://github.com/sodiqoluwatimileyin190-oss/sodiqoluwatimileyin190-oss.github.io/tree/main/projects/jrad-retail-powerbi-dashboard"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   class="jrad-button jrad-button-secondary">
+
+                    View Project on GitHub
+
+                </a>
+
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =========================================================
+         FOOTER
+         ========================================================= -->
+
+    <div class="jrad-footer">
+
+        JRAD Superstores ·
+        Executive Retail Performance Dashboard ·
+        2026
 
     </div>
-</section>
+
+
+</main>
 
 </body>
 </html>

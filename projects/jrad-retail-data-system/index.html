@@ -8,89 +8,435 @@
     <title>JRAD Retail Data System | Sodiq Oluwatimileyin</title>
 
     <style>
+        /* =========================================================
+           JRAD RETAIL DATA SYSTEM — PROJECT 1
+           Visual language aligned with Projects 2 & 3
+           ========================================================= */
+
         * {
             box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
         }
 
         body {
             margin: 0;
             font-family: Arial, Helvetica, sans-serif;
-            background: #f4f6f9;
-            color: #1f2937;
+            background: #ffffff;
+            color: #171717;
             line-height: 1.7;
         }
 
+        img {
+            max-width: 100%;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        /* =========================================================
+           CONTAINER
+           ========================================================= */
+
+        .container {
+            width: min(1180px, 92%);
+            margin: 0 auto;
+        }
+
+        /* =========================================================
+           HERO
+           ========================================================= */
+
         .hero {
-            background: #1f2f4a;
-            color: white;
-            padding: 80px 20px;
+            position: relative;
+            overflow: hidden;
+            padding: 85px 0 75px;
             text-align: center;
+            color: #ffffff;
+            background:
+                radial-gradient(
+                    circle at 20% 10%,
+                    #a68be0 0%,
+                    #7c5cd6 35%,
+                    #3d2a8a 100%
+                );
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            width: 420px;
+            height: 420px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.07);
+            top: -230px;
+            right: -120px;
+        }
+
+        .hero::after {
+            content: "";
+            position: absolute;
+            width: 320px;
+            height: 320px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.05);
+            bottom: -210px;
+            left: -100px;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .eyebrow {
+            display: inline-block;
+            margin-bottom: 18px;
+            padding: 8px 15px;
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.10);
+            font-size: 0.78rem;
+            font-weight: 800;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
         }
 
         .hero h1 {
             margin: 0;
-            font-size: 42px;
+            font-size: clamp(2.4rem, 5vw, 4.5rem);
+            line-height: 1.04;
+            letter-spacing: -0.045em;
         }
 
-        .hero p {
-            max-width: 750px;
-            margin: 20px auto 0;
-            font-size: 18px;
-            color: #dbe4f0;
+        .hero h1 span {
+            display: block;
+            margin-top: 8px;
+            opacity: 0.82;
         }
 
-        .container {
-            width: 90%;
-            max-width: 1100px;
-            margin: auto;
+        .hero-subtitle {
+            max-width: 780px;
+            margin: 24px auto 0;
+            color: #eee9ff;
+            font-size: 1.1rem;
+            line-height: 1.75;
+        }
+
+        /* =========================================================
+           BUTTONS
+           ========================================================= */
+
+        .actions {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 13px;
+            margin-top: 32px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 13px 23px;
+            border-radius: 10px;
+            font-weight: 700;
+            transition:
+                transform 0.2s ease,
+                box-shadow 0.2s ease,
+                background 0.2s ease;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .btn-primary {
+            background: #ffffff;
+            color: #5d3baa;
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .btn-secondary {
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            background: rgba(255, 255, 255, 0.10);
+            color: #ffffff;
+        }
+
+        /* =========================================================
+           BACK TO PORTFOLIO
+           ========================================================= */
+
+        .top-navigation {
+            padding: 25px 0 0;
         }
 
         .back-link {
-            display: inline-block;
-            margin: 30px 0;
-            text-decoration: none;
-            color: #1f2f4a;
-            font-weight: bold;
+            color: #7046c6;
+            font-size: 0.9rem;
+            font-weight: 700;
         }
 
-        section {
-            background: white;
-            padding: 45px;
-            margin-bottom: 30px;
-            border-radius: 10px;
+        .back-link:hover {
+            text-decoration: underline;
         }
 
-        h2 {
-            color: #1f2f4a;
-            margin-top: 0;
+        /* =========================================================
+           GENERAL SECTIONS
+           ========================================================= */
+
+        .section {
+            padding: 85px 0;
         }
 
-        h3 {
-            color: #2d4365;
-            margin-top: 35px;
+        .section-light {
+            background: #f8f7fb;
         }
+
+        .section-heading {
+            max-width: 780px;
+            margin-bottom: 42px;
+        }
+
+        .section-label {
+            color: #7046c6;
+            font-size: 0.78rem;
+            font-weight: 800;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        .section-heading h2 {
+            margin: 9px 0 15px;
+            font-size: clamp(1.9rem, 4vw, 2.8rem);
+            line-height: 1.15;
+            letter-spacing: -0.04em;
+        }
+
+        .section-heading p {
+            margin: 0;
+            color: #666;
+            line-height: 1.75;
+        }
+
+        /* =========================================================
+           PROJECT AT A GLANCE
+           ========================================================= */
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+        }
+
+        .stat-card {
+            padding: 28px 22px;
+            border: 1px solid #e7e2ef;
+            border-radius: 16px;
+            background: #ffffff;
+            transition:
+                transform 0.2s ease,
+                box-shadow 0.2s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(45, 29, 91, 0.08);
+        }
+
+        .stat-card strong {
+            display: block;
+            margin-bottom: 6px;
+            color: #7046c6;
+            font-size: 1.65rem;
+            line-height: 1.2;
+        }
+
+        .stat-card span {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        /* =========================================================
+           BUSINESS PROBLEM
+           ========================================================= */
+
+        .problem-grid {
+            display: grid;
+            grid-template-columns: 0.85fr 1.15fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .problem-title {
+            margin: 0;
+            font-size: clamp(2rem, 4vw, 3.1rem);
+            line-height: 1.12;
+            letter-spacing: -0.04em;
+        }
+
+        .problem-copy {
+            color: #555;
+            font-size: 1.03rem;
+            line-height: 1.8;
+        }
+
+        /* =========================================================
+           DISCLAIMER
+           ========================================================= */
 
         .disclaimer {
-            background: #eef3f9;
-            border-left: 5px solid #1f2f4a;
-            padding: 25px;
             margin-bottom: 30px;
+            padding: 24px 26px;
+            border-left: 4px solid #7046c6;
+            border-radius: 14px;
+            background: #f7f4fc;
         }
 
-        ul {
-            padding-left: 22px;
+        .disclaimer h3 {
+            margin: 0 0 8px;
+            color: #5d3baa;
+            font-size: 1rem;
         }
 
-        .image-section {
-            margin-top: 35px;
+        .disclaimer p {
+            margin: 6px 0 0;
+            color: #666;
+            font-size: 0.92rem;
+            line-height: 1.7;
+        }
+
+        /* =========================================================
+           SYSTEM FOUNDATION
+           ========================================================= */
+
+        .foundation-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+        }
+
+        .foundation-card {
+            padding: 28px;
+            border: 1px solid #e7e2ef;
+            border-radius: 17px;
+            background: #ffffff;
+            transition:
+                transform 0.2s ease,
+                box-shadow 0.2s ease;
+        }
+
+        .foundation-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(45, 29, 91, 0.08);
+        }
+
+        .foundation-number {
+            color: #7046c6;
+            font-size: 0.78rem;
+            font-weight: 800;
+        }
+
+        .foundation-card h3 {
+            margin: 11px 0 9px;
+            font-size: 1.1rem;
+        }
+
+        .foundation-card p {
+            margin: 0;
+            color: #666;
+            font-size: 0.93rem;
+            line-height: 1.65;
+        }
+
+        /* =========================================================
+           ARTIFACTS
+           ========================================================= */
+
+        .artifact {
+            margin-bottom: 75px;
+        }
+
+        .artifact:last-child {
+            margin-bottom: 0;
+        }
+
+        .artifact-header {
+            margin-bottom: 23px;
+        }
+
+        .artifact-number {
+            color: #7046c6;
+            font-size: 0.78rem;
+            font-weight: 800;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        .artifact-header h3 {
+            margin: 7px 0 8px;
+            font-size: 1.65rem;
+            letter-spacing: -0.025em;
+        }
+
+        .artifact-header p {
+            max-width: 790px;
+            margin: 0;
+            color: #666;
+            line-height: 1.7;
+        }
+
+        .image-frame {
+            overflow: hidden;
+            border: 1px solid #e6e2eb;
+            border-radius: 18px;
+            background: #ffffff;
+            box-shadow: 0 20px 55px rgba(45, 29, 91, 0.10);
         }
 
         .project-image {
+            display: block;
             width: 100%;
-            margin-top: 15px;
-            border-radius: 8px;
-            border: 1px solid #ddd;
+            height: auto;
         }
+
+        .artifact-caption {
+            margin-top: 17px;
+            padding: 18px 20px;
+            border-left: 4px solid #7046c6;
+            border-radius: 12px;
+            background: #f7f4fc;
+            color: #5d5d5d;
+            font-size: 0.9rem;
+            line-height: 1.65;
+        }
+
+        /* =========================================================
+           PYTHON SECTION
+           ========================================================= */
+
+        .python-section {
+            background:
+                linear-gradient(
+                    135deg,
+                    #f8f7fb 0%,
+                    #f2edfb 100%
+                );
+        }
+
+        .python-intro {
+            max-width: 800px;
+            color: #555;
+            line-height: 1.8;
+        }
+
+        /* =========================================================
+           TOOL STACK
+           ========================================================= */
 
         .tools {
             display: flex;
@@ -99,381 +445,1177 @@
         }
 
         .tool {
-            background: #1f2f4a;
-            color: white;
-            padding: 10px 18px;
-            border-radius: 5px;
+            padding: 13px 18px;
+            border-radius: 10px;
+            background: #f2edfb;
+            color: #5d3baa;
+            font-weight: 700;
+            font-size: 0.9rem;
+            border: 1px solid #e5ddf5;
         }
+
+        /* =========================================================
+           WORKFLOW
+           ========================================================= */
 
         .workflow {
-            padding-left: 25px;
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 12px;
+            margin: 0;
+            padding: 0;
+            list-style: none;
         }
+
+        .workflow-step {
+            padding: 25px 18px;
+            border: 1px solid #e7e2ef;
+            border-radius: 14px;
+            background: #ffffff;
+        }
+
+        .workflow-step span {
+            display: block;
+            margin-bottom: 9px;
+            color: #7046c6;
+            font-size: 0.75rem;
+            font-weight: 800;
+            letter-spacing: 0.08em;
+        }
+
+        .workflow-step strong {
+            display: block;
+            margin-bottom: 7px;
+            font-size: 0.95rem;
+        }
+
+        .workflow-step p {
+            margin: 0;
+            color: #666;
+            font-size: 0.83rem;
+            line-height: 1.55;
+        }
+
+        /* =========================================================
+           SKILLS
+           ========================================================= */
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 18px;
+        }
+
+        .skill-card {
+            padding: 26px;
+            border: 1px solid #e7e2ef;
+            border-radius: 16px;
+            background: #ffffff;
+        }
+
+        .skill-card h3 {
+            margin: 0 0 10px;
+            font-size: 1.05rem;
+        }
+
+        .skill-card p {
+            margin: 0;
+            color: #666;
+            font-size: 0.93rem;
+            line-height: 1.65;
+        }
+
+        /* =========================================================
+           OUTCOME
+           ========================================================= */
+
+        .outcome {
+            display: grid;
+            grid-template-columns: 0.8fr 1.2fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .outcome-title {
+            margin: 0;
+            font-size: clamp(2rem, 4vw, 3rem);
+            line-height: 1.1;
+            letter-spacing: -0.04em;
+        }
+
+        .outcome-copy {
+            color: #555;
+            font-size: 1.02rem;
+            line-height: 1.8;
+        }
+
+        /* =========================================================
+           FINAL CTA
+           ========================================================= */
+
+        .final-cta {
+            padding: 90px 0;
+            text-align: center;
+        }
+
+        .final-cta h2 {
+            margin: 0 0 14px;
+            font-size: clamp(2rem, 4vw, 3rem);
+            letter-spacing: -0.04em;
+        }
+
+        .final-cta p {
+            max-width: 650px;
+            margin: 0 auto;
+            color: #666;
+            line-height: 1.7;
+        }
+
+        .final-cta .btn-primary {
+            background: #7046c6;
+            color: #ffffff;
+        }
+
+        /* =========================================================
+           FOOTER
+           ========================================================= */
 
         footer {
+            padding: 30px 0;
             text-align: center;
-            padding: 35px;
-            color: #6b7280;
+            border-top: 1px solid #ece9f1;
+            color: #777;
+            font-size: 0.85rem;
         }
 
-        @media (max-width: 768px) {
+        /* =========================================================
+           RESPONSIVE
+           ========================================================= */
+
+        @media (max-width: 1000px) {
+
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .foundation-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .workflow {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .problem-grid,
+            .outcome {
+                grid-template-columns: 1fr;
+                gap: 25px;
+            }
+        }
+
+        @media (max-width: 760px) {
+
+            .hero {
+                padding: 65px 0 55px;
+            }
+
+            .section {
+                padding: 60px 0;
+            }
+
+            .foundation-grid,
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .problem-grid,
+            .outcome {
+                grid-template-columns: 1fr;
+            }
+
+            .workflow {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 560px) {
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
 
             .hero h1 {
-                font-size: 30px;
+                font-size: 2.45rem;
             }
 
-            section {
-                padding: 25px;
+            .hero-subtitle {
+                font-size: 0.98rem;
             }
 
+            .image-frame {
+                border-radius: 12px;
+            }
+
+            .actions {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
         }
     </style>
 </head>
 
+
 <body>
 
-    <header class="hero">
-        <div class="container">
-            <h1>JRAD Retail Data System</h1>
 
-            <p>
-                From Real-Life Observation to a 2M+ Row Retail Data System
+    <!-- =========================================================
+         HERO
+         ========================================================= -->
+
+    <header class="hero">
+
+        <div class="container hero-content">
+
+            <div class="eyebrow">
+                Data Engineering & Synthetic Data
+            </div>
+
+            <h1>
+                JRAD Retail Data System
+                <span>From Observation to a 2M+ Row Retail Ecosystem</span>
+            </h1>
+
+            <p class="hero-subtitle">
+                A ground-up retail data engineering project inspired by
+                real-world Nigerian superstore operations, transforming
+                business observations and behavioural rules into a scalable
+                synthetic retail data system for SQL analysis and Power BI.
             </p>
+
+            <div class="actions">
+
+                <a
+                    href="https://github.com/sodiqoluwatimileyin190-oss/sodiqoluwatimileyin190-oss.github.io"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="btn btn-primary">
+                    View on GitHub
+                </a>
+
+            </div>
+
         </div>
+
     </header>
 
 
-    <main class="container">
-
-        <a href="../../index.html" class="back-link">
-            ← Back to Portfolio
-        </a>
+    <main>
 
 
-        <section>
+        <!-- =====================================================
+             NAVIGATION
+             ===================================================== -->
 
-            <div class="disclaimer">
+        <div class="container top-navigation">
 
-                <h2>Project Disclaimer</h2>
+            <a href="../../index.html" class="back-link">
+                ← Back to Portfolio
+            </a>
 
-                <p>
-                    JRAD Retail is a fictional and simulated retail environment
-                    created for portfolio and analytical purposes. The project is
-                    not affiliated with, endorsed by, or based on proprietary data
-                    from any real retailer.
-                </p>
-
-                <p>
-                    The business scenarios and operational behaviours were informed
-                    by real-world observations of Nigerian superstore environments
-                    and were translated into custom business rules, probability
-                    distributions, and simulation logic.
-                </p>
-
-            </div>
+        </div>
 
 
-            <h2>Project Overview</h2>
+        <!-- =====================================================
+             PROJECT AT A GLANCE
+             ===================================================== -->
 
-            <p>
-                The JRAD Retail Data System is a full-scale retail data engineering
-                and analytics project inspired by real-life Nigerian superstore
-                operations and customer shopping behaviour.
-            </p>
+        <section class="section section-light">
 
-            <p>
-                The project was designed to simulate a realistic retail environment,
-                covering customer behaviour, product purchasing patterns, branch
-                performance, loyalty activity, operational events, and customer
-                experience.
-            </p>
+            <div class="container">
 
-            <p>
-                Rather than using a simple ready-made dataset, the project involved
-                designing and building a structured retail data ecosystem from the
-                ground up.
-            </p>
+                <div class="section-heading">
 
-        </section>
+                    <div class="section-label">
+                        Project at a Glance
+                    </div>
 
+                    <h2>
+                        Building the retail data foundation from the ground up.
+                    </h2>
 
-        <section>
+                    <p>
+                        Instead of starting with a ready-made dataset, the
+                        project was designed as a complete synthetic retail
+                        ecosystem — from product and customer foundations
+                        through behavioural modelling and large-scale
+                        transaction generation.
+                    </p>
 
-            <h2>Business Problem</h2>
-
-            <p>
-                Retail businesses generate large volumes of transactional and
-                operational data. However, raw data alone does not provide
-                meaningful business value.
-            </p>
-
-            <p>
-                The objective of this project was to create a realistic retail
-                data environment that could be used to analyze:
-            </p>
-
-            <ul>
-                <li>Sales and revenue performance</li>
-                <li>Customer purchasing behaviour</li>
-                <li>Branch performance</li>
-                <li>Product and category performance</li>
-                <li>Customer loyalty and retention</li>
-                <li>Payment behaviour</li>
-                <li>Operational efficiency</li>
-                <li>Seasonal and event-driven shopping patterns</li>
-            </ul>
-
-        </section>
+                </div>
 
 
-        <section>
+                <div class="stats">
 
-            <h2>Project Scope</h2>
+                    <div class="stat-card">
+                        <strong>1.8M+</strong>
+                        <span>Transaction Lines</span>
+                    </div>
 
-            <p>
-                The JRAD Retail Data System simulates retail activity across
-                multiple branches and includes:
-            </p>
+                    <div class="stat-card">
+                        <strong>225,499</strong>
+                        <span>Receipts Generated</span>
+                    </div>
 
-            <ul>
-                <li>Customer master data</li>
-                <li>Product master data</li>
-                <li>Sales transactions</li>
-                <li>Branch information</li>
-                <li>Customer loyalty behaviour</li>
-                <li>Payment behaviour</li>
-                <li>Business events and seasonal patterns</li>
-                <li>Customer experience and ratings</li>
-                <li>Queue and operational metrics</li>
-                <li>Product pricing history</li>
-            </ul>
+                    <div class="stat-card">
+                        <strong>525</strong>
+                        <span>Products / SKUs</span>
+                    </div>
 
-        </section>
+                    <div class="stat-card">
+                        <strong>5</strong>
+                        <span>Retail Branches</span>
+                    </div>
 
-
-        <section>
-
-            <h2>Building the Retail Foundation</h2>
-
-
-            <div class="image-section">
-
-                <h3>Product Master</h3>
-
-                <p>
-                    The Product Master served as the commercial foundation of
-                    the JRAD Retail ecosystem. It defined the products available
-                    across the simulated business and established attributes that
-                    influence purchasing, pricing, demand, storage, and downstream
-                    transaction behaviour.
-                </p>
-
-                <img
-                    src="images/01-product-master.png"
-                    alt="JRAD Retail Product Master"
-                    class="project-image">
-
-            </div>
-
-
-            <div class="image-section">
-
-                <h3>Distribution Library</h3>
-
-                <p>
-                    A custom Distribution Library was created in Excel to define
-                    realistic distributions and business rules.
-                </p>
-
-                <ul>
-                    <li>Branch-level customer distribution</li>
-                    <li>Age distributions</li>
-                    <li>Demographic distributions</li>
-                    <li>Registration behaviour</li>
-                    <li>Loyalty membership behaviour</li>
-                    <li>Payment method distribution</li>
-                    <li>Basket size distribution</li>
-                    <li>Customer acquisition channels</li>
-                </ul>
-
-                <img
-                    src="images/02-distribution-library.png"
-                    alt="JRAD Retail Distribution Library"
-                    class="project-image">
-
-            </div>
-
-
-            <div class="image-section">
-
-                <h3>Nigerian Identity Library</h3>
-
-                <p>
-                    A separate Identity Library was created to generate realistic
-                    Nigerian customer identities using structured pools of first
-                    names, surnames, gender-specific names, and ethnic name groups.
-                </p>
-
-                <img
-                    src="images/03-nigerian-identity-library.png"
-                    alt="JRAD Retail Nigerian Identity Library"
-                    class="project-image">
-
-            </div>
-
-
-            <div class="image-section">
-
-                <h3>Customer Master Output</h3>
-
-                <p>
-                    The generation process produced structured customer records by
-                    combining identity data, demographic distributions, branch logic,
-                    registration behaviour, loyalty status, acquisition channels,
-                    and other defined business rules.
-                </p>
-
-                <img
-                    src="images/04-customer-master.png"
-                    alt="JRAD Retail Customer Master"
-                    class="project-image">
-
-            </div>
-
-
-            <div class="image-section">
-
-                <h3>Business Events and Seasonality</h3>
-
-                <p>
-                    The system incorporates simulated business events that influence
-                    customer traffic, basket size, customer spending, product demand,
-                    and peak shopping hours.
-                </p>
-
-                <img
-                    src="images/05-business-events.png"
-                    alt="JRAD Retail Business Events"
-                    class="project-image">
+                </div>
 
             </div>
 
         </section>
 
-<section>
-    <h2>Python Data Generation</h2>
 
-    <div class="image-section">
-        <h3>Transaction Generation Engine</h3>
+        <!-- =====================================================
+             BUSINESS PROBLEM
+             ===================================================== -->
 
-        <p>
-            A custom Python-based transaction generation engine was developed
-            to simulate realistic retail activity across the JRAD Retail Data
-            System. The generator applied business rules, customer behaviour,
-            branch activity, product demand, pricing logic, and transaction
-            patterns to create a large-scale simulated retail dataset.
-        </p>
+        <section class="section">
 
-        <img
-            src="images/06-python-transaction-generation.jpeg"
-            alt="JRAD Python Transaction Generator"
-            class="project-image">
-    </div>
+            <div class="container">
 
-    <div class="image-section">
-        <h3>Large-Scale Dataset Generation</h3>
+                <div class="problem-grid">
 
-        <p>
-            The generation process produced 225,499 receipts and over
-            1.8 million transaction lines, creating a realistic retail
-            dataset for further analysis in SQL, Excel, and Power BI.
-        </p>
+                    <div>
 
-        <img
-            src="images/07-transaction-output.jpeg"
-            alt="JRAD Transaction Generation Results"
-            class="project-image">
-    </div>
-</section>
-        <section>
+                        <div class="section-label">
+                            The Business Problem
+                        </div>
 
-            <h2>Tools Used</h2>
+                        <h2 class="problem-title">
+                            How do you build a realistic retail dataset when the data doesn't already exist?
+                        </h2>
 
-            <div class="tools">
-                <div class="tool">Microsoft Excel</div>
-                <div class="tool">Python</div>
-                <div class="tool">SQL</div>
-                <div class="tool">Power BI</div>
+                    </div>
+
+
+                    <div class="problem-copy">
+
+                        <p>
+                            Retail analytics depends on data that reflects
+                            how a real business actually operates. A simple
+                            random dataset would not capture the relationships
+                            between customers, products, branches, payments,
+                            seasonality and purchasing behaviour.
+                        </p>
+
+                        <p>
+                            The objective was therefore to design a retail
+                            data environment where those relationships were
+                            explicitly defined and then translated into
+                            interconnected synthetic data.
+                        </p>
+
+                    </div>
+
+                </div>
+
             </div>
 
         </section>
 
 
-        <section>
+        <!-- =====================================================
+             DISCLAIMER
+             ===================================================== -->
 
-            <h2>Key Skills Demonstrated</h2>
+        <section class="section section-light">
 
-            <ul>
-                <li>Data generation</li>
-                <li>Data modelling</li>
-                <li>Business rule design</li>
-                <li>Synthetic data generation</li>
-                <li>Distribution modelling</li>
-                <li>Data architecture</li>
-                <li>Data cleaning</li>
-                <li>SQL analysis</li>
-                <li>Business intelligence</li>
-                <li>Dashboard development</li>
-            </ul>
+            <div class="container">
 
-        </section>
+                <div class="disclaimer">
 
+                    <h3>
+                        Project Disclaimer
+                    </h3>
 
-        <section>
+                    <p>
+                        JRAD Retail is a fictional and simulated retail
+                        environment created for portfolio and analytical
+                        purposes. The project is not affiliated with,
+                        endorsed by, or based on proprietary data from
+                        any real retailer.
+                    </p>
 
-            <h2>Project Workflow</h2>
+                    <p>
+                        The business scenarios and operational behaviours
+                        were informed by real-world observations of Nigerian
+                        superstore environments and translated into custom
+                        business rules, probability distributions and
+                        simulation logic.
+                    </p>
 
-            <ol class="workflow">
-                <li>Observed and documented realistic retail business behaviour.</li>
-                <li>Designed the retail data structure.</li>
-                <li>Created the Product Master dataset.</li>
-                <li>Created the Distribution Library in Excel.</li>
-                <li>Created the Nigerian Identity Library.</li>
-                <li>Defined customer and business behaviour rules.</li>
-                <li>Used Python to generate interconnected datasets.</li>
-                <li>Loaded and prepared the data for SQL analysis.</li>
-                <li>Developed analytical models and dashboards.</li>
-            </ol>
+                </div>
+
+            </div>
 
         </section>
 
 
-        <section>
+        <!-- =====================================================
+             PROJECT SCOPE
+             ===================================================== -->
 
-            <h2>Project Outcome</h2>
+        <section class="section">
 
-            <p>
-                The final result is a structured retail data ecosystem designed
-                for end-to-end analytics.
-            </p>
+            <div class="container">
 
-            <p>
-                The project demonstrates how real-world observations and business
-                logic can be transformed into a scalable synthetic data system that
-                supports analysis, reporting, and business intelligence.
-            </p>
+                <div class="section-heading">
+
+                    <div class="section-label">
+                        Project Scope
+                    </div>
+
+                    <h2>
+                        A connected retail ecosystem, not just a transaction table.
+                    </h2>
+
+                    <p>
+                        The system was designed to represent multiple
+                        dimensions of retail operations and customer
+                        behaviour.
+                    </p>
+
+                </div>
+
+
+                <div class="foundation-grid">
+
+                    <div class="foundation-card">
+                        <div class="foundation-number">01</div>
+                        <h3>Customer Data</h3>
+                        <p>
+                            Customer identities, demographics, registration,
+                            loyalty behaviour and acquisition channels.
+                        </p>
+                    </div>
+
+                    <div class="foundation-card">
+                        <div class="foundation-number">02</div>
+                        <h3>Product Data</h3>
+                        <p>
+                            Product master information supporting purchasing,
+                            pricing, demand and downstream transaction logic.
+                        </p>
+                    </div>
+
+                    <div class="foundation-card">
+                        <div class="foundation-number">03</div>
+                        <h3>Sales Transactions</h3>
+                        <p>
+                            Large-scale receipt and transaction-line data
+                            generated from interconnected business rules.
+                        </p>
+                    </div>
+
+                    <div class="foundation-card">
+                        <div class="foundation-number">04</div>
+                        <h3>Branch Behaviour</h3>
+                        <p>
+                            Branch-level activity and customer distribution
+                            designed to create realistic operational variation.
+                        </p>
+                    </div>
+
+                    <div class="foundation-card">
+                        <div class="foundation-number">05</div>
+                        <h3>Business Events</h3>
+                        <p>
+                            Seasonal and event-driven effects influencing
+                            traffic, spending, demand and peak shopping periods.
+                        </p>
+                    </div>
+
+                    <div class="foundation-card">
+                        <div class="foundation-number">06</div>
+                        <h3>Operational Data</h3>
+                        <p>
+                            Loyalty, payments, customer experience, queues
+                            and pricing history supporting broader analytics.
+                        </p>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             BUILDING THE RETAIL FOUNDATION
+             ===================================================== -->
+
+        <section class="section section-light">
+
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <div class="section-label">
+                        Building the Retail Foundation
+                    </div>
+
+                    <h2>
+                        Designing the inputs before generating the transactions.
+                    </h2>
+
+                    <p>
+                        The system began with structured reference libraries
+                        and business foundations that would later drive the
+                        Python generation process.
+                    </p>
+
+                </div>
+
+
+                <!-- PRODUCT MASTER -->
+
+                <article class="artifact">
+
+                    <div class="artifact-header">
+
+                        <div class="artifact-number">
+                            Artifact 01
+                        </div>
+
+                        <h3>
+                            Product Master
+                        </h3>
+
+                        <p>
+                            The Product Master served as the commercial
+                            foundation of the JRAD Retail ecosystem,
+                            defining the products available across the
+                            simulated business and establishing attributes
+                            that influence purchasing, pricing, demand,
+                            storage and downstream transaction behaviour.
+                        </p>
+
+                    </div>
+
+                    <div class="image-frame">
+
+                        <img
+                            src="images/01-product-master.png"
+                            alt="JRAD Retail Product Master"
+                            class="project-image">
+
+                    </div>
+
+                </article>
+
+
+                <!-- DISTRIBUTION LIBRARY -->
+
+                <article class="artifact">
+
+                    <div class="artifact-header">
+
+                        <div class="artifact-number">
+                            Artifact 02
+                        </div>
+
+                        <h3>
+                            Distribution Library
+                        </h3>
+
+                        <p>
+                            A custom Distribution Library was created in
+                            Excel to define realistic probability
+                            distributions and business rules for customer
+                            and transaction behaviour.
+                        </p>
+
+                    </div>
+
+                    <div class="image-frame">
+
+                        <img
+                            src="images/02-distribution-library.png"
+                            alt="JRAD Retail Distribution Library"
+                            class="project-image">
+
+                    </div>
+
+                    <div class="artifact-caption">
+                        Branch-level customer distribution, age,
+                        demographic patterns, registration behaviour,
+                        loyalty membership, payment methods, basket sizes
+                        and acquisition channels were incorporated into
+                        the modelling framework.
+                    </div>
+
+                </article>
+
+
+                <!-- NIGERIAN IDENTITY LIBRARY -->
+
+                <article class="artifact">
+
+                    <div class="artifact-header">
+
+                        <div class="artifact-number">
+                            Artifact 03
+                        </div>
+
+                        <h3>
+                            Nigerian Identity Library
+                        </h3>
+
+                        <p>
+                            A dedicated Identity Library was created to
+                            generate realistic Nigerian customer identities
+                            using structured pools of first names, surnames,
+                            gender-specific names and ethnic name groups.
+                        </p>
+
+                    </div>
+
+                    <div class="image-frame">
+
+                        <img
+                            src="images/03-nigerian-identity-library.png"
+                            alt="JRAD Retail Nigerian Identity Library"
+                            class="project-image">
+
+                    </div>
+
+                </article>
+
+
+                <!-- CUSTOMER MASTER -->
+
+                <article class="artifact">
+
+                    <div class="artifact-header">
+
+                        <div class="artifact-number">
+                            Artifact 04
+                        </div>
+
+                        <h3>
+                            Customer Master Output
+                        </h3>
+
+                        <p>
+                            The generation process combined identity data,
+                            demographic distributions, branch logic,
+                            registration behaviour, loyalty status,
+                            acquisition channels and other defined business
+                            rules to produce structured customer records.
+                        </p>
+
+                    </div>
+
+                    <div class="image-frame">
+
+                        <img
+                            src="images/04-customer-master.png"
+                            alt="JRAD Retail Customer Master"
+                            class="project-image">
+
+                    </div>
+
+                </article>
+
+
+                <!-- BUSINESS EVENTS -->
+
+                <article class="artifact">
+
+                    <div class="artifact-header">
+
+                        <div class="artifact-number">
+                            Artifact 05
+                        </div>
+
+                        <h3>
+                            Business Events & Seasonality
+                        </h3>
+
+                        <p>
+                            Simulated business events were incorporated to
+                            influence customer traffic, basket size,
+                            spending, product demand and peak shopping hours.
+                        </p>
+
+                    </div>
+
+                    <div class="image-frame">
+
+                        <img
+                            src="images/05-business-events.png"
+                            alt="JRAD Retail Business Events"
+                            class="project-image">
+
+                    </div>
+
+                </article>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             PYTHON DATA GENERATION
+             ===================================================== -->
+
+        <section class="section python-section">
+
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <div class="section-label">
+                        Python Data Generation
+                    </div>
+
+                    <h2>
+                        Turning business rules into large-scale synthetic data.
+                    </h2>
+
+                    <p class="python-intro">
+                        A custom Python-based transaction generation engine
+                        was developed to simulate realistic retail activity
+                        across the JRAD Retail Data System. The generator
+                        applied business rules, customer behaviour, branch
+                        activity, product demand, pricing logic and transaction
+                        patterns to create the final large-scale dataset.
+                    </p>
+
+                </div>
+
+
+                <!-- TRANSACTION GENERATION -->
+
+                <article class="artifact">
+
+                    <div class="artifact-header">
+
+                        <div class="artifact-number">
+                            Generation Engine
+                        </div>
+
+                        <h3>
+                            Transaction Generation Engine
+                        </h3>
+
+                        <p>
+                            The Python engine transformed the defined retail
+                            rules and behavioural distributions into
+                            interconnected transaction activity.
+                        </p>
+
+                    </div>
+
+                    <div class="image-frame">
+
+                        <img
+                            src="images/06-python-transaction-generation.jpeg"
+                            alt="JRAD Python Transaction Generator"
+                            class="project-image">
+
+                    </div>
+
+                </article>
+
+
+                <!-- OUTPUT -->
+
+                <article class="artifact">
+
+                    <div class="artifact-header">
+
+                        <div class="artifact-number">
+                            Generation Output
+                        </div>
+
+                        <h3>
+                            Large-Scale Dataset Generation
+                        </h3>
+
+                        <p>
+                            The generation process produced
+                            <strong>225,499 receipts</strong> and more than
+                            <strong>1.8 million transaction lines</strong>,
+                            creating a large-scale simulated retail dataset
+                            for further analysis in SQL, Excel and Power BI.
+                        </p>
+
+                    </div>
+
+                    <div class="image-frame">
+
+                        <img
+                            src="images/07-transaction-output.jpeg"
+                            alt="JRAD Transaction Generation Results"
+                            class="project-image">
+
+                    </div>
+
+                </article>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             TECHNICAL STACK
+             ===================================================== -->
+
+        <section class="section">
+
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <div class="section-label">
+                        Technical Stack
+                    </div>
+
+                    <h2>
+                        Tools used across the data-generation pipeline.
+                    </h2>
+
+                </div>
+
+                <div class="tools">
+
+                    <div class="tool">
+                        Microsoft Excel
+                    </div>
+
+                    <div class="tool">
+                        Python
+                    </div>
+
+                    <div class="tool">
+                        SQL
+                    </div>
+
+                    <div class="tool">
+                        Power BI
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             PROJECT WORKFLOW
+             ===================================================== -->
+
+        <section class="section section-light">
+
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <div class="section-label">
+                        Project Workflow
+                    </div>
+
+                    <h2>
+                        From real-world observation to analytical data.
+                    </h2>
+
+                    <p>
+                        The project followed a structured pipeline in which
+                        each stage supplied the foundation for the next.
+                    </p>
+
+                </div>
+
+
+                <ol class="workflow">
+
+                    <li class="workflow-step">
+
+                        <span>01</span>
+
+                        <strong>Observe</strong>
+
+                        <p>
+                            Document realistic retail business behaviour.
+                        </p>
+
+                    </li>
+
+
+                    <li class="workflow-step">
+
+                        <span>02</span>
+
+                        <strong>Design</strong>
+
+                        <p>
+                            Define the retail data structure and entities.
+                        </p>
+
+                    </li>
+
+
+                    <li class="workflow-step">
+
+                        <span>03</span>
+
+                        <strong>Model</strong>
+
+                        <p>
+                            Build product, customer and behavioural libraries.
+                        </p>
+
+                    </li>
+
+
+                    <li class="workflow-step">
+
+                        <span>04</span>
+
+                        <strong>Generate</strong>
+
+                        <p>
+                            Use Python to generate interconnected datasets.
+                        </p>
+
+                    </li>
+
+
+                    <li class="workflow-step">
+
+                        <span>05</span>
+
+                        <strong>Analyse</strong>
+
+                        <p>
+                            Prepare the resulting ecosystem for SQL and BI.
+                        </p>
+
+                    </li>
+
+                </ol>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             SKILLS
+             ===================================================== -->
+
+        <section class="section">
+
+            <div class="container">
+
+                <div class="section-heading">
+
+                    <div class="section-label">
+                        Skills Demonstrated
+                    </div>
+
+                    <h2>
+                        Engineering a dataset with business logic at its core.
+                    </h2>
+
+                </div>
+
+
+                <div class="skills-grid">
+
+                    <div class="skill-card">
+                        <h3>Data Generation</h3>
+                        <p>
+                            Building large-scale synthetic datasets from
+                            defined business rules and behavioural patterns.
+                        </p>
+                    </div>
+
+                    <div class="skill-card">
+                        <h3>Distribution Modelling</h3>
+                        <p>
+                            Translating expected customer and transaction
+                            behaviour into structured probability distributions.
+                        </p>
+                    </div>
+
+                    <div class="skill-card">
+                        <h3>Business Rule Design</h3>
+                        <p>
+                            Converting real-world retail observations into
+                            explicit logic that can drive data generation.
+                        </p>
+                    </div>
+
+                    <div class="skill-card">
+                        <h3>Data Architecture</h3>
+                        <p>
+                            Designing interconnected retail entities capable
+                            of supporting downstream analytics.
+                        </p>
+                    </div>
+
+                    <div class="skill-card">
+                        <h3>Data Cleaning</h3>
+                        <p>
+                            Preparing generated datasets for reliable
+                            analytical use across the wider project.
+                        </p>
+                    </div>
+
+                    <div class="skill-card">
+                        <h3>Business Intelligence</h3>
+                        <p>
+                            Creating the underlying data foundation required
+                            for SQL analysis and Power BI reporting.
+                        </p>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             PROJECT OUTCOME
+             ===================================================== -->
+
+        <section class="section section-light">
+
+            <div class="container">
+
+                <div class="outcome">
+
+                    <div>
+
+                        <div class="section-label">
+                            Project Outcome
+                        </div>
+
+                        <h2 class="outcome-title">
+                            A complete retail ecosystem built for analytics.
+                        </h2>
+
+                    </div>
+
+
+                    <div class="outcome-copy">
+
+                        <p>
+                            The final result is a structured retail data
+                            ecosystem designed for end-to-end analytics.
+                        </p>
+
+                        <p>
+                            The project demonstrates how real-world
+                            observations and business logic can be transformed
+                            into a scalable synthetic data system that supports
+                            data validation, SQL analysis, reporting and
+                            business intelligence.
+                        </p>
+
+                        <p>
+                            This foundation feeds directly into the subsequent
+                            JRAD SQL analysis and Power BI executive intelligence
+                            projects.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             FINAL CTA
+             ===================================================== -->
+
+        <section class="final-cta">
+
+            <div class="container">
+
+                <h2>
+                    Explore the JRAD Retail Data System.
+                </h2>
+
+                <p>
+                    Explore the project repository and see how the retail
+                    data ecosystem was designed, generated and prepared
+                    for downstream analytics.
+                </p>
+
+                <div class="actions">
+
+                    <a
+                        href="https://github.com/sodiqoluwatimileyin190-oss/sodiqoluwatimileyin190-oss.github.io"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="btn btn-primary">
+                        View Project on GitHub
+                    </a>
+
+                    <a
+                        href="../../index.html"
+                        class="btn btn-secondary">
+                        Back to Portfolio
+                    </a>
+
+                </div>
+
+            </div>
 
         </section>
 
     </main>
 
 
+    <!-- =========================================================
+         FOOTER
+         ========================================================= -->
+
     <footer>
 
-        <p>
-            © 2026 Sodiq Oluwatimileyin — Data Analysis Portfolio
-        </p>
+        <div class="container">
+
+            <p>
+                © 2026 Sodiq Oluwatimileyin — Data Analysis Portfolio
+            </p>
+
+        </div>
 
     </footer>
+
 
 </body>
 

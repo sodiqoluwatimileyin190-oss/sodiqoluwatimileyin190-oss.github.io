@@ -25,554 +25,791 @@
             margin: 0 auto;
         }
 
-        /* =========================================================
-           HERO
-           ========================================================= */
-
-        .jrad-hero {
-            padding: 70px 0 50px;
-            text-align: center;
-        }
-
-        .jrad-eyebrow {
-            display: inline-block;
-            margin-bottom: 18px;
-            padding: 8px 15px;
-            border-radius: 999px;
-            background: #f0e9ff;
-            color: #6d42c7;
-            font-size: 0.78rem;
-            font-weight: 700;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
-        }
-
-        .jrad-hero h1 {
-            margin: 0;
-            font-size: clamp(2.2rem, 5vw, 4.2rem);
-            line-height: 1.05;
-            letter-spacing: -0.04em;
-        }
-
-        .jrad-hero h1 span {
-            color: #7046c6;
-        }
-
-        .jrad-subtitle {
-            max-width: 760px;
-            margin: 22px auto 0;
-            font-size: 1.12rem;
-            line-height: 1.7;
-            color: #666;
-        }
-
-        .jrad-hero-image {
-            margin: 55px auto 0;
-            overflow: hidden;
-            border-radius: 22px;
-            box-shadow: 0 25px 70px rgba(45, 29, 91, 0.18);
-        }
-
-        .jrad-hero-image img {
-            display: block;
-            width: 100%;
-            height: auto;
-        }
-
-        /* =========================================================
-           BUTTONS
-           ========================================================= */
-
-        .jrad-actions {
-            display: flex;
-            justify-content: center;
-            gap: 14px;
-            flex-wrap: wrap;
-            margin-top: 32px;
-        }
-
-        .jrad-btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            padding: 13px 23px;
-            border-radius: 10px;
-            text-decoration: none;
-            font-weight: 700;
-            transition:
-                transform 0.2s ease,
-                box-shadow 0.2s ease;
-        }
-
-        .jrad-btn:hover {
-            transform: translateY(-2px);
-        }
-
-        .jrad-btn-primary {
-            background: #7046c6;
-            color: #ffffff;
-            box-shadow: 0 10px 25px rgba(112, 70, 198, 0.25);
-        }
-
-        .jrad-btn-secondary {
-            background: #f4f1fa;
-            color: #5d3baa;
-        }
-
-        /* =========================================================
-           GENERAL SECTION
-           ========================================================= */
-
-        .jrad-section {
-            padding: 85px 0;
-        }
-
-        .jrad-section-light {
-            background: #f8f7fb;
-        }
-
-        .jrad-section-heading {
-            max-width: 760px;
-            margin-bottom: 42px;
-        }
-
-        .jrad-section-heading .label {
-            color: #7046c6;
-            font-size: 0.78rem;
-            font-weight: 800;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-        }
-
-        .jrad-section-heading h2 {
-            margin: 10px 0 15px;
-            font-size: clamp(1.8rem, 4vw, 2.7rem);
-            letter-spacing: -0.035em;
-        }
-
-        .jrad-section-heading p {
-            margin: 0;
-            color: #666;
-            line-height: 1.75;
-        }
-
-        /* =========================================================
-           PROJECT AT A GLANCE
-           ========================================================= */
-
-        .jrad-stats {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 16px;
-        }
-
-        .jrad-stat {
-            padding: 28px 22px;
-            border: 1px solid #e8e4ef;
-            border-radius: 16px;
-            background: #ffffff;
-            transition:
-                transform 0.2s ease,
-                box-shadow 0.2s ease;
-        }
-
-        .jrad-stat:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 35px rgba(45, 29, 91, 0.08);
-        }
-
-        .jrad-stat strong {
-            display: block;
-            margin-bottom: 7px;
-            font-size: 1.7rem;
-            color: #7046c6;
-        }
-
-        .jrad-stat span {
-            color: #666;
-            font-size: 0.9rem;
-        }
-
-        /* =========================================================
-           BUSINESS QUESTION
-           ========================================================= */
-
-        .jrad-question {
-            display: grid;
-            grid-template-columns: 0.8fr 1.2fr;
-            gap: 55px;
-            align-items: center;
-        }
-
-        .jrad-question-title {
-            font-size: clamp(2rem, 4vw, 3rem);
-            line-height: 1.15;
-            letter-spacing: -0.04em;
-        }
-
-        .jrad-question-copy {
-            color: #555;
-            font-size: 1.05rem;
-            line-height: 1.8;
-        }
-
-        /* =========================================================
-           ANALYTICAL AREAS
-           ========================================================= */
-
-        .jrad-analysis-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 18px;
-        }
-
-        .jrad-analysis-card {
-            padding: 28px;
-            border: 1px solid #e7e2ef;
-            border-radius: 17px;
-            background: #ffffff;
-            transition:
-                transform 0.2s ease,
-                box-shadow 0.2s ease;
-        }
-
-        .jrad-analysis-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 35px rgba(45, 29, 91, 0.08);
-        }
-
-        .jrad-analysis-number {
-            color: #7046c6;
-            font-size: 0.8rem;
-            font-weight: 800;
-        }
-
-        .jrad-analysis-card h3 {
-            margin: 12px 0 10px;
-            font-size: 1.15rem;
-        }
-
-        .jrad-analysis-card p {
-            margin: 0;
-            color: #666;
-            line-height: 1.65;
-            font-size: 0.94rem;
-        }
-
-        /* =========================================================
-           PROJECT ARTIFACTS
-           ========================================================= */
-
-        .jrad-artifact {
-            margin-bottom: 75px;
-        }
-
-        .jrad-artifact:last-child {
-            margin-bottom: 0;
-        }
-
-        .jrad-artifact-header {
-            margin-bottom: 24px;
-        }
-
-        .jrad-artifact-number {
-            color: #7046c6;
-            font-size: 0.78rem;
-            font-weight: 800;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-        }
-
-        .jrad-artifact-header h3 {
-            margin: 7px 0 8px;
-            font-size: 1.7rem;
-        }
-
-        .jrad-artifact-header p {
-            max-width: 760px;
-            margin: 0;
-            color: #666;
-            line-height: 1.65;
-        }
-
-        .jrad-artifact-image {
-            overflow: hidden;
-            border-radius: 18px;
-            background: #eeeeee;
-            box-shadow: 0 20px 55px rgba(0, 0, 0, 0.12);
-        }
-
-        .jrad-artifact-image img {
-            display: block;
-            width: 100%;
-            height: auto;
-        }
-
-        .jrad-artifact-note {
-            margin-top: 18px;
-            padding: 22px 24px;
-            border-radius: 14px;
-            background: #f7f4fc;
-            border-left: 4px solid #7046c6;
-            color: #555;
-            line-height: 1.7;
-        }
-
-        /* =========================================================
-           SQL WORKFLOW
-           ========================================================= */
-
-        .jrad-workflow {
-            display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            gap: 12px;
-        }
-
-        .jrad-workflow-step {
-            position: relative;
-            padding: 25px 18px;
-            border: 1px solid #e7e2ef;
-            border-radius: 14px;
-            background: #ffffff;
-        }
-
-        .jrad-workflow-step span {
-            display: block;
-            margin-bottom: 9px;
-            color: #7046c6;
-            font-size: 0.75rem;
-            font-weight: 800;
-            letter-spacing: 0.08em;
-        }
-
-        .jrad-workflow-step strong {
-            display: block;
-            margin-bottom: 7px;
-            font-size: 0.95rem;
-        }
-
-        .jrad-workflow-step p {
-            margin: 0;
-            color: #666;
-            line-height: 1.55;
-            font-size: 0.83rem;
-        }
-
-        /* =========================================================
-           TECHNICAL STACK
-           ========================================================= */
-
-        .jrad-stack {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px;
-            margin-top: 30px;
-        }
-
-        .jrad-stack-item {
-            padding: 13px 18px;
-            border-radius: 10px;
-            background: #f2edfb;
-            color: #5d3baa;
-            font-weight: 700;
-            font-size: 0.9rem;
-        }
-
-        /* =========================================================
-           TECHNICAL CARDS
-           ========================================================= */
-
-        .jrad-tech-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 18px;
-        }
-
-        .jrad-tech-card {
-            padding: 28px;
-            border-radius: 16px;
-            background: #ffffff;
-            border: 1px solid #e7e2ef;
-        }
-
-        .jrad-tech-card h3 {
-            margin: 0 0 10px;
-            font-size: 1.05rem;
-        }
-
-        .jrad-tech-card p {
-            margin: 0;
-            color: #666;
-            line-height: 1.65;
-            font-size: 0.94rem;
-        }
-
-        /* =========================================================
-           BUSINESS IMPACT
-           ========================================================= */
-
-        .jrad-impact {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 18px;
-        }
-
-        .jrad-impact-card {
-            padding: 30px;
-            border-radius: 17px;
-            background: #21143b;
-            color: #ffffff;
-        }
-
-        .jrad-impact-card h3 {
-            margin: 0 0 12px;
-            font-size: 1.1rem;
-        }
-
-        .jrad-impact-card p {
-            margin: 0;
-            color: #d9d2e6;
-            line-height: 1.7;
-            font-size: 0.93rem;
-        }
-
-        /* =========================================================
-           DISCLAIMER
-           ========================================================= */
-
-        .jrad-disclaimer {
-            margin-top: 30px;
-            padding: 20px 22px;
-            border-radius: 13px;
-            background: #f8f7fb;
-            border: 1px solid #e7e2ef;
-            color: #666;
-            font-size: 0.88rem;
-            line-height: 1.65;
-        }
-
-        /* =========================================================
-           FINAL CTA
-           ========================================================= */
-
-        .jrad-final {
-            padding: 90px 0;
-            text-align: center;
-        }
-
-        .jrad-final h2 {
-            margin: 0 0 15px;
-            font-size: clamp(2rem, 4vw, 3rem);
-            letter-spacing: -0.04em;
-        }
-
-        .jrad-final p {
-            max-width: 620px;
-            margin: 0 auto;
-            color: #666;
-            line-height: 1.7;
-        }
-
-        /* =========================================================
-           RESPONSIVE
-           ========================================================= */
-
-        @media (max-width: 1000px) {
-
-            .jrad-stats {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .jrad-workflow {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .jrad-impact {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        @media (max-width: 900px) {
-
-            .jrad-question {
-                grid-template-columns: 1fr;
-                gap: 20px;
-            }
-
-            .jrad-analysis-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .jrad-tech-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        @media (max-width: 650px) {
-
-            .jrad-section {
-                padding: 60px 0;
-            }
-
-            .jrad-hero {
-                padding: 50px 0 35px;
-            }
-
-            .jrad-stats {
-                grid-template-columns: 1fr;
-            }
-
-            .jrad-workflow {
-                grid-template-columns: 1fr;
-            }
-
-            .jrad-hero-image,
-            .jrad-artifact-image {
-                border-radius: 12px;
-            }
-        }
-    </style>
-</head>
-
-
-<body class="jrad-page">
-
-
-    <!-- =========================================================
-         HERO
-         ========================================================= -->
-
-    <section class="jrad-hero">
-
-        <div class="jrad-container">
+       <style>
+
+/* =========================================================
+   JRAD RETAIL SQL — HERO UPGRADE
+   Visual language aligned with Project 3
+   ========================================================= */
+
+.jrad-hero {
+
+    position: relative;
+
+    min-height: 720px;
+
+    padding: 90px 0 0;
+
+    text-align: left;
+
+    overflow: hidden;
+
+    color: #ffffff;
+
+    background:
+        radial-gradient(
+            circle at 12% 15%,
+            rgba(180,145,255,0.48),
+            transparent 32%
+        ),
+        radial-gradient(
+            circle at 88% 18%,
+            rgba(124,86,215,0.42),
+            transparent 30%
+        ),
+        linear-gradient(
+            135deg,
+            #a887e8 0%,
+            #7046c6 48%,
+            #3e278b 100%
+        );
+}
+
+
+/* =========================================================
+   AMBIENT BACKGROUND BLOBS
+   ========================================================= */
+
+.jrad-hero::before {
+
+    content: "";
+
+    position: absolute;
+
+    width: 430px;
+    height: 430px;
+
+    top: -180px;
+    right: -90px;
+
+    border-radius: 50%;
+
+    background:
+        rgba(255,255,255,0.10);
+
+    filter: blur(2px);
+
+    animation:
+        jradSqlFloat 11s ease-in-out infinite;
+}
+
+
+.jrad-hero::after {
+
+    content: "";
+
+    position: absolute;
+
+    width: 320px;
+    height: 320px;
+
+    bottom: -190px;
+    left: -110px;
+
+    border-radius: 50%;
+
+    background:
+        rgba(255,255,255,0.08);
+
+    animation:
+        jradSqlFloatReverse 14s ease-in-out infinite;
+}
+
+
+/* =========================================================
+   HERO GRID
+   ========================================================= */
+
+.jrad-hero-grid {
+
+    position: absolute;
+
+    inset: 0;
+
+    opacity: 0.10;
+
+    background-image:
+        linear-gradient(
+            rgba(255,255,255,0.18) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(255,255,255,0.18) 1px,
+            transparent 1px
+        );
+
+    background-size: 42px 42px;
+
+    mask-image:
+        linear-gradient(
+            to bottom,
+            black,
+            transparent 90%
+        );
+
+    pointer-events: none;
+}
+
+
+/* =========================================================
+   HERO CONTAINER
+   ========================================================= */
+
+.jrad-hero .jrad-container {
+
+    position: relative;
+
+    z-index: 3;
+
+    width: min(1180px, 92%);
+
+    margin: 0 auto;
+}
+
+
+/* =========================================================
+   HERO CONTENT
+   ========================================================= */
+
+.jrad-hero-content {
+
+    max-width: 880px;
+
+    margin: 0 auto;
+
+    text-align: center;
+}
+
+
+/* =========================================================
+   EYEBROW
+   ========================================================= */
+
+.jrad-eyebrow {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    padding: 9px 17px;
+
+    margin-bottom: 22px;
+
+    border:
+        1px solid
+        rgba(255,255,255,0.30);
+
+    border-radius: 999px;
+
+    background:
+        rgba(255,255,255,0.09);
+
+    backdrop-filter: blur(12px);
+
+    color: #ffffff;
+
+    font-size: 12px;
+
+    font-weight: 800;
+
+    letter-spacing: 0.14em;
+
+    text-transform: uppercase;
+
+    opacity: 0;
+
+    transform: translateY(24px);
+
+    animation:
+        jradSqlReveal
+        0.75s
+        cubic-bezier(.2,.75,.25,1)
+        0.05s
+        forwards;
+}
+
+
+/* =========================================================
+   HERO TITLE
+   ========================================================= */
+
+.jrad-hero h1 {
+
+    max-width: 1000px;
+
+    margin: 0 auto;
+
+    font-size:
+        clamp(
+            3.3rem,
+            7vw,
+            6.4rem
+        );
+
+    line-height: 0.96;
+
+    letter-spacing: -0.055em;
+
+    color: #ffffff;
+
+    opacity: 0;
+
+    transform: translateY(34px);
+
+    animation:
+        jradSqlReveal
+        0.9s
+        cubic-bezier(.2,.75,.25,1)
+        0.15s
+        forwards;
+}
+
+
+/* =========================================================
+   GRADIENT / SECOND LINE
+   ========================================================= */
+
+.jrad-hero h1 span {
+
+    display: block;
+
+    margin-top: 8px;
+
+    color:
+        rgba(255,255,255,0.76);
+}
+
+
+/* =========================================================
+   HERO SUBTITLE
+   ========================================================= */
+
+.jrad-subtitle {
+
+    max-width: 760px;
+
+    margin: 26px auto 0;
+
+    color:
+        rgba(255,255,255,0.88);
+
+    font-size:
+        clamp(
+            16px,
+            2vw,
+            19px
+        );
+
+    line-height: 1.7;
+
+    opacity: 0;
+
+    transform: translateY(24px);
+
+    animation:
+        jradSqlReveal
+        0.85s
+        cubic-bezier(.2,.75,.25,1)
+        0.30s
+        forwards;
+}
+
+
+/* =========================================================
+   HERO ACTIONS
+   ========================================================= */
+
+.jrad-actions {
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    flex-wrap: wrap;
+
+    gap: 12px;
+
+    margin-top: 30px;
+
+    opacity: 0;
+
+    transform: translateY(22px);
+
+    animation:
+        jradSqlReveal
+        0.8s
+        cubic-bezier(.2,.75,.25,1)
+        0.42s
+        forwards;
+}
+
+
+/* =========================================================
+   BUTTONS
+   ========================================================= */
+
+.jrad-btn {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    min-height: 46px;
+
+    padding: 0 21px;
+
+    border-radius: 10px;
+
+    text-decoration: none;
+
+    font-size: 14px;
+
+    font-weight: 800;
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        background 0.25s ease;
+}
+
+
+.jrad-btn:hover {
+
+    transform:
+        translateY(-3px);
+}
+
+
+.jrad-btn-primary {
+
+    background: #ffffff;
+
+    color: #6038b5;
+
+    box-shadow:
+        0 12px 30px
+        rgba(25,10,70,0.20);
+}
+
+
+.jrad-btn-primary:hover {
+
+    box-shadow:
+        0 16px 35px
+        rgba(25,10,70,0.30);
+}
+
+
+.jrad-btn-secondary {
+
+    background:
+        rgba(255,255,255,0.09);
+
+    color: #ffffff;
+
+    border:
+        1px solid
+        rgba(255,255,255,0.32);
+
+    backdrop-filter:
+        blur(10px);
+}
+
+
+.jrad-btn-secondary:hover {
+
+    background:
+        rgba(255,255,255,0.16);
+
+    box-shadow:
+        0 12px 28px
+        rgba(25,10,70,0.18);
+}
+
+
+/* =========================================================
+   HERO IMAGE
+   ========================================================= */
+
+.jrad-hero-image {
+
+    position: relative;
+
+    width: min(1080px, 100%);
+
+    margin: 58px auto 0;
+
+    overflow: hidden;
+
+    border-radius: 22px;
+
+    background:
+        rgba(255,255,255,0.10);
+
+    border:
+        1px solid
+        rgba(255,255,255,0.22);
+
+    box-shadow:
+        0 30px 80px
+        rgba(30,15,80,0.28);
+
+    opacity: 0;
+
+    transform:
+        translateY(45px)
+        scale(0.965);
+
+    animation:
+        jradSqlHeroImage
+        1.05s
+        cubic-bezier(.2,.75,.25,1)
+        0.58s
+        forwards;
+}
+
+
+.jrad-hero-image img {
+
+    display: block;
+
+    width: 100%;
+
+    height: auto;
+
+    transition:
+        transform 0.7s
+        cubic-bezier(.2,.75,.25,1);
+}
+
+
+/* =========================================================
+   IMAGE MICRO MOTION
+   ========================================================= */
+
+@media (hover: hover) and (pointer: fine) {
+
+    .jrad-hero-image:hover {
+
+        box-shadow:
+            0 38px 95px
+            rgba(30,15,80,0.35);
+    }
+
+
+    .jrad-hero-image:hover img {
+
+        transform:
+            scale(1.025);
+    }
+
+}
+
+
+/* =========================================================
+   HERO ANIMATIONS
+   ========================================================= */
+
+@keyframes jradSqlReveal {
+
+    from {
+
+        opacity: 0;
+
+        transform:
+            translateY(28px);
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            translateY(0);
+    }
+
+}
+
+
+@keyframes jradSqlHeroImage {
+
+    from {
+
+        opacity: 0;
+
+        transform:
+            translateY(55px)
+            scale(0.965);
+    }
+
+    to {
+
+        opacity: 1;
+
+        transform:
+            translateY(0)
+            scale(1);
+    }
+
+}
+
+
+@keyframes jradSqlFloat {
+
+    0%,
+    100% {
+
+        transform:
+            translate3d(0,0,0)
+            scale(1);
+    }
+
+    50% {
+
+        transform:
+            translate3d(-20px,25px,0)
+            scale(1.05);
+    }
+
+}
+
+
+@keyframes jradSqlFloatReverse {
+
+    0%,
+    100% {
+
+        transform:
+            translate3d(0,0,0);
+    }
+
+    50% {
+
+        transform:
+            translate3d(25px,-20px,0);
+    }
+
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+    .jrad-hero {
+
+        min-height: auto;
+
+        padding:
+            70px 0 0;
+    }
+
+
+    .jrad-hero h1 {
+
+        font-size:
+            clamp(
+                3rem,
+                9vw,
+                5rem
+            );
+    }
+
+
+    .jrad-hero-image {
+
+        margin-top: 48px;
+
+        border-radius: 18px;
+    }
+
+}
+
+
+@media (max-width: 650px) {
+
+    .jrad-hero {
+
+        padding:
+            55px 0 0;
+    }
+
+
+    .jrad-hero-content {
+
+        width: 100%;
+    }
+
+
+    .jrad-eyebrow {
+
+        font-size: 10px;
+
+        padding:
+            8px 13px;
+    }
+
+
+    .jrad-hero h1 {
+
+        font-size:
+            clamp(
+                2.65rem,
+                12vw,
+                4rem
+            );
+
+        line-height: 0.98;
+    }
+
+
+    .jrad-subtitle {
+
+        font-size: 15px;
+
+        line-height: 1.65;
+    }
+
+
+    .jrad-actions {
+
+        flex-direction: column;
+
+        width: 100%;
+    }
+
+
+    .jrad-btn {
+
+        width: min(280px, 100%);
+    }
+
+
+    .jrad-hero-image {
+
+        margin-top: 40px;
+
+        border-radius: 14px;
+    }
+
+
+    .jrad-hero::before,
+    .jrad-hero::after {
+
+        opacity: 0.5;
+    }
+
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .jrad-hero::before,
+    .jrad-hero::after {
+
+        animation: none;
+    }
+
+
+    .jrad-eyebrow,
+    .jrad-hero h1,
+    .jrad-subtitle,
+    .jrad-actions,
+    .jrad-hero-image {
+
+        opacity: 1;
+
+        transform: none;
+
+        animation: none;
+    }
+
+
+    .jrad-btn,
+    .jrad-hero-image img {
+
+        transition: none;
+    }
+
+}
+
+</style>
+
+
+<!-- =========================================================
+     HERO
+     ========================================================= -->
+
+<section class="jrad-hero">
+
+    <div class="jrad-hero-grid"></div>
+
+    <div class="jrad-container">
+
+        <div class="jrad-hero-content">
 
             <div class="jrad-eyebrow">
-                SQL Retail Business Analysis
+
+                Project 02 · SQL Analytics
+
             </div>
 
+
             <h1>
-                JRAD Retail<br>
-                <span>Analytical Foundations</span>
+
+                JRAD Retail
+
+                <span>
+                    Analytical Foundations
+                </span>
+
             </h1>
 
+
             <p class="jrad-subtitle">
-                A SQL-driven retail analytics project built to validate,
-                structure and interrogate the JRAD Superstores 2026
-                retail ecosystem before translating the findings into
-                executive Power BI intelligence.
+
+                A SQL-driven retail analytics project built to
+                validate, structure and interrogate the JRAD
+                Superstores 2026 retail ecosystem before translating
+                the findings into executive Power BI intelligence.
+
             </p>
 
+
             <div class="jrad-actions">
+
+                <a
+                    href="#analysis"
+                    class="jrad-btn jrad-btn-primary">
+
+                    Explore Analysis
+
+                </a>
+
 
                 <a
                     href="https://github.com/sodiqoluwatimileyin190-oss/sodiqoluwatimileyin190-oss.github.io/tree/main/projects/jrad-retail-sql-analysis"
                     target="_blank"
                     rel="noopener noreferrer"
-                    class="jrad-btn jrad-btn-primary">
+                    class="jrad-btn jrad-btn-secondary">
+
                     View Project on GitHub
+
                 </a>
 
             </div>
+
 
             <div class="jrad-hero-image">
 
@@ -584,7 +821,9 @@
 
         </div>
 
-    </section>
+    </div>
+
+</section>
 
 
     <!-- =========================================================

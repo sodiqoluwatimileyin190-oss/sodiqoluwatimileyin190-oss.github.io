@@ -2625,9 +2625,8 @@ footer {
 
 /* =========================================================
    CARD HEADER
-   (icon stacked above title so the heading gets full card
-   width to wrap into — fixes clipped headings like
-   "Data Analysi…" / "Busine… Intellig…")
+   (icon stacked above title, both centered — heading gets
+   full card width to wrap into and never sits flush left)
 ========================================================= */
 
 .skills-section .skill-header {
@@ -2636,7 +2635,9 @@ footer {
 
     flex-direction: column;
 
-    align-items: flex-start;
+    align-items: center;
+
+    text-align: center;
 
     gap: 14px;
 
@@ -2716,6 +2717,8 @@ footer {
 
     width: 100%;
 
+    text-align: center;
+
 }
 
 
@@ -2756,6 +2759,8 @@ footer {
 
 /* =========================================================
    SKILL LIST
+   (label + arrow centered as a unit, so nothing ever sits
+   flush against the card's left or right edge)
 ========================================================= */
 
 .skills-section .skill-list {
@@ -2773,11 +2778,11 @@ footer {
     display: flex;
 
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
 
-    gap: 15px;
+    gap: 10px;
 
-    padding: 11px 0;
+    padding: 11px 4px;
 
     color:
         var(--text-soft);
@@ -2786,12 +2791,13 @@ footer {
 
     line-height: 1.35;
 
+    text-align: center;
+
     border-bottom:
         1px solid #eeeaf5;
 
     transition:
-        color 0.3s ease,
-        padding-left 0.3s ease;
+        color 0.3s ease;
 
 }
 
@@ -2835,8 +2841,6 @@ footer {
 
         color:
             #38266c;
-
-        padding-left: 5px;
 
     }
 
@@ -3124,7 +3128,9 @@ footer {
 
 .skills-section .skill-list li {
     min-width: 0;
-    padding: 12px 0;
+    justify-content: center;
+    text-align: center;
+    padding: 12px 4px;
 }
 
 

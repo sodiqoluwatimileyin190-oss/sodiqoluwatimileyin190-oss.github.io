@@ -88,8 +88,6 @@ spend comparison, and salary-cycle sensitivity by persona.
 ## Tools
 Power BI Desktop · DAX (88 measures) · Deneb (Vega-Lite) custom visual · GitHub Pages · HTML/CSS/JavaScript
 
-## Screenshots
-_Add page screenshots/GIFs here — Overview, Sales & Time, Customer Segmentation._
 
 ## Business Impact
 _Framed around the key findings above: e.g. "surfaced a ₦2.32bn uplift

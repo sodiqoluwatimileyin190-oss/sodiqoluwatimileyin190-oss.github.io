@@ -1,1 +1,1566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
 
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>THERA Bank — Personal Loan Campaign Analysis</title>
+
+    <meta
+        name="description"
+        content="THERA Bank Personal Loan Campaign Analysis — a Power BI case study analyzing customer behavior, loan acceptance and campaign targeting."
+    >
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+
+    <style>
+
+        /* =========================================================
+           RESET
+        ========================================================= */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f7f8fc;
+            color: #17172f;
+            line-height: 1.6;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+
+        /* =========================================================
+           NAVIGATION
+        ========================================================= */
+
+        .navbar {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+
+            width: 100%;
+
+            background: rgba(255,255,255,0.92);
+            backdrop-filter: blur(15px);
+
+            border-bottom: 1px solid #e5e5ef;
+        }
+
+        .nav-container {
+            width: min(1180px, 92%);
+            margin: auto;
+
+            height: 72px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .brand {
+            font-size: 18px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            color: #21184f;
+        }
+
+        .brand span {
+            color: #7356d8;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 28px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            font-size: 13px;
+            font-weight: 600;
+            color: #65657b;
+
+            transition: 0.25s ease;
+        }
+
+        .nav-links a:hover {
+            color: #7356d8;
+        }
+
+
+        /* =========================================================
+           HERO
+        ========================================================= */
+
+        .hero {
+            position: relative;
+            overflow: hidden;
+
+            padding: 115px 20px 100px;
+
+            background:
+                radial-gradient(
+                    circle at 15% 20%,
+                    rgba(124, 92, 214, 0.18),
+                    transparent 35%
+                ),
+                radial-gradient(
+                    circle at 85% 20%,
+                    rgba(82, 201, 213, 0.16),
+                    transparent 35%
+                ),
+                #ffffff;
+        }
+
+        .hero-container {
+            width: min(1080px, 92%);
+            margin: auto;
+            text-align: center;
+        }
+
+        .eyebrow {
+            display: inline-block;
+
+            padding: 8px 16px;
+
+            border-radius: 50px;
+
+            background: #f0ebff;
+            color: #7154d4;
+
+            font-size: 11px;
+            font-weight: 800;
+
+            letter-spacing: 1.8px;
+            text-transform: uppercase;
+
+            margin-bottom: 25px;
+        }
+
+        .hero h1 {
+            max-width: 900px;
+            margin: auto;
+
+            font-family: Georgia, "Times New Roman", serif;
+
+            font-size: clamp(44px, 6vw, 78px);
+            line-height: 0.98;
+
+            letter-spacing: -3px;
+
+            color: #17143d;
+        }
+
+        .hero h1 span {
+            color: #7558d7;
+        }
+
+        .hero-description {
+            max-width: 720px;
+
+            margin: 28px auto 0;
+
+            color: #68687d;
+
+            font-size: 16px;
+            line-height: 1.8;
+        }
+
+        .hero-buttons {
+            margin-top: 35px;
+
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 9px;
+
+            padding: 13px 21px;
+
+            border-radius: 8px;
+
+            font-size: 13px;
+            font-weight: 700;
+
+            transition: 0.25s ease;
+        }
+
+        .btn-primary {
+            background: #241754;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            background: #34216e;
+        }
+
+        .btn-secondary {
+            border: 1px solid #ddd9ea;
+            background: white;
+            color: #33265c;
+        }
+
+        .btn-secondary:hover {
+            border-color: #7356d8;
+            color: #7356d8;
+        }
+
+
+        /* =========================================================
+           PROJECT STATS
+        ========================================================= */
+
+        .stats {
+            width: min(900px, 92%);
+            margin: -35px auto 80px;
+
+            position: relative;
+            z-index: 5;
+
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+
+            background: white;
+
+            border: 1px solid #e7e5ef;
+            border-radius: 16px;
+
+            box-shadow: 0 20px 50px rgba(32, 25, 76, 0.08);
+        }
+
+        .stat {
+            padding: 27px 20px;
+            text-align: center;
+
+            border-right: 1px solid #eceaf2;
+        }
+
+        .stat:last-child {
+            border-right: none;
+        }
+
+        .stat strong {
+            display: block;
+
+            font-size: 25px;
+
+            color: #241754;
+        }
+
+        .stat span {
+            display: block;
+
+            margin-top: 4px;
+
+            font-size: 11px;
+            font-weight: 700;
+
+            color: #818096;
+
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+        }
+
+
+        /* =========================================================
+           GENERAL SECTION
+        ========================================================= */
+
+        .section {
+            padding: 95px 20px;
+        }
+
+        .section-container {
+            width: min(1080px, 92%);
+            margin: auto;
+        }
+
+        .section-label {
+            color: #7356d8;
+
+            font-size: 10px;
+            font-weight: 800;
+
+            letter-spacing: 2px;
+            text-transform: uppercase;
+
+            margin-bottom: 12px;
+        }
+
+        .section-heading {
+            max-width: 760px;
+        }
+
+        .section-heading h2 {
+            font-family: Georgia, "Times New Roman", serif;
+
+            font-size: clamp(34px, 4vw, 52px);
+
+            line-height: 1.05;
+
+            letter-spacing: -1.5px;
+
+            color: #17143d;
+        }
+
+        .section-heading p {
+            margin-top: 16px;
+
+            color: #737287;
+
+            font-size: 15px;
+        }
+
+
+        /* =========================================================
+           OVERVIEW
+        ========================================================= */
+
+        .overview {
+            background: #f7f6fb;
+        }
+
+        .overview-grid {
+            margin-top: 45px;
+
+            display: grid;
+            grid-template-columns: 1.15fr 0.85fr;
+
+            gap: 30px;
+        }
+
+        .overview-card {
+            background: white;
+
+            border: 1px solid #e8e6ef;
+
+            border-radius: 15px;
+
+            padding: 32px;
+
+            box-shadow: 0 10px 30px rgba(31, 24, 70, 0.04);
+        }
+
+        .overview-card h3 {
+            font-family: Georgia, "Times New Roman", serif;
+
+            font-size: 25px;
+
+            margin-bottom: 15px;
+
+            color: #21184f;
+        }
+
+        .overview-card p {
+            color: #6e6d7e;
+
+            font-size: 14px;
+
+            line-height: 1.8;
+        }
+
+        .focus-list {
+            list-style: none;
+
+            margin-top: 15px;
+        }
+
+        .focus-list li {
+            display: flex;
+            gap: 11px;
+
+            padding: 11px 0;
+
+            border-bottom: 1px solid #eeeef4;
+
+            color: #57566c;
+
+            font-size: 13px;
+        }
+
+        .focus-list li:last-child {
+            border-bottom: none;
+        }
+
+        .focus-list i {
+            color: #7356d8;
+
+            margin-top: 4px;
+        }
+
+
+        /* =========================================================
+           DASHBOARD GALLERY
+        ========================================================= */
+
+        .dashboard-section {
+            background: white;
+        }
+
+        .dashboard-gallery {
+            margin-top: 50px;
+
+            display: grid;
+
+            gap: 35px;
+        }
+
+        .dashboard-card {
+            background: #fafaff;
+
+            border: 1px solid #e6e4ed;
+
+            border-radius: 18px;
+
+            padding: 14px;
+
+            box-shadow:
+                0 15px 45px rgba(35, 28, 78, 0.07);
+
+            transition: 0.3s ease;
+        }
+
+        .dashboard-card:hover {
+            transform: translateY(-4px);
+
+            box-shadow:
+                0 25px 55px rgba(35, 28, 78, 0.11);
+        }
+
+        .dashboard-image {
+            overflow: hidden;
+
+            border-radius: 11px;
+
+            background: #ddd;
+        }
+
+        .dashboard-image img {
+            width: 100%;
+
+            cursor: zoom-in;
+
+            transition: transform 0.5s ease;
+        }
+
+        .dashboard-card:hover .dashboard-image img {
+            transform: scale(1.015);
+        }
+
+        .dashboard-info {
+            padding: 20px 10px 8px;
+        }
+
+        .dashboard-number {
+            color: #7356d8;
+
+            font-size: 10px;
+            font-weight: 800;
+
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+        }
+
+        .dashboard-info h3 {
+            margin-top: 5px;
+
+            font-family: Georgia, "Times New Roman", serif;
+
+            font-size: 24px;
+
+            color: #21184f;
+        }
+
+        .dashboard-info p {
+            margin-top: 7px;
+
+            color: #727184;
+
+            font-size: 13px;
+        }
+
+
+        /* =========================================================
+           INSIGHTS
+        ========================================================= */
+
+        .insights {
+            background: #f7f6fb;
+        }
+
+        .insight-grid {
+            margin-top: 45px;
+
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+
+            gap: 20px;
+        }
+
+        .insight-card {
+            background: white;
+
+            border: 1px solid #e7e5ee;
+
+            border-radius: 15px;
+
+            padding: 28px;
+        }
+
+        .insight-icon {
+            width: 42px;
+            height: 42px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 10px;
+
+            background: #eee9ff;
+
+            color: #7356d8;
+
+            margin-bottom: 20px;
+        }
+
+        .insight-card h3 {
+            font-family: Georgia, "Times New Roman", serif;
+
+            font-size: 21px;
+
+            color: #21184f;
+
+            margin-bottom: 10px;
+        }
+
+        .insight-card p {
+            color: #747285;
+
+            font-size: 13px;
+
+            line-height: 1.75;
+        }
+
+
+        /* =========================================================
+           TOOLS
+        ========================================================= */
+
+        .tools {
+            margin-top: 45px;
+
+            display: flex;
+            flex-wrap: wrap;
+
+            gap: 10px;
+        }
+
+        .tool {
+            padding: 10px 16px;
+
+            border-radius: 50px;
+
+            background: #f1edff;
+
+            color: #5d42b9;
+
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+
+        /* =========================================================
+           CTA
+        ========================================================= */
+
+        .cta {
+            padding: 100px 20px;
+
+            background:
+                radial-gradient(
+                    circle at 20% 10%,
+                    rgba(150, 122, 236, 0.3),
+                    transparent 30%
+                ),
+                linear-gradient(
+                    135deg,
+                    #21164d,
+                    #4a358f
+                );
+
+            color: white;
+
+            text-align: center;
+        }
+
+        .cta-container {
+            width: min(800px, 92%);
+            margin: auto;
+        }
+
+        .cta h2 {
+            font-family: Georgia, "Times New Roman", serif;
+
+            font-size: clamp(36px, 5vw, 58px);
+
+            line-height: 1.05;
+        }
+
+        .cta p {
+            margin: 20px auto 30px;
+
+            max-width: 600px;
+
+            color: rgba(255,255,255,0.72);
+
+            font-size: 14px;
+        }
+
+        .cta .btn-primary {
+            background: white;
+            color: #241754;
+        }
+
+
+        /* =========================================================
+           FOOTER
+        ========================================================= */
+
+        footer {
+            padding: 25px 20px;
+
+            background: #171238;
+
+            color: rgba(255,255,255,0.5);
+
+            text-align: center;
+
+            font-size: 11px;
+        }
+
+
+        /* =========================================================
+           LIGHTBOX
+        ========================================================= */
+
+        .lightbox {
+            position: fixed;
+
+            inset: 0;
+
+            z-index: 2000;
+
+            background: rgba(10, 8, 25, 0.94);
+
+            display: none;
+
+            align-items: center;
+            justify-content: center;
+
+            padding: 30px;
+        }
+
+        .lightbox.active {
+            display: flex;
+        }
+
+        .lightbox img {
+            max-width: 95vw;
+            max-height: 92vh;
+
+            object-fit: contain;
+
+            border-radius: 8px;
+        }
+
+        .lightbox-close {
+            position: fixed;
+
+            top: 20px;
+            right: 25px;
+
+            width: 45px;
+            height: 45px;
+
+            border-radius: 50%;
+
+            border: 1px solid rgba(255,255,255,0.2);
+
+            background: rgba(255,255,255,0.1);
+
+            color: white;
+
+            font-size: 20px;
+
+            cursor: pointer;
+        }
+
+
+        /* =========================================================
+           RESPONSIVE
+        ========================================================= */
+
+        @media (max-width: 850px) {
+
+            .nav-links {
+                display: none;
+            }
+
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .stat:nth-child(2) {
+                border-right: none;
+            }
+
+            .stat:nth-child(-n+2) {
+                border-bottom: 1px solid #eceaf2;
+            }
+
+            .overview-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .insight-grid {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+
+        @media (max-width: 550px) {
+
+            .hero {
+                padding-top: 80px;
+            }
+
+            .hero h1 {
+                letter-spacing: -1.5px;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+
+            .stat {
+                border-right: none;
+                border-bottom: 1px solid #eceaf2;
+            }
+
+            .stat:last-child {
+                border-bottom: none;
+            }
+
+            .section {
+                padding: 70px 18px;
+            }
+
+            .overview-card {
+                padding: 24px;
+            }
+
+            .dashboard-card {
+                padding: 8px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================================================
+     NAVIGATION
+========================================================= -->
+
+<nav class="navbar">
+
+    <div class="nav-container">
+
+        <a href="../../index.html" class="brand">
+            Sodiq<span>.</span>
+        </a>
+
+        <div class="nav-links">
+
+            <a href="#overview">
+                Overview
+            </a>
+
+            <a href="#dashboard">
+                Dashboard
+            </a>
+
+            <a href="#insights">
+                Insights
+            </a>
+
+            <a href="#tools">
+                Tools
+            </a>
+
+        </div>
+
+    </div>
+
+</nav>
+
+
+
+<!-- =========================================================
+     HERO
+========================================================= -->
+
+<section class="hero">
+
+    <div class="hero-container">
+
+        <span class="eyebrow">
+            Power BI Case Study
+        </span>
+
+        <h1>
+            THERA Bank —
+            <span>Personal Loan Campaign Analysis</span>
+        </h1>
+
+        <p class="hero-description">
+
+            A focused business intelligence case study analyzing
+            customer behavior, personal loan acceptance and
+            campaign targeting to identify higher-potential
+            customer segments.
+
+        </p>
+
+
+        <div class="hero-buttons">
+
+            <a
+                href="#dashboard"
+                class="btn btn-primary"
+            >
+                Explore Dashboard
+                <i class="fas fa-arrow-down"></i>
+            </a>
+
+            <a
+                href="https://github.com/sodiqoluwatimileyin190-oss/sodiqoluwatimileyin190-oss.github.io/tree/main/projects/thera-bank-loan-analytics"
+                target="_blank"
+                rel="noopener"
+                class="btn btn-secondary"
+            >
+                View GitHub
+                <i class="fab fa-github"></i>
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     PROJECT STATS
+========================================================= -->
+
+<div class="stats">
+
+    <div class="stat">
+
+        <strong>5,000</strong>
+
+        <span>
+            Customers
+        </span>
+
+    </div>
+
+
+    <div class="stat">
+
+        <strong>480</strong>
+
+        <span>
+            Accepted Loans
+        </span>
+
+    </div>
+
+
+    <div class="stat">
+
+        <strong>9.6%</strong>
+
+        <span>
+            Acceptance Rate
+        </span>
+
+    </div>
+
+
+    <div class="stat">
+
+        <strong>3</strong>
+
+        <span>
+            Dashboard Pages
+        </span>
+
+    </div>
+
+</div>
+
+
+
+<!-- =========================================================
+     OVERVIEW
+========================================================= -->
+
+<section
+    class="section overview"
+    id="overview"
+>
+
+    <div class="section-container">
+
+        <div class="section-heading">
+
+            <div class="section-label">
+                01 — Project Overview
+            </div>
+
+            <h2>
+                Understanding who converts.
+            </h2>
+
+            <p>
+
+                The analysis examines customer characteristics,
+                banking relationships and demographic segments
+                associated with personal loan acceptance.
+
+            </p>
+
+        </div>
+
+
+        <div class="overview-grid">
+
+
+            <div class="overview-card">
+
+                <h3>
+                    Business Problem
+                </h3>
+
+                <p>
+
+                    THERA Bank's personal loan campaign recorded
+                    a relatively low overall acceptance rate.
+                    The objective was to determine which customer
+                    profiles were more likely to accept a personal
+                    loan offer and translate those patterns into
+                    actionable targeting recommendations.
+
+                </p>
+
+            </div>
+
+
+            <div class="overview-card">
+
+                <h3>
+                    Analysis Focus
+                </h3>
+
+                <ul class="focus-list">
+
+                    <li>
+                        <i class="fas fa-check"></i>
+                        Personal loan acceptance
+                    </li>
+
+                    <li>
+                        <i class="fas fa-check"></i>
+                        Income & education segments
+                    </li>
+
+                    <li>
+                        <i class="fas fa-check"></i>
+                        Age & family characteristics
+                    </li>
+
+                    <li>
+                        <i class="fas fa-check"></i>
+                        Banking relationships
+                    </li>
+
+                    <li>
+                        <i class="fas fa-check"></i>
+                        Mortgage ownership
+                    </li>
+
+                </ul>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     DASHBOARD
+========================================================= -->
+
+<section
+    class="section dashboard-section"
+    id="dashboard"
+>
+
+    <div class="section-container">
+
+        <div class="section-heading">
+
+            <div class="section-label">
+                02 — Power BI Dashboard
+            </div>
+
+            <h2>
+                From customer behavior to targeting strategy.
+            </h2>
+
+            <p>
+
+                The dashboard is structured across three analytical
+                views: executive overview, customer behavior and
+                strategic recommendations.
+
+            </p>
+
+        </div>
+
+
+        <div class="dashboard-gallery">
+
+
+            <!-- PAGE 1 -->
+
+            <article class="dashboard-card">
+
+                <div class="dashboard-image">
+
+                    <img
+                        src="images/executive-overview.png"
+                        alt="THERA Bank Executive Overview Dashboard"
+                        class="zoomable"
+                    >
+
+                </div>
+
+                <div class="dashboard-info">
+
+                    <div class="dashboard-number">
+                        Dashboard 01
+                    </div>
+
+                    <h3>
+                        Executive Overview
+                    </h3>
+
+                    <p>
+
+                        High-level view of customer volume,
+                        loan acceptance, income segments,
+                        age groups and education-level performance.
+
+                    </p>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- PAGE 2 -->
+
+            <article class="dashboard-card">
+
+                <div class="dashboard-image">
+
+                    <img
+                        src="images/customer-behavior.png"
+                        alt="THERA Bank Customer Behavior Dashboard"
+                        class="zoomable"
+                    >
+
+                </div>
+
+                <div class="dashboard-info">
+
+                    <div class="dashboard-number">
+                        Dashboard 02
+                    </div>
+
+                    <h3>
+                        Customer Behavior & Banking Relationships
+                    </h3>
+
+                    <p>
+
+                        Examines family size, professional experience,
+                        banking services, credit card ownership and
+                        mortgage relationships.
+
+                    </p>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- PAGE 3 -->
+
+            <article class="dashboard-card">
+
+                <div class="dashboard-image">
+
+                    <img
+                        src="images/strategic-recommendations.png"
+                        alt="THERA Bank Strategic Recommendations Dashboard"
+                        class="zoomable"
+                    >
+
+                </div>
+
+                <div class="dashboard-info">
+
+                    <div class="dashboard-number">
+                        Dashboard 03
+                    </div>
+
+                    <h3>
+                        Strategic Recommendations & Targeting
+                    </h3>
+
+                    <p>
+
+                        Converts the analytical findings into
+                        actionable customer profiles and campaign
+                        targeting recommendations.
+
+                    </p>
+
+                </div>
+
+            </article>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     INSIGHTS
+========================================================= -->
+
+<section
+    class="section insights"
+    id="insights"
+>
+
+    <div class="section-container">
+
+        <div class="section-heading">
+
+            <div class="section-label">
+                03 — Key Findings
+            </div>
+
+            <h2>
+                What the analysis revealed.
+            </h2>
+
+            <p>
+
+                The dashboard highlights several customer characteristics
+                associated with stronger loan acceptance.
+
+            </p>
+
+        </div>
+
+
+        <div class="insight-grid">
+
+
+            <article class="insight-card">
+
+                <div class="insight-icon">
+
+                    <i class="fas fa-chart-line"></i>
+
+                </div>
+
+                <h3>
+                    Acceptance was highly concentrated
+                </h3>
+
+                <p>
+
+                    Only 9.6% of the 5,000 customers accepted
+                    the personal loan offer, indicating substantial
+                    room for more precise campaign targeting.
+
+                </p>
+
+            </article>
+
+
+
+            <article class="insight-card">
+
+                <div class="insight-icon">
+
+                    <i class="fas fa-user-graduate"></i>
+
+                </div>
+
+                <h3>
+                    Education mattered
+                </h3>
+
+                <p>
+
+                    Professional and graduate customers recorded
+                    considerably stronger acceptance rates than
+                    undergraduate customers.
+
+                </p>
+
+            </article>
+
+
+
+            <article class="insight-card">
+
+                <div class="insight-icon">
+
+                    <i class="fas fa-coins"></i>
+
+                </div>
+
+                <h3>
+                    Higher income was a major signal
+                </h3>
+
+                <p>
+
+                    Loan acceptance was heavily concentrated among
+                    higher-income customers, making income an important
+                    variable for future campaign prioritization.
+
+                </p>
+
+            </article>
+
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     TOOLS
+========================================================= -->
+
+<section
+    class="section"
+    id="tools"
+>
+
+    <div class="section-container">
+
+        <div class="section-heading">
+
+            <div class="section-label">
+                04 — Technical Approach
+            </div>
+
+            <h2>
+                Built for business decision-making.
+            </h2>
+
+            <p>
+
+                The project focuses on analytical reasoning,
+                segmentation and dashboard storytelling rather
+                than simply presenting charts.
+
+            </p>
+
+        </div>
+
+
+        <div class="tools">
+
+            <span class="tool">
+                Power BI
+            </span>
+
+            <span class="tool">
+                DAX
+            </span>
+
+            <span class="tool">
+                Data Modeling
+            </span>
+
+            <span class="tool">
+                Customer Segmentation
+            </span>
+
+            <span class="tool">
+                Business Analysis
+            </span>
+
+            <span class="tool">
+                KPI Development
+            </span>
+
+            <span class="tool">
+                Data Storytelling
+            </span>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     CTA
+========================================================= -->
+
+<section class="cta">
+
+    <div class="cta-container">
+
+        <h2>
+            Explore the analysis.
+        </h2>
+
+        <p>
+
+            View the project repository, dashboard screenshots
+            and supporting documentation on GitHub.
+
+        </p>
+
+
+        <div class="hero-buttons">
+
+            <a
+                href="https://github.com/sodiqoluwatimileyin190-oss/sodiqoluwatimileyin190-oss.github.io/tree/main/projects/thera-bank-loan-analytics"
+                target="_blank"
+                rel="noopener"
+                class="btn btn-primary"
+            >
+
+                View GitHub
+                <i class="fab fa-github"></i>
+
+            </a>
+
+
+            <a
+                href="../../index.html#projects"
+                class="btn btn-secondary"
+            >
+
+                Back to Portfolio
+                <i class="fas fa-arrow-left"></i>
+
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     FOOTER
+========================================================= -->
+
+<footer>
+
+    <p>
+        © 2026 Sodiq Oluwatimileyin. THERA Bank Analytics Case Study.
+    </p>
+
+</footer>
+
+
+
+<!-- =========================================================
+     IMAGE LIGHTBOX
+========================================================= -->
+
+<div
+    class="lightbox"
+    id="lightbox"
+>
+
+    <button
+        class="lightbox-close"
+        id="lightboxClose"
+        aria-label="Close image"
+    >
+        <i class="fas fa-times"></i>
+    </button>
+
+    <img
+        id="lightboxImage"
+        src=""
+        alt="Expanded dashboard"
+    >
+
+</div>
+
+
+
+<!-- =========================================================
+     JAVASCRIPT
+========================================================= -->
+
+<script>
+
+    const zoomableImages =
+        document.querySelectorAll(".zoomable");
+
+    const lightbox =
+        document.getElementById("lightbox");
+
+    const lightboxImage =
+        document.getElementById("lightboxImage");
+
+    const lightboxClose =
+        document.getElementById("lightboxClose");
+
+
+    zoomableImages.forEach(image => {
+
+        image.addEventListener("click", () => {
+
+            lightboxImage.src = image.src;
+
+            lightbox.classList.add("active");
+
+            document.body.style.overflow = "hidden";
+
+        });
+
+    });
+
+
+    function closeLightbox() {
+
+        lightbox.classList.remove("active");
+
+        document.body.style.overflow = "";
+
+    }
+
+
+    lightboxClose.addEventListener(
+        "click",
+        closeLightbox
+    );
+
+
+    lightbox.addEventListener(
+        "click",
+        event => {
+
+            if (event.target === lightbox) {
+
+                closeLightbox();
+
+            }
+
+        }
+    );
+
+
+    document.addEventListener(
+        "keydown",
+        event => {
+
+            if (event.key === "Escape") {
+
+                closeLightbox();
+
+            }
+
+        }
+    );
+
+</script>
+
+
+</body>
+
+</html>

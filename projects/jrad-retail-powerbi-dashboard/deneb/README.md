@@ -1,28 +1,33 @@
-# Deneb Visual Engineering
+# Deneb / Vega-Lite
 
-This folder documents the custom Deneb and Vega-Lite visuals developed for the JRAD Retail Power BI dashboard.
+The report contains **16 custom Deneb visuals**.
 
-## Chapter 1 Visuals
+## Highlighted Work
+- Threshold-based needle gauge
+- Revenue trend
+- Branch performance
+- Department performance
+- Dynamic insight callouts
+- Business-event waterfall
+- Persona → Shopping Mission → Department Sankey
+- Basket-value segmentation
+- Registered vs Walk-In comparison
 
-### Branch Performance
-Custom horizontal performance visual showing branch revenue alongside target variance.
+## Standout Visual
+The Sankey is manually constructed because Vega-Lite does not provide a native Sankey mark. Node ordering, cumulative positions, lookups, and ribbon geometry are calculated in the specification.
 
-### Department Performance
-Custom ranked bar visual showing department revenue and growth versus the prior period.
+## Conditional Encoding
+Positive/negative states are authored directly through Vega-Lite expressions rather than native Power BI `FillRule` conditional formatting.
 
-### Customer Persona Performance
-Custom persona contribution visual showing each persona's share of revenue alongside period-over-period growth.
+Place verified JSON specifications in this folder using descriptive filenames such as:
 
-## Visual Engineering Approach
-
-The visuals use Deneb and Vega-Lite to provide greater control over:
-
-- Layout
-- Data labels
-- Conditional colours
-- Growth indicators
-- Typography
-- Spacing
-- Executive dashboard composition
-
-The objective is to combine analytical accuracy with deliberate visual hierarchy rather than relying solely on native Power BI visuals.
+```text
+01-executive-gauge.json
+02-revenue-trend.json
+03-branch-insight.json
+04-branch-performance.json
+...
+14-persona-mission-department-sankey.json
+...
+16-registered-walkin-comparison.json
+```

@@ -1,1 +1,436 @@
 
+
+--selecting top 50 from olist_orders_dataset
+SELECT TOP 50 *
+FROM dbo.olist_orders_dataset;
+
+--checking data types of olist_orders_dataset
+SELECT 
+	COLUMN_NAME, 
+	DATA_TYPE
+	FROM INFORMATION_SCHEMA.COLUMNS
+	WHERE TABLE_NAME = 'olist_orders_dataset';
+
+--selecting top 50 from olist_order_items_dataset
+SELECT TOP 50 *
+FROM dbo.olist_order_items_dataset;
+
+--checking data types of olist_order_items_dataset
+SELECT 
+	COLUMN_NAME, 
+	DATA_TYPE
+	FROM INFORMATION_SCHEMA.COLUMNS
+	WHERE TABLE_NAME = 'olist_order_items_dataset';
+
+--selecting top 50 from olist_order_payments_dataset
+SELECT TOP 50 *
+FROM dbo.olist_order_payments_dataset;
+
+--checking data types of olist_order_payments_dataset
+SELECT 
+	COLUMN_NAME, 
+	DATA_TYPE
+	FROM INFORMATION_SCHEMA.COLUMNS
+	WHERE TABLE_NAME = 'olist_order_payments_dataset'
+
+--selecting top 50 from olist_customers_dataset
+SELECT TOP 50 *
+FROM dbo.olist_customers_dataset;
+
+--checking data types of olist_customers_dataset
+SELECT 
+	COLUMN_NAME, 
+	DATA_TYPE
+	FROM INFORMATION_SCHEMA.COLUMNS
+	WHERE TABLE_NAME = 'olist_customers_dataset'
+
+
+--check customer_id that are null in olist_customers_dataset
+SELECT 
+	COUNT(*) AS total_rows,
+	COUNT(["customer_id"]) AS customer_id_count	
+	FROM olist_customers_dataset;
+
+--check duplicates in order_id in olist_orders_dataset
+SELECT 
+	["order_id"], 
+	COUNT(*) AS count
+	FROM olist_orders_dataset
+	GROUP BY ["order_id"]
+	HAVING COUNT(*) > 1;
+
+--checking duplicates in order_items
+SELECT ["order_id"], COUNT(*) 
+FROM olist_order_items_dataset
+GROUP BY ["order_id"]
+ORDER BY COUNT(*) DESC;
+
+--checking payments duplication
+SELECT ["order_id"], COUNT(*) AS payments
+FROM olist_order_payments_dataset
+GROUP BY ["order_id"]
+ORDER BY COUNT(*) DESC;
+
+--Aggregate order items (total value per order)
+-- Step 1: Aggregate order items (total value per order)
+WITH order_items_agg AS (
+    SELECT 
+        ["order_id"],
+        SUM(CAST(["price"] AS FLOAT) + CAST(["freight_value"] AS FLOAT)) AS total_order_value
+    FROM olist_order_items_dataset
+    GROUP BY ["order_id"]
+),
+
+-- Step 2: Aggregate payments (total payment per order)
+payments_agg AS (
+    SELECT 
+        ["order_id"],
+        SUM(CAST(["payment_value"] AS FLOAT)) AS total_payment
+    FROM olist_order_payments_dataset
+    GROUP BY ["order_id"]
+)
+
+-- Step 3: Join everything cleanly
+--Fix null values by updating my joins query
+SELECT 
+    c.["customer_unique_id"],
+    o.["order_id"],
+    CAST(o.["order_purchase_timestamp"] AS DATE) AS order_date,
+   ISNULL(oi.total_order_value, 0) AS total_order_value,
+    ISNULL(p.total_payment, 0) AS total_payment
+
+FROM olist_orders_dataset o
+
+INNER JOIN olist_customers_dataset c 
+    ON o.["customer_id"] = c.["customer_id"]
+
+LEFT JOIN order_items_agg oi 
+    ON o.["order_id"] = oi.["order_id"]
+
+LEFT JOIN payments_agg p 
+    ON o.["order_id"] = p.["order_id"];
+
+--Create a table with the joined data
+WITH order_items_agg AS (
+    SELECT 
+        ["order_id"],
+        SUM(CAST(["price"] AS FLOAT) + CAST(["freight_value"] AS FLOAT)) AS total_order_value
+    FROM olist_order_items_dataset
+    GROUP BY ["order_id"]
+),
+
+payments_agg AS (
+    SELECT 
+        ["order_id"],
+        SUM(CAST(["payment_value"] AS FLOAT)) AS total_payment
+    FROM olist_order_payments_dataset
+    GROUP BY ["order_id"]
+)
+
+SELECT 
+    c.["customer_unique_id"],
+    o.["order_id"],
+    CAST(o.["order_purchase_timestamp"] AS DATE) AS order_date,
+    ISNULL(oi.total_order_value, 0) AS total_order_value,
+    ISNULL(p.total_payment, 0) AS total_payment
+
+INTO ecommerce_base
+
+FROM olist_orders_dataset o
+
+INNER JOIN olist_customers_dataset c 
+    ON o.["customer_id"] = c.["customer_id"]
+
+LEFT JOIN order_items_agg oi 
+    ON o.["order_id"] = oi.["order_id"]
+
+LEFT JOIN payments_agg p 
+    ON o.["order_id"] = p.["order_id"];
+
+--Check the new table
+SELECT *
+FROM ecommerce_base;
+
+
+--checking if null has been fixed and converted to 0
+SELECT 
+    COUNT(*) AS total_rows,
+    COUNT(total_order_value) AS non_null_values
+FROM ecommerce_base;
+
+--investigating the distribution of total_order_value
+SELECT 
+    total_order_value,
+    COUNT(*) AS count
+    FROM ecommerce_base
+    GROUP BY total_order_value;
+
+--investigating the distribution of total_payment
+SELECT 
+    total_payment,
+    COUNT(*) AS count
+    FROM ecommerce_base
+    GROUP BY total_payment;
+
+--selectin top 20 
+SELECT TOP 20 *
+FROM ecommerce_base
+WHERE total_order_value = 0
+AND total_payment > 0;
+
+
+--We see money paid… but we don’t see what was bought, so we can’t be sure if the money paid was for an order that had a total value of 0, or if it was for an order that had a total value greater than 0 but was not captured in our aggregation. This could be due to missing data in the order items or payments datasets, or it could be due to errors in the data entry process. To investigate this further, we can look at the individual orders that have a total order value of 0 and see if there are any corresponding entries in the order items and payments datasets. We can also check for any discrepancies in the data, such as orders that have a total payment greater than 0 but no corresponding entries in the order items dataset.
+--pick one order_id from olist_orders_items
+SELECT *
+FROM olist_order_items_dataset
+WHERE ["order_id"] = 'PASTE_ONE_ORDER_ID';
+
+--CUSTOMER METRIC (CORE ANALYSIS)
+--Custmer summary metrics: 
+WITH customer_metrics AS (
+    SELECT 
+        ["customer_unique_id"],
+        COUNT(["order_id"]) AS total_orders,
+        SUM(total_payment) AS total_spent,
+        MAX(order_date) AS last_purchase_date
+    FROM ecommerce_base
+    GROUP BY ["customer_unique_id"]
+)
+
+SELECT top 50 *
+FROM customer_metrics;
+
+SELECT COUNT(DISTINCT ["customer_unique_id"]) AS total_customers
+FROM ecommerce_base;
+
+--RECENCY(How long since last purchase)
+WITH customer_metrics AS (
+    SELECT 
+        ["customer_unique_id"],
+        COUNT(["order_id"]) AS total_orders,
+        SUM(total_payment) AS total_spent,
+        MAX(order_date) AS last_purchase_date
+    FROM ecommerce_base
+    GROUP BY ["customer_unique_id"]
+),
+
+final_metrics AS (
+    SELECT *,
+        DATEDIFF(DAY, last_purchase_date, 
+            (SELECT MAX(order_date) FROM ecommerce_base)
+        ) AS recency
+    FROM customer_metrics
+)
+
+SELECT *
+FROM final_metrics;
+
+--Defining Churn
+WITH customer_metrics AS (
+    SELECT 
+        ["customer_unique_id"],
+        COUNT(["order_id"]) AS total_orders,
+        SUM(total_payment) AS total_spent,
+        MAX(order_date) AS last_purchase_date
+    FROM ecommerce_base
+    GROUP BY ["customer_unique_id"]
+),
+
+final_metrics AS (
+    SELECT *,
+        DATEDIFF(DAY, last_purchase_date, 
+            (SELECT MAX(order_date) FROM ecommerce_base)
+        ) AS recency
+    FROM customer_metrics
+)
+
+SELECT *,
+    CASE 
+        WHEN recency > 90 THEN 'Churned'
+        ELSE 'Active'
+    END AS customer_status
+INTO churn_table
+FROM final_metrics;
+
+--Defining Distribution of Churned vs Active Customers
+SELECT 
+    customer_status,
+    COUNT(*) 
+FROM churn_table
+GROUP BY customer_status;
+
+
+--selecting top 50 from products dataset
+SELECT TOP 50 *
+FROM dbo.olist_products_dataset;
+
+
+
+--PRODUCT ANALYSIS (What are customers buying, and does it relate to churn?)
+--product view
+SELECT 
+    c.["customer_unique_id"],
+    ct.customer_status,
+    oi.["product_id"],
+    p.["product_category_name"],
+    oi.["price"]
+
+FROM churn_table ct
+
+INNER JOIN olist_customers_dataset c 
+    ON ct.["customer_unique_id"] = c.["customer_unique_id"]
+
+INNER JOIN olist_orders_dataset o 
+    ON c.["customer_id"] = o.["customer_id"]
+
+INNER JOIN olist_order_items_dataset oi 
+    ON o.["order_id"] = oi.["order_id"]
+
+LEFT JOIN olist_products_dataset p 
+    ON oi.["product_id"] = p.["product_id"];
+
+
+--We can use this view to analyze the relationship between customer churn and the products that customers are buying. For example, we can look at the distribution of product categories among churned vs active customers, or we can look at the average price of products purchased by churned vs active customers. This analysis can help us identify any patterns or trends in customer behavior that may be related to churn, and it can also help us identify any specific products or product categories that may be more likely to lead to churn.
+    SELECT 
+    customer_status,
+    ["product_category_name"],
+    COUNT(*) AS total_purchases
+FROM (
+    SELECT 
+        c.["customer_unique_id"],
+        ct.customer_status,
+        oi.["product_id"],
+        p.["product_category_name"]
+    FROM churn_table ct
+    INNER JOIN olist_customers_dataset c 
+        ON ct.["customer_unique_id"] = c.["customer_unique_id"]
+    INNER JOIN olist_orders_dataset o 
+        ON c.["customer_id"] = o.["customer_id"]
+    INNER JOIN olist_order_items_dataset oi 
+        ON o.["order_id"] = oi.["order_id"]
+    LEFT JOIN olist_products_dataset p 
+        ON oi.["product_id"] = p.["product_id"]
+) AS data
+GROUP BY customer_status, ["product_category_name"]
+ORDER BY total_purchases DESC;
+
+--TOP PRODUCTS FOR CHURNED CUSTOMERS
+SELECT TOP 10
+  ["product_category_name"],
+    COUNT(*) AS total_purchases
+FROM (
+    SELECT 
+        ct.customer_status,
+        p.["product_category_name"]
+    FROM churn_table ct
+    INNER JOIN olist_customers_dataset c 
+        ON ct.["customer_unique_id"] = c.["customer_unique_id"]
+    INNER JOIN olist_orders_dataset o 
+        ON c.["customer_id"] = o.["customer_id"]
+    INNER JOIN olist_order_items_dataset oi 
+        ON o.["order_id"] = oi.["order_id"]
+    LEFT JOIN olist_products_dataset p 
+        ON oi.["product_id"] = p.["product_id"]
+    WHERE ct.customer_status = 'Churned'
+) AS churn_data
+GROUP BY ["product_category_name"]
+ORDER BY total_purchases DESC;
+
+--TOP PRODUCTS FOR ACTIVE CUSTOMERS
+SELECT TOP 10
+  ["product_category_name"],
+    COUNT(*) AS total_purchases
+    FROM (
+    SELECT 
+        ct.customer_status,
+        p.["product_category_name"]
+        FROM churn_table ct
+        INNER JOIN olist_customers_dataset c
+        ON ct.["customer_unique_id"] = c.["customer_unique_id"]
+        INNER JOIN olist_orders_dataset o
+        ON c.["customer_id"] = o.["customer_id"]
+        INNER JOIN olist_order_items_dataset oi
+        ON o.["order_id"] = oi.["order_id"]
+        LEFT JOIN olist_products_dataset p
+        ON oi.["product_id"] = p.["product_id"]
+        WHERE ct.customer_status = 'Active'
+        ) AS active_data
+        GROUP BY ["product_category_name"]
+        ORDER BY total_purchases DESC;
+
+
+--compare average spend
+SELECT 
+    customer_status,
+    AVG(total_spent) AS avg_spent
+FROM churn_table
+GROUP BY customer_status;
+--This analysis can help us identify any patterns or trends in customer behavior that may be related to churn, and it can also help us identify any specific products or product categories that may be more likely to lead to churn. For example, if we find that churned customers are more likely to purchase products in a certain category, we can investigate further to see if there are any issues with those products (e.g. quality issues, pricing issues, etc.) that may be contributing to churn. Alternatively, if we find that active customers are more likely to purchase products in a certain category, we can investigate further to see if there are any opportunities to promote those products more heavily to increase customer retention.
+--This is just a starting point for our analysis, and there are many other factors that we could consider when analyzing customer churn. For example, we could look at the frequency of purchases, the timing of purchases, the types of products purchased, the channels through which customers are purchasing, etc. By analyzing these factors in conjunction with customer churn, we can gain a deeper understanding of what drives customer behavior and how we can improve customer retention.
+--Overall, the goal of this analysis is to identify any patterns or trends in customer behavior that may be related to churn, and to use that information to develop strategies for improving customer retention. By understanding what drives customer behavior and what factors are associated with churn, we can take proactive steps to address those issues and keep our customers engaged and satisfied with our products and services.
+--In conclusion, analyzing customer churn is a critical aspect of any business, and by leveraging data and analytics, we can gain valuable insights into customer behavior and develop strategies for improving retention. By understanding what drives customer behavior and what factors are associated with churn, we can take proactive steps to address those issues and keep our customers engaged and satisfied with our products and services.
+
+
+--Count of distinct products category naames
+SELECT 
+    COUNT(DISTINCT ["product_category_name"]) AS distinct_categories
+    FROM olist_products_dataset;
+
+--name of the distinct product categories
+SELECT DISTINCT ["product_category_name"]
+FROM olist_products_dataset;
+
+
+--join translation table to get english names of product categories
+SELECT 
+    p.["product_category_name"],
+    t.product_category_name_english
+    FROM olist_products_dataset p
+    LEFT JOIN product_category_name_translation t
+    ON p.["product_category_name"] = t.product_category_name;
+
+--update PRODUCT ANALYSIS TABLE TO INCLUDE ENGLISH NAMES
+SELECT 
+    c.["customer_unique_id"],
+    ct.customer_status,
+    oi.["product_id"],
+    p.["product_category_name"],
+    t.product_category_name_english,
+    ISNULL(t.product_category_name_english, 'Unknown') AS product_category_name_english,
+    oi.["price"]
+    FROM churn_table ct
+    INNER JOIN olist_customers_dataset c
+    ON ct.["customer_unique_id"] = c.["customer_unique_id"]
+    INNER JOIN olist_orders_dataset o
+    ON c.["customer_id"] = o.["customer_id"]
+    INNER JOIN olist_order_items_dataset oi
+    ON o.["order_id"] = oi.["order_id"]
+    LEFT JOIN olist_products_dataset p
+    ON oi.["product_id"] = p.["product_id"]
+    LEFT JOIN product_category_name_translation t
+    ON p.["product_category_name"] = t.product_category_name;
+ 
+
+ --Changing the nulls in the english category names to 'Unknown'
+ SELECT 
+    c.["customer_unique_id"],
+    ct.customer_status,
+    oi.["product_id"],
+    p.["product_category_name"],
+    ISNULL(t.product_category_name_english, 'Unknown') AS product_category_name_english,
+    oi.["price"]
+    FROM churn_table ct
+    INNER JOIN olist_customers_dataset c
+    ON ct.["customer_unique_id"] = c.["customer_unique_id"]
+    INNER JOIN olist_orders_dataset o
+    ON c.["customer_id"] = o.["customer_id"]
+    INNER JOIN olist_order_items_dataset oi
+    ON o.["order_id"] = oi.["order_id"]
+    LEFT JOIN olist_products_dataset p
+    ON oi.["product_id"] = p.["product_id"]
+    LEFT JOIN product_category_name_translation t
+    ON p.["product_category_name"] = t.product_category_name;
+
+
+select *
+from churn_table;

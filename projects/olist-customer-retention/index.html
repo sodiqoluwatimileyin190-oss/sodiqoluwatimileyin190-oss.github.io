@@ -1,1984 +1,1327 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Olist — Customer Retention & Operational Analytics | Sodiq Oluwatimileyin</title>
+    <title>Olist — Customer & Operational Analytics | Sodiq</title>
 
-<meta name="description" content="Olist Brazilian e-commerce customer retention and operational analytics case study by Sodiq Oluwatimileyin.">
+    <meta
+        name="description"
+        content="Olist e-commerce customer, product, retention and operational analytics case study by Sodiq Oluwatimileyin."
+    >
 
-<link rel="icon" type="image/png" href="../../favicon-32x32.png">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap"
+        rel="stylesheet"
+    >
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+    <!-- GSAP -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 
-<style>
-
-/* =========================================================
-   ROOT
-========================================================= */
-
-:root{
-    --purple:#7356d8;
-    --purple-dark:#4c329f;
-    --deep:#29185f;
-    --soft:#eee9ff;
-    --ink:#17172f;
-    --muted:#68687c;
-    --border:#e6e3ef;
-    --bg:#f7f8fc;
-    --white:#ffffff;
+    <style>
 
-    --shadow:0 25px 70px rgba(42,26,91,.10);
-    --deep-shadow:0 40px 100px rgba(42,26,91,.16);
-}
+        /* =========================================================
+           ROOT
+        ========================================================= */
 
+        :root {
+            --purple: #5638c9;
+            --purple-dark: #24135f;
+            --purple-light: #7a5ce2;
 
-/* =========================================================
-   RESET
-========================================================= */
+            --ink: #17133a;
+            --muted: #6e6a82;
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
-
-html{
-    scroll-behavior:smooth;
-}
-
-body{
-    font-family:Inter,Arial,sans-serif;
-    background:var(--bg);
-    color:var(--ink);
-    line-height:1.6;
-    overflow-x:hidden;
-}
-
-img{
-    display:block;
-    max-width:100%;
-}
-
-a{
-    text-decoration:none;
-    color:inherit;
-}
-
-
-/* =========================================================
-   NAVIGATION
-========================================================= */
-
-.navbar{
-    position:sticky;
-    top:0;
-    z-index:1000;
-
-    background:rgba(255,255,255,.92);
-    backdrop-filter:blur(18px);
-
-    border-bottom:1px solid var(--border);
-}
-
-.nav-container{
-    width:min(1180px,calc(100% - 40px));
-    height:68px;
-
-    margin:auto;
-
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-}
-
-.brand{
-    font-weight:800;
-    font-size:17px;
-    color:var(--deep);
-}
-
-.brand span{
-    color:var(--purple);
-}
-
-.nav-links{
-    display:flex;
-    gap:30px;
-}
-
-.nav-links a{
-    font-size:11px;
-    font-weight:700;
-    color:#69677a;
-    transition:.25s;
-}
-
-.nav-links a:hover{
-    color:var(--purple);
-    transform:translateY(-1px);
-}
-
-
-/* =========================================================
-   HERO
-========================================================= */
-
-.hero{
-    position:relative;
-    min-height:760px;
-
-    display:flex;
-    align-items:center;
-
-    overflow:hidden;
-
-    background:
-        radial-gradient(
-            circle at 12% 20%,
-            rgba(142,108,236,.16),
-            transparent 32%
-        ),
-        radial-gradient(
-            circle at 88% 15%,
-            rgba(115,86,216,.12),
-            transparent 30%
-        ),
-        linear-gradient(
-            135deg,
-            #f0edff,
-            #ffffff 48%,
-            #f1f5ff
-        );
-}
+            --bg: #faf9ff;
+            --soft: #f1edff;
+            --white: #ffffff;
 
-.hero:before{
-    content:"";
+            --border: rgba(76, 54, 160, 0.14);
 
-    position:absolute;
-    inset:0;
+            --shadow:
+                0 30px 80px rgba(53, 36, 119, 0.12);
 
-    opacity:.34;
+            --radius: 24px;
+        }
 
-    background-image:
-        linear-gradient(
-            rgba(115,86,216,.055) 1px,
-            transparent 1px
-        ),
-        linear-gradient(
-            90deg,
-            rgba(115,86,216,.055) 1px,
-            transparent 1px
-        );
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-    background-size:55px 55px;
+        html {
+            scroll-behavior: auto;
+        }
 
-    mask-image:
-        linear-gradient(
-            to bottom,
-            #000,
-            transparent 85%
-        );
-}
+        body {
+            font-family: "DM Sans", sans-serif;
+            color: var(--ink);
+            background: var(--bg);
+            overflow-x: hidden;
+        }
 
-.hero-glow{
-    position:absolute;
-    border-radius:50%;
-    pointer-events:none;
-}
+        img {
+            display: block;
+            max-width: 100%;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
 
-.hero-glow-one{
-    width:320px;
-    height:320px;
+        button {
+            font: inherit;
+        }
 
-    left:-120px;
-    top:100px;
+
+        /* =========================================================
+           NAVIGATION
+        ========================================================= */
+
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 72px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            padding: 0 6vw;
+
+            background: rgba(255,255,255,0.88);
+            backdrop-filter: blur(18px);
+
+            border-bottom: 1px solid rgba(50,30,120,0.08);
+
+            z-index: 1000;
+        }
+
+        .brand {
+            font-size: 18px;
+            font-weight: 700;
+            letter-spacing: -0.04em;
+            color: var(--purple-dark);
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 32px;
 
-    background:rgba(115,86,216,.10);
+            font-size: 13px;
+            font-weight: 600;
 
-    animation:float 10s ease-in-out infinite alternate;
-}
+            color: #747087;
+        }
 
-.hero-glow-two{
-    width:260px;
-    height:260px;
+        .nav-links a {
+            transition: color .25s ease;
+        }
 
-    right:-90px;
-    bottom:80px;
+        .nav-links a:hover {
+            color: var(--purple);
+        }
 
-    background:rgba(85,135,217,.10);
 
-    animation:float 12s ease-in-out infinite alternate-reverse;
-}
+        /* =========================================================
+           HERO
+        ========================================================= */
 
-.hero-container{
-    position:relative;
-    z-index:2;
+        .hero {
+            position: relative;
 
-    width:min(1050px,calc(100% - 40px));
+            min-height: 100vh;
 
-    margin:auto;
+            padding:
+                150px 6vw
+                100px;
 
-    text-align:center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
 
-    padding:90px 0 70px;
-}
+            overflow: hidden;
 
-.eyebrow{
-    display:inline-flex;
-    align-items:center;
-    gap:8px;
+            background:
+                radial-gradient(
+                    circle at 12% 20%,
+                    rgba(122,92,226,.15),
+                    transparent 35%
+                ),
+                radial-gradient(
+                    circle at 88% 35%,
+                    rgba(86,56,201,.10),
+                    transparent 32%
+                ),
+                linear-gradient(
+                    135deg,
+                    #f0ebff 0%,
+                    #ffffff 48%,
+                    #eef2ff 100%
+                );
+        }
 
-    padding:8px 15px;
+        .hero::before {
+            content: "";
 
-    border:1px solid #ddd3ff;
-    border-radius:999px;
+            position: absolute;
+            inset: 0;
 
-    background:rgba(255,255,255,.66);
+            background:
+                linear-gradient(
+                    90deg,
+                    rgba(255,255,255,.18) 1px,
+                    transparent 1px
+                ),
+                linear-gradient(
+                    rgba(255,255,255,.18) 1px,
+                    transparent 1px
+                );
 
-    color:#7458df;
+            background-size: 80px 80px;
 
-    font-size:9px;
-    font-weight:800;
+            opacity: .35;
+            pointer-events: none;
+        }
 
-    letter-spacing:2px;
-}
+        .hero-content {
+            position: relative;
+            z-index: 2;
 
-.hero h1{
-    margin-top:28px;
+            width: min(900px, 100%);
 
-    font-family:"Playfair Display",serif;
+            text-align: center;
+        }
 
-    font-size:clamp(4rem,8vw,7rem);
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
 
-    line-height:.91;
+            padding: 8px 15px;
 
-    letter-spacing:-4px;
+            border: 1px solid rgba(104,76,211,.25);
+            border-radius: 100px;
 
-    color:var(--deep);
-}
+            background: rgba(255,255,255,.55);
 
-.hero h1 span{
-    display:block;
-    color:var(--purple);
-}
+            color: var(--purple);
 
-.hero-subtitle{
-    max-width:760px;
+            font-size: 10px;
+            font-weight: 700;
 
-    margin:28px auto 0;
+            letter-spacing: .18em;
+            text-transform: uppercase;
 
-    color:var(--muted);
+            margin-bottom: 25px;
+        }
 
-    font-size:15px;
-}
+        .eyebrow-dot {
+            width: 6px;
+            height: 6px;
 
-.hero-actions{
-    display:flex;
-    justify-content:center;
+            border-radius: 50%;
 
-    gap:10px;
+            background: var(--purple);
+        }
 
-    margin-top:28px;
+        .hero h1 {
+            font-family: "Playfair Display", serif;
 
-    flex-wrap:wrap;
-}
+            font-size: clamp(58px, 8vw, 112px);
 
+            line-height: .92;
 
-/* =========================================================
-   BUTTONS
-========================================================= */
+            letter-spacing: -.055em;
 
-.btn{
-    display:inline-flex;
+            color: var(--purple-dark);
 
-    align-items:center;
-    justify-content:center;
+            margin-bottom: 15px;
+        }
 
-    gap:9px;
+        .hero h1 span {
+            display: block;
 
-    min-height:44px;
+            color: var(--purple-light);
+        }
 
-    padding:0 19px;
+        .hero-description {
+            max-width: 720px;
 
-    border-radius:10px;
+            margin: 28px auto 30px;
 
-    background:var(--purple);
+            font-size: 15px;
 
-    color:#fff;
+            line-height: 1.8;
 
-    font-size:11px;
-    font-weight:800;
+            color: var(--muted);
+        }
 
-    box-shadow:
-        0 12px 30px rgba(115,86,216,.22);
+        .hero-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
 
-    transition:.3s;
-}
+            margin-bottom: 55px;
+        }
 
-.btn:hover{
-    transform:translateY(-3px);
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
 
-    box-shadow:
-        0 18px 38px rgba(115,86,216,.28);
-}
+            min-height: 44px;
 
-.btn-secondary{
-    background:rgba(255,255,255,.78);
+            padding: 0 20px;
 
-    color:var(--purple-dark);
+            border-radius: 10px;
 
-    border:1px solid #dcd5f0;
+            font-size: 12px;
+            font-weight: 700;
 
-    box-shadow:none;
-}
+            transition:
+                transform .25s ease,
+                box-shadow .25s ease;
+        }
 
+        .btn:hover {
+            transform: translateY(-2px);
+        }
 
-/* =========================================================
-   ORDER JOURNEY
-========================================================= */
+        .btn-primary {
+            color: white;
 
-.order-journey{
-    position:relative;
+            background: var(--purple);
 
-    width:min(810px,100%);
+            box-shadow:
+                0 12px 30px rgba(86,56,201,.25);
+        }
 
-    height:155px;
+        .btn-secondary {
+            color: var(--purple-dark);
 
-    margin:48px auto 0;
+            background: rgba(255,255,255,.75);
 
-    padding:20px 28px;
+            border: 1px solid rgba(86,56,201,.18);
+        }
 
-    border:1px solid #e0daf0;
 
-    border-radius:20px;
+        /* =========================================================
+           HERO DASHBOARD IMAGE
+        ========================================================= */
 
-    background:rgba(255,255,255,.76);
+        .hero-dashboard {
+            position: relative;
 
-    box-shadow:var(--shadow);
+            width: min(1100px, 94vw);
 
-    overflow:hidden;
-}
+            border-radius: 24px;
 
+            overflow: hidden;
 
-/* Track */
+            border: 1px solid rgba(75,48,163,.16);
 
-.journey-track{
-    position:absolute;
+            background: white;
 
-    left:7%;
-    right:7%;
+            box-shadow:
+                0 40px 100px rgba(52,36,119,.20);
 
-    top:73px;
+            transform-style: preserve-3d;
+        }
 
-    height:3px;
+        .hero-dashboard img {
+            width: 100%;
 
-    background:
-        repeating-linear-gradient(
-            to right,
-            #c8b9ff 0,
-            #c8b9ff 10px,
-            transparent 10px,
-            transparent 17px
-        );
+            height: auto;
 
-    z-index:1;
-}
+            object-fit: cover;
+        }
 
+        .hero-dashboard::after {
+            content: "";
 
-/* Journey stages */
+            position: absolute;
+            inset: 0;
 
-.journey-stage{
-    position:absolute;
+            background:
+                linear-gradient(
+                    180deg,
+                    transparent 65%,
+                    rgba(30,19,70,.08)
+                );
 
-    top:20px;
+            pointer-events: none;
+        }
 
-    width:120px;
 
-    text-align:center;
+        /* =========================================================
+           STAT STRIP
+        ========================================================= */
 
-    transform:translateX(-50%);
+        .stats {
+            position: relative;
+            z-index: 5;
 
-    z-index:3;
-}
+            width: min(900px, 92vw);
 
-.journey-stage:nth-of-type(1){
-    left:7%;
-}
+            margin: -1px auto 0;
 
-.journey-stage:nth-of-type(2){
-    left:28.5%;
-}
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
 
-.journey-stage:nth-of-type(3){
-    left:50%;
-}
+            background: white;
 
-.journey-stage:nth-of-type(4){
-    left:71.5%;
-}
+            border:
+                1px solid rgba(70,50,150,.10);
 
-.journey-stage:nth-of-type(5){
-    left:93%;
-}
+            border-radius: 0 0 20px 20px;
 
+            box-shadow:
+                0 20px 50px rgba(52,36,119,.08);
 
-/* Icons */
+            overflow: hidden;
+        }
 
-.stage-icon{
-    width:46px;
-    height:46px;
+        .stat {
+            min-height: 100px;
 
-    margin:auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
 
-    display:flex;
+            text-align: center;
 
-    align-items:center;
-    justify-content:center;
+            border-right: 1px solid var(--border);
+        }
 
-    border-radius:13px;
+        .stat:last-child {
+            border-right: 0;
+        }
 
-    border:1px solid #ddd4ff;
+        .stat-number {
+            font-size: 27px;
+            font-weight: 700;
 
-    background:#f2eeff;
+            color: var(--purple);
 
-    color:var(--purple);
+            letter-spacing: -.04em;
+        }
 
-    box-shadow:
-        0 8px 20px rgba(115,86,216,.10);
+        .stat-label {
+            margin-top: 6px;
 
-    transition:.3s;
-}
+            font-size: 9px;
+            font-weight: 700;
 
-.stage-icon i{
-    font-size:17px;
-}
+            letter-spacing: .14em;
+            text-transform: uppercase;
 
-.journey-stage span{
-    display:block;
+            color: #858094;
+        }
 
-    margin-top:7px;
 
-    font-size:8px;
+        /* =========================================================
+           ORDER JOURNEY
+        ========================================================= */
 
-    font-weight:800;
+        .journey {
+            position: relative;
 
-    letter-spacing:.7px;
+            width: min(1050px, 90vw);
 
-    color:#68657a;
+            margin: 70px auto 0;
 
-    text-transform:uppercase;
-}
+            padding: 30px 35px;
 
+            background: rgba(255,255,255,.72);
 
-/* =========================================================
-   DELIVERY TRUCK ANIMATION
-========================================================= */
+            border:
+                1px solid rgba(86,56,201,.12);
 
-.delivery-object{
-    position:absolute;
+            border-radius: 22px;
 
-    top:73px;
+            box-shadow:
+                0 20px 60px rgba(64,45,133,.08);
 
-    left:7%;
+            overflow: hidden;
+        }
 
-    width:44px;
-    height:44px;
+        .journey-line {
+            position: absolute;
 
-    transform:translate(-50%,-50%);
+            left: 9%;
+            right: 9%;
+            top: 50%;
 
-    display:flex;
+            height: 2px;
 
-    align-items:center;
-    justify-content:center;
+            background:
+                linear-gradient(
+                    90deg,
+                    rgba(86,56,201,.10),
+                    rgba(86,56,201,.5),
+                    rgba(86,56,201,.10)
+                );
+        }
 
-    border-radius:50%;
+        .journey-progress {
+            position: absolute;
 
-    background:var(--purple);
+            left: 9%;
+            top: 50%;
 
-    color:#fff;
+            width: 0%;
+            height: 2px;
 
-    border:5px solid rgba(255,255,255,.96);
+            background: var(--purple);
 
-    box-shadow:
-        0 8px 24px rgba(115,86,216,.35);
+            transform: translateY(-50%);
+        }
 
-    z-index:5;
+        .journey-track {
+            position: relative;
+            z-index: 2;
 
-    animation:
-        journeyTravel 9s
-        cubic-bezier(.45,0,.25,1)
-        infinite;
-}
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
 
-.delivery-object i{
-    font-size:15px;
-}
+            gap: 10px;
+        }
 
-.delivery-object:after{
-    content:"";
+        .journey-step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
 
-    position:absolute;
+            gap: 8px;
+        }
 
-    inset:-8px;
+        .journey-icon {
+            width: 48px;
+            height: 48px;
 
-    border-radius:50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
 
-    border:1px solid rgba(115,86,216,.28);
+            border-radius: 14px;
 
-    animation:
-        pulseRing 1.8s ease-out infinite;
-}
+            background: #f0ebff;
 
+            border: 1px solid rgba(86,56,201,.15);
 
-/*
-   IMPORTANT:
-   Customer
-      ↓
-   Online Order
-      ↓
-   Processing
-      ↓
-   Delivery
-      ↓
-   Delivered
+            color: var(--purple);
 
-   The truck reaches DELIVERY first,
-   pauses,
-   then continues to DELIVERED.
+            font-size: 18px;
 
-   It then pauses at Delivered before
-   restarting the journey.
-*/
+            box-shadow:
+                0 8px 20px rgba(86,56,201,.08);
+        }
 
-@keyframes journeyTravel{
+        .journey-step.active .journey-icon {
+            background: var(--purple);
+            color: white;
 
-    /* Customer */
-    0%,
-    5%{
-        left:7%;
-    }
+            box-shadow:
+                0 10px 25px rgba(86,56,201,.28);
+        }
 
-    /* Customer → Online Order */
-    20%{
-        left:28.5%;
-    }
+        .journey-label {
+            font-size: 10px;
+            font-weight: 700;
 
-    /* Online Order → Processing */
-    37%{
-        left:50%;
-    }
+            letter-spacing: .08em;
+            text-transform: uppercase;
 
-    /* Processing → Delivery */
-    54%{
-        left:71.5%;
-    }
+            color: #777187;
 
-    /*
-       Pause at Delivery
-    */
-    62%{
-        left:71.5%;
-    }
+            text-align: center;
+        }
 
-    /* Delivery → Delivered */
-    78%{
-        left:93%;
-    }
 
-    /*
-       Pause at Delivered
-    */
-    88%{
-        left:93%;
-    }
+        /* =========================================================
+           SECTION
+        ========================================================= */
 
-    /*
-       Reset
-    */
-    100%{
-        left:7%;
-    }
-}
+        .section {
+            width: min(1100px, 88vw);
 
-@keyframes pulseRing{
+            margin: 0 auto;
 
-    0%{
-        transform:scale(.8);
-        opacity:.8;
-    }
+            padding: 130px 0;
+        }
 
-    100%{
-        transform:scale(1.55);
-        opacity:0;
-    }
-}
+        .section-header {
+            max-width: 720px;
 
-@keyframes float{
+            margin-bottom: 55px;
+        }
 
-    from{
-        transform:translate3d(0,0,0);
-    }
+        .section-kicker {
+            font-size: 10px;
+            font-weight: 700;
 
-    to{
-        transform:translate3d(25px,-20px,0);
-    }
-}
+            letter-spacing: .2em;
+            text-transform: uppercase;
 
+            color: var(--purple);
 
-/* =========================================================
-   STATS
-========================================================= */
+            margin-bottom: 15px;
+        }
 
-.stats{
-    position:relative;
+        .section-title {
+            font-family: "Playfair Display", serif;
 
-    z-index:5;
+            font-size: clamp(42px, 5vw, 70px);
 
-    width:min(870px,calc(100% - 40px));
+            line-height: 1;
 
-    margin:-34px auto 0;
+            letter-spacing: -.045em;
 
-    display:grid;
+            color: var(--purple-dark);
+        }
 
-    grid-template-columns:
-        repeat(4,1fr);
+        .section-title span {
+            color: var(--purple-light);
+        }
 
-    background:#fff;
+        .section-description {
+            margin-top: 20px;
 
-    border:1px solid var(--border);
+            font-size: 14px;
 
-    border-radius:20px;
+            line-height: 1.8;
 
-    box-shadow:var(--shadow);
+            color: var(--muted);
+        }
 
-    overflow:hidden;
-}
 
-.stat{
-    text-align:center;
+        /* =========================================================
+           DASHBOARD STORY
+        ========================================================= */
 
-    padding:25px 15px;
+        .dashboard-story {
+            position: relative;
+        }
 
-    border-right:1px solid var(--border);
-}
+        .dashboard-panel {
+            position: relative;
 
-.stat:last-child{
-    border-right:0;
-}
+            min-height: 100vh;
 
-.stat-value{
-    display:block;
+            display: flex;
+            align-items: center;
 
-    color:var(--purple-dark);
+            padding: 80px 0;
+        }
 
-    font-size:1.7rem;
+        .dashboard-card {
+            position: relative;
 
-    font-weight:800;
+            width: 100%;
 
-    letter-spacing:-1px;
-}
+            background: white;
 
-.stat-label{
-    display:block;
+            border-radius: 26px;
 
-    margin-top:4px;
+            border:
+                1px solid rgba(67,45,151,.12);
 
-    color:#8a8797;
+            box-shadow:
+                0 35px 100px rgba(48,34,111,.13);
 
-    font-size:8px;
+            overflow: hidden;
+        }
 
-    font-weight:800;
+        .dashboard-image-wrap {
+            position: relative;
 
-    letter-spacing:1.2px;
+            padding: 18px;
 
-    text-transform:uppercase;
-}
+            background:
+                linear-gradient(
+                    135deg,
+                    #f1edff,
+                    #ffffff
+                );
+        }
 
+        .dashboard-image-wrap img {
+            width: 100%;
 
-/* =========================================================
-   GENERAL SECTIONS
-========================================================= */
+            border-radius: 15px;
 
-.section{
-    padding:110px 0;
-}
+            box-shadow:
+                0 15px 40px rgba(34,24,79,.14);
+        }
 
-.section-inner,
-.dashboard-inner,
-.findings-inner,
-.tech-inner{
-    width:min(1080px,calc(100% - 40px));
+        .dashboard-info {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
 
-    margin:auto;
-}
+            gap: 40px;
 
-.section-eyebrow{
-    display:block;
+            padding: 40px 45px;
+        }
 
-    color:var(--purple);
+        .dashboard-number {
+            font-size: 11px;
 
-    font-size:9px;
+            font-weight: 700;
 
-    font-weight:800;
+            letter-spacing: .18em;
 
-    letter-spacing:2px;
+            color: var(--purple);
+        }
 
-    margin-bottom:15px;
-}
+        .dashboard-title {
+            font-family: "Playfair Display", serif;
 
-.section-heading{
-    max-width:760px;
-}
+            font-size: 35px;
 
-.section-heading h2{
-    font-family:"Playfair Display",serif;
+            line-height: 1.05;
 
-    font-size:
-        clamp(2.7rem,5vw,4.7rem);
+            color: var(--purple-dark);
 
-    line-height:.98;
+            margin-top: 8px;
+        }
 
-    letter-spacing:-2px;
+        .dashboard-copy {
+            color: var(--muted);
 
-    color:var(--deep);
-}
+            font-size: 13px;
 
-.section-heading p{
-    margin-top:20px;
+            line-height: 1.8;
+        }
 
-    color:var(--muted);
+        .insight-tag {
+            display: inline-flex;
 
-    font-size:14px;
+            margin-top: 18px;
 
-    max-width:720px;
-}
+            padding: 8px 12px;
 
+            border-radius: 100px;
 
-/* =========================================================
-   OVERVIEW
-========================================================= */
+            background: #f0ebff;
 
-.overview-grid{
-    display:grid;
+            color: var(--purple);
 
-    grid-template-columns:
-        repeat(2,1fr);
+            font-size: 10px;
 
-    gap:20px;
+            font-weight: 700;
 
-    margin-top:45px;
-}
+            letter-spacing: .06em;
+        }
 
-.info-card{
-    padding:34px;
 
-    border:1px solid var(--border);
+        /* =========================================================
+           FINDINGS
+        ========================================================= */
 
-    border-radius:20px;
+        .findings {
+            background: #f3f0ff;
+        }
 
-    background:#fff;
+        .findings-inner {
+            width: min(1100px, 88vw);
 
-    box-shadow:
-        0 15px 45px rgba(42,26,91,.055);
-}
+            margin: auto;
 
-.info-card h3{
-    font-size:17px;
+            padding: 120px 0;
+        }
 
-    color:var(--deep);
+        .finding-grid {
+            display: grid;
 
-    margin-bottom:13px;
-}
+            grid-template-columns:
+                repeat(3, 1fr);
 
-.info-card p{
-    font-size:13px;
+            gap: 18px;
 
-    color:var(--muted);
-}
+            margin-top: 50px;
+        }
 
-.question-list{
-    list-style:none;
+        .finding {
+            padding: 30px;
 
-    margin-top:20px;
-}
+            min-height: 220px;
 
-.question-list li{
-    position:relative;
+            background: white;
 
-    padding:10px 0 10px 20px;
+            border:
+                1px solid rgba(68,45,152,.10);
 
-    border-top:1px solid #efedf5;
+            border-radius: 20px;
 
-    color:#5e5b6e;
+            box-shadow:
+                0 15px 40px rgba(49,35,111,.06);
+        }
 
-    font-size:12px;
-}
+        .finding-number {
+            font-family: "Playfair Display", serif;
 
-.question-list li:before{
-    content:"";
+            font-size: 42px;
 
-    position:absolute;
+            color: var(--purple);
 
-    left:0;
-    top:18px;
+            line-height: 1;
+        }
 
-    width:6px;
-    height:6px;
+        .finding h3 {
+            margin-top: 20px;
 
-    border-radius:50%;
+            font-size: 16px;
+        }
 
-    background:var(--purple);
-}
+        .finding p {
+            margin-top: 12px;
 
+            color: var(--muted);
 
-/* =========================================================
-   DASHBOARD SECTION
-========================================================= */
+            font-size: 12px;
 
-.dashboard-section{
-    padding:115px 0;
+            line-height: 1.7;
+        }
 
-    background:
-        linear-gradient(
-            180deg,
-            #f4f1fb,
-            #fff 18%,
-            #f8f7fc
-        );
-}
 
-.dashboard-inner > .section-heading{
-    margin-bottom:65px;
-}
+        /* =========================================================
+           TOOLS
+        ========================================================= */
 
-.dashboard-stack{
-    display:flex;
+        .tools {
+            display: flex;
 
-    flex-direction:column;
+            flex-wrap: wrap;
 
-    gap:100px;
-}
+            gap: 10px;
 
+            margin-top: 25px;
+        }
 
-/* Dashboard story */
+        .tool {
+            padding: 8px 13px;
 
-.dashboard-story{
-    display:grid;
+            border-radius: 100px;
 
-    grid-template-columns:
-        minmax(0,1fr) 300px;
+            background: #f1edff;
 
-    gap:38px;
+            color: var(--purple-dark);
 
-    align-items:center;
+            font-size: 10px;
 
-    min-height:530px;
+            font-weight: 700;
+        }
 
-    opacity:0;
 
-    transform:translateY(55px);
+        /* =========================================================
+           CTA
+        ========================================================= */
 
-    transition:
-        opacity .9s ease,
-        transform 1s cubic-bezier(.22,1,.36,1);
-}
+        .cta {
+            width: min(1100px, 88vw);
 
-.dashboard-story:nth-child(even){
-    grid-template-columns:
-        300px minmax(0,1fr);
-}
+            margin: 0 auto;
 
-.dashboard-story:nth-child(even)
-.dashboard-visual{
-    order:2;
-}
+            padding: 100px 0;
+        }
 
-.dashboard-story:nth-child(even)
-.dashboard-copy{
-    order:1;
-}
+        .cta-box {
+            padding: 70px 60px;
 
-.dashboard-story.visible{
-    opacity:1;
+            text-align: center;
 
-    transform:none;
-}
+            border-radius: 28px;
 
+            background:
+                linear-gradient(
+                    135deg,
+                    #251461,
+                    #6244d1
+                );
 
-/* Dashboard image */
+            color: white;
 
-.dashboard-visual{
-    position:relative;
+            box-shadow:
+                0 35px 80px rgba(45,28,105,.25);
+        }
 
-    padding:13px;
+        .cta-box h2 {
+            font-family: "Playfair Display", serif;
 
-    border:1px solid #ded9eb;
+            font-size: clamp(40px, 5vw, 68px);
 
-    border-radius:24px;
+            line-height: 1;
 
-    background:#fff;
+            letter-spacing: -.045em;
+        }
 
-    box-shadow:var(--deep-shadow);
+        .cta-box p {
+            max-width: 600px;
 
-    cursor:zoom-in;
+            margin: 22px auto 30px;
 
-    overflow:hidden;
+            color: rgba(255,255,255,.72);
 
-    transition:.35s;
-}
+            font-size: 13px;
 
-.dashboard-visual:hover{
-    transform:translateY(-7px);
+            line-height: 1.8;
+        }
 
-    box-shadow:
-        0 45px 100px rgba(42,26,91,.20);
-}
+        .cta-box .btn-secondary {
+            background: white;
 
-.dashboard-visual:after{
-    content:"CLICK TO EXPAND";
+            color: var(--purple-dark);
 
-    position:absolute;
+            border: none;
+        }
 
-    right:22px;
-    top:22px;
 
-    padding:7px 10px;
+        /* =========================================================
+           FOOTER
+        ========================================================= */
 
-    border-radius:999px;
+        footer {
+            padding: 35px 6vw;
 
-    background:rgba(31,22,65,.82);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
 
-    color:#fff;
+            border-top: 1px solid rgba(60,40,130,.08);
 
-    font-size:7px;
+            font-size: 11px;
 
-    font-weight:800;
+            color: #878298;
+        }
 
-    letter-spacing:1.2px;
 
-    opacity:0;
+        /* =========================================================
+           SCROLL REVEAL
+        ========================================================= */
 
-    transform:translateY(-5px);
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+        }
 
-    transition:.3s;
-}
 
-.dashboard-visual:hover:after{
-    opacity:1;
+        /* =========================================================
+           RESPONSIVE
+        ========================================================= */
 
-    transform:none;
-}
+        @media (max-width: 800px) {
 
-.dashboard-visual img{
-    width:100%;
+            .nav {
+                padding: 0 5vw;
+            }
 
-    height:auto;
+            .nav-links {
+                gap: 14px;
+                font-size: 11px;
+            }
 
-    border-radius:15px;
-}
+            .hero {
+                padding-left: 5vw;
+                padding-right: 5vw;
+            }
 
+            .hero h1 {
+                font-size: 58px;
+            }
 
-/* Dashboard copy */
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
 
-.dashboard-copy{
-    opacity:0;
+            .stat:nth-child(2) {
+                border-right: 0;
+            }
 
-    transform:translateY(30px);
+            .stat:nth-child(-n+2) {
+                border-bottom: 1px solid var(--border);
+            }
 
-    transition:
-        opacity .75s ease .18s,
-        transform .8s cubic-bezier(.22,1,.36,1) .18s;
-}
+            .journey {
+                padding: 25px 12px;
+            }
 
-.dashboard-story.visible
-.dashboard-copy{
-    opacity:1;
+            .journey-icon {
+                width: 40px;
+                height: 40px;
+                font-size: 15px;
+            }
 
-    transform:none;
-}
+            .journey-label {
+                font-size: 8px;
+            }
 
-.dashboard-number{
-    font-size:9px;
+            .section {
+                width: 90vw;
+            }
 
-    font-weight:800;
+            .dashboard-panel {
+                min-height: auto;
 
-    letter-spacing:2px;
+                padding: 60px 0;
+            }
 
-    color:var(--purple);
+            .dashboard-info {
+                grid-template-columns: 1fr;
 
-    margin-bottom:15px;
-}
+                gap: 18px;
 
-.dashboard-copy h3{
-    font-family:"Playfair Display",serif;
+                padding: 28px;
+            }
 
-    font-size:
-        clamp(2rem,3.5vw,3rem);
+            .finding-grid {
+                grid-template-columns: 1fr;
+            }
 
-    line-height:1;
+            .cta-box {
+                padding: 55px 25px;
+            }
 
-    color:var(--deep);
-}
+            footer {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
 
-.dashboard-copy p{
-    margin-top:18px;
+        @media (max-width: 560px) {
 
-    font-size:12px;
+            .nav-links a:nth-child(2),
+            .nav-links a:nth-child(3) {
+                display: none;
+            }
 
-    color:var(--muted);
-}
+            .hero {
+                padding-top: 120px;
+            }
 
-.dashboard-tags{
-    display:flex;
+            .hero h1 {
+                font-size: 50px;
+            }
 
-    flex-wrap:wrap;
+            .hero-description {
+                font-size: 13px;
+            }
 
-    gap:7px;
+            .hero-buttons {
+                flex-direction: column;
 
-    margin-top:20px;
-}
+                width: 100%;
+            }
 
-.dashboard-tags span{
-    padding:6px 9px;
+            .btn {
+                width: 100%;
+            }
 
-    border-radius:999px;
+            .journey-track {
+                grid-template-columns: repeat(5, 1fr);
+            }
 
-    background:var(--soft);
+            .journey-line,
+            .journey-progress {
+                left: 10%;
+                right: 10%;
+            }
 
-    color:var(--purple-dark);
+            .journey-icon {
+                width: 34px;
+                height: 34px;
 
-    font-size:8px;
+                border-radius: 10px;
 
-    font-weight:800;
-}
+                font-size: 13px;
+            }
 
-.dashboard-progress{
-    margin-top:25px;
+            .journey-label {
+                font-size: 7px;
+                letter-spacing: .02em;
+            }
 
-    display:flex;
+            .dashboard-image-wrap {
+                padding: 8px;
+            }
 
-    align-items:center;
+            .dashboard-title {
+                font-size: 28px;
+            }
+        }
 
-    gap:10px;
-
-    color:#9a96a6;
-
-    font-size:8px;
-
-    font-weight:800;
-
-    letter-spacing:1px;
-}
-
-.dashboard-progress i{
-    color:var(--purple);
-}
-
-
-/* =========================================================
-   FINDINGS
-========================================================= */
-
-.findings-section{
-    padding:115px 0;
-
-    background:#fff;
-}
-
-.findings-grid{
-    display:grid;
-
-    grid-template-columns:
-        repeat(3,1fr);
-
-    gap:18px;
-
-    margin-top:50px;
-}
-
-.finding-card{
-    padding:30px;
-
-    border:1px solid var(--border);
-
-    border-radius:18px;
-
-    background:#fbfaff;
-
-    transition:.35s;
-}
-
-.finding-card:hover{
-    transform:translateY(-7px);
-
-    box-shadow:var(--shadow);
-}
-
-.finding-number{
-    color:var(--purple);
-
-    font-size:9px;
-
-    font-weight:800;
-
-    letter-spacing:2px;
-}
-
-.finding-icon{
-    width:45px;
-    height:45px;
-
-    margin:24px 0 20px;
-
-    display:flex;
-
-    align-items:center;
-    justify-content:center;
-
-    border-radius:13px;
-
-    background:var(--soft);
-
-    color:var(--purple);
-}
-
-.finding-card h3{
-    font-size:16px;
-
-    color:var(--deep);
-
-    line-height:1.25;
-}
-
-.finding-card p{
-    margin-top:12px;
-
-    color:var(--muted);
-
-    font-size:12px;
-}
-
-
-/* =========================================================
-   TECHNICAL SECTION
-========================================================= */
-
-.tech-section{
-    padding:115px 0;
-
-    background:
-        linear-gradient(
-            135deg,
-            #f0edff,
-            #fff
-        );
-}
-
-.tech-grid{
-    display:grid;
-
-    grid-template-columns:
-        repeat(3,1fr);
-
-    gap:18px;
-
-    margin-top:50px;
-}
-
-.tech-card{
-    padding:28px;
-
-    border:1px solid var(--border);
-
-    border-radius:18px;
-
-    background:rgba(255,255,255,.8);
-
-    transition:.35s;
-}
-
-.tech-card:hover{
-    transform:translateY(-6px);
-
-    box-shadow:var(--shadow);
-}
-
-.tech-card > i{
-    font-size:20px;
-
-    color:var(--purple);
-
-    margin-bottom:18px;
-}
-
-.tech-card h3{
-    font-size:15px;
-
-    color:var(--deep);
-}
-
-.tech-card p{
-    margin-top:10px;
-
-    color:var(--muted);
-
-    font-size:11px;
-}
-
-.tools-strip{
-    display:flex;
-
-    flex-wrap:wrap;
-
-    gap:8px;
-
-    margin-top:35px;
-}
-
-.tool{
-    padding:8px 12px;
-
-    border-radius:999px;
-
-    background:#fff;
-
-    border:1px solid var(--border);
-
-    color:var(--purple-dark);
-
-    font-size:8px;
-
-    font-weight:800;
-
-    letter-spacing:.7px;
-}
-
-
-/* =========================================================
-   CTA
-========================================================= */
-
-.cta{
-    width:min(1080px,calc(100% - 40px));
-
-    margin:100px auto;
-
-    padding:80px 40px;
-
-    text-align:center;
-
-    border-radius:28px;
-
-    background:
-        linear-gradient(
-            135deg,
-            #29185f,
-            #5d43b6
-        );
-
-    color:#fff;
-
-    box-shadow:
-        0 35px 90px rgba(42,26,91,.20);
-}
-
-.cta h2{
-    font-family:"Playfair Display",serif;
-
-    font-size:
-        clamp(2.7rem,5vw,4.5rem);
-
-    line-height:1;
-
-    letter-spacing:-2px;
-}
-
-.cta p{
-    max-width:650px;
-
-    margin:20px auto 28px;
-
-    color:rgba(255,255,255,.76);
-
-    font-size:13px;
-}
-
-.cta .btn{
-    background:#fff;
-
-    color:var(--deep);
-
-    box-shadow:none;
-}
-
-
-/* =========================================================
-   FOOTER
-========================================================= */
-
-footer{
-    padding:35px 20px 45px;
-
-    text-align:center;
-
-    color:#8c8998;
-
-    font-size:9px;
-
-    border-top:1px solid var(--border);
-}
-
-
-/* =========================================================
-   LIGHTBOX
-========================================================= */
-
-.lightbox{
-    position:fixed;
-
-    inset:0;
-
-    z-index:3000;
-
-    display:flex;
-
-    align-items:center;
-    justify-content:center;
-
-    padding:35px;
-
-    background:
-        rgba(16,10,37,.92);
-
-    opacity:0;
-
-    visibility:hidden;
-
-    transition:.3s;
-}
-
-.lightbox.active{
-    opacity:1;
-
-    visibility:visible;
-}
-
-.lightbox img{
-    max-width:95vw;
-
-    max-height:90vh;
-
-    object-fit:contain;
-
-    border-radius:10px;
-
-    box-shadow:
-        0 30px 100px rgba(0,0,0,.45);
-}
-
-.lightbox-close{
-    position:absolute;
-
-    top:22px;
-    right:25px;
-
-    width:45px;
-    height:45px;
-
-    border:0;
-
-    border-radius:50%;
-
-    background:#fff;
-
-    color:var(--deep);
-
-    cursor:pointer;
-
-    font-size:17px;
-}
-
-
-/* =========================================================
-   REVEAL ANIMATION
-========================================================= */
-
-.reveal{
-    opacity:0;
-
-    transform:translateY(35px);
-
-    transition:
-        opacity .8s ease,
-        transform .8s cubic-bezier(.22,1,.36,1);
-}
-
-.reveal.visible{
-    opacity:1;
-
-    transform:none;
-}
-
-
-/* =========================================================
-   RESPONSIVE
-========================================================= */
-
-@media(max-width:900px){
-
-    .dashboard-story,
-    .dashboard-story:nth-child(even){
-        grid-template-columns:1fr;
-
-        gap:30px;
-
-        min-height:auto;
-    }
-
-    .dashboard-story:nth-child(even)
-    .dashboard-visual,
-    .dashboard-story:nth-child(even)
-    .dashboard-copy{
-        order:initial;
-    }
-
-    .dashboard-copy{
-        padding:0 10px;
-    }
-
-    .tech-grid{
-        grid-template-columns:
-            repeat(2,1fr);
-    }
-
-    .findings-grid{
-        grid-template-columns:
-            repeat(2,1fr);
-    }
-}
-
-
-@media(max-width:700px){
-
-    .nav-links{
-        gap:13px;
-    }
-
-    .nav-links a:nth-child(2){
-        display:none;
-    }
-
-    .hero{
-        min-height:700px;
-    }
-
-    .hero-container{
-        padding-top:70px;
-    }
-
-    .hero h1{
-        letter-spacing:-2px;
-    }
-
-    .order-journey{
-        height:130px;
-
-        padding:15px;
-    }
-
-    .journey-stage{
-        width:75px;
-    }
-
-    .stage-icon{
-        width:40px;
-        height:40px;
-    }
-
-    .journey-stage span{
-        font-size:6px;
-    }
-
-    .stats{
-        grid-template-columns:
-            1fr 1fr;
-    }
-
-    .stat:nth-child(2){
-        border-right:0;
-    }
-
-    .stat:nth-child(-n+2){
-        border-bottom:1px solid var(--border);
-    }
-
-    .overview-grid,
-    .findings-grid,
-    .tech-grid{
-        grid-template-columns:1fr;
-    }
-
-    .section,
-    .dashboard-section,
-    .findings-section,
-    .tech-section{
-        padding:80px 0;
-    }
-
-    .dashboard-stack{
-        gap:75px;
-    }
-
-    .dashboard-copy h3{
-        font-size:2.2rem;
-    }
-
-    .cta{
-        padding:60px 25px;
-    }
-}
-
-
-/* =========================================================
-   REDUCED MOTION
-========================================================= */
-
-@media(prefers-reduced-motion:reduce){
-
-    *,
-    *::before,
-    *::after{
-        animation-duration:.01ms !important;
-
-        animation-iteration-count:1 !important;
-
-        scroll-behavior:auto !important;
-
-        transition-duration:.01ms !important;
-    }
-}
-
-</style>
+    </style>
 </head>
 
 
 <body>
 
 
-<!-- ======================================================
+<!-- ============================================================
      NAVIGATION
-======================================================= -->
+============================================================ -->
 
-<nav class="navbar">
+<header class="nav">
 
-    <div class="nav-container">
+    <a href="../../index.html" class="brand">
+        Sodiq.
+    </a>
 
-        <a href="../../index.html" class="brand">
-            Sodiq<span>.</span>
+    <nav class="nav-links">
+
+        <a href="#overview">
+            Overview
         </a>
 
-        <div class="nav-links">
-
-            <a href="#overview">
-                Overview
-            </a>
-
-            <a href="#dashboard">
-                Dashboard
-            </a>
-
-            <a href="#findings">
-                Findings
-            </a>
-
-            <a href="../../index.html#projects">
-                Portfolio
-            </a>
-
-        </div>
-
-    </div>
-
-</nav>
-
-
-
-<!-- ======================================================
-     HERO
-======================================================= -->
-
-<header class="hero">
-
-    <div class="hero-glow hero-glow-one"></div>
-
-    <div class="hero-glow hero-glow-two"></div>
-
-
-    <div class="hero-container">
-
-        <div class="eyebrow">
-
-            <i class="fas fa-cart-shopping"></i>
-
-            E-COMMERCE · CUSTOMER ANALYTICS
-
-        </div>
-
-
-        <h1>
-
-            Olist
-
-            <span>
-                Customer &amp; Operational<br>
-                Analytics
-            </span>
-
-        </h1>
-
-
-        <p class="hero-subtitle">
-
-            A focused SQL and Power BI analysis of the Brazilian Olist
-            e-commerce marketplace, exploring customer retention,
-            purchasing behaviour, product performance, and operational
-            delivery efficiency.
-
-        </p>
-
-
-        <div class="hero-actions">
-
-            <a href="#dashboard" class="btn">
-
-                Explore Dashboard
-
-                <i class="fas fa-arrow-down"></i>
-
-            </a>
-
-
-            <a
-                href="https://github.com/sodiqoluwatimileyin190-oss"
-                target="_blank"
-                rel="noopener"
-                class="btn btn-secondary"
-            >
-
-                View GitHub
-
-                <i class="fab fa-github"></i>
-
-            </a>
-
-        </div>
-
-
-
-        <!-- ORDER JOURNEY -->
-
-        <div class="order-journey">
-
-            <div class="journey-track"></div>
-
-
-            <!-- 01 CUSTOMER -->
-
-            <div class="journey-stage">
-
-                <div class="stage-icon">
-
-                    <i class="fas fa-user"></i>
-
-                </div>
-
-                <span>
-                    Customer
-                </span>
-
-            </div>
-
-
-            <!-- 02 ONLINE ORDER -->
-
-            <div class="journey-stage">
-
-                <div class="stage-icon">
-
-                    <i class="fas fa-mobile-screen-button"></i>
-
-                </div>
-
-                <span>
-                    Online Order
-                </span>
-
-            </div>
-
-
-            <!-- 03 PROCESSING -->
-
-            <div class="journey-stage">
-
-                <div class="stage-icon">
-
-                    <i class="fas fa-box"></i>
-
-                </div>
-
-                <span>
-                    Processing
-                </span>
-
-            </div>
-
-
-            <!-- 04 DELIVERY -->
-
-            <div class="journey-stage">
-
-                <div class="stage-icon">
-
-                    <i class="fas fa-truck-fast"></i>
-
-                </div>
-
-                <span>
-                    Delivery
-                </span>
-
-            </div>
-
-
-            <!-- 05 DELIVERED — FINAL -->
-
-            <div class="journey-stage">
-
-                <div class="stage-icon">
-
-                    <i class="fas fa-house-circle-check"></i>
-
-                </div>
-
-                <span>
-                    Delivered
-                </span>
-
-            </div>
-
-
-            <!-- MOVING TRUCK -->
-
-            <div class="delivery-object">
-
-                <i class="fas fa-truck-fast"></i>
-
-            </div>
-
-        </div>
-
-    </div>
+        <a href="#dashboard">
+            Dashboard
+        </a>
+
+        <a href="#findings">
+            Findings
+        </a>
+
+        <a href="../../index.html">
+            Portfolio
+        </a>
+
+    </nav>
 
 </header>
 
 
 
-<!-- ======================================================
-     STATS
-======================================================= -->
+<!-- ============================================================
+     HERO
+============================================================ -->
 
-<section class="stats">
+<main>
 
-    <div class="stat">
+<section class="hero" id="overview">
 
-        <span
-            class="stat-value counter"
-            data-target="99"
-            data-suffix="K+"
-        >
-            0
-        </span>
+    <div class="hero-content">
 
-        <span class="stat-label">
-            Customers
-        </span>
+        <div class="eyebrow hero-animate">
+            <span class="eyebrow-dot"></span>
+            E-Commerce · Customer Analytics
+        </div>
 
-    </div>
-
-
-    <div class="stat">
-
-        <span
-            class="stat-value counter"
-            data-target="99"
-            data-suffix="K+"
-        >
-            0
-        </span>
-
-        <span class="stat-label">
-            Orders
-        </span>
-
-    </div>
-
-
-    <div class="stat">
-
-        <span
-            class="stat-value counter"
-            data-target="71"
-            data-suffix=""
-        >
-            0
-        </span>
-
-        <span class="stat-label">
-            Product Categories
-        </span>
-
-    </div>
-
-
-    <div class="stat">
-
-        <span class="stat-value">
-            2016–2018
-        </span>
-
-        <span class="stat-label">
-            Analysis Period
-        </span>
-
-    </div>
-
-</section>
-
-
-
-<!-- ======================================================
-     OVERVIEW
-======================================================= -->
-
-<section class="section" id="overview">
-
-    <div class="section-inner">
-
-
-        <div class="section-heading reveal">
-
-            <span class="section-eyebrow">
-                01 · ANALYTICAL CONTEXT
+        <h1 class="hero-animate">
+            Olist
+            <span>
+                Customer & Operational
+                <br>
+                Analytics
             </span>
+        </h1>
 
-            <h2>
-                From Transactions<br>
-                to Customer Behaviour
-            </h2>
+        <p class="hero-description hero-animate">
 
-            <p>
+            A focused SQL and Power BI analysis of the Brazilian
+            Olist e-commerce marketplace, exploring customer
+            retention, purchasing behaviour, product performance,
+            and operational delivery efficiency.
 
-                The analysis moves beyond order volume to understand
-                what happens after the first purchase — examining
-                repeat behaviour, category performance, and the
-                operational experience surrounding fulfilment.
+        </p>
 
-            </p>
+        <div class="hero-buttons hero-animate">
+
+            <a href="#dashboard" class="btn btn-primary">
+                Explore Dashboard
+                ↓
+            </a>
+
+            <a
+                href="https://github.com/sodiqoluwatimileyin190-oss"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn btn-secondary"
+            >
+                View GitHub
+                ↗
+            </a>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- HERO MOCKUP -->
+
+    <div class="hero-dashboard hero-image">
+
+        <img
+            src="overview.png"
+            alt="Olist Customer and Operational Analytics Dashboard"
+        >
+
+    </div>
+
+
+
+    <!-- ========================================================
+         ANIMATED ORDER JOURNEY
+    ========================================================= -->
+
+    <div class="journey">
+
+        <div class="journey-line"></div>
+
+        <div class="journey-progress"></div>
+
+        <div class="journey-track">
+
+            <div class="journey-step active">
+
+                <div class="journey-icon">
+                    👤
+                </div>
+
+                <div class="journey-label">
+                    Customer
+                </div>
+
+            </div>
+
+
+            <div class="journey-step">
+
+                <div class="journey-icon">
+                    📱
+                </div>
+
+                <div class="journey-label">
+                    Online Order
+                </div>
+
+            </div>
+
+
+            <div class="journey-step">
+
+                <div class="journey-icon">
+                    📦
+                </div>
+
+                <div class="journey-label">
+                    Processing
+                </div>
+
+            </div>
+
+
+            <div class="journey-step">
+
+                <div class="journey-icon">
+                    🚚
+                </div>
+
+                <div class="journey-label">
+                    Delivery
+                </div>
+
+            </div>
+
+
+            <div class="journey-step">
+
+                <div class="journey-icon">
+                    ✓
+                </div>
+
+                <div class="journey-label">
+                    Delivered
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- ========================================================
+         STATS
+    ========================================================= -->
+
+    <div class="stats">
+
+        <div class="stat">
+
+            <div
+                class="stat-number counter"
+                data-target="99000"
+                data-format="99K+"
+            >
+                0
+            </div>
+
+            <div class="stat-label">
+                Customers
+            </div>
 
         </div>
 
 
+        <div class="stat">
 
-        <div class="overview-grid">
+            <div
+                class="stat-number counter"
+                data-target="99000"
+                data-format="99K+"
+            >
+                0
+            </div>
 
+            <div class="stat-label">
+                Orders
+            </div>
 
-            <article class="info-card reveal">
-
-                <h3>
-                    Business Problem
-                </h3>
-
-                <p>
-
-                    Olist contains a large volume of transactional
-                    e-commerce data, but transaction volume alone
-                    does not explain whether customers return,
-                    which categories contribute to stronger
-                    retention, or whether operational performance
-                    may influence the customer experience.
-
-                </p>
+        </div>
 
 
-                <ul class="question-list">
+        <div class="stat">
 
-                    <li>
-                        Are customers returning after their first order?
-                    </li>
+            <div
+                class="stat-number counter"
+                data-target="71"
+                data-format="71"
+            >
+                0
+            </div>
 
-                    <li>
-                        Which product categories show stronger or
-                        weaker retention?
-                    </li>
+            <div class="stat-label">
+                Product Categories
+            </div>
 
-                    <li>
-                        Where are churn risks concentrated?
-                    </li>
-
-                    <li>
-                        How does delivery performance vary across regions?
-                    </li>
-
-                </ul>
-
-            </article>
+        </div>
 
 
+        <div class="stat">
 
-            <article class="info-card reveal">
+            <div class="stat-number">
+                2016–2018
+            </div>
 
-                <h3>
-                    Analytical Approach
-                </h3>
-
-                <p>
-
-                    SQL was used to combine and aggregate transactional
-                    data into customer, product, and operational views.
-                    Power BI then transformed these analytical outputs
-                    into an interactive decision-support dashboard.
-
-                </p>
-
-
-                <ul class="question-list">
-
-                    <li>
-                        Customer-level purchase behaviour
-                    </li>
-
-                    <li>
-                        Repeat purchase and churn classification
-                    </li>
-
-                    <li>
-                        Product/category performance
-                    </li>
-
-                    <li>
-                        Delivery and fulfilment analysis
-                    </li>
-
-                </ul>
-
-            </article>
+            <div class="stat-label">
+                Analysis Period
+            </div>
 
         </div>
 
@@ -1988,248 +1331,191 @@ footer{
 
 
 
-<!-- ======================================================
-     DASHBOARD
-======================================================= -->
+<!-- ============================================================
+     DASHBOARD STORY
+============================================================ -->
 
-<section class="dashboard-section" id="dashboard">
+<section class="section dashboard-story" id="dashboard">
 
-    <div class="dashboard-inner">
+    <div class="section-header reveal">
+
+        <div class="section-kicker">
+            02 · Power BI
+        </div>
+
+        <h2 class="section-title">
+            Three Views.
+            <br>
+            <span>One Customer Story.</span>
+        </h2>
+
+        <p class="section-description">
+
+            The dashboard is structured as a progression from
+            customer behaviour to product-level patterns and
+            finally to operational performance.
+
+        </p>
+
+    </div>
 
 
-        <div class="section-heading reveal">
 
-            <span class="section-eyebrow">
-                02 · POWER BI
-            </span>
+    <!-- ========================================================
+         DASHBOARD 01
+    ========================================================= -->
 
-            <h2>
-                Three Views.<br>
-                One Customer Story.
-            </h2>
+    <div class="dashboard-panel dashboard-panel-1">
 
-            <p>
+        <div class="dashboard-card">
 
-                The dashboard is structured as a progression from
-                customer behaviour to product-level patterns and
-                finally to operational performance.
+            <div class="dashboard-image-wrap">
 
-            </p>
+                <img
+                    src="images/customer-retention.png"
+                    alt="Olist Customer Retention Dashboard"
+                >
+
+            </div>
+
+            <div class="dashboard-info">
+
+                <div>
+
+                    <div class="dashboard-number">
+                        01 · CUSTOMER RETENTION
+                    </div>
+
+                    <h3 class="dashboard-title">
+                        Purchase Frequency
+                        <br>
+                        & Retention
+                    </h3>
+
+                </div>
+
+                <div class="dashboard-copy">
+
+                    The first view examines customer purchasing
+                    behaviour and retention. The analysis shows
+                    that the marketplace is heavily dominated by
+                    one-time purchasers.
+
+                    <div class="insight-tag">
+                        98% CHURN · LOW REPEAT PURCHASE
+                    </div>
+
+                </div>
+
+            </div>
 
         </div>
 
+    </div>
 
 
-        <div class="dashboard-stack">
 
+    <!-- ========================================================
+         DASHBOARD 02
+    ========================================================= -->
 
-            <!-- ==================================================
-                 DASHBOARD 01
-            =================================================== -->
+    <div class="dashboard-panel dashboard-panel-2">
 
-            <article class="dashboard-story">
+        <div class="dashboard-card">
 
-                <div class="dashboard-visual zoomable">
+            <div class="dashboard-image-wrap">
 
-                    <img
-                        src="images/customer-retention.png"
-                        alt="Olist Customer Retention Power BI dashboard"
-                        loading="lazy"
-                    >
+                <img
+                    src="images/product-performance.png"
+                    alt="Olist Product Performance and Retention Dashboard"
+                >
+
+            </div>
+
+            <div class="dashboard-info">
+
+                <div>
+
+                    <div class="dashboard-number">
+                        02 · PRODUCT INSIGHTS
+                    </div>
+
+                    <h3 class="dashboard-title">
+                        Product Performance
+                        <br>
+                        & Churn Risk
+                    </h3>
 
                 </div>
-
 
                 <div class="dashboard-copy">
 
-                    <div class="dashboard-number">
-                        01 / CUSTOMER RETENTION
+                    The second view moves from customers into
+                    product categories, identifying categories
+                    with stronger revenue contribution alongside
+                    categories exposed to high churn.
+
+                    <div class="insight-tag">
+                        REVENUE · ADOPTION · CHURN
                     </div>
 
-                    <h3>
-                        Who returns —
-                        and who disappears?
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- ========================================================
+         DASHBOARD 03
+    ========================================================= -->
+
+    <div class="dashboard-panel dashboard-panel-3">
+
+        <div class="dashboard-card">
+
+            <div class="dashboard-image-wrap">
+
+                <img
+                    src="images/operational-insights.png"
+                    alt="Olist Operational Insights Dashboard"
+                >
+
+            </div>
+
+            <div class="dashboard-info">
+
+                <div>
+
+                    <div class="dashboard-number">
+                        03 · OPERATIONAL INSIGHTS
+                    </div>
+
+                    <h3 class="dashboard-title">
+                        Delivery,
+                        <br>
+                        Fulfilment & Regions
                     </h3>
 
-                    <p>
-
-                        The first view establishes the retention
-                        problem through purchase frequency,
-                        repeat behaviour and churn. The analysis
-                        shows that the overwhelming majority of
-                        customers make only one purchase.
-
-                    </p>
-
-
-                    <div class="dashboard-tags">
-
-                        <span>
-                            Purchase Frequency
-                        </span>
-
-                        <span>
-                            Repeat Behaviour
-                        </span>
-
-                        <span>
-                            Churn
-                        </span>
-
-                    </div>
-
-
-                    <div class="dashboard-progress">
-
-                        CUSTOMER LAYER
-
-                        <i class="fas fa-arrow-right"></i>
-
-                    </div>
-
                 </div>
-
-            </article>
-
-
-
-            <!-- ==================================================
-                 DASHBOARD 02
-            =================================================== -->
-
-            <article class="dashboard-story">
-
-                <div class="dashboard-visual zoomable">
-
-                    <img
-                        src="images/product-insights.png"
-                        alt="Olist Product and Retention Insights Power BI dashboard"
-                        loading="lazy"
-                    >
-
-                </div>
-
 
                 <div class="dashboard-copy">
 
-                    <div class="dashboard-number">
-                        02 / PRODUCT &amp; RETENTION
-                    </div>
+                    The final view evaluates order fulfilment,
+                    delivery performance, cancellation behaviour
+                    and regional delivery variation to identify
+                    operational friction.
 
-                    <h3>
-                        Where product performance
-                        meets retention.
-                    </h3>
-
-                    <p>
-
-                        Category-level analysis connects revenue
-                        contribution, adoption and churn risk,
-                        helping distinguish stronger-performing
-                        categories from areas where retention is weak.
-
-                    </p>
-
-
-                    <div class="dashboard-tags">
-
-                        <span>
-                            Revenue
-                        </span>
-
-                        <span>
-                            Category Adoption
-                        </span>
-
-                        <span>
-                            High Churn
-                        </span>
-
-                    </div>
-
-
-                    <div class="dashboard-progress">
-
-                        PRODUCT LAYER
-
-                        <i class="fas fa-arrow-right"></i>
-
+                    <div class="insight-tag">
+                        DELIVERY · FULFILMENT · REGIONAL PERFORMANCE
                     </div>
 
                 </div>
 
-            </article>
-
-
-
-            <!-- ==================================================
-                 DASHBOARD 03
-            =================================================== -->
-
-            <article class="dashboard-story">
-
-                <div class="dashboard-visual zoomable">
-
-                    <img
-                        src="images/operational-insights.png"
-                        alt="Olist Operational Insights Power BI dashboard"
-                        loading="lazy"
-                    >
-
-                </div>
-
-
-                <div class="dashboard-copy">
-
-                    <div class="dashboard-number">
-                        03 / OPERATIONAL INSIGHTS
-                    </div>
-
-                    <h3>
-                        What happens between
-                        order and delivery?
-                    </h3>
-
-                    <p>
-
-                        The final view moves into fulfilment:
-                        delivery timing, regional variation,
-                        cancellations and order-status progression
-                        reveal the operational experience surrounding
-                        the transaction.
-
-                    </p>
-
-
-                    <div class="dashboard-tags">
-
-                        <span>
-                            Delivery
-                        </span>
-
-                        <span>
-                            Fulfilment
-                        </span>
-
-                        <span>
-                            Regional Performance
-                        </span>
-
-                    </div>
-
-
-                    <div class="dashboard-progress">
-
-                        OPERATIONAL LAYER
-
-                        <i class="fas fa-check"></i>
-
-                    </div>
-
-                </div>
-
-            </article>
-
+            </div>
 
         </div>
 
@@ -2239,31 +1525,31 @@ footer{
 
 
 
-<!-- ======================================================
+<!-- ============================================================
      FINDINGS
-======================================================= -->
+============================================================ -->
 
-<section class="findings-section" id="findings">
+<section class="findings" id="findings">
 
     <div class="findings-inner">
 
+        <div class="section-header reveal">
 
-        <div class="section-heading reveal">
+            <div class="section-kicker">
+                03 · Key Findings
+            </div>
 
-            <span class="section-eyebrow">
-                03 · KEY FINDINGS
-            </span>
-
-            <h2>
-                What the Data<br>
-                Revealed
+            <h2 class="section-title">
+                What the
+                <span>data revealed.</span>
             </h2>
 
-            <p>
+            <p class="section-description">
 
-                The analysis identified a significant retention
-                challenge alongside meaningful differences in
-                product and operational performance.
+                The analysis connects customer behaviour,
+                category performance and fulfilment efficiency
+                to uncover where the marketplace is strongest
+                and where improvement opportunities exist.
 
             </p>
 
@@ -2271,250 +1557,82 @@ footer{
 
 
 
-        <div class="findings-grid">
+        <div class="finding-grid">
 
+            <article class="finding reveal">
 
-            <article class="finding-card reveal">
-
-                <span class="finding-number">
-                    01
-                </span>
-
-                <div class="finding-icon">
-
-                    <i class="fas fa-user-clock"></i>
-
+                <div class="finding-number">
+                    98%
                 </div>
 
                 <h3>
-                    Extremely Low Repeat Purchasing
+                    Customer Churn
                 </h3>
 
                 <p>
-
-                    Approximately 98% of customers were classified
-                    as churned under the project's 90-day inactivity
-                    definition, highlighting a major customer
-                    retention challenge.
-
+                    The overwhelming majority of customers
+                    make only one purchase, highlighting a
+                    significant retention challenge.
                 </p>
 
             </article>
 
 
 
-            <article class="finding-card reveal">
+            <article class="finding reveal">
 
-                <span class="finding-number">
-                    02
-                </span>
-
-                <div class="finding-icon">
-
-                    <i class="fas fa-boxes-stacked"></i>
-
+                <div class="finding-number">
+                    71
                 </div>
 
                 <h3>
-                    Category-Level Retention Differences
+                    Product Categories
                 </h3>
 
                 <p>
-
-                    Product categories showed substantial differences
-                    in revenue contribution, customer adoption,
-                    and churn behaviour, creating opportunities for
-                    targeted retention strategies.
-
+                    Category-level analysis identifies
+                    differences in revenue contribution,
+                    adoption and customer retention.
                 </p>
 
             </article>
 
 
 
-            <article class="finding-card reveal">
+            <article class="finding reveal">
 
-                <span class="finding-number">
-                    03
-                </span>
-
-                <div class="finding-icon">
-
-                    <i class="fas fa-truck-fast"></i>
-
+                <div class="finding-number">
+                    99K+
                 </div>
 
                 <h3>
-                    Operational Performance Varies
+                    Orders Analysed
                 </h3>
 
                 <p>
-
-                    Delivery times differed materially across regions,
-                    showing that fulfilment performance can become
-                    an important part of the wider customer experience.
-
+                    The analysis covers nearly one hundred
+                    thousand marketplace orders across the
+                    2016–2018 period.
                 </p>
 
             </article>
-
-
-        </div>
-
-    </div>
-
-</section>
-
-
-
-<!-- ======================================================
-     TECHNICAL APPROACH
-======================================================= -->
-
-<section class="tech-section">
-
-    <div class="tech-inner">
-
-
-        <div class="section-heading reveal">
-
-            <span class="section-eyebrow">
-                04 · TECHNICAL APPROACH
-            </span>
-
-            <h2>
-                Turning raw transactions<br>
-                into decision-ready BI.
-            </h2>
-
-            <p>
-
-                SQL provided the structured analytical foundation
-                that allowed the Power BI layer to focus on
-                interpretation, storytelling and decision support.
-
-            </p>
 
         </div>
 
 
 
-        <div class="tech-grid">
+        <!-- ====================================================
+             TOOLS
+        ===================================================== -->
 
-
-            <article class="tech-card reveal">
-
-                <i class="fas fa-database"></i>
-
-                <h3>
-                    SQL Analysis
-                </h3>
-
-                <p>
-                    Transactional data was structured into customer,
-                    product and operational analytical views.
-                </p>
-
-            </article>
-
-
-
-            <article class="tech-card reveal">
-
-                <i class="fas fa-users"></i>
-
-                <h3>
-                    Customer Analytics
-                </h3>
-
-                <p>
-                    Repeat purchase behaviour, customer segmentation,
-                    churn classification and retention analysis.
-                </p>
-
-            </article>
-
-
-
-            <article class="tech-card reveal">
-
-                <i class="fas fa-tags"></i>
-
-                <h3>
-                    Product Analytics
-                </h3>
-
-                <p>
-                    Category revenue, adoption, product performance
-                    and high-churn category identification.
-                </p>
-
-            </article>
-
-
-
-            <article class="tech-card reveal">
-
-                <i class="fas fa-route"></i>
-
-                <h3>
-                    Operational Analytics
-                </h3>
-
-                <p>
-                    Delivery performance, fulfilment outcomes,
-                    cancellation behaviour and regional variation.
-                </p>
-
-            </article>
-
-
-
-            <article class="tech-card reveal">
-
-                <i class="fas fa-chart-line"></i>
-
-                <h3>
-                    Power BI Storytelling
-                </h3>
-
-                <p>
-                    Interactive visuals were arranged as a progression
-                    from customer behaviour to operations.
-                </p>
-
-            </article>
-
-
-
-            <article class="tech-card reveal">
-
-                <i class="fas fa-lightbulb"></i>
-
-                <h3>
-                    Business Interpretation
-                </h3>
-
-                <p>
-                    Technical outputs were translated into commercially
-                    meaningful retention and operational insights.
-                </p>
-
-            </article>
-
-
-        </div>
-
-
-
-        <div class="tools-strip reveal">
+        <div class="tools reveal">
 
             <span class="tool">
                 SQL
             </span>
 
             <span class="tool">
-                POWER BI
+                Power BI
             </span>
 
             <span class="tool">
@@ -2522,23 +1640,19 @@ footer{
             </span>
 
             <span class="tool">
-                CUSTOMER ANALYTICS
+                Customer Segmentation
             </span>
 
             <span class="tool">
-                RETENTION
+                Retention Analysis
             </span>
 
             <span class="tool">
-                CHURN
+                Operational Analytics
             </span>
 
             <span class="tool">
-                E-COMMERCE
-            </span>
-
-            <span class="tool">
-                DATA STORYTELLING
+                Data Storytelling
             </span>
 
         </div>
@@ -2549,412 +1663,481 @@ footer{
 
 
 
-<!-- ======================================================
+<!-- ============================================================
      CTA
-======================================================= -->
+============================================================ -->
 
-<section class="cta reveal">
+<section class="cta">
 
-    <h2>
-        Turning Transactions<br>
-        Into Decisions.
-    </h2>
+    <div class="cta-box reveal">
 
-    <p>
+        <h2>
+            More than a dashboard.
+        </h2>
 
-        Olist demonstrates how transactional e-commerce data
-        can be transformed into customer, product and operational
-        intelligence.
+        <p>
 
-    </p>
+            This project combines SQL analysis, Power BI
+            modelling and business storytelling to translate
+            marketplace data into actionable customer and
+            operational insights.
 
-    <a
-        href="../../index.html#projects"
-        class="btn"
-    >
+        </p>
 
-        Back to Portfolio
+        <a
+            href="../../index.html"
+            class="btn btn-secondary"
+        >
+            Back to Portfolio
+            ↗
+        </a>
 
-        <i class="fas fa-arrow-left"></i>
-
-    </a>
+    </div>
 
 </section>
 
 
+</main>
 
-<!-- ======================================================
+
+
+<!-- ============================================================
      FOOTER
-======================================================= -->
+============================================================ -->
 
 <footer>
 
-    © 2026 Sodiq Oluwatimileyin.
-    Olist Customer Retention &amp; Operational Analytics.
+    <div>
+        © 2026 Sodiq Oluwatimileyin
+    </div>
+
+    <div>
+        Olist Customer & Operational Analytics
+    </div>
 
 </footer>
 
 
 
-<!-- ======================================================
-     LIGHTBOX
-======================================================= -->
-
-<div class="lightbox" id="lightbox">
-
-    <button
-        class="lightbox-close"
-        id="lightboxClose"
-        aria-label="Close dashboard image"
-    >
-
-        <i class="fas fa-times"></i>
-
-    </button>
-
-
-    <img
-        id="lightboxImage"
-        src=""
-        alt="Expanded Olist dashboard"
-    >
-
-</div>
-
-
-
-<!-- ======================================================
-     JAVASCRIPT
-======================================================= -->
+<!-- ============================================================
+     GSAP ANIMATIONS
+============================================================ -->
 
 <script>
 
-document.addEventListener("DOMContentLoaded", () => {
+    gsap.registerPlugin(ScrollTrigger);
 
 
-    /* =====================================================
-       REDUCED MOTION
-    ====================================================== */
+    /* =========================================================
+       HERO INTRO
+    ========================================================= */
 
-    const reduced =
-        window.matchMedia(
-            "(prefers-reduced-motion: reduce)"
-        ).matches;
+    const heroTimeline = gsap.timeline({
+        defaults: {
+            ease: "power3.out"
+        }
+    });
+
+    heroTimeline
+        .from(".hero-animate", {
+            opacity: 0,
+            y: 35,
+            duration: .8,
+            stagger: .13
+        })
+        .from(".hero-image", {
+            opacity: 0,
+            y: 70,
+            scale: .96,
+            duration: 1.1
+        }, "-=.45")
+        .from(".journey", {
+            opacity: 0,
+            y: 35,
+            duration: .8
+        }, "-=.5")
+        .from(".stats", {
+            opacity: 0,
+            y: 25,
+            duration: .7
+        }, "-=.35");
 
 
 
-    /* =====================================================
-       SCROLL REVEAL
-    ====================================================== */
+    /* =========================================================
+       HERO DASHBOARD FLOAT
+    ========================================================= */
 
-    const reveals =
-        document.querySelectorAll(
-            ".reveal, .dashboard-story"
+    gsap.to(".hero-dashboard", {
+
+        y: -10,
+
+        duration: 3,
+
+        repeat: -1,
+
+        yoyo: true,
+
+        ease: "sine.inOut"
+
+    });
+
+
+
+    /* =========================================================
+       COUNTERS
+    ========================================================= */
+
+    document.querySelectorAll(".counter").forEach(counter => {
+
+        const target = Number(
+            counter.dataset.target
         );
 
+        const format =
+            counter.dataset.format;
 
-    if(
-        reduced ||
-        !("IntersectionObserver" in window)
-    ){
+        const obj = {
+            value: 0
+        };
 
-        reveals.forEach(element => {
+        gsap.to(obj, {
 
-            element.classList.add("visible");
+            value: target,
+
+            duration: 2.2,
+
+            delay: .5,
+
+            ease: "power2.out",
+
+            onUpdate: () => {
+
+                if (format === "99K+") {
+
+                    const value =
+                        Math.floor(obj.value / 1000);
+
+                    counter.textContent =
+                        value + "K+";
+
+                } else {
+
+                    counter.textContent =
+                        Math.floor(obj.value);
+
+                }
+
+            }
 
         });
 
-    }else{
+    });
 
-        const observer =
-            new IntersectionObserver(
-                (entries, obs) => {
 
-                    entries.forEach(entry => {
 
-                        if(entry.isIntersecting){
+    /* =========================================================
+       ORDER JOURNEY ANIMATION
+    ========================================================= */
 
-                            entry.target.classList.add(
-                                "visible"
-                            );
+    const journeySteps =
+        document.querySelectorAll(".journey-step");
 
-                            obs.unobserve(
-                                entry.target
-                            );
+    const journeyProgress =
+        document.querySelector(".journey-progress");
 
-                        }
 
-                    });
+    const journeyTimeline =
+        gsap.timeline({
+            repeat: -1,
+            repeatDelay: .8
+        });
+
+
+    journeySteps.forEach((step, index) => {
+
+        journeyTimeline
+            .to(step, {
+
+                duration: .35,
+
+                onStart: () => {
+
+                    step.classList.add("active");
 
                 },
-                {
-                    threshold:.13,
 
-                    rootMargin:
-                        "0px 0px -60px 0px"
+                onReverseComplete: () => {
+
+                    step.classList.remove("active");
+
+                }
+
+            })
+
+            .to(
+                journeyProgress,
+                {
+                    width:
+                        ((index + 1) / 4) * 82 + "%",
+
+                    duration: .55,
+
+                    ease: "power2.inOut"
+                },
+                "<"
+            );
+
+    });
+
+
+    journeyTimeline
+        .to({}, { duration: .6 })
+        .to(journeyProgress, {
+            width: "0%",
+            duration: .5
+        });
+
+
+    /* =========================================================
+       DASHBOARD 01
+       Pins while dashboard 01 becomes the focus.
+    ========================================================= */
+
+    gsap.from(".dashboard-panel-1 .dashboard-card", {
+
+        scrollTrigger: {
+
+            trigger: ".dashboard-panel-1",
+
+            start: "top 75%",
+
+            end: "center center",
+
+            scrub: 1
+
+        },
+
+        opacity: 0,
+
+        y: 100,
+
+        scale: .92
+
+    });
+
+
+
+    /* =========================================================
+       DASHBOARD 02
+    ========================================================= */
+
+    gsap.from(".dashboard-panel-2 .dashboard-card", {
+
+        scrollTrigger: {
+
+            trigger: ".dashboard-panel-2",
+
+            start: "top 78%",
+
+            end: "center center",
+
+            scrub: 1
+
+        },
+
+        opacity: 0,
+
+        x: 180,
+
+        rotateY: -8,
+
+        scale: .94
+
+    });
+
+
+
+    /* =========================================================
+       DASHBOARD 03
+    ========================================================= */
+
+    gsap.from(".dashboard-panel-3 .dashboard-card", {
+
+        scrollTrigger: {
+
+            trigger: ".dashboard-panel-3",
+
+            start: "top 78%",
+
+            end: "center center",
+
+            scrub: 1
+
+        },
+
+        opacity: 0,
+
+        x: -180,
+
+        rotateY: 8,
+
+        scale: .94
+
+    });
+
+
+
+    /* =========================================================
+       DASHBOARD IMAGE PARALLAX
+    ========================================================= */
+
+    document.querySelectorAll(
+        ".dashboard-image-wrap img"
+    ).forEach(image => {
+
+        gsap.fromTo(
+            image,
+
+            {
+                scale: 1.04
+            },
+
+            {
+                scale: 1,
+
+                scrollTrigger: {
+
+                    trigger: image,
+
+                    start: "top 90%",
+
+                    end: "bottom 20%",
+
+                    scrub: 1
+
+                }
+
+            }
+        );
+
+    });
+
+
+
+    /* =========================================================
+       SECTION REVEALS
+    ========================================================= */
+
+    document.querySelectorAll(".reveal")
+        .forEach(element => {
+
+            gsap.fromTo(
+                element,
+
+                {
+                    opacity: 0,
+                    y: 45
+                },
+
+                {
+                    opacity: 1,
+                    y: 0,
+
+                    duration: .9,
+
+                    ease: "power3.out",
+
+                    scrollTrigger: {
+
+                        trigger: element,
+
+                        start: "top 85%",
+
+                        toggleActions:
+                            "play none none reverse"
+
+                    }
+
                 }
             );
 
-
-        reveals.forEach(element => {
-
-            observer.observe(element);
-
         });
 
-    }
 
 
+    /* =========================================================
+       NAVIGATION ACTIVE EFFECT
+    ========================================================= */
 
-    /* =====================================================
-       NUMBER COUNTERS
-    ====================================================== */
+    const sections = [
+        document.querySelector("#overview"),
+        document.querySelector("#dashboard"),
+        document.querySelector("#findings")
+    ];
 
-    const counters =
-        document.querySelectorAll(
-            ".counter"
-        );
-
-    let countersStarted = false;
-
-
-    function startCounters(){
-
-        if(countersStarted){
-            return;
-        }
-
-        countersStarted = true;
+    const navLinks =
+        document.querySelectorAll(".nav-links a");
 
 
-        counters.forEach(counter => {
+    sections.forEach((section, index) => {
 
-            const target =
-                Number(
-                    counter.dataset.target
+        if (!section) return;
+
+        ScrollTrigger.create({
+
+            trigger: section,
+
+            start: "top 45%",
+
+            end: "bottom 45%",
+
+            onEnter: () => {
+
+                navLinks.forEach(link =>
+                    link.style.color = ""
                 );
 
-            const suffix =
-                counter.dataset.suffix || "";
+                if (navLinks[index]) {
+                    navLinks[index].style.color =
+                        "var(--purple)";
+                }
 
+            },
 
-            if(reduced){
+            onEnterBack: () => {
 
-                counter.textContent =
-                    target + suffix;
+                navLinks.forEach(link =>
+                    link.style.color = ""
+                );
 
-                return;
-            }
-
-
-            const start =
-                performance.now();
-
-            const duration =
-                1350;
-
-
-            function tick(now){
-
-                const progress =
-                    Math.min(
-                        (now - start) /
-                        duration,
-                        1
-                    );
-
-
-                const ease =
-                    1 -
-                    Math.pow(
-                        1 - progress,
-                        3
-                    );
-
-
-                counter.textContent =
-                    Math.round(
-                        target * ease
-                    ) + suffix;
-
-
-                if(progress < 1){
-
-                    requestAnimationFrame(
-                        tick
-                    );
-
+                if (navLinks[index]) {
+                    navLinks[index].style.color =
+                        "var(--purple)";
                 }
 
             }
-
-
-            requestAnimationFrame(
-                tick
-            );
 
         });
 
-    }
+    });
 
 
 
-    const stats =
-        document.querySelector(".stats");
+    /* =========================================================
+       REFRESH SCROLLTRIGGER
+    ========================================================= */
 
+    window.addEventListener(
+        "load",
+        () => {
 
-    if(
-        stats &&
-        "IntersectionObserver" in window &&
-        !reduced
-    ){
-
-        const statsObserver =
-            new IntersectionObserver(
-                (entries, observer) => {
-
-                    if(
-                        entries.some(
-                            entry =>
-                                entry.isIntersecting
-                        )
-                    ){
-
-                        startCounters();
-
-                        observer.disconnect();
-
-                    }
-
-                },
-                {
-                    threshold:.35
-                }
-            );
-
-
-        statsObserver.observe(stats);
-
-    }else{
-
-        startCounters();
-
-    }
-
-
-
-    /* =====================================================
-       DASHBOARD LIGHTBOX
-    ====================================================== */
-
-    const lightbox =
-        document.getElementById(
-            "lightbox"
-        );
-
-    const lightboxImage =
-        document.getElementById(
-            "lightboxImage"
-        );
-
-
-    document
-        .querySelectorAll(".zoomable")
-        .forEach(card => {
-
-            card.addEventListener(
-                "click",
-                () => {
-
-                    const source =
-                        card.querySelector(
-                            "img"
-                        );
-
-
-                    if(!source){
-                        return;
-                    }
-
-
-                    lightboxImage.src =
-                        source.src;
-
-                    lightboxImage.alt =
-                        source.alt;
-
-
-                    lightbox.classList.add(
-                        "active"
-                    );
-
-
-                    document.body.style.overflow =
-                        "hidden";
-
-                }
-            );
-
-        });
-
-
-
-    function closeLightbox(){
-
-        lightbox.classList.remove(
-            "active"
-        );
-
-        document.body.style.overflow =
-            "";
-
-    }
-
-
-
-    document
-        .getElementById("lightboxClose")
-        .addEventListener(
-            "click",
-            closeLightbox
-        );
-
-
-    lightbox.addEventListener(
-        "click",
-        event => {
-
-            if(
-                event.target === lightbox
-            ){
-
-                closeLightbox();
-
-            }
+            ScrollTrigger.refresh();
 
         }
     );
-
-
-    document.addEventListener(
-        "keydown",
-        event => {
-
-            if(
-                event.key === "Escape"
-            ){
-
-                closeLightbox();
-
-            }
-
-        }
-    );
-
-});
 
 </script>
-
 
 </body>
 </html>

@@ -1,137 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta charset="UTF-8">
+<title>Olist — Customer Retention & Operational Analytics | Sodiq Oluwatimileyin</title>
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
+<meta name="description" content="Olist Brazilian e-commerce customer retention and operational analytics case study by Sodiq Oluwatimileyin.">
 
-    <title>
-        Olist — Customer Retention & Operational Analytics | Sodiq Oluwatimileyin
-    </title>
+<link rel="icon" type="image/png" href="../../favicon-32x32.png">
 
-    <meta
-        name="description"
-        content="Olist Brazilian E-Commerce Customer Retention and Operational Analytics case study by Sodiq Oluwatimileyin."
-    >
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-    <link
-        rel="icon"
-        type="image/png"
-        href="../../favicon-32x32.png"
-    >
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
 
-    <link
-        rel="preconnect"
-        href="https://fonts.googleapis.com"
-    >
-
-    <link
-        rel="preconnect"
-        href="https://fonts.gstatic.com"
-        crossorigin
-    >
-
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@500;600;700&display=swap"
-        rel="stylesheet"
-    >
-
-    <link
-        rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
-    >
-
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
 <style>
 
 /* =========================================================
-   OLIST CUSTOMER RETENTION & OPERATIONAL ANALYTICS
-   STANDALONE PROJECT PAGE
-
-   Design direction:
-   Clean editorial BI presentation
-   Purple analytics language
-   Animated e-commerce journey
-   Fully responsive
+   ROOT
 ========================================================= */
+
+:root{
+    --purple:#7356d8;
+    --purple-dark:#4c329f;
+    --deep:#29185f;
+    --soft:#eee9ff;
+    --ink:#17172f;
+    --muted:#68687c;
+    --border:#e6e3ef;
+    --bg:#f7f8fc;
+    --white:#ffffff;
+
+    --shadow:0 25px 70px rgba(42,26,91,.10);
+    --deep-shadow:0 40px 100px rgba(42,26,91,.16);
+}
 
 
 /* =========================================================
    RESET
 ========================================================= */
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
 }
 
-html {
-    scroll-behavior: smooth;
+html{
+    scroll-behavior:smooth;
 }
 
-body {
-    font-family:
-        Inter,
-        Arial,
-        Helvetica,
-        sans-serif;
-
-    background: #f7f8fc;
-
-    color: #17172f;
-
-    line-height: 1.6;
-
-    overflow-x: hidden;
+body{
+    font-family:Inter,Arial,sans-serif;
+    background:var(--bg);
+    color:var(--ink);
+    line-height:1.6;
+    overflow-x:hidden;
 }
 
-img {
-    max-width: 100%;
-    display: block;
+img{
+    display:block;
+    max-width:100%;
 }
 
-a {
-    text-decoration: none;
-}
-
-
-/* =========================================================
-   VARIABLES
-========================================================= */
-
-:root {
-
-    --purple: #7356d8;
-    --purple-dark: #4c329f;
-    --purple-deep: #29185f;
-
-    --purple-soft: #eee9ff;
-    --purple-pale: #f8f6ff;
-
-    --ink: #17172f;
-    --muted: #68687c;
-
-    --border: #e6e5ee;
-
-    --white: #ffffff;
-
-    --green: #2d9b68;
-    --orange: #e99345;
-    --blue: #5186d9;
-
-    --shadow:
-        0 20px 55px
-        rgba(42, 26, 91, 0.08);
-
-    --shadow-deep:
-        0 35px 90px
-        rgba(42, 26, 91, 0.15);
+a{
+    text-decoration:none;
+    color:inherit;
 }
 
 
@@ -139,97 +76,53 @@ a {
    NAVIGATION
 ========================================================= */
 
-.navbar {
+.navbar{
+    position:sticky;
+    top:0;
+    z-index:1000;
 
-    position: sticky;
+    background:rgba(255,255,255,.92);
+    backdrop-filter:blur(18px);
 
-    top: 0;
-
-    z-index: 1000;
-
-    width: 100%;
-
-    background:
-        rgba(255,255,255,0.92);
-
-    backdrop-filter:
-        blur(16px);
-
-    border-bottom:
-        1px solid var(--border);
+    border-bottom:1px solid var(--border);
 }
 
-.nav-container {
+.nav-container{
+    width:min(1180px,calc(100% - 40px));
+    height:68px;
 
-    width:
-        min(1180px, 92%);
+    margin:auto;
 
-    margin:
-        auto;
-
-    height:
-        72px;
-
-    display:
-        flex;
-
-    align-items:
-        center;
-
-    justify-content:
-        space-between;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
 }
 
-.brand {
-
-    color:
-        var(--purple-deep);
-
-    font-size:
-        18px;
-
-    font-weight:
-        800;
-
-    letter-spacing:
-        -0.6px;
+.brand{
+    font-weight:800;
+    font-size:17px;
+    color:var(--deep);
 }
 
-.brand span {
-    color:
-        var(--purple);
+.brand span{
+    color:var(--purple);
 }
 
-.nav-links {
-
-    display:
-        flex;
-
-    align-items:
-        center;
-
-    gap:
-        28px;
+.nav-links{
+    display:flex;
+    gap:30px;
 }
 
-.nav-links a {
-
-    color:
-        #65657b;
-
-    font-size:
-        13px;
-
-    font-weight:
-        600;
-
-    transition:
-        color 0.25s ease;
+.nav-links a{
+    font-size:11px;
+    font-weight:700;
+    color:#69677a;
+    transition:.25s;
 }
 
-.nav-links a:hover {
-    color:
-        var(--purple);
+.nav-links a:hover{
+    color:var(--purple);
+    transform:translateY(-1px);
 }
 
 
@@ -237,769 +130,504 @@ a {
    HERO
 ========================================================= */
 
-.hero {
+.hero{
+    position:relative;
+    min-height:760px;
 
-    position:
-        relative;
+    display:flex;
+    align-items:center;
 
-    overflow:
-        hidden;
-
-    padding:
-        110px 20px 95px;
+    overflow:hidden;
 
     background:
-
         radial-gradient(
-            circle at 12% 15%,
-            rgba(121, 87, 218, .20),
+            circle at 12% 20%,
+            rgba(142,108,236,.16),
             transparent 32%
         ),
-
         radial-gradient(
-            circle at 88% 22%,
-            rgba(81, 134, 217, .14),
+            circle at 88% 15%,
+            rgba(115,86,216,.12),
             transparent 30%
         ),
-
         linear-gradient(
-            180deg,
-            #ffffff 0%,
-            #f8f6ff 100%
+            135deg,
+            #f0edff,
+            #ffffff 48%,
+            #f1f5ff
         );
 }
 
+.hero:before{
+    content:"";
 
-/* Hero grid */
+    position:absolute;
+    inset:0;
 
-.hero::before {
-
-    content: "";
-
-    position: absolute;
-
-    inset: 0;
-
-    pointer-events: none;
-
-    opacity: .35;
+    opacity:.34;
 
     background-image:
-
         linear-gradient(
-            rgba(115,86,216,.035) 1px,
+            rgba(115,86,216,.055) 1px,
             transparent 1px
         ),
-
         linear-gradient(
             90deg,
-            rgba(115,86,216,.035) 1px,
+            rgba(115,86,216,.055) 1px,
             transparent 1px
         );
 
-    background-size:
-        46px 46px;
-}
+    background-size:55px 55px;
 
-
-/* Decorative glow */
-
-.hero-glow {
-
-    position:
-        absolute;
-
-    border-radius:
-        50%;
-
-    filter:
-        blur(2px);
-
-    pointer-events:
-        none;
-
-    animation:
-        floatGlow 8s ease-in-out infinite;
-}
-
-.hero-glow-one {
-
-    width:
-        320px;
-
-    height:
-        320px;
-
-    right:
-        -110px;
-
-    top:
-        120px;
-
-    background:
-        radial-gradient(
-            circle,
-            rgba(115,86,216,.16),
-            transparent 68%
+    mask-image:
+        linear-gradient(
+            to bottom,
+            #000,
+            transparent 85%
         );
 }
 
-.hero-glow-two {
-
-    width:
-        250px;
-
-    height:
-        250px;
-
-    left:
-        -100px;
-
-    bottom:
-        20px;
-
-    background:
-        radial-gradient(
-            circle,
-            rgba(81,134,217,.13),
-            transparent 68%
-        );
-
-    animation-delay:
-        -3s;
+.hero-glow{
+    position:absolute;
+    border-radius:50%;
+    pointer-events:none;
 }
 
+.hero-glow-one{
+    width:320px;
+    height:320px;
 
-@keyframes floatGlow {
+    left:-120px;
+    top:100px;
 
-    0%,
-    100% {
-        transform:
-            translate3d(0,0,0);
-    }
+    background:rgba(115,86,216,.10);
 
-    50% {
-        transform:
-            translate3d(0,-20px,0);
-    }
+    animation:float 10s ease-in-out infinite alternate;
 }
 
+.hero-glow-two{
+    width:260px;
+    height:260px;
 
-/* Hero container */
+    right:-90px;
+    bottom:80px;
 
-.hero-container {
+    background:rgba(85,135,217,.10);
 
-    position:
-        relative;
-
-    z-index:
-        2;
-
-    width:
-        min(1120px, 92%);
-
-    margin:
-        auto;
-
-    text-align:
-        center;
+    animation:float 12s ease-in-out infinite alternate-reverse;
 }
 
+.hero-container{
+    position:relative;
+    z-index:2;
 
-/* Eyebrow */
+    width:min(1050px,calc(100% - 40px));
 
-.eyebrow {
+    margin:auto;
 
-    display:
-        inline-flex;
+    text-align:center;
 
-    align-items:
-        center;
-
-    gap:
-        8px;
-
-    padding:
-        8px 15px;
-
-    border:
-        1px solid #ddd5fa;
-
-    border-radius:
-        50px;
-
-    background:
-        rgba(255,255,255,.75);
-
-    color:
-        var(--purple);
-
-    font-size:
-        10px;
-
-    font-weight:
-        800;
-
-    letter-spacing:
-        1.5px;
-
-    text-transform:
-        uppercase;
+    padding:90px 0 70px;
 }
 
-.eyebrow i {
-    font-size:
-        9px;
+.eyebrow{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+
+    padding:8px 15px;
+
+    border:1px solid #ddd3ff;
+    border-radius:999px;
+
+    background:rgba(255,255,255,.66);
+
+    color:#7458df;
+
+    font-size:9px;
+    font-weight:800;
+
+    letter-spacing:2px;
 }
 
+.hero h1{
+    margin-top:28px;
 
-/* Hero title */
+    font-family:"Playfair Display",serif;
 
-.hero h1 {
+    font-size:clamp(4rem,8vw,7rem);
 
-    margin-top:
-        24px;
+    line-height:.91;
 
-    font-family:
-        "Playfair Display",
-        Georgia,
-        serif;
+    letter-spacing:-4px;
 
-    font-size:
-        clamp(3rem, 7vw, 5.8rem);
-
-    line-height:
-        .98;
-
-    letter-spacing:
-        -3px;
-
-    color:
-        var(--purple-deep);
+    color:var(--deep);
 }
 
-.hero h1 span {
-    display:
-        block;
-
-    color:
-        var(--purple);
+.hero h1 span{
+    display:block;
+    color:var(--purple);
 }
 
+.hero-subtitle{
+    max-width:760px;
 
-/* Hero subtitle */
+    margin:28px auto 0;
 
-.hero-subtitle {
+    color:var(--muted);
 
-    max-width:
-        760px;
-
-    margin:
-        26px auto 0;
-
-    color:
-        #5f5d70;
-
-    font-size:
-        1rem;
-
-    line-height:
-        1.8;
+    font-size:15px;
 }
 
+.hero-actions{
+    display:flex;
+    justify-content:center;
 
-/* Hero buttons */
+    gap:10px;
 
-.hero-actions {
+    margin-top:28px;
 
-    display:
-        flex;
-
-    justify-content:
-        center;
-
-    flex-wrap:
-        wrap;
-
-    gap:
-        12px;
-
-    margin-top:
-        30px;
-}
-
-.btn {
-
-    display:
-        inline-flex;
-
-    align-items:
-        center;
-
-    justify-content:
-        center;
-
-    gap:
-        9px;
-
-    min-height:
-        46px;
-
-    padding:
-        0 20px;
-
-    border-radius:
-        10px;
-
-    background:
-        var(--purple);
-
-    color:
-        #ffffff;
-
-    font-size:
-        12px;
-
-    font-weight:
-        800;
-
-    transition:
-        transform .25s ease,
-        box-shadow .25s ease,
-        background .25s ease;
-}
-
-.btn:hover {
-
-    transform:
-        translateY(-2px);
-
-    background:
-        var(--purple-dark);
-
-    box-shadow:
-        0 10px 25px
-        rgba(115,86,216,.22);
-}
-
-.btn-secondary {
-
-    background:
-        #ffffff;
-
-    color:
-        var(--purple-dark);
-
-    border:
-        1px solid #dcd7eb;
-}
-
-.btn-secondary:hover {
-
-    background:
-        #faf8ff;
-
-    color:
-        var(--purple);
+    flex-wrap:wrap;
 }
 
 
 /* =========================================================
-   ANIMATED E-COMMERCE JOURNEY
+   BUTTONS
 ========================================================= */
 
-.order-journey {
+.btn{
+    display:inline-flex;
 
-    position:
-        relative;
+    align-items:center;
+    justify-content:center;
 
-    width:
-        min(1040px, 100%);
+    gap:9px;
 
-    height:
-        185px;
+    min-height:44px;
 
-    margin:
-        62px auto 0;
+    padding:0 19px;
 
-    border:
-        1px solid #e3def1;
+    border-radius:10px;
 
-    border-radius:
-        24px;
+    background:var(--purple);
 
-    background:
-        rgba(255,255,255,.82);
+    color:#fff;
+
+    font-size:11px;
+    font-weight:800;
 
     box-shadow:
-        var(--shadow);
+        0 12px 30px rgba(115,86,216,.22);
 
-    overflow:
-        hidden;
+    transition:.3s;
+}
+
+.btn:hover{
+    transform:translateY(-3px);
+
+    box-shadow:
+        0 18px 38px rgba(115,86,216,.28);
+}
+
+.btn-secondary{
+    background:rgba(255,255,255,.78);
+
+    color:var(--purple-dark);
+
+    border:1px solid #dcd5f0;
+
+    box-shadow:none;
 }
 
 
-/* Journey background */
+/* =========================================================
+   ORDER JOURNEY
+========================================================= */
 
-.journey-track {
+.order-journey{
+    position:relative;
 
-    position:
-        absolute;
+    width:min(810px,100%);
 
-    left:
-        10%;
+    height:155px;
 
-    right:
-        10%;
+    margin:48px auto 0;
 
-    top:
-        92px;
+    padding:20px 28px;
 
-    height:
-        2px;
+    border:1px solid #e0daf0;
 
-    background:
-        linear-gradient(
-            90deg,
-            #d8d0ee,
-            #b9aae0,
-            #d8d0ee
-        );
+    border-radius:20px;
+
+    background:rgba(255,255,255,.76);
+
+    box-shadow:var(--shadow);
+
+    overflow:hidden;
 }
 
 
-/* Animated dotted line */
+/* Track */
 
-.journey-track::after {
+.journey-track{
+    position:absolute;
 
-    content: "";
+    left:7%;
+    right:7%;
 
-    position:
-        absolute;
+    top:73px;
 
-    inset:
-        0;
+    height:3px;
 
     background:
         repeating-linear-gradient(
-            90deg,
-            transparent 0 10px,
-            rgba(115,86,216,.5) 10px 16px
+            to right,
+            #c8b9ff 0,
+            #c8b9ff 10px,
+            transparent 10px,
+            transparent 17px
         );
 
-    animation:
-        trackMove 2s linear infinite;
-}
-
-@keyframes trackMove {
-
-    from {
-        transform:
-            translateX(0);
-    }
-
-    to {
-        transform:
-            translateX(26px);
-    }
+    z-index:1;
 }
 
 
 /* Journey stages */
 
-.journey-stage {
+.journey-stage{
+    position:absolute;
 
-    position:
-        absolute;
+    top:20px;
 
-    top:
-        30px;
+    width:120px;
 
-    transform:
-        translateX(-50%);
+    text-align:center;
 
-    width:
-        130px;
+    transform:translateX(-50%);
 
-    text-align:
-        center;
-
-    z-index:
-        3;
+    z-index:3;
 }
 
-.journey-stage:nth-child(1) {
-    left:
-        10%;
+.journey-stage:nth-of-type(1){
+    left:7%;
 }
 
-.journey-stage:nth-child(2) {
-    left:
-        32%;
+.journey-stage:nth-of-type(2){
+    left:28.5%;
 }
 
-.journey-stage:nth-child(3) {
-    left:
-        55%;
+.journey-stage:nth-of-type(3){
+    left:50%;
 }
 
-.journey-stage:nth-child(4) {
-    left:
-        78%;
+.journey-stage:nth-of-type(4){
+    left:71.5%;
 }
 
-.journey-stage:nth-child(5) {
-    left:
-        91%;
+.journey-stage:nth-of-type(5){
+    left:93%;
 }
 
-.stage-icon {
 
-    width:
-        54px;
+/* Icons */
 
-    height:
-        54px;
+.stage-icon{
+    width:46px;
+    height:46px;
 
-    margin:
-        0 auto 9px;
+    margin:auto;
 
-    display:
-        flex;
+    display:flex;
 
-    align-items:
-        center;
+    align-items:center;
+    justify-content:center;
 
-    justify-content:
-        center;
+    border-radius:13px;
 
-    border-radius:
-        15px;
+    border:1px solid #ddd4ff;
 
-    background:
-        #f1edff;
+    background:#f2eeff;
 
-    color:
-        var(--purple);
-
-    border:
-        1px solid #dfd6f7;
+    color:var(--purple);
 
     box-shadow:
-        0 8px 22px
-        rgba(74,48,139,.08);
+        0 8px 20px rgba(115,86,216,.10);
+
+    transition:.3s;
 }
 
-.stage-icon i {
-    font-size:
-        20px;
+.stage-icon i{
+    font-size:17px;
 }
 
-.journey-stage span {
+.journey-stage span{
+    display:block;
 
-    display:
-        block;
+    margin-top:7px;
 
-    color:
-        #625d72;
+    font-size:8px;
 
-    font-size:
-        9px;
+    font-weight:800;
 
-    font-weight:
-        800;
+    letter-spacing:.7px;
 
-    letter-spacing:
-        .8px;
+    color:#68657a;
 
-    text-transform:
-        uppercase;
+    text-transform:uppercase;
 }
 
 
-/* Moving delivery package */
+/* =========================================================
+   DELIVERY TRUCK ANIMATION
+========================================================= */
 
-.delivery-object {
+.delivery-object{
+    position:absolute;
 
-    position:
-        absolute;
+    top:73px;
 
-    top:
-        76px;
+    left:7%;
 
-    left:
-        10%;
+    width:44px;
+    height:44px;
 
-    width:
-        32px;
+    transform:translate(-50%,-50%);
 
-    height:
-        32px;
+    display:flex;
 
-    display:
-        flex;
+    align-items:center;
+    justify-content:center;
 
-    align-items:
-        center;
+    border-radius:50%;
 
-    justify-content:
-        center;
+    background:var(--purple);
 
-    border-radius:
-        9px;
+    color:#fff;
 
-    background:
-        var(--purple);
-
-    color:
-        #ffffff;
+    border:5px solid rgba(255,255,255,.96);
 
     box-shadow:
-        0 8px 22px
-        rgba(115,86,216,.28);
+        0 8px 24px rgba(115,86,216,.35);
 
-    z-index:
-        5;
+    z-index:5;
 
     animation:
-        orderTravel 6s
-        cubic-bezier(.45,.05,.55,.95)
+        journeyTravel 9s
+        cubic-bezier(.45,0,.25,1)
         infinite;
 }
 
-.delivery-object i {
-    font-size:
-        13px;
+.delivery-object i{
+    font-size:15px;
 }
 
-@keyframes orderTravel {
+.delivery-object:after{
+    content:"";
 
-    0% {
-        left:
-            10%;
-        transform:
-            translateX(-50%) scale(.85);
-        opacity:
-            0;
-    }
+    position:absolute;
 
-    8% {
-        opacity:
-            1;
-    }
+    inset:-8px;
 
-    22% {
-        left:
-            32%;
-    }
+    border-radius:50%;
 
-    45% {
-        left:
-            55%;
-    }
-
-    68% {
-        left:
-            78%;
-    }
-
-    88% {
-        left:
-            91%;
-    }
-
-    94% {
-        opacity:
-            1;
-        transform:
-            translateX(-50%) scale(1);
-    }
-
-    100% {
-        left:
-            94%;
-        opacity:
-            0;
-        transform:
-            translateX(-50%) scale(.7);
-    }
-}
-
-
-/* Pulsing stage */
-
-.journey-stage::after {
-
-    content: "";
-
-    position:
-        absolute;
-
-    width:
-        62px;
-
-    height:
-        62px;
-
-    left:
-        50%;
-
-    top:
-        -4px;
-
-    transform:
-        translateX(-50%);
-
-    border:
-        1px solid
-        rgba(115,86,216,.18);
-
-    border-radius:
-        17px;
+    border:1px solid rgba(115,86,216,.28);
 
     animation:
-        stagePulse 3s ease-in-out infinite;
+        pulseRing 1.8s ease-out infinite;
 }
 
-.journey-stage:nth-child(2)::after {
-    animation-delay:
-        .7s;
-}
 
-.journey-stage:nth-child(3)::after {
-    animation-delay:
-        1.4s;
-}
+/*
+   IMPORTANT:
+   Customer
+      ↓
+   Online Order
+      ↓
+   Processing
+      ↓
+   Delivery
+      ↓
+   Delivered
 
-.journey-stage:nth-child(4)::after {
-    animation-delay:
-        2.1s;
-}
+   The truck reaches DELIVERY first,
+   pauses,
+   then continues to DELIVERED.
 
-.journey-stage:nth-child(5)::after {
-    animation-delay:
-        2.8s;
-}
+   It then pauses at Delivered before
+   restarting the journey.
+*/
 
-@keyframes stagePulse {
+@keyframes journeyTravel{
 
+    /* Customer */
     0%,
-    100% {
-        opacity:
-            .15;
-
-        transform:
-            translateX(-50%)
-            scale(.92);
+    5%{
+        left:7%;
     }
 
-    50% {
-        opacity:
-            .8;
+    /* Customer → Online Order */
+    20%{
+        left:28.5%;
+    }
 
-        transform:
-            translateX(-50%)
-            scale(1.08);
+    /* Online Order → Processing */
+    37%{
+        left:50%;
+    }
+
+    /* Processing → Delivery */
+    54%{
+        left:71.5%;
+    }
+
+    /*
+       Pause at Delivery
+    */
+    62%{
+        left:71.5%;
+    }
+
+    /* Delivery → Delivered */
+    78%{
+        left:93%;
+    }
+
+    /*
+       Pause at Delivered
+    */
+    88%{
+        left:93%;
+    }
+
+    /*
+       Reset
+    */
+    100%{
+        left:7%;
+    }
+}
+
+@keyframes pulseRing{
+
+    0%{
+        transform:scale(.8);
+        opacity:.8;
+    }
+
+    100%{
+        transform:scale(1.55);
+        opacity:0;
+    }
+}
+
+@keyframes float{
+
+    from{
+        transform:translate3d(0,0,0);
+    }
+
+    to{
+        transform:translate3d(25px,-20px,0);
     }
 }
 
@@ -1008,99 +636,69 @@ a {
    STATS
 ========================================================= */
 
-.stats {
+.stats{
+    position:relative;
 
-    position:
-        relative;
+    z-index:5;
 
-    z-index:
-        5;
+    width:min(870px,calc(100% - 40px));
 
-    width:
-        min(1120px, 92%);
+    margin:-34px auto 0;
 
-    margin:
-        -30px auto 0;
-
-    display:
-        grid;
+    display:grid;
 
     grid-template-columns:
-        repeat(4, 1fr);
+        repeat(4,1fr);
 
-    background:
-        #ffffff;
+    background:#fff;
 
-    border:
-        1px solid var(--border);
+    border:1px solid var(--border);
 
-    border-radius:
-        18px;
+    border-radius:20px;
 
-    box-shadow:
-        var(--shadow);
+    box-shadow:var(--shadow);
 
-    overflow:
-        hidden;
+    overflow:hidden;
 }
 
-.stat {
+.stat{
+    text-align:center;
 
-    padding:
-        27px 20px;
+    padding:25px 15px;
 
-    text-align:
-        center;
-
-    border-right:
-        1px solid var(--border);
+    border-right:1px solid var(--border);
 }
 
-.stat:last-child {
-    border-right:
-        none;
+.stat:last-child{
+    border-right:0;
 }
 
-.stat-value {
+.stat-value{
+    display:block;
 
-    display:
-        block;
+    color:var(--purple-dark);
 
-    color:
-        var(--purple-dark);
+    font-size:1.7rem;
 
-    font-size:
-        1.65rem;
+    font-weight:800;
 
-    font-weight:
-        800;
-
-    letter-spacing:
-        -1px;
+    letter-spacing:-1px;
 }
 
-.stat-label {
+.stat-label{
+    display:block;
 
-    display:
-        block;
+    margin-top:4px;
 
-    margin-top:
-        4px;
+    color:#8a8797;
 
-    color:
-        #797589;
+    font-size:8px;
 
-    font-size:
-        10px;
+    font-weight:800;
 
-    font-weight:
-        700;
+    letter-spacing:1.2px;
 
-    letter-spacing:
-        .8px;
-
-    text-transform:
-        uppercase;
+    text-transform:uppercase;
 }
 
 
@@ -1108,84 +706,58 @@ a {
    GENERAL SECTIONS
 ========================================================= */
 
-.section {
-
-    width:
-        min(1120px, 92%);
-
-    margin:
-        0 auto;
-
-    padding:
-        100px 0;
+.section{
+    padding:110px 0;
 }
 
-.section-heading {
+.section-inner,
+.dashboard-inner,
+.findings-inner,
+.tech-inner{
+    width:min(1080px,calc(100% - 40px));
 
-    max-width:
-        720px;
-
-    margin-bottom:
-        45px;
+    margin:auto;
 }
 
-.section-eyebrow {
+.section-eyebrow{
+    display:block;
 
-    display:
-        block;
+    color:var(--purple);
 
-    margin-bottom:
-        10px;
+    font-size:9px;
 
-    color:
-        var(--purple);
+    font-weight:800;
+
+    letter-spacing:2px;
+
+    margin-bottom:15px;
+}
+
+.section-heading{
+    max-width:760px;
+}
+
+.section-heading h2{
+    font-family:"Playfair Display",serif;
 
     font-size:
-        10px;
+        clamp(2.7rem,5vw,4.7rem);
 
-    font-weight:
-        800;
+    line-height:.98;
 
-    letter-spacing:
-        2px;
+    letter-spacing:-2px;
 
-    text-transform:
-        uppercase;
+    color:var(--deep);
 }
 
-.section-heading h2 {
+.section-heading p{
+    margin-top:20px;
 
-    font-family:
-        "Playfair Display",
-        Georgia,
-        serif;
+    color:var(--muted);
 
-    color:
-        var(--purple-deep);
+    font-size:14px;
 
-    font-size:
-        clamp(2rem, 4vw, 3.2rem);
-
-    line-height:
-        1.05;
-
-    letter-spacing:
-        -1.5px;
-}
-
-.section-heading p {
-
-    margin-top:
-        17px;
-
-    color:
-        var(--muted);
-
-    font-size:
-        .94rem;
-
-    line-height:
-        1.8;
+    max-width:720px;
 }
 
 
@@ -1193,272 +765,320 @@ a {
    OVERVIEW
 ========================================================= */
 
-.overview-grid {
-
-    display:
-        grid;
+.overview-grid{
+    display:grid;
 
     grid-template-columns:
-        1.05fr .95fr;
+        repeat(2,1fr);
 
-    gap:
-        30px;
+    gap:20px;
+
+    margin-top:45px;
 }
 
-.info-card {
+.info-card{
+    padding:34px;
 
-    padding:
-        34px;
+    border:1px solid var(--border);
 
-    border:
-        1px solid var(--border);
+    border-radius:20px;
 
-    border-radius:
-        18px;
-
-    background:
-        #ffffff;
+    background:#fff;
 
     box-shadow:
-        0 12px 35px
-        rgba(42,26,91,.045);
+        0 15px 45px rgba(42,26,91,.055);
 }
 
-.info-card h3 {
+.info-card h3{
+    font-size:17px;
 
-    margin-bottom:
-        13px;
+    color:var(--deep);
 
-    color:
-        var(--purple-deep);
-
-    font-size:
-        1.1rem;
+    margin-bottom:13px;
 }
 
-.info-card p {
+.info-card p{
+    font-size:13px;
 
-    color:
-        var(--muted);
-
-    font-size:
-        .86rem;
-
-    line-height:
-        1.85;
+    color:var(--muted);
 }
 
+.question-list{
+    list-style:none;
 
-/* Question list */
-
-.question-list {
-
-    list-style:
-        none;
-
-    margin-top:
-        20px;
+    margin-top:20px;
 }
 
-.question-list li {
+.question-list li{
+    position:relative;
 
-    position:
-        relative;
+    padding:10px 0 10px 20px;
 
-    padding:
-        13px 0 13px 25px;
+    border-top:1px solid #efedf5;
 
-    color:
-        #5f5d70;
+    color:#5e5b6e;
 
-    font-size:
-        .82rem;
-
-    border-bottom:
-        1px solid #eeeef3;
+    font-size:12px;
 }
 
-.question-list li:last-child {
-    border-bottom:
-        none;
-}
+.question-list li:before{
+    content:"";
 
-.question-list li::before {
+    position:absolute;
 
-    content:
-        "→";
+    left:0;
+    top:18px;
 
-    position:
-        absolute;
+    width:6px;
+    height:6px;
 
-    left:
-        0;
+    border-radius:50%;
 
-    color:
-        var(--purple);
-
-    font-weight:
-        800;
+    background:var(--purple);
 }
 
 
 /* =========================================================
-   DASHBOARD SHOWCASE
+   DASHBOARD SECTION
 ========================================================= */
 
-.dashboard-section {
-
-    background:
-        #ffffff;
-
-    width:
-        100%;
-
-    padding:
-        100px 0;
-}
-
-.dashboard-inner {
-
-    width:
-        min(1120px, 92%);
-
-    margin:
-        auto;
-}
-
-.dashboard-grid {
-
-    display:
-        grid;
-
-    grid-template-columns:
-        repeat(3, 1fr);
-
-    gap:
-        22px;
-}
-
-.dashboard-card {
-
-    position:
-        relative;
-
-    overflow:
-        hidden;
-
-    border:
-        1px solid var(--border);
-
-    border-radius:
-        17px;
-
-    background:
-        #ffffff;
-
-    box-shadow:
-        0 15px 40px
-        rgba(42,26,91,.07);
-
-    cursor:
-        zoom-in;
-
-    transition:
-        transform .35s ease,
-        box-shadow .35s ease;
-}
-
-.dashboard-card:hover {
-
-    transform:
-        translateY(-7px);
-
-    box-shadow:
-        var(--shadow-deep);
-}
-
-.dashboard-card img {
-
-    width:
-        100%;
-
-    height:
-        235px;
-
-    object-fit:
-        cover;
-
-    object-position:
-        top center;
-
-    transition:
-        transform .55s ease;
-}
-
-.dashboard-card:hover img {
-
-    transform:
-        scale(1.035);
-}
-
-.dashboard-overlay {
-
-    position:
-        absolute;
-
-    inset:
-        0;
-
-    display:
-        flex;
-
-    align-items:
-        flex-end;
-
-    padding:
-        18px;
+.dashboard-section{
+    padding:115px 0;
 
     background:
         linear-gradient(
-            transparent 45%,
-            rgba(20,13,43,.72)
+            180deg,
+            #f4f1fb,
+            #fff 18%,
+            #f8f7fc
         );
-
-    pointer-events:
-        none;
 }
 
-.dashboard-label {
-
-    color:
-        #ffffff;
-
-    font-size:
-        .8rem;
-
-    font-weight:
-        800;
-
-    letter-spacing:
-        .5px;
+.dashboard-inner > .section-heading{
+    margin-bottom:65px;
 }
 
-.dashboard-label small {
+.dashboard-stack{
+    display:flex;
 
-    display:
-        block;
+    flex-direction:column;
 
-    margin-top:
-        3px;
+    gap:100px;
+}
 
-    color:
-        rgba(255,255,255,.72);
+
+/* Dashboard story */
+
+.dashboard-story{
+    display:grid;
+
+    grid-template-columns:
+        minmax(0,1fr) 300px;
+
+    gap:38px;
+
+    align-items:center;
+
+    min-height:530px;
+
+    opacity:0;
+
+    transform:translateY(55px);
+
+    transition:
+        opacity .9s ease,
+        transform 1s cubic-bezier(.22,1,.36,1);
+}
+
+.dashboard-story:nth-child(even){
+    grid-template-columns:
+        300px minmax(0,1fr);
+}
+
+.dashboard-story:nth-child(even)
+.dashboard-visual{
+    order:2;
+}
+
+.dashboard-story:nth-child(even)
+.dashboard-copy{
+    order:1;
+}
+
+.dashboard-story.visible{
+    opacity:1;
+
+    transform:none;
+}
+
+
+/* Dashboard image */
+
+.dashboard-visual{
+    position:relative;
+
+    padding:13px;
+
+    border:1px solid #ded9eb;
+
+    border-radius:24px;
+
+    background:#fff;
+
+    box-shadow:var(--deep-shadow);
+
+    cursor:zoom-in;
+
+    overflow:hidden;
+
+    transition:.35s;
+}
+
+.dashboard-visual:hover{
+    transform:translateY(-7px);
+
+    box-shadow:
+        0 45px 100px rgba(42,26,91,.20);
+}
+
+.dashboard-visual:after{
+    content:"CLICK TO EXPAND";
+
+    position:absolute;
+
+    right:22px;
+    top:22px;
+
+    padding:7px 10px;
+
+    border-radius:999px;
+
+    background:rgba(31,22,65,.82);
+
+    color:#fff;
+
+    font-size:7px;
+
+    font-weight:800;
+
+    letter-spacing:1.2px;
+
+    opacity:0;
+
+    transform:translateY(-5px);
+
+    transition:.3s;
+}
+
+.dashboard-visual:hover:after{
+    opacity:1;
+
+    transform:none;
+}
+
+.dashboard-visual img{
+    width:100%;
+
+    height:auto;
+
+    border-radius:15px;
+}
+
+
+/* Dashboard copy */
+
+.dashboard-copy{
+    opacity:0;
+
+    transform:translateY(30px);
+
+    transition:
+        opacity .75s ease .18s,
+        transform .8s cubic-bezier(.22,1,.36,1) .18s;
+}
+
+.dashboard-story.visible
+.dashboard-copy{
+    opacity:1;
+
+    transform:none;
+}
+
+.dashboard-number{
+    font-size:9px;
+
+    font-weight:800;
+
+    letter-spacing:2px;
+
+    color:var(--purple);
+
+    margin-bottom:15px;
+}
+
+.dashboard-copy h3{
+    font-family:"Playfair Display",serif;
 
     font-size:
-        .65rem;
+        clamp(2rem,3.5vw,3rem);
 
-    font-weight:
-        600;
+    line-height:1;
+
+    color:var(--deep);
+}
+
+.dashboard-copy p{
+    margin-top:18px;
+
+    font-size:12px;
+
+    color:var(--muted);
+}
+
+.dashboard-tags{
+    display:flex;
+
+    flex-wrap:wrap;
+
+    gap:7px;
+
+    margin-top:20px;
+}
+
+.dashboard-tags span{
+    padding:6px 9px;
+
+    border-radius:999px;
+
+    background:var(--soft);
+
+    color:var(--purple-dark);
+
+    font-size:8px;
+
+    font-weight:800;
+}
+
+.dashboard-progress{
+    margin-top:25px;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    color:#9a96a6;
+
+    font-size:8px;
+
+    font-weight:800;
+
+    letter-spacing:1px;
+}
+
+.dashboard-progress i{
+    color:var(--purple);
 }
 
 
@@ -1466,268 +1086,178 @@ a {
    FINDINGS
 ========================================================= */
 
-.findings-section {
+.findings-section{
+    padding:115px 0;
+
+    background:#fff;
+}
+
+.findings-grid{
+    display:grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap:18px;
+
+    margin-top:50px;
+}
+
+.finding-card{
+    padding:30px;
+
+    border:1px solid var(--border);
+
+    border-radius:18px;
+
+    background:#fbfaff;
+
+    transition:.35s;
+}
+
+.finding-card:hover{
+    transform:translateY(-7px);
+
+    box-shadow:var(--shadow);
+}
+
+.finding-number{
+    color:var(--purple);
+
+    font-size:9px;
+
+    font-weight:800;
+
+    letter-spacing:2px;
+}
+
+.finding-icon{
+    width:45px;
+    height:45px;
+
+    margin:24px 0 20px;
+
+    display:flex;
+
+    align-items:center;
+    justify-content:center;
+
+    border-radius:13px;
+
+    background:var(--soft);
+
+    color:var(--purple);
+}
+
+.finding-card h3{
+    font-size:16px;
+
+    color:var(--deep);
+
+    line-height:1.25;
+}
+
+.finding-card p{
+    margin-top:12px;
+
+    color:var(--muted);
+
+    font-size:12px;
+}
+
+
+/* =========================================================
+   TECHNICAL SECTION
+========================================================= */
+
+.tech-section{
+    padding:115px 0;
 
     background:
         linear-gradient(
-            180deg,
-            #f8f6ff,
-            #ffffff
+            135deg,
+            #f0edff,
+            #fff
         );
-
-    width:
-        100%;
-
-    padding:
-        100px 0;
 }
 
-.findings-inner {
-
-    width:
-        min(1120px, 92%);
-
-    margin:
-        auto;
-}
-
-.findings-grid {
-
-    display:
-        grid;
+.tech-grid{
+    display:grid;
 
     grid-template-columns:
-        repeat(3, 1fr);
+        repeat(3,1fr);
 
-    gap:
-        22px;
+    gap:18px;
+
+    margin-top:50px;
 }
 
-.finding-card {
+.tech-card{
+    padding:28px;
 
-    position:
-        relative;
+    border:1px solid var(--border);
 
-    padding:
-        30px;
+    border-radius:18px;
 
-    min-height:
-        245px;
+    background:rgba(255,255,255,.8);
 
-    background:
-        #ffffff;
-
-    border:
-        1px solid var(--border);
-
-    border-radius:
-        18px;
-
-    box-shadow:
-        0 12px 35px
-        rgba(42,26,91,.05);
-
-    overflow:
-        hidden;
+    transition:.35s;
 }
 
-.finding-number {
+.tech-card:hover{
+    transform:translateY(-6px);
 
-    position:
-        absolute;
-
-    top:
-        18px;
-
-    right:
-        20px;
-
-    color:
-        #e8e1fa;
-
-    font-size:
-        2.8rem;
-
-    font-weight:
-        800;
-
-    line-height:
-        1;
+    box-shadow:var(--shadow);
 }
 
-.finding-icon {
+.tech-card > i{
+    font-size:20px;
 
-    width:
-        42px;
+    color:var(--purple);
 
-    height:
-        42px;
-
-    display:
-        flex;
-
-    align-items:
-        center;
-
-    justify-content:
-        center;
-
-    margin-bottom:
-        20px;
-
-    border-radius:
-        12px;
-
-    background:
-        var(--purple-soft);
-
-    color:
-        var(--purple);
-
-    font-size:
-        16px;
+    margin-bottom:18px;
 }
 
-.finding-card h3 {
+.tech-card h3{
+    font-size:15px;
 
-    margin-bottom:
-        10px;
-
-    color:
-        var(--purple-deep);
-
-    font-size:
-        1rem;
+    color:var(--deep);
 }
 
-.finding-card p {
+.tech-card p{
+    margin-top:10px;
 
-    color:
-        var(--muted);
+    color:var(--muted);
 
-    font-size:
-        .8rem;
-
-    line-height:
-        1.8;
+    font-size:11px;
 }
 
+.tools-strip{
+    display:flex;
 
-/* =========================================================
-   TECHNICAL APPROACH
-========================================================= */
+    flex-wrap:wrap;
 
-.tech-grid {
+    gap:8px;
 
-    display:
-        grid;
-
-    grid-template-columns:
-        repeat(3, 1fr);
-
-    gap:
-        18px;
+    margin-top:35px;
 }
 
-.tech-card {
+.tool{
+    padding:8px 12px;
 
-    padding:
-        24px;
+    border-radius:999px;
 
-    background:
-        #ffffff;
+    background:#fff;
 
-    border:
-        1px solid var(--border);
+    border:1px solid var(--border);
 
-    border-radius:
-        16px;
-}
+    color:var(--purple-dark);
 
-.tech-card i {
+    font-size:8px;
 
-    color:
-        var(--purple);
+    font-weight:800;
 
-    font-size:
-        18px;
-
-    margin-bottom:
-        14px;
-}
-
-.tech-card h3 {
-
-    color:
-        var(--purple-deep);
-
-    font-size:
-        .95rem;
-
-    margin-bottom:
-        7px;
-}
-
-.tech-card p {
-
-    color:
-        var(--muted);
-
-    font-size:
-        .76rem;
-
-    line-height:
-        1.7;
-}
-
-
-/* =========================================================
-   TOOLS STRIP
-========================================================= */
-
-.tools-strip {
-
-    display:
-        flex;
-
-    justify-content:
-        center;
-
-    flex-wrap:
-        wrap;
-
-    gap:
-        10px;
-
-    margin-top:
-        35px;
-}
-
-.tool {
-
-    padding:
-        9px 14px;
-
-    border:
-        1px solid #ded8ed;
-
-    border-radius:
-        50px;
-
-    background:
-        #ffffff;
-
-    color:
-        #615b70;
-
-    font-size:
-        10px;
-
-    font-weight:
-        800;
-
-    letter-spacing:
-        .5px;
+    letter-spacing:.7px;
 }
 
 
@@ -1735,112 +1265,57 @@ a {
    CTA
 ========================================================= */
 
-.cta {
+.cta{
+    width:min(1080px,calc(100% - 40px));
 
-    position:
-        relative;
+    margin:100px auto;
 
-    overflow:
-        hidden;
+    padding:80px 40px;
 
-    width:
-        min(1120px, 92%);
+    text-align:center;
 
-    margin:
-        0 auto 90px;
-
-    padding:
-        60px 45px;
-
-    border-radius:
-        24px;
-
-    color:
-        #ffffff;
-
-    text-align:
-        center;
+    border-radius:28px;
 
     background:
-
-        radial-gradient(
-            circle at 15% 20%,
-            rgba(255,255,255,.20),
-            transparent 28%
-        ),
-
-        radial-gradient(
-            circle at 85% 80%,
-            rgba(255,255,255,.13),
-            transparent 28%
-        ),
-
         linear-gradient(
             135deg,
-            #8064df,
-            #4c329f
+            #29185f,
+            #5d43b6
         );
 
+    color:#fff;
+
     box-shadow:
-        var(--shadow-deep);
+        0 35px 90px rgba(42,26,91,.20);
 }
 
-.cta h2 {
-
-    position:
-        relative;
-
-    z-index:
-        2;
-
-    font-family:
-        "Playfair Display",
-        Georgia,
-        serif;
+.cta h2{
+    font-family:"Playfair Display",serif;
 
     font-size:
-        clamp(2rem, 4vw, 3rem);
+        clamp(2.7rem,5vw,4.5rem);
+
+    line-height:1;
+
+    letter-spacing:-2px;
 }
 
-.cta p {
+.cta p{
+    max-width:650px;
 
-    position:
-        relative;
+    margin:20px auto 28px;
 
-    z-index:
-        2;
+    color:rgba(255,255,255,.76);
 
-    max-width:
-        650px;
-
-    margin:
-        14px auto 25px;
-
-    color:
-        rgba(255,255,255,.78);
-
-    font-size:
-        .85rem;
+    font-size:13px;
 }
 
-.cta .btn {
+.cta .btn{
+    background:#fff;
 
-    position:
-        relative;
+    color:var(--deep);
 
-    z-index:
-        2;
-
-    background:
-        #ffffff;
-
-    color:
-        var(--purple-dark);
-}
-
-.cta .btn:hover {
-    background:
-        #f7f4ff;
+    box-shadow:none;
 }
 
 
@@ -1848,28 +1323,16 @@ a {
    FOOTER
 ========================================================= */
 
-footer {
+footer{
+    padding:35px 20px 45px;
 
-    padding:
-        30px 20px;
+    text-align:center;
 
-    border-top:
-        1px solid var(--border);
+    color:#8c8998;
 
-    background:
-        #ffffff;
+    font-size:9px;
 
-    text-align:
-        center;
-}
-
-footer p {
-
-    color:
-        #858193;
-
-    font-size:
-        11px;
+    border-top:1px solid var(--border);
 }
 
 
@@ -1877,111 +1340,69 @@ footer p {
    LIGHTBOX
 ========================================================= */
 
-.lightbox {
+.lightbox{
+    position:fixed;
 
-    position:
-        fixed;
+    inset:0;
 
-    inset:
-        0;
+    z-index:3000;
 
-    z-index:
-        2000;
+    display:flex;
 
-    display:
-        flex;
+    align-items:center;
+    justify-content:center;
 
-    align-items:
-        center;
-
-    justify-content:
-        center;
-
-    padding:
-        35px;
+    padding:35px;
 
     background:
-        rgba(17,12,32,.88);
+        rgba(16,10,37,.92);
 
-    opacity:
-        0;
+    opacity:0;
 
-    visibility:
-        hidden;
+    visibility:hidden;
 
-    transition:
-        opacity .3s ease,
-        visibility .3s ease;
+    transition:.3s;
 }
 
-.lightbox.active {
+.lightbox.active{
+    opacity:1;
 
-    opacity:
-        1;
-
-    visibility:
-        visible;
+    visibility:visible;
 }
 
-.lightbox img {
+.lightbox img{
+    max-width:95vw;
 
-    max-width:
-        94vw;
+    max-height:90vh;
 
-    max-height:
-        88vh;
+    object-fit:contain;
 
-    border-radius:
-        10px;
+    border-radius:10px;
 
     box-shadow:
-        0 30px 90px
-        rgba(0,0,0,.35);
+        0 30px 100px rgba(0,0,0,.45);
 }
 
-.lightbox-close {
+.lightbox-close{
+    position:absolute;
 
-    position:
-        absolute;
+    top:22px;
+    right:25px;
 
-    top:
-        22px;
+    width:45px;
+    height:45px;
 
-    right:
-        25px;
+    border:0;
 
-    width:
-        45px;
+    border-radius:50%;
 
-    height:
-        45px;
+    background:#fff;
 
-    display:
-        flex;
+    color:var(--deep);
 
-    align-items:
-        center;
+    cursor:pointer;
 
-    justify-content:
-        center;
-
-    border:
-        none;
-
-    border-radius:
-        50%;
-
-    background:
-        rgba(255,255,255,.12);
-
-    color:
-        #ffffff;
-
-    font-size:
-        18px;
-
-    cursor:
-        pointer;
+    font-size:17px;
 }
 
 
@@ -1989,28 +1410,20 @@ footer p {
    REVEAL ANIMATION
 ========================================================= */
 
-.reveal {
+.reveal{
+    opacity:0;
 
-    opacity:
-        0;
+    transform:translateY(35px);
 
-    transform:
-        translateY(25px);
-
-    animation:
-        revealUp .8s ease forwards;
+    transition:
+        opacity .8s ease,
+        transform .8s cubic-bezier(.22,1,.36,1);
 }
 
-@keyframes revealUp {
+.reveal.visible{
+    opacity:1;
 
-    to {
-
-        opacity:
-            1;
-
-        transform:
-            translateY(0);
-    }
+    transform:none;
 }
 
 
@@ -2018,319 +1431,158 @@ footer p {
    RESPONSIVE
 ========================================================= */
 
-@media (max-width: 900px) {
+@media(max-width:900px){
 
-    .nav-links {
-        gap:
-            15px;
+    .dashboard-story,
+    .dashboard-story:nth-child(even){
+        grid-template-columns:1fr;
+
+        gap:30px;
+
+        min-height:auto;
     }
 
-    .overview-grid {
+    .dashboard-story:nth-child(even)
+    .dashboard-visual,
+    .dashboard-story:nth-child(even)
+    .dashboard-copy{
+        order:initial;
+    }
+
+    .dashboard-copy{
+        padding:0 10px;
+    }
+
+    .tech-grid{
         grid-template-columns:
-            1fr;
+            repeat(2,1fr);
     }
 
-    .dashboard-grid,
-    .findings-grid,
-    .tech-grid {
+    .findings-grid{
         grid-template-columns:
-            repeat(2, 1fr);
-    }
-
-    .stats {
-        grid-template-columns:
-            repeat(2, 1fr);
-    }
-
-    .stat:nth-child(2) {
-        border-right:
-            none;
-    }
-
-    .stat:nth-child(-n+2) {
-        border-bottom:
-            1px solid var(--border);
-    }
-
-    .order-journey {
-        height:
-            165px;
-    }
-
-    .journey-stage {
-        width:
-            100px;
-    }
-
-    .journey-stage:nth-child(5) {
-        display:
-            none;
-    }
-
-    .journey-stage:nth-child(4) {
-        left:
-            88%;
-    }
-
-    .delivery-object {
-        animation-name:
-            orderTravelTablet;
-    }
-
-    @keyframes orderTravelTablet {
-
-        0% {
-            left: 10%;
-            opacity: 0;
-        }
-
-        8% {
-            opacity: 1;
-        }
-
-        30% {
-            left: 35%;
-        }
-
-        55% {
-            left: 60%;
-        }
-
-        82% {
-            left: 88%;
-        }
-
-        94% {
-            opacity: 1;
-        }
-
-        100% {
-            left: 92%;
-            opacity: 0;
-        }
+            repeat(2,1fr);
     }
 }
 
 
-@media (max-width: 650px) {
+@media(max-width:700px){
 
-    .navbar {
-        position:
-            relative;
+    .nav-links{
+        gap:13px;
     }
 
-    .nav-container {
-        height:
-            auto;
-
-        min-height:
-            68px;
+    .nav-links a:nth-child(2){
+        display:none;
     }
 
-    .nav-links {
-        gap:
-            12px;
+    .hero{
+        min-height:700px;
     }
 
-    .nav-links a {
-        font-size:
-            11px;
+    .hero-container{
+        padding-top:70px;
     }
 
-    .nav-links a:nth-child(2) {
-        display:
-            none;
+    .hero h1{
+        letter-spacing:-2px;
     }
 
-    .hero {
-        padding:
-            80px 18px 70px;
+    .order-journey{
+        height:130px;
+
+        padding:15px;
     }
 
-    .hero h1 {
-        letter-spacing:
-            -2px;
+    .journey-stage{
+        width:75px;
     }
 
-    .hero-subtitle {
-        font-size:
-            .88rem;
+    .stage-icon{
+        width:40px;
+        height:40px;
     }
 
-    .order-journey {
-        height:
-            145px;
-
-        margin-top:
-            45px;
+    .journey-stage span{
+        font-size:6px;
     }
 
-    .journey-stage {
-        width:
-            70px;
-
-        top:
-            23px;
-    }
-
-    .journey-stage:nth-child(1) {
-        left:
-            12%;
-    }
-
-    .journey-stage:nth-child(2) {
-        left:
-            37%;
-    }
-
-    .journey-stage:nth-child(3) {
-        left:
-            62%;
-    }
-
-    .journey-stage:nth-child(4) {
-        left:
-            87%;
-    }
-
-    .stage-icon {
-        width:
-            43px;
-
-        height:
-            43px;
-
-        border-radius:
-            12px;
-    }
-
-    .stage-icon i {
-        font-size:
-            16px;
-    }
-
-    .journey-stage span {
-        font-size:
-            7px;
-    }
-
-    .journey-track {
-        top:
-            75px;
-
-        left:
-            12%;
-
-        right:
-            12%;
-    }
-
-    .delivery-object {
-        top:
-            60px;
-    }
-
-    .stats {
-        margin-top:
-            -20px;
-
-        width:
-            calc(100% - 30px);
-    }
-
-    .stat {
-        padding:
-            20px 10px;
-    }
-
-    .stat-value {
-        font-size:
-            1.25rem;
-    }
-
-    .section {
-        padding:
-            75px 0;
-    }
-
-    .dashboard-grid,
-    .findings-grid,
-    .tech-grid {
+    .stats{
         grid-template-columns:
-            1fr;
+            1fr 1fr;
     }
 
-    .dashboard-card img {
-        height:
-            auto;
+    .stat:nth-child(2){
+        border-right:0;
     }
 
-    .info-card {
-        padding:
-            26px;
+    .stat:nth-child(-n+2){
+        border-bottom:1px solid var(--border);
     }
 
-    .cta {
-        width:
-            calc(100% - 30px);
+    .overview-grid,
+    .findings-grid,
+    .tech-grid{
+        grid-template-columns:1fr;
+    }
 
-        padding:
-            45px 24px;
+    .section,
+    .dashboard-section,
+    .findings-section,
+    .tech-section{
+        padding:80px 0;
+    }
 
-        margin-bottom:
-            55px;
+    .dashboard-stack{
+        gap:75px;
+    }
+
+    .dashboard-copy h3{
+        font-size:2.2rem;
+    }
+
+    .cta{
+        padding:60px 25px;
     }
 }
 
 
 /* =========================================================
-   REDUCED MOTION ACCESSIBILITY
+   REDUCED MOTION
 ========================================================= */
 
-@media (prefers-reduced-motion: reduce) {
-
-    html {
-        scroll-behavior:
-            auto;
-    }
+@media(prefers-reduced-motion:reduce){
 
     *,
     *::before,
-    *::after {
-        animation-duration:
-            .01ms !important;
+    *::after{
+        animation-duration:.01ms !important;
 
-        animation-iteration-count:
-            1 !important;
+        animation-iteration-count:1 !important;
 
-        transition-duration:
-            .01ms !important;
+        scroll-behavior:auto !important;
+
+        transition-duration:.01ms !important;
     }
 }
 
 </style>
-
 </head>
 
 
 <body>
 
 
-<!-- =========================================================
+<!-- ======================================================
      NAVIGATION
-========================================================= -->
+======================================================= -->
 
 <nav class="navbar">
 
     <div class="nav-container">
 
-        <a
-            href="../../index.html"
-            class="brand"
-        >
+        <a href="../../index.html" class="brand">
             Sodiq<span>.</span>
         </a>
-
 
         <div class="nav-links">
 
@@ -2358,9 +1610,9 @@ footer p {
 
 
 
-<!-- =========================================================
+<!-- ======================================================
      HERO
-========================================================= -->
+======================================================= -->
 
 <header class="hero">
 
@@ -2370,7 +1622,6 @@ footer p {
 
 
     <div class="hero-container">
-
 
         <div class="eyebrow">
 
@@ -2386,7 +1637,8 @@ footer p {
             Olist
 
             <span>
-                Customer &amp; Operational Analytics
+                Customer &amp; Operational<br>
+                Analytics
             </span>
 
         </h1>
@@ -2394,52 +1646,50 @@ footer p {
 
         <p class="hero-subtitle">
 
-            A focused SQL and Power BI analysis of the Brazilian
-            Olist e-commerce marketplace, exploring customer
-            retention, purchasing behaviour, product performance,
-            and operational delivery efficiency.
+            A focused SQL and Power BI analysis of the Brazilian Olist
+            e-commerce marketplace, exploring customer retention,
+            purchasing behaviour, product performance, and operational
+            delivery efficiency.
 
         </p>
 
 
         <div class="hero-actions">
 
-            <a
-                href="#dashboard"
-                class="btn"
-            >
+            <a href="#dashboard" class="btn">
+
                 Explore Dashboard
 
                 <i class="fas fa-arrow-down"></i>
+
             </a>
 
 
             <a
-                href="https://github.com/sodiqoluwatimileyin190-oss/sodiqoluwatimileyin190-oss.github.io/tree/main/projects/olist-customer-retention"
+                href="https://github.com/sodiqoluwatimileyin190-oss"
                 target="_blank"
-                rel="noopener noreferrer"
+                rel="noopener"
                 class="btn btn-secondary"
             >
+
                 View GitHub
 
                 <i class="fab fa-github"></i>
+
             </a>
 
         </div>
 
 
 
-        <!-- =================================================
-             ANIMATED E-COMMERCE JOURNEY
-        ================================================== -->
+        <!-- ORDER JOURNEY -->
 
-        <div
-            class="order-journey"
-            aria-label="Animated customer online ordering and delivery journey"
-        >
+        <div class="order-journey">
 
             <div class="journey-track"></div>
 
+
+            <!-- 01 CUSTOMER -->
 
             <div class="journey-stage">
 
@@ -2456,6 +1706,8 @@ footer p {
             </div>
 
 
+            <!-- 02 ONLINE ORDER -->
+
             <div class="journey-stage">
 
                 <div class="stage-icon">
@@ -2470,6 +1722,8 @@ footer p {
 
             </div>
 
+
+            <!-- 03 PROCESSING -->
 
             <div class="journey-stage">
 
@@ -2486,6 +1740,8 @@ footer p {
             </div>
 
 
+            <!-- 04 DELIVERY -->
+
             <div class="journey-stage">
 
                 <div class="stage-icon">
@@ -2501,11 +1757,13 @@ footer p {
             </div>
 
 
+            <!-- 05 DELIVERED — FINAL -->
+
             <div class="journey-stage">
 
                 <div class="stage-icon">
 
-                    <i class="fas fa-house"></i>
+                    <i class="fas fa-house-circle-check"></i>
 
                 </div>
 
@@ -2516,9 +1774,11 @@ footer p {
             </div>
 
 
+            <!-- MOVING TRUCK -->
+
             <div class="delivery-object">
 
-                <i class="fas fa-box"></i>
+                <i class="fas fa-truck-fast"></i>
 
             </div>
 
@@ -2530,16 +1790,20 @@ footer p {
 
 
 
-<!-- =========================================================
+<!-- ======================================================
      STATS
-========================================================= -->
+======================================================= -->
 
 <section class="stats">
 
     <div class="stat">
 
-        <span class="stat-value">
-            99K+
+        <span
+            class="stat-value counter"
+            data-target="99"
+            data-suffix="K+"
+        >
+            0
         </span>
 
         <span class="stat-label">
@@ -2551,8 +1815,12 @@ footer p {
 
     <div class="stat">
 
-        <span class="stat-value">
-            99K+
+        <span
+            class="stat-value counter"
+            data-target="99"
+            data-suffix="K+"
+        >
+            0
         </span>
 
         <span class="stat-label">
@@ -2564,8 +1832,12 @@ footer p {
 
     <div class="stat">
 
-        <span class="stat-value">
-            71
+        <span
+            class="stat-value counter"
+            data-target="71"
+            data-suffix=""
+        >
+            0
         </span>
 
         <span class="stat-label">
@@ -2591,121 +1863,124 @@ footer p {
 
 
 
-<!-- =========================================================
+<!-- ======================================================
      OVERVIEW
-========================================================= -->
+======================================================= -->
 
-<section
-    class="section"
-    id="overview"
->
+<section class="section" id="overview">
 
-    <div class="section-heading reveal">
-
-        <span class="section-eyebrow">
-            01 · ANALYTICAL CONTEXT
-        </span>
-
-        <h2>
-            From Transactions
-            <br>
-            to Customer Behaviour
-        </h2>
-
-        <p>
-
-            The analysis moves beyond order volume to understand
-            what happens after the first purchase — examining
-            repeat behaviour, category performance, and the
-            operational experience surrounding fulfilment.
-
-        </p>
-
-    </div>
+    <div class="section-inner">
 
 
-    <div class="overview-grid">
+        <div class="section-heading reveal">
 
+            <span class="section-eyebrow">
+                01 · ANALYTICAL CONTEXT
+            </span>
 
-        <article class="info-card reveal">
-
-            <h3>
-                Business Problem
-            </h3>
+            <h2>
+                From Transactions<br>
+                to Customer Behaviour
+            </h2>
 
             <p>
 
-                Olist contains a large volume of transactional
-                e-commerce data, but transaction volume alone does
-                not explain whether customers return, which
-                categories contribute to stronger retention, or
-                whether operational performance may influence the
-                customer experience.
+                The analysis moves beyond order volume to understand
+                what happens after the first purchase — examining
+                repeat behaviour, category performance, and the
+                operational experience surrounding fulfilment.
 
             </p>
 
-
-            <ul class="question-list">
-
-                <li>
-                    Are customers returning after their first order?
-                </li>
-
-                <li>
-                    Which product categories show stronger or weaker retention?
-                </li>
-
-                <li>
-                    Where are churn risks concentrated?
-                </li>
-
-                <li>
-                    How does delivery performance vary across regions?
-                </li>
-
-            </ul>
-
-        </article>
+        </div>
 
 
 
-        <article class="info-card reveal">
-
-            <h3>
-                Analytical Approach
-            </h3>
-
-            <p>
-
-                SQL was used to combine and aggregate transactional
-                data into customer, product, and operational views.
-                Power BI then transformed these analytical outputs
-                into an interactive decision-support dashboard.
-
-            </p>
+        <div class="overview-grid">
 
 
-            <ul class="question-list">
+            <article class="info-card reveal">
 
-                <li>
-                    Customer-level purchase behaviour
-                </li>
+                <h3>
+                    Business Problem
+                </h3>
 
-                <li>
-                    Repeat purchase and churn classification
-                </li>
+                <p>
 
-                <li>
-                    Product/category performance
-                </li>
+                    Olist contains a large volume of transactional
+                    e-commerce data, but transaction volume alone
+                    does not explain whether customers return,
+                    which categories contribute to stronger
+                    retention, or whether operational performance
+                    may influence the customer experience.
 
-                <li>
-                    Delivery and fulfilment analysis
-                </li>
+                </p>
 
-            </ul>
 
-        </article>
+                <ul class="question-list">
+
+                    <li>
+                        Are customers returning after their first order?
+                    </li>
+
+                    <li>
+                        Which product categories show stronger or
+                        weaker retention?
+                    </li>
+
+                    <li>
+                        Where are churn risks concentrated?
+                    </li>
+
+                    <li>
+                        How does delivery performance vary across regions?
+                    </li>
+
+                </ul>
+
+            </article>
+
+
+
+            <article class="info-card reveal">
+
+                <h3>
+                    Analytical Approach
+                </h3>
+
+                <p>
+
+                    SQL was used to combine and aggregate transactional
+                    data into customer, product, and operational views.
+                    Power BI then transformed these analytical outputs
+                    into an interactive decision-support dashboard.
+
+                </p>
+
+
+                <ul class="question-list">
+
+                    <li>
+                        Customer-level purchase behaviour
+                    </li>
+
+                    <li>
+                        Repeat purchase and churn classification
+                    </li>
+
+                    <li>
+                        Product/category performance
+                    </li>
+
+                    <li>
+                        Delivery and fulfilment analysis
+                    </li>
+
+                </ul>
+
+            </article>
+
+        </div>
 
     </div>
 
@@ -2713,14 +1988,11 @@ footer p {
 
 
 
-<!-- =========================================================
-     DASHBOARD SHOWCASE
-========================================================= -->
+<!-- ======================================================
+     DASHBOARD
+======================================================= -->
 
-<section
-    class="dashboard-section"
-    id="dashboard"
->
+<section class="dashboard-section" id="dashboard">
 
     <div class="dashboard-inner">
 
@@ -2732,16 +2004,15 @@ footer p {
             </span>
 
             <h2>
-                Three Views.
-                <br>
+                Three Views.<br>
                 One Customer Story.
             </h2>
 
             <p>
 
-                The dashboard is structured as a progression
-                from customer behaviour to product-level patterns
-                and finally to operational performance.
+                The dashboard is structured as a progression from
+                customer behaviour to product-level patterns and
+                finally to operational performance.
 
             </p>
 
@@ -2749,31 +2020,70 @@ footer p {
 
 
 
-        <div class="dashboard-grid">
+        <div class="dashboard-stack">
 
 
-            <!-- CUSTOMER RETENTION -->
+            <!-- ==================================================
+                 DASHBOARD 01
+            =================================================== -->
 
-            <article
-                class="dashboard-card reveal zoomable"
-                data-title="Customer Retention"
-            >
+            <article class="dashboard-story">
 
-                <img
-                    src="images/customer-retention.png"
-                    alt="Olist Customer Retention Dashboard"
-                    loading="lazy"
-                >
+                <div class="dashboard-visual zoomable">
 
-                <div class="dashboard-overlay">
+                    <img
+                        src="images/customer-retention.png"
+                        alt="Olist Customer Retention Power BI dashboard"
+                        loading="lazy"
+                    >
 
-                    <div class="dashboard-label">
+                </div>
 
-                        Customer Retention
 
-                        <small>
-                            Purchase frequency · repeat behaviour · churn
-                        </small>
+                <div class="dashboard-copy">
+
+                    <div class="dashboard-number">
+                        01 / CUSTOMER RETENTION
+                    </div>
+
+                    <h3>
+                        Who returns —
+                        and who disappears?
+                    </h3>
+
+                    <p>
+
+                        The first view establishes the retention
+                        problem through purchase frequency,
+                        repeat behaviour and churn. The analysis
+                        shows that the overwhelming majority of
+                        customers make only one purchase.
+
+                    </p>
+
+
+                    <div class="dashboard-tags">
+
+                        <span>
+                            Purchase Frequency
+                        </span>
+
+                        <span>
+                            Repeat Behaviour
+                        </span>
+
+                        <span>
+                            Churn
+                        </span>
+
+                    </div>
+
+
+                    <div class="dashboard-progress">
+
+                        CUSTOMER LAYER
+
+                        <i class="fas fa-arrow-right"></i>
 
                     </div>
 
@@ -2783,28 +2093,66 @@ footer p {
 
 
 
-            <!-- PRODUCT INSIGHTS -->
+            <!-- ==================================================
+                 DASHBOARD 02
+            =================================================== -->
 
-            <article
-                class="dashboard-card reveal zoomable"
-                data-title="Product & Retention Insights"
-            >
+            <article class="dashboard-story">
 
-                <img
-                    src="images/product-insights.png"
-                    alt="Olist Product and Retention Insights Dashboard"
-                    loading="lazy"
-                >
+                <div class="dashboard-visual zoomable">
 
-                <div class="dashboard-overlay">
+                    <img
+                        src="images/product-insights.png"
+                        alt="Olist Product and Retention Insights Power BI dashboard"
+                        loading="lazy"
+                    >
 
-                    <div class="dashboard-label">
+                </div>
 
-                        Product &amp; Retention Insights
 
-                        <small>
-                            Categories · revenue · adoption · churn
-                        </small>
+                <div class="dashboard-copy">
+
+                    <div class="dashboard-number">
+                        02 / PRODUCT &amp; RETENTION
+                    </div>
+
+                    <h3>
+                        Where product performance
+                        meets retention.
+                    </h3>
+
+                    <p>
+
+                        Category-level analysis connects revenue
+                        contribution, adoption and churn risk,
+                        helping distinguish stronger-performing
+                        categories from areas where retention is weak.
+
+                    </p>
+
+
+                    <div class="dashboard-tags">
+
+                        <span>
+                            Revenue
+                        </span>
+
+                        <span>
+                            Category Adoption
+                        </span>
+
+                        <span>
+                            High Churn
+                        </span>
+
+                    </div>
+
+
+                    <div class="dashboard-progress">
+
+                        PRODUCT LAYER
+
+                        <i class="fas fa-arrow-right"></i>
 
                     </div>
 
@@ -2814,28 +2162,67 @@ footer p {
 
 
 
-            <!-- OPERATIONAL INSIGHTS -->
+            <!-- ==================================================
+                 DASHBOARD 03
+            =================================================== -->
 
-            <article
-                class="dashboard-card reveal zoomable"
-                data-title="Operational Insights"
-            >
+            <article class="dashboard-story">
 
-                <img
-                    src="images/operational-insights.png"
-                    alt="Olist Operational Insights Dashboard"
-                    loading="lazy"
-                >
+                <div class="dashboard-visual zoomable">
 
-                <div class="dashboard-overlay">
+                    <img
+                        src="images/operational-insights.png"
+                        alt="Olist Operational Insights Power BI dashboard"
+                        loading="lazy"
+                    >
 
-                    <div class="dashboard-label">
+                </div>
 
-                        Operational Insights
 
-                        <small>
-                            Delivery · fulfilment · regional performance
-                        </small>
+                <div class="dashboard-copy">
+
+                    <div class="dashboard-number">
+                        03 / OPERATIONAL INSIGHTS
+                    </div>
+
+                    <h3>
+                        What happens between
+                        order and delivery?
+                    </h3>
+
+                    <p>
+
+                        The final view moves into fulfilment:
+                        delivery timing, regional variation,
+                        cancellations and order-status progression
+                        reveal the operational experience surrounding
+                        the transaction.
+
+                    </p>
+
+
+                    <div class="dashboard-tags">
+
+                        <span>
+                            Delivery
+                        </span>
+
+                        <span>
+                            Fulfilment
+                        </span>
+
+                        <span>
+                            Regional Performance
+                        </span>
+
+                    </div>
+
+
+                    <div class="dashboard-progress">
+
+                        OPERATIONAL LAYER
+
+                        <i class="fas fa-check"></i>
 
                     </div>
 
@@ -2852,14 +2239,11 @@ footer p {
 
 
 
-<!-- =========================================================
-     KEY FINDINGS
-========================================================= -->
+<!-- ======================================================
+     FINDINGS
+======================================================= -->
 
-<section
-    class="findings-section"
-    id="findings"
->
+<section class="findings-section" id="findings">
 
     <div class="findings-inner">
 
@@ -2871,8 +2255,7 @@ footer p {
             </span>
 
             <h2>
-                What the Data
-                <br>
+                What the Data<br>
                 Revealed
             </h2>
 
@@ -2890,8 +2273,6 @@ footer p {
 
         <div class="findings-grid">
 
-
-            <!-- FINDING 01 -->
 
             <article class="finding-card reveal">
 
@@ -2922,8 +2303,6 @@ footer p {
 
 
 
-            <!-- FINDING 02 -->
-
             <article class="finding-card reveal">
 
                 <span class="finding-number">
@@ -2945,15 +2324,13 @@ footer p {
                     Product categories showed substantial differences
                     in revenue contribution, customer adoption,
                     and churn behaviour, creating opportunities for
-                    more targeted retention strategies.
+                    targeted retention strategies.
 
                 </p>
 
             </article>
 
 
-
-            <!-- FINDING 03 -->
 
             <article class="finding-card reveal">
 
@@ -2963,20 +2340,19 @@ footer p {
 
                 <div class="finding-icon">
 
-                    <i class="fas fa-truck"></i>
+                    <i class="fas fa-truck-fast"></i>
 
                 </div>
 
                 <h3>
-                    Delivery Performance Varies by Region
+                    Operational Performance Varies
                 </h3>
 
                 <p>
 
-                    Delivery and fulfilment performance varied
-                    considerably across regions, providing an
-                    operational dimension to the customer
-                    experience analysis.
+                    Delivery times differed materially across regions,
+                    showing that fulfilment performance can become
+                    an important part of the wider customer experience.
 
                 </p>
 
@@ -2991,194 +2367,181 @@ footer p {
 
 
 
-<!-- =========================================================
+<!-- ======================================================
      TECHNICAL APPROACH
-========================================================= -->
+======================================================= -->
 
-<section class="section">
+<section class="tech-section">
 
-
-    <div class="section-heading reveal">
-
-        <span class="section-eyebrow">
-            04 · TECHNICAL APPROACH
-        </span>
-
-        <h2>
-            Built for
-            <br>
-            Analytical Clarity
-        </h2>
-
-        <p>
-
-            The project combines SQL-based preparation with
-            Power BI modelling and visualization to turn
-            transactional data into business-facing analysis.
-
-        </p>
-
-    </div>
+    <div class="tech-inner">
 
 
+        <div class="section-heading reveal">
 
-    <div class="tech-grid">
+            <span class="section-eyebrow">
+                04 · TECHNICAL APPROACH
+            </span>
 
-
-        <article class="tech-card reveal">
-
-            <i class="fas fa-database"></i>
-
-            <h3>
-                SQL Analysis
-            </h3>
+            <h2>
+                Turning raw transactions<br>
+                into decision-ready BI.
+            </h2>
 
             <p>
 
-                Joins, aggregations, customer-level metrics,
-                product analysis, payment analysis, and
-                operational performance analysis.
+                SQL provided the structured analytical foundation
+                that allowed the Power BI layer to focus on
+                interpretation, storytelling and decision support.
 
             </p>
 
-        </article>
+        </div>
 
 
 
-        <article class="tech-card reveal">
-
-            <i class="fas fa-chart-column"></i>
-
-            <h3>
-                Power BI
-            </h3>
-
-            <p>
-
-                Interactive dashboards combining KPIs,
-                segmentation, category analysis, regional
-                performance, and operational metrics.
-
-            </p>
-
-        </article>
+        <div class="tech-grid">
 
 
+            <article class="tech-card reveal">
 
-        <article class="tech-card reveal">
+                <i class="fas fa-database"></i>
 
-            <i class="fas fa-calculator"></i>
+                <h3>
+                    SQL Analysis
+                </h3>
 
-            <h3>
-                DAX &amp; Modelling
-            </h3>
+                <p>
+                    Transactional data was structured into customer,
+                    product and operational analytical views.
+                </p>
 
-            <p>
-
-                Measures and analytical logic for customer
-                frequency, spend, retention, churn, and
-                performance analysis.
-
-            </p>
-
-        </article>
+            </article>
 
 
 
-        <article class="tech-card reveal">
+            <article class="tech-card reveal">
 
-            <i class="fas fa-users"></i>
+                <i class="fas fa-users"></i>
 
-            <h3>
-                Customer Analytics
-            </h3>
+                <h3>
+                    Customer Analytics
+                </h3>
 
-            <p>
+                <p>
+                    Repeat purchase behaviour, customer segmentation,
+                    churn classification and retention analysis.
+                </p>
 
-                Repeat purchase behaviour, customer segmentation,
-                churn classification, and retention analysis.
-
-            </p>
-
-        </article>
+            </article>
 
 
 
-        <article class="tech-card reveal">
+            <article class="tech-card reveal">
 
-            <i class="fas fa-tags"></i>
+                <i class="fas fa-tags"></i>
 
-            <h3>
-                Product Analytics
-            </h3>
+                <h3>
+                    Product Analytics
+                </h3>
 
-            <p>
+                <p>
+                    Category revenue, adoption, product performance
+                    and high-churn category identification.
+                </p>
 
-                Category revenue, adoption, product performance,
-                and high-churn category identification.
-
-            </p>
-
-        </article>
+            </article>
 
 
 
-        <article class="tech-card reveal">
+            <article class="tech-card reveal">
 
-            <i class="fas fa-route"></i>
+                <i class="fas fa-route"></i>
 
-            <h3>
-                Operational Analytics
-            </h3>
+                <h3>
+                    Operational Analytics
+                </h3>
 
-            <p>
+                <p>
+                    Delivery performance, fulfilment outcomes,
+                    cancellation behaviour and regional variation.
+                </p>
 
-                Delivery performance, fulfilment outcomes,
-                cancellation behaviour, and regional
-                operational variation.
-
-            </p>
-
-        </article>
-
-
-    </div>
+            </article>
 
 
 
-    <div class="tools-strip reveal">
+            <article class="tech-card reveal">
 
-        <span class="tool">
-            SQL
-        </span>
+                <i class="fas fa-chart-line"></i>
 
-        <span class="tool">
-            POWER BI
-        </span>
+                <h3>
+                    Power BI Storytelling
+                </h3>
 
-        <span class="tool">
-            DAX
-        </span>
+                <p>
+                    Interactive visuals were arranged as a progression
+                    from customer behaviour to operations.
+                </p>
 
-        <span class="tool">
-            CUSTOMER ANALYTICS
-        </span>
+            </article>
 
-        <span class="tool">
-            RETENTION
-        </span>
 
-        <span class="tool">
-            CHURN
-        </span>
 
-        <span class="tool">
-            E-COMMERCE
-        </span>
+            <article class="tech-card reveal">
 
-        <span class="tool">
-            DATA STORYTELLING
-        </span>
+                <i class="fas fa-lightbulb"></i>
+
+                <h3>
+                    Business Interpretation
+                </h3>
+
+                <p>
+                    Technical outputs were translated into commercially
+                    meaningful retention and operational insights.
+                </p>
+
+            </article>
+
+
+        </div>
+
+
+
+        <div class="tools-strip reveal">
+
+            <span class="tool">
+                SQL
+            </span>
+
+            <span class="tool">
+                POWER BI
+            </span>
+
+            <span class="tool">
+                DAX
+            </span>
+
+            <span class="tool">
+                CUSTOMER ANALYTICS
+            </span>
+
+            <span class="tool">
+                RETENTION
+            </span>
+
+            <span class="tool">
+                CHURN
+            </span>
+
+            <span class="tool">
+                E-COMMERCE
+            </span>
+
+            <span class="tool">
+                DATA STORYTELLING
+            </span>
+
+        </div>
 
     </div>
 
@@ -3186,25 +2549,24 @@ footer p {
 
 
 
-<!-- =========================================================
+<!-- ======================================================
      CTA
-========================================================= -->
+======================================================= -->
 
 <section class="cta reveal">
 
     <h2>
-        Turning Transactions
+        Turning Transactions<br>
         Into Decisions.
     </h2>
 
     <p>
 
         Olist demonstrates how transactional e-commerce data
-        can be transformed into customer, product, and
-        operational intelligence.
+        can be transformed into customer, product and operational
+        intelligence.
 
     </p>
-
 
     <a
         href="../../index.html#projects"
@@ -3221,29 +2583,24 @@ footer p {
 
 
 
-<!-- =========================================================
+<!-- ======================================================
      FOOTER
-========================================================= -->
+======================================================= -->
 
 <footer>
 
-    <p>
-        © 2026 Sodiq Oluwatimileyin.
-        Olist Customer Retention &amp; Operational Analytics.
-    </p>
+    © 2026 Sodiq Oluwatimileyin.
+    Olist Customer Retention &amp; Operational Analytics.
 
 </footer>
 
 
 
-<!-- =========================================================
+<!-- ======================================================
      LIGHTBOX
-========================================================= -->
+======================================================= -->
 
-<div
-    class="lightbox"
-    id="lightbox"
->
+<div class="lightbox" id="lightbox">
 
     <button
         class="lightbox-close"
@@ -3266,201 +2623,338 @@ footer p {
 
 
 
-<!-- =========================================================
+<!-- ======================================================
      JAVASCRIPT
-========================================================= -->
+======================================================= -->
 
 <script>
 
-
-/* =========================================================
-   DASHBOARD LIGHTBOX
-========================================================= */
-
-const zoomableImages =
-    document.querySelectorAll(".zoomable");
-
-const lightbox =
-    document.getElementById("lightbox");
-
-const lightboxImage =
-    document.getElementById("lightboxImage");
-
-const lightboxClose =
-    document.getElementById("lightboxClose");
+document.addEventListener("DOMContentLoaded", () => {
 
 
-zoomableImages.forEach(card => {
+    /* =====================================================
+       REDUCED MOTION
+    ====================================================== */
 
-    card.addEventListener("click", () => {
-
-        const image =
-            card.querySelector("img");
-
-        if (!image) return;
-
-        lightboxImage.src =
-            image.src;
-
-        lightboxImage.alt =
-            image.alt;
-
-        lightbox.classList.add("active");
-
-        document.body.style.overflow =
-            "hidden";
-
-    });
-
-});
+    const reduced =
+        window.matchMedia(
+            "(prefers-reduced-motion: reduce)"
+        ).matches;
 
 
-function closeLightbox() {
 
-    lightbox.classList.remove("active");
+    /* =====================================================
+       SCROLL REVEAL
+    ====================================================== */
 
-    document.body.style.overflow =
-        "";
-
-}
-
-
-lightboxClose.addEventListener(
-    "click",
-    closeLightbox
-);
-
-
-lightbox.addEventListener(
-    "click",
-    event => {
-
-        if (
-            event.target === lightbox
-        ) {
-
-            closeLightbox();
-
-        }
-
-    }
-);
-
-
-document.addEventListener(
-    "keydown",
-    event => {
-
-        if (
-            event.key === "Escape"
-        ) {
-
-            closeLightbox();
-
-        }
-
-    }
-);
-
-
-/* =========================================================
-   REVEAL ON SCROLL
-========================================================= */
-
-const revealElements =
-    document.querySelectorAll(".reveal");
-
-
-if (
-    "IntersectionObserver"
-    in window
-) {
-
-    const revealObserver =
-        new IntersectionObserver(
-            entries => {
-
-                entries.forEach(entry => {
-
-                    if (
-                        entry.isIntersecting
-                    ) {
-
-                        entry.target.style.animationDelay =
-                            `${Math.min(
-                                entry.target.getBoundingClientRect().top / 800,
-                                .25
-                            )}s`;
-
-                        entry.target.classList.add(
-                            "visible"
-                        );
-
-                        revealObserver.unobserve(
-                            entry.target
-                        );
-
-                    }
-
-                });
-
-            },
-            {
-                threshold:
-                    .08
-            }
+    const reveals =
+        document.querySelectorAll(
+            ".reveal, .dashboard-story"
         );
 
 
-    revealElements.forEach(
-        element => {
+    if(
+        reduced ||
+        !("IntersectionObserver" in window)
+    ){
 
-            revealObserver.observe(
-                element
+        reveals.forEach(element => {
+
+            element.classList.add("visible");
+
+        });
+
+    }else{
+
+        const observer =
+            new IntersectionObserver(
+                (entries, obs) => {
+
+                    entries.forEach(entry => {
+
+                        if(entry.isIntersecting){
+
+                            entry.target.classList.add(
+                                "visible"
+                            );
+
+                            obs.unobserve(
+                                entry.target
+                            );
+
+                        }
+
+                    });
+
+                },
+                {
+                    threshold:.13,
+
+                    rootMargin:
+                        "0px 0px -60px 0px"
+                }
             );
+
+
+        reveals.forEach(element => {
+
+            observer.observe(element);
+
+        });
+
+    }
+
+
+
+    /* =====================================================
+       NUMBER COUNTERS
+    ====================================================== */
+
+    const counters =
+        document.querySelectorAll(
+            ".counter"
+        );
+
+    let countersStarted = false;
+
+
+    function startCounters(){
+
+        if(countersStarted){
+            return;
+        }
+
+        countersStarted = true;
+
+
+        counters.forEach(counter => {
+
+            const target =
+                Number(
+                    counter.dataset.target
+                );
+
+            const suffix =
+                counter.dataset.suffix || "";
+
+
+            if(reduced){
+
+                counter.textContent =
+                    target + suffix;
+
+                return;
+            }
+
+
+            const start =
+                performance.now();
+
+            const duration =
+                1350;
+
+
+            function tick(now){
+
+                const progress =
+                    Math.min(
+                        (now - start) /
+                        duration,
+                        1
+                    );
+
+
+                const ease =
+                    1 -
+                    Math.pow(
+                        1 - progress,
+                        3
+                    );
+
+
+                counter.textContent =
+                    Math.round(
+                        target * ease
+                    ) + suffix;
+
+
+                if(progress < 1){
+
+                    requestAnimationFrame(
+                        tick
+                    );
+
+                }
+
+            }
+
+
+            requestAnimationFrame(
+                tick
+            );
+
+        });
+
+    }
+
+
+
+    const stats =
+        document.querySelector(".stats");
+
+
+    if(
+        stats &&
+        "IntersectionObserver" in window &&
+        !reduced
+    ){
+
+        const statsObserver =
+            new IntersectionObserver(
+                (entries, observer) => {
+
+                    if(
+                        entries.some(
+                            entry =>
+                                entry.isIntersecting
+                        )
+                    ){
+
+                        startCounters();
+
+                        observer.disconnect();
+
+                    }
+
+                },
+                {
+                    threshold:.35
+                }
+            );
+
+
+        statsObserver.observe(stats);
+
+    }else{
+
+        startCounters();
+
+    }
+
+
+
+    /* =====================================================
+       DASHBOARD LIGHTBOX
+    ====================================================== */
+
+    const lightbox =
+        document.getElementById(
+            "lightbox"
+        );
+
+    const lightboxImage =
+        document.getElementById(
+            "lightboxImage"
+        );
+
+
+    document
+        .querySelectorAll(".zoomable")
+        .forEach(card => {
+
+            card.addEventListener(
+                "click",
+                () => {
+
+                    const source =
+                        card.querySelector(
+                            "img"
+                        );
+
+
+                    if(!source){
+                        return;
+                    }
+
+
+                    lightboxImage.src =
+                        source.src;
+
+                    lightboxImage.alt =
+                        source.alt;
+
+
+                    lightbox.classList.add(
+                        "active"
+                    );
+
+
+                    document.body.style.overflow =
+                        "hidden";
+
+                }
+            );
+
+        });
+
+
+
+    function closeLightbox(){
+
+        lightbox.classList.remove(
+            "active"
+        );
+
+        document.body.style.overflow =
+            "";
+
+    }
+
+
+
+    document
+        .getElementById("lightboxClose")
+        .addEventListener(
+            "click",
+            closeLightbox
+        );
+
+
+    lightbox.addEventListener(
+        "click",
+        event => {
+
+            if(
+                event.target === lightbox
+            ){
+
+                closeLightbox();
+
+            }
 
         }
     );
 
-}
 
+    document.addEventListener(
+        "keydown",
+        event => {
 
-/* =========================================================
-   SMART NAVIGATION SHADOW
-========================================================= */
+            if(
+                event.key === "Escape"
+            ){
 
-const navbar =
-    document.querySelector(".navbar");
+                closeLightbox();
 
-
-window.addEventListener(
-    "scroll",
-    () => {
-
-        if (
-            window.scrollY > 10
-        ) {
-
-            navbar.style.boxShadow =
-                "0 8px 30px rgba(35,24,75,.06)";
-
-        } else {
-
-            navbar.style.boxShadow =
-                "none";
+            }
 
         }
+    );
 
-    },
-    {
-        passive: true
-    }
-);
-
+});
 
 </script>
 
 
 </body>
-
 </html>

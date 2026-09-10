@@ -1,61 +1,133 @@
-# Sodiq Oluwatimileyin - Data Analysis Portfolio
+# Sodiq Oluwatimileyin — Data & Business Analyst
 
-Welcome! This repository contains the complete template for a professional, one-page data analysis portfolio website, hosted for free on GitHub Pages.
+Business & Data Analyst focused on turning raw data into actionable business insights through data analysis, business intelligence, visualization, and analytical storytelling.
 
-## About This Portfolio Template
+My portfolio brings together projects across **retail, banking, and e-commerce**, combining SQL, Power BI, Excel, Python, DAX, data modelling, and AI-assisted analytical workflows.
 
-This portfolio is designed to demonstrate skills in:
-- Data visualization and storytelling
-- Data modeling and analysis
-- Creating interactive, professional dashboards
-- Transforming complex data into actionable insights
+---
 
-## 🚀 Projects
+## Featured Work
 
-This template is set up to showcase your best work. You can easily customize the project cards in the `index.html` file.
+### JRAD — Real-World Retail Business Intelligence System
 
-### Project Title One
-*A brief description of your project, the tools used, and the key insights derived.*
+An end-to-end retail analytics ecosystem built around a realistic Nigerian supermarket environment.
 
-### Project Title Two
-*A brief description of your project, the tools used, and the key insights derived.*
+The project covers the analytical workflow from raw business data through SQL analysis, data quality, modelling, Power BI dashboards, customer behaviour, operational performance, and strategic decision support.
 
-### Project Title Three
-*A brief description of your project, the tools used, and the key insights derived.*
+**Focus areas:**
+- Retail sales & revenue analysis
+- Customer behaviour & retention
+- Product & category performance
+- Branch performance
+- Payments & operations
+- Pricing, promotions & inflation
+- Market basket analysis
+- Business intelligence & executive reporting
 
+**Tools:** SQL · Power BI · DAX · Excel · Python · Power Query · Data Modelling
 
-## 🛠️ Skills
+[View JRAD Project](projects/jrad-retail-powerbi-dashboard/)
 
-Update the `index.html` file to reflect your personal technical skillset. The template is organized into key categories:
+---
 
-- **Data Visualization**: Power BI, Tableau, Matplotlib, etc.
-- **Data Analysis**: SQL, Python (Pandas), R, Excel, etc.
-- **Data Modeling**: Power Query, DAX, Star Schema Design, etc.
-- **Tools**: List any other relevant tools like Power BI Service, specific cloud platforms, etc.
+### THERA Bank — Personal Loan Campaign Analysis
 
-## 💡 How to Use This Template
+A focused Power BI case study analysing customer behaviour and personal loan acceptance during a banking marketing campaign.
 
-Creating your own portfolio from this template is a simple, four-step process.
+The analysis explores customer characteristics and banking relationships associated with stronger loan conversion.
 
-### 1. Create a New Repository from this Template
-Click the green **"Use this template"** button at the top of this repository page, then select **"Create a new repository"**.
+**Focus areas:**
+- Loan acceptance rate
+- Income segmentation
+- Education & customer demographics
+- Family characteristics
+- Banking relationships
+- Mortgage ownership
+- Customer targeting & campaign strategy
 
-### 2. Name Your Repository for GitHub Pages
-This is the most important step. To turn your portfolio into a live website, you **must** name your new repository in the following format:
-`your-username.github.io`
-*(Replace `your-username` with your actual GitHub username.)*
+**Tools:** Power BI · DAX · Excel · Data Analysis · Business Intelligence
 
-### 3. Customize Your Portfolio
-Open the `index.html` file and begin personalizing it. The file contains helpful `<!--💡UPDATE: ... -->` comments to guide you on where to change:
-- Your name and title
-- Social media links
-- The "About Me" section
-- Your project titles, descriptions, and links
-- Your list of skills
+[View THERA Bank Project](projects/thera-bank-loan-analytics/)
 
-### 4. Add Your Files
-- Upload your profile photo and project preview images to the `assets/images/` folder.
-- Upload your CV (e.g., in PDF format) to the `assets/` folder.
-- Create your favicon and add it to the root folder.
+---
 
-Once you commit your changes, your new portfolio website will be live at `https://your-username.github.io` within a few minutes!
+### Olist — Customer & Operational Analytics
+
+A focused SQL and Power BI analysis of the Brazilian Olist e-commerce marketplace.
+
+The project examines customer retention, purchasing behaviour, product performance, delivery efficiency, and operational patterns.
+
+**Focus areas:**
+- Customer retention & churn
+- Purchase frequency
+- Product & category performance
+- Customer adoption
+- Delivery performance
+- Order fulfilment
+- Regional operational analysis
+
+**Tools:** SQL · Power BI · DAX · Excel · Data Analysis
+
+[View Olist Project](projects/olist-customer-retention/)
+
+---
+
+## Analytical Capabilities
+
+### Data Visualization
+- Power BI
+- Tableau
+- Excel Dashboards
+- Deneb
+- Data Storytelling
+- Executive Reporting
+
+### Data Analysis
+- SQL
+- Python
+- Pandas
+- Excel
+- Exploratory Data Analysis
+- Customer & Sales Analysis
+- Business Analysis
+
+### Data Modelling & BI
+- DAX
+- Power Query
+- Star Schema
+- Dimensional Modelling
+- KPI & Measure Engineering
+- Data Transformation
+
+### Additional Skills
+- AI-assisted analytical workflows
+- Prompt Engineering
+- Figma
+- HTML
+- CSS
+- JavaScript
+- Git & GitHub
+
+---
+
+## Portfolio Structure
+
+This repository powers my personal portfolio website.
+
+```text
+/
+├── assets/
+│   ├── CSS/
+│   ├── images/
+│   ├── js/
+│   └── Sodiq Oluwatimileyin_CV.pdf
+│
+├── projects/
+│   ├── jrad-retail-data-system/
+│   ├── jrad-retail-powerbi-dashboard/
+│   ├── jrad-retail-sql-analysis/
+│   ├── thera-bank-loan-analytics/
+│   └── olist-customer-retention/
+│
+├── index.html
+└── README.md

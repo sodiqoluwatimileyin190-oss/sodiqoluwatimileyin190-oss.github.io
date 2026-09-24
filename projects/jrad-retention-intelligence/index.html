@@ -239,7 +239,8 @@
             transform-origin: center bottom;
         }
 
-        .jrad-hero-dashboard img {
+        .jrad-hero-dashboard img,
+        .jrad-hero-dashboard video {
             display: block;
             width: 100%;
             height: auto;
@@ -1077,11 +1078,14 @@
 
             <div class="jrad-hero-dashboard">
 
-                <img src="images/telegram-alert.jpg"
-                     alt="A real retention alert arriving in Telegram, showing new candidates found per branch">
+                <video autoplay loop muted playsinline
+                       poster="images/telegram-alert.jpg"
+                       aria-label="A short walkthrough of the retention pipeline, from writing the detection code to a real alert arriving on Telegram">
+                    <source src="videos/jrad-lifecycle.mp4" type="video/mp4">
+                </video>
 
                 <div class="jrad-hero-caption">
-                    A real alert, from a real run — not a mockup.
+                    The full pipeline, in 22 seconds — not a mockup.
                 </div>
 
             </div>

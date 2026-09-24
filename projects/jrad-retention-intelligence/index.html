@@ -1,1 +1,1603 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <title>JRAD Retention Intelligence | Sodiq Oluwatimileyin</title>
+
+    <link rel="stylesheet"
+          href="../../assets/css/style.css">
+
+    <style>
+
+        /* =========================================================
+           JRAD RETENTION INTELLIGENCE — VERSION 2 CASE STUDY
+           Continuation of the JRAD Power BI story
+        ========================================================= */
+
+        :root {
+            --jrad-purple: #6338c7;
+            --jrad-purple-dark: #43218f;
+            --jrad-purple-light: #8e6be8;
+            --jrad-bg: #f8f7fb;
+            --jrad-text: #17151d;
+            --jrad-muted: #696574;
+            --jrad-border: rgba(99, 56, 199, 0.12);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            background: var(--jrad-bg);
+            color: var(--jrad-text);
+            overflow-x: hidden;
+        }
+
+        /* =========================================================
+           HERO
+        ========================================================= */
+
+        .jrad-hero {
+            position: relative;
+            min-height: 720px;
+            padding: 72px 24px 0;
+            display: flex;
+            justify-content: center;
+            overflow: hidden;
+
+            background:
+                radial-gradient(
+                    circle at 15% 20%,
+                    rgba(190, 157, 255, 0.95),
+                    transparent 34%
+                ),
+                radial-gradient(
+                    circle at 85% 85%,
+                    rgba(55, 23, 130, 0.85),
+                    transparent 45%
+                ),
+                linear-gradient(
+                    125deg,
+                    #a17ce8 0%,
+                    #754bd0 48%,
+                    #42238f 100%
+                );
+
+            color: white;
+        }
+
+        .jrad-hero::before,
+        .jrad-hero::after {
+            content: "";
+            position: absolute;
+            border-radius: 50%;
+            pointer-events: none;
+            filter: blur(2px);
+        }
+
+        .jrad-hero::before {
+            width: 360px;
+            height: 360px;
+            right: -110px;
+            top: -100px;
+            background: rgba(255, 255, 255, 0.08);
+            animation: heroBlobOne 7s ease-in-out infinite alternate;
+        }
+
+        .jrad-hero::after {
+            width: 250px;
+            height: 250px;
+            left: -100px;
+            bottom: -110px;
+            background: rgba(255, 255, 255, 0.07);
+            animation: heroBlobTwo 8s ease-in-out infinite alternate;
+        }
+
+        .jrad-hero-inner {
+            position: relative;
+            z-index: 2;
+            width: min(1180px, 100%);
+            text-align: center;
+        }
+
+        .jrad-eyebrow {
+            display: inline-block;
+            margin-bottom: 18px;
+            padding: 8px 16px;
+            border: 1px solid rgba(255, 255, 255, 0.28);
+            border-radius: 999px;
+
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(8px);
+
+            opacity: 0;
+            transform: translateY(18px);
+            animation: heroIn 0.55s cubic-bezier(.2, .8, .2, 1) forwards;
+        }
+
+        .jrad-hero h1 {
+            margin: 0;
+            font-size: clamp(44px, 5.6vw, 76px);
+            line-height: 0.98;
+            letter-spacing: -3px;
+            font-weight: 900;
+
+            opacity: 0;
+            transform: translateY(25px);
+            animation: heroIn 0.65s 0.08s cubic-bezier(.2, .8, .2, 1) forwards;
+        }
+
+        .jrad-hero-subtitle {
+            margin: 16px 0 18px;
+
+            font-size: clamp(19px, 2.2vw, 29px);
+            line-height: 1.15;
+            font-weight: 800;
+
+            opacity: 0;
+            transform: translateY(20px);
+            animation: heroIn 0.6s 0.16s cubic-bezier(.2, .8, .2, 1) forwards;
+        }
+
+        .jrad-hero-description {
+            width: min(760px, 100%);
+            margin: 0 auto;
+
+            font-size: 15px;
+            line-height: 1.8;
+            color: rgba(255, 255, 255, 0.86);
+
+            opacity: 0;
+            transform: translateY(18px);
+            animation: heroIn 0.6s 0.24s cubic-bezier(.2, .8, .2, 1) forwards;
+        }
+
+        .jrad-hero-actions {
+            margin-top: 25px;
+
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+
+            opacity: 0;
+            transform: translateY(18px);
+            animation: heroIn 0.55s 0.32s cubic-bezier(.2, .8, .2, 1) forwards;
+        }
+
+        .jrad-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+
+            padding: 12px 20px;
+            border-radius: 9px;
+
+            font-size: 13px;
+            font-weight: 700;
+            text-decoration: none;
+
+            transition:
+                transform 0.2s ease,
+                box-shadow 0.2s ease,
+                background 0.2s ease;
+        }
+
+        .jrad-btn-primary {
+            background: white;
+            color: var(--jrad-purple-dark);
+        }
+
+        .jrad-btn-secondary {
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.35);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .jrad-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.18);
+        }
+
+        /* =========================================================
+           HERO DASHBOARD
+        ========================================================= */
+
+        .jrad-hero-dashboard {
+            width: min(820px, 100%);
+            margin: 45px auto 0;
+
+            position: relative;
+            z-index: 3;
+
+            opacity: 0;
+            transform:
+                perspective(1400px)
+                translateY(45px)
+                scale(0.94);
+
+            animation:
+                heroDashboardIn
+                0.85s
+                0.38s
+                cubic-bezier(.16, .84, .25, 1)
+                forwards;
+
+            transform-origin: center bottom;
+        }
+
+        .jrad-hero-dashboard img {
+            display: block;
+            width: 100%;
+            height: auto;
+
+            border-radius: 16px 16px 0 0;
+
+            box-shadow:
+                0 35px 80px rgba(32, 13, 83, 0.35),
+                0 8px 30px rgba(32, 13, 83, 0.18);
+
+            animation:
+                dashboardFloat
+                6s
+                1.4s
+                ease-in-out
+                infinite alternate;
+        }
+
+        .jrad-hero-caption {
+            margin-top: 14px;
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* =========================================================
+           MAIN CONTENT
+        ========================================================= */
+
+        .jrad-page {
+            position: relative;
+            width: min(1180px, 92%);
+            margin: 0 auto;
+            padding: 95px 0;
+        }
+
+        .jrad-page::before {
+            content: "";
+            position: absolute;
+
+            top: 50%;
+            left: 50%;
+
+            width: 700px;
+            height: 450px;
+
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+
+            background:
+                radial-gradient(
+                    circle,
+                    rgba(126, 81, 221, 0.14),
+                    transparent 70%
+                );
+
+            filter: blur(45px);
+
+            opacity: 0;
+            transition: opacity 0.7s ease;
+
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .jrad-page.visible::before {
+            opacity: 1;
+        }
+
+        /* =========================================================
+           BACK LINK
+        ========================================================= */
+
+        .jrad-back {
+            width: min(1180px, 92%);
+            margin: 0 auto;
+            padding-top: 20px;
+        }
+
+        .jrad-back a {
+            color: var(--jrad-purple);
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        /* =========================================================
+           PROJECT AT A GLANCE
+        ========================================================= */
+
+        .jrad-glance {
+            padding: 75px 0 30px;
+        }
+
+        .jrad-section-label {
+            color: var(--jrad-purple);
+            font-size: 11px;
+            font-weight: 900;
+            letter-spacing: 1.6px;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+        }
+
+        .jrad-glance h2 {
+            max-width: 760px;
+            margin: 0;
+
+            font-size: clamp(33px, 3.8vw, 52px);
+            line-height: 1.06;
+            letter-spacing: -2px;
+        }
+
+        .jrad-glance-description {
+            max-width: 760px;
+            margin-top: 22px;
+
+            color: var(--jrad-muted);
+            font-size: 16px;
+            line-height: 1.8;
+        }
+
+        /* =========================================================
+           COUNTING FIGURES
+        ========================================================= */
+
+        .jrad-stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+
+            margin-top: 42px;
+        }
+
+        .jrad-stat {
+            padding: 28px 24px;
+
+            border: 1px solid var(--jrad-border);
+            border-radius: 16px;
+
+            background: rgba(255, 255, 255, 0.8);
+
+            box-shadow:
+                0 10px 30px rgba(44, 21, 91, 0.06);
+
+            opacity: 0;
+            transform: translateY(24px);
+        }
+
+        .jrad-stat.visible {
+            animation:
+                statReveal
+                0.5s
+                cubic-bezier(.2, .8, .2, 1)
+                forwards;
+        }
+
+        .jrad-stat:nth-child(1).visible { animation-delay: 0s; }
+        .jrad-stat:nth-child(2).visible { animation-delay: 0.08s; }
+        .jrad-stat:nth-child(3).visible { animation-delay: 0.16s; }
+        .jrad-stat:nth-child(4).visible { animation-delay: 0.24s; }
+
+        .jrad-stat-number {
+            color: var(--jrad-purple);
+            font-size: clamp(28px, 2.8vw, 40px);
+            line-height: 1;
+            font-weight: 900;
+            letter-spacing: -1px;
+        }
+
+        .jrad-stat-label {
+            margin-top: 9px;
+            color: var(--jrad-muted);
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        /* =========================================================
+           DASHBOARD SECTIONS
+        ========================================================= */
+
+        .jrad-dashboard-section {
+            display: grid;
+            grid-template-columns: minmax(0, 1.15fr) minmax(320px, 0.85fr);
+            gap: 70px;
+            align-items: center;
+
+            padding: 100px 0;
+        }
+
+        .jrad-dashboard-section.reverse {
+            grid-template-columns: minmax(320px, 0.85fr) minmax(0, 1.15fr);
+        }
+
+        .jrad-dashboard-section.reverse .jrad-dashboard-copy { order: 2; }
+        .jrad-dashboard-section.reverse .jrad-dashboard-visual { order: 1; }
+
+        /* =========================================================
+           DASHBOARD VISUAL
+        ========================================================= */
+
+        .jrad-dashboard-visual {
+            width: 100%;
+
+            opacity: 0;
+            transform: translateY(28px) scale(0.965);
+
+            transition:
+                transform 0.75s cubic-bezier(.16, .84, .25, 1),
+                opacity 0.6s ease;
+        }
+
+        .jrad-dashboard-visual.visible {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        .jrad-dashboard-frame {
+            width: 100%;
+            padding: 10px;
+
+            border-radius: 18px;
+
+            background: rgba(255, 255, 255, 0.88);
+
+            box-shadow:
+                0 25px 65px rgba(47, 25, 101, 0.14),
+                0 5px 18px rgba(47, 25, 101, 0.08);
+
+            transition:
+                transform 0.28s ease,
+                box-shadow 0.28s ease;
+        }
+
+        .jrad-dashboard-frame img {
+            display: block;
+            width: 100%;
+            height: auto;
+
+            border-radius: 11px;
+
+            transition: transform 0.32s ease;
+        }
+
+        @media (hover: hover) and (pointer: fine) {
+
+            .jrad-dashboard-frame:hover {
+                transform: translateY(-9px);
+                box-shadow:
+                    0 35px 80px rgba(47, 25, 101, 0.20),
+                    0 8px 22px rgba(47, 25, 101, 0.10);
+            }
+
+            .jrad-dashboard-frame:hover img {
+                transform: scale(1.035);
+            }
+        }
+
+        /* =========================================================
+           STORY CARDS (used in place of a screenshot for The Gap)
+        ========================================================= */
+
+        .jrad-story-stack {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .jrad-story-card {
+            padding: 18px 20px;
+            border-radius: 14px;
+            background: rgba(255, 255, 255, 0.88);
+            border: 1px solid var(--jrad-border);
+            box-shadow: 0 10px 30px rgba(44, 21, 91, 0.06);
+        }
+
+        .jrad-story-card strong {
+            display: block;
+            color: var(--jrad-purple);
+            font-size: 13px;
+            margin-bottom: 4px;
+        }
+
+        .jrad-story-card span {
+            color: var(--jrad-muted);
+            font-size: 13px;
+            line-height: 1.55;
+        }
+
+        /* =========================================================
+           DASHBOARD COPY
+        ========================================================= */
+
+        .jrad-dashboard-copy {
+            opacity: 0;
+            transform: translateY(25px);
+            transition:
+                opacity 0.55s ease,
+                transform 0.65s cubic-bezier(.2, .8, .2, 1);
+        }
+
+        .jrad-dashboard-copy.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .jrad-dashboard-copy h2 {
+            margin: 0 0 12px;
+
+            font-size: clamp(28px, 3vw, 40px);
+            line-height: 1.08;
+            letter-spacing: -1.5px;
+        }
+
+        .jrad-dashboard-copy > p {
+            margin: 0 0 28px;
+
+            color: var(--jrad-muted);
+            font-size: 15px;
+            line-height: 1.75;
+        }
+
+        /* =========================================================
+           INSIGHTS
+        ========================================================= */
+
+        .jrad-insights {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .jrad-insights li {
+            padding: 15px 0;
+            border-bottom: 1px solid var(--jrad-border);
+
+            display: flex;
+            gap: 13px;
+
+            color: #4c5560;
+            font-size: 13px;
+            line-height: 1.65;
+
+            opacity: 0;
+            transform: translateX(-14px);
+        }
+
+        .jrad-dashboard-copy.visible .jrad-insights li {
+            animation: insightIn 0.42s cubic-bezier(.2, .8, .2, 1) forwards;
+        }
+
+        .jrad-dashboard-copy.visible .jrad-insights li:nth-child(1) { animation-delay: 0.08s; }
+        .jrad-dashboard-copy.visible .jrad-insights li:nth-child(2) { animation-delay: 0.16s; }
+        .jrad-dashboard-copy.visible .jrad-insights li:nth-child(3) { animation-delay: 0.24s; }
+        .jrad-dashboard-copy.visible .jrad-insights li:nth-child(4) { animation-delay: 0.32s; }
+
+        .jrad-insights li::before {
+            content: "";
+            flex: 0 0 6px;
+            width: 6px;
+            height: 6px;
+            margin-top: 8px;
+
+            border-radius: 50%;
+            background: var(--jrad-purple);
+        }
+
+        /* =========================================================
+           STRATEGIC FOCUS
+        ========================================================= */
+
+        .jrad-strategy {
+            margin-top: 22px;
+            padding: 23px 25px;
+
+            border-radius: 15px;
+
+            color: white;
+
+            background: linear-gradient(135deg, #6940ca, #4a2495);
+
+            box-shadow: 0 18px 35px rgba(75, 35, 145, 0.22);
+
+            opacity: 0;
+            transform: translateY(16px) scale(0.98);
+        }
+
+        .jrad-dashboard-copy.visible .jrad-strategy {
+            animation: strategyIn 0.55s 0.35s cubic-bezier(.2, .8, .2, 1) forwards;
+        }
+
+        .jrad-strategy-label {
+            margin-bottom: 9px;
+
+            font-size: 10px;
+            font-weight: 900;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+
+            opacity: 0.7;
+        }
+
+        .jrad-strategy p {
+            margin: 0;
+
+            font-size: 13px;
+            line-height: 1.65;
+            font-weight: 600;
+        }
+
+        /* =========================================================
+           VALIDATION CALLOUT (gold, used once for the payoff moment)
+        ========================================================= */
+
+        .jrad-validation {
+            margin-top: 22px;
+            padding: 23px 25px;
+            border-radius: 15px;
+            color: var(--jrad-purple-dark);
+            background: linear-gradient(135deg, #ede7fb, #d9cef5);
+            box-shadow: 0 18px 35px rgba(99, 56, 199, 0.18);
+            display: flex;
+            gap: 28px;
+
+            opacity: 0;
+            transform: translateY(16px) scale(0.98);
+        }
+
+        .jrad-dashboard-copy.visible .jrad-validation {
+            animation: strategyIn 0.55s 0.4s cubic-bezier(.2, .8, .2, 1) forwards;
+        }
+
+        .jrad-validation-figure strong {
+            display: block;
+            font-size: 26px;
+            font-weight: 900;
+        }
+
+        .jrad-validation-figure span {
+            font-size: 11px;
+            font-weight: 700;
+        }
+
+        /* =========================================================
+           ARCHITECTURE / THE CYCLE (modern animated diagram)
+        ========================================================= */
+
+        .jrad-flow {
+            padding: 110px 0;
+            text-align: center;
+        }
+
+        .jrad-flow h2 {
+            margin: 0;
+            font-size: clamp(32px, 3.8vw, 48px);
+            letter-spacing: -1.7px;
+        }
+
+        .jrad-flow > p {
+            max-width: 730px;
+            margin: 18px auto 55px;
+            color: var(--jrad-muted);
+            line-height: 1.75;
+            font-size: 15px;
+        }
+
+        .jrad-flow-wrap {
+            display: flex;
+            justify-content: center;
+            gap: 70px;
+            flex-wrap: wrap;
+            align-items: flex-start;
+        }
+
+        .jrad-flow-lane {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .jrad-flow-lane-title {
+            font-size: 12px;
+            font-weight: 900;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--jrad-purple);
+            margin-bottom: 26px;
+        }
+
+        .jrad-flow-node {
+            width: 260px;
+            padding: 18px 22px;
+            border-radius: 14px;
+            background: white;
+            border: 1px solid var(--jrad-border);
+            box-shadow: 0 10px 30px rgba(47, 25, 101, 0.07);
+            text-align: left;
+
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .jrad-flow-node.visible {
+            animation: techIn 0.5s cubic-bezier(.2, .8, .2, 1) forwards;
+        }
+
+        .jrad-flow-node strong {
+            display: block;
+            font-size: 14px;
+            color: var(--jrad-text);
+            margin-bottom: 3px;
+        }
+
+        .jrad-flow-node span {
+            display: block;
+            font-size: 12px;
+            color: var(--jrad-muted);
+            line-height: 1.5;
+        }
+
+        .jrad-flow-node.gold {
+            background: linear-gradient(135deg, #6940ca, #4a2495);
+            border-color: transparent;
+        }
+
+        .jrad-flow-node.gold strong,
+        .jrad-flow-node.gold span {
+            color: white;
+        }
+
+        .jrad-flow-connector {
+            width: 3px;
+            height: 34px;
+            background: repeating-linear-gradient(
+                180deg,
+                var(--jrad-purple) 0 6px,
+                transparent 6px 14px
+            );
+            background-size: 3px 28px;
+            animation: flowMove 0.9s linear infinite;
+        }
+
+        .jrad-flow-connector.gold {
+            background: repeating-linear-gradient(
+                180deg,
+                var(--jrad-purple) 0 6px,
+                transparent 6px 14px
+            );
+            background-size: 3px 28px;
+        }
+
+        .jrad-flow-edge-label {
+            font-size: 10.5px;
+            font-weight: 800;
+            color: var(--jrad-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.4px;
+            margin: 6px 0;
+        }
+
+        .jrad-flow-note {
+            margin-top: 26px;
+            max-width: 260px;
+            font-size: 12px;
+            color: var(--jrad-muted);
+            line-height: 1.6;
+        }
+
+        /* =========================================================
+           TECHNICAL PIPELINE
+        ========================================================= */
+
+        .jrad-tech {
+            padding: 100px 0;
+        }
+
+        .jrad-tech h2 {
+            margin: 0 0 35px;
+            font-size: clamp(32px, 3.8vw, 48px);
+            letter-spacing: -1.7px;
+        }
+
+        .jrad-tech-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+        }
+
+        .jrad-tech-card {
+            padding: 24px;
+
+            border: 1px solid var(--jrad-border);
+            border-radius: 15px;
+
+            background: white;
+
+            box-shadow: 0 10px 30px rgba(47, 25, 101, 0.05);
+
+            opacity: 0;
+            transform: translateY(25px);
+        }
+
+        .jrad-tech-card.visible {
+            animation: techIn 0.48s cubic-bezier(.2, .8, .2, 1) forwards;
+        }
+
+        .jrad-tech-card:nth-child(1).visible { animation-delay: 0s; }
+        .jrad-tech-card:nth-child(2).visible { animation-delay: 0.07s; }
+        .jrad-tech-card:nth-child(3).visible { animation-delay: 0.14s; }
+        .jrad-tech-card:nth-child(4).visible { animation-delay: 0.21s; }
+        .jrad-tech-card:nth-child(5).visible { animation-delay: 0.28s; }
+        .jrad-tech-card:nth-child(6).visible { animation-delay: 0.35s; }
+        .jrad-tech-card:nth-child(7).visible { animation-delay: 0.42s; }
+
+        .jrad-tech-card strong {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--jrad-purple);
+            font-size: 14px;
+        }
+
+        .jrad-tech-card span {
+            color: var(--jrad-muted);
+            font-size: 12px;
+            line-height: 1.6;
+        }
+
+        /* =========================================================
+           FINAL CTA
+        ========================================================= */
+
+        .jrad-final {
+            margin: 50px 0 100px;
+            padding: 55px 35px;
+            text-align: center;
+            border-radius: 22px;
+            color: white;
+
+            background: linear-gradient(135deg, #7046d1, #43218f);
+
+            box-shadow: 0 30px 70px rgba(63, 29, 126, 0.22);
+        }
+
+        .jrad-final h2 {
+            margin: 0 0 12px;
+            font-size: clamp(28px, 3.6vw, 44px);
+            letter-spacing: -1.5px;
+        }
+
+        .jrad-final p {
+            max-width: 680px;
+            margin: 0 auto 25px;
+            color: rgba(255, 255, 255, 0.82);
+            line-height: 1.7;
+        }
+
+        /* =========================================================
+           ANIMATIONS
+        ========================================================= */
+
+        @keyframes heroIn {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes heroDashboardIn {
+            0% {
+                opacity: 0;
+                transform: perspective(1400px) translateY(55px) scale(0.91) rotateX(3deg);
+            }
+            100% {
+                opacity: 1;
+                transform: perspective(1400px) translateY(0) scale(1) rotateX(0);
+            }
+        }
+
+        @keyframes dashboardFloat {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-7px); }
+        }
+
+        @keyframes heroBlobOne {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(-35px, 25px) scale(1.08); }
+        }
+
+        @keyframes heroBlobTwo {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(30px, -20px) scale(1.05); }
+        }
+
+        @keyframes statReveal {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes insightIn {
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        @keyframes strategyIn {
+            to { opacity: 1; transform: translateY(0) scale(1); }
+        }
+
+        @keyframes techIn {
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes flowMove {
+            from { background-position-y: 0; }
+            to { background-position-y: 28px; }
+        }
+
+        /* =========================================================
+           RESPONSIVE
+        ========================================================= */
+
+        @media (max-width: 900px) {
+
+            .jrad-hero { min-height: 620px; padding-top: 55px; }
+            .jrad-hero-dashboard { margin-top: 35px; }
+
+            .jrad-dashboard-section,
+            .jrad-dashboard-section.reverse {
+                grid-template-columns: 1fr;
+                gap: 40px;
+                padding: 75px 0;
+            }
+
+            .jrad-dashboard-section.reverse .jrad-dashboard-copy,
+            .jrad-dashboard-section.reverse .jrad-dashboard-visual {
+                order: initial;
+            }
+
+            .jrad-stats { grid-template-columns: repeat(2, 1fr); }
+            .jrad-tech-grid { grid-template-columns: repeat(2, 1fr); }
+            .jrad-flow-wrap { gap: 50px; }
+        }
+
+        @media (max-width: 600px) {
+
+            .jrad-hero { min-height: 560px; padding: 45px 18px 0; }
+            .jrad-hero h1 { letter-spacing: -2px; }
+            .jrad-hero-dashboard { margin-top: 30px; transform: translateY(30px) scale(0.96); }
+
+            .jrad-page { width: 90%; padding: 70px 0; }
+
+            .jrad-stats { grid-template-columns: 1fr 1fr; gap: 10px; }
+            .jrad-stat { padding: 20px 16px; }
+            .jrad-stat-number { font-size: 28px; }
+
+            .jrad-dashboard-section,
+            .jrad-dashboard-section.reverse { padding: 65px 0; }
+
+            .jrad-dashboard-copy h2 { font-size: 29px; }
+            .jrad-dashboard-frame { padding: 7px; border-radius: 13px; }
+
+            .jrad-tech-grid { grid-template-columns: 1fr; }
+            .jrad-validation { flex-direction: column; gap: 12px; }
+
+            .jrad-hero::before,
+            .jrad-hero::after { display: none; }
+        }
+
+        /* =========================================================
+           REDUCED MOTION
+        ========================================================= */
+
+        @media (prefers-reduced-motion: reduce) {
+
+            html { scroll-behavior: auto; }
+
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+
+            .jrad-eyebrow, .jrad-hero h1, .jrad-hero-subtitle,
+            .jrad-hero-description, .jrad-hero-actions, .jrad-hero-dashboard,
+            .jrad-stat, .jrad-dashboard-visual, .jrad-dashboard-copy,
+            .jrad-insights li, .jrad-strategy, .jrad-validation,
+            .jrad-tech-card, .jrad-flow-node {
+                opacity: 1 !important;
+                transform: none !important;
+            }
+
+            .jrad-flow-connector, .jrad-flow-connector.gold {
+                animation: none !important;
+            }
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+    <!-- =========================================================
+         HERO
+    ========================================================= -->
+
+    <header class="jrad-hero">
+
+        <div class="jrad-hero-inner">
+
+            <div class="jrad-eyebrow">
+                PROJECT 04 · CUSTOMER RETENTION INTELLIGENCE
+            </div>
+
+            <h1>
+                JRAD Retention Intelligence
+            </h1>
+
+            <div class="jrad-hero-subtitle">
+                From an Aggregate Insight to a Working System
+            </div>
+
+            <p class="jrad-hero-description">
+                The Power BI dashboard ended with a recommendation: convert
+                high-frequency walk-in customers into registered members.
+                It could say how many walk-ins existed — it couldn't say
+                who they were. This is the story of closing that gap,
+                end to end, until a branch manager's phone buzzes.
+            </p>
+
+            <div class="jrad-hero-actions">
+
+                <a href="#story" class="jrad-btn jrad-btn-primary">
+                    Explore the Build
+                </a>
+
+                <a href="../jrad-retail-powerbi-dashboard/"
+                   class="jrad-btn jrad-btn-secondary">
+                    See Version 1 First
+                </a>
+
+            </div>
+
+            <div class="jrad-hero-dashboard">
+
+                <img src="images/telegram-alert.jpg"
+                     alt="A real retention alert arriving in Telegram, showing new candidates found per branch">
+
+                <div class="jrad-hero-caption">
+                    A real alert, from a real run — not a mockup.
+                </div>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- =========================================================
+         BACK
+    ========================================================= -->
+
+    <div class="jrad-back">
+        <a href="../../index.html">← Back to Portfolio</a>
+    </div>
+
+
+    <main>
+
+
+        <!-- =====================================================
+             PROJECT AT A GLANCE
+        ====================================================== -->
+
+        <section class="jrad-page jrad-glance" id="story">
+
+            <div class="jrad-section-label">PROJECT AT A GLANCE</div>
+
+            <h2>Built to close the loop, not just describe it.</h2>
+
+            <p class="jrad-glance-description">
+                A full pipeline from raw payment data to a live notification —
+                identity resolution, a statistically validated detection rule,
+                automated alerting, and a real-time recognition tool for the till.
+            </p>
+
+            <div class="jrad-stats">
+
+                <div class="jrad-stat">
+                    <div class="jrad-stat-number" data-counter="4256" data-suffix="">0</div>
+                    <div class="jrad-stat-label">Recurring Identities Found</div>
+                </div>
+
+                <div class="jrad-stat">
+                    <div class="jrad-stat-number" data-counter="100" data-suffix="%">0%</div>
+                    <div class="jrad-stat-label">Detection Precision</div>
+                </div>
+
+                <div class="jrad-stat">
+                    <div class="jrad-stat-number" data-counter="88.3" data-decimals="1" data-suffix="%">0%</div>
+                    <div class="jrad-stat-label">Detection Recall</div>
+                </div>
+
+                <div class="jrad-stat">
+                    <div class="jrad-stat-number" data-counter="3" data-suffix="">0</div>
+                    <div class="jrad-stat-label">Alert Channels Delivered</div>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             01 / THE GAP
+        ====================================================== -->
+
+        <section class="jrad-page jrad-dashboard-section">
+
+            <div class="jrad-dashboard-visual">
+
+                <div class="jrad-story-stack">
+
+                    <div class="jrad-story-card">
+                        <strong>Day 1</strong>
+                        <span>A walk-in customer pays by transfer. Nothing about them is recorded beyond the transaction.</span>
+                    </div>
+
+                    <div class="jrad-story-card">
+                        <strong>Day 3</strong>
+                        <span>Back again — same transfer name, an above-average basket. A different cashier serves them.</span>
+                    </div>
+
+                    <div class="jrad-story-card">
+                        <strong>Day 10</strong>
+                        <span>A third visit. Still nobody has connected the three. On paper, they're three strangers.</span>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="jrad-dashboard-copy">
+
+                <div class="jrad-section-label">01 / THE GAP</div>
+
+                <h2>An insight that couldn't act on itself.</h2>
+
+                <p>
+                    The Customer Segmentation page closed with a finding: walk-in
+                    customers dominate the mix, and converting frequent walk-ins
+                    into registered members was flagged as the opportunity. True —
+                    and useless in the same breath.
+                </p>
+
+                <ul class="jrad-insights">
+
+                    <li>169,244 of 225,499 payments (75%) came from Walk-In customers — no name, no history, nothing to recognize them by</li>
+                    <li>Nothing in the schema linked one Walk-In visit to another, even when it was the same person</li>
+                    <li>Cashiers rotate shifts, so even a genuinely familiar face went unrecognized visit to visit</li>
+
+                </ul>
+
+                <div class="jrad-strategy">
+                    <div class="jrad-strategy-label">Strategic Focus</div>
+                    <p>
+                        Stop asking how many walk-ins exist, and start asking
+                        which one just paid — and whether it's happened before.
+                    </p>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             02 / IDENTITY RESOLUTION & VALIDATED DETECTION
+        ====================================================== -->
+
+        <section class="jrad-page jrad-dashboard-section reverse">
+
+            <div class="jrad-dashboard-copy">
+
+                <div class="jrad-section-label">02 / IDENTITY RESOLUTION &amp; VALIDATED DETECTION</div>
+
+                <h2>Turning a discarded signal into a detector.</h2>
+
+                <p>
+                    A transfer payment already carries the sender's name — a piece
+                    of identity the business was collecting and immediately
+                    throwing away. Two honest iterations got this right.
+                </p>
+
+                <ul class="jrad-insights">
+
+                    <li>Enriched 101,463 Walk-In transfer payments with realistic payer identities — the first version had a name-collision bug affecting 43,502 rows, fixed by drawing names without replacement per branch</li>
+                    <li>Built a fuzzy identity resolver, blocked by surname for speed — an early loose threshold incorrectly merged distinct names ("Femi Adegbite" and "Yemi Adegbite"), tightened to require an exact token match</li>
+                    <li>Rule: 2+ visits, average spend at or above the branch's own average</li>
+
+                </ul>
+
+                <div class="jrad-validation">
+                    <div class="jrad-validation-figure">
+                        <strong>100%</strong>
+                        <span>PRECISION</span>
+                    </div>
+                    <div class="jrad-validation-figure">
+                        <strong>88.3%</strong>
+                        <span>RECALL</span>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="jrad-dashboard-visual">
+
+                <div class="jrad-dashboard-frame">
+                    <img src="images/detection-engine-code.jpg"
+                         alt="The retention detection engine resolving identities and validating precision and recall">
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             03 / FROM DETECTION TO ACTION
+        ====================================================== -->
+
+        <section class="jrad-page jrad-dashboard-section">
+
+            <div class="jrad-dashboard-visual">
+
+                <div class="jrad-dashboard-frame">
+                    <img src="images/alert-system-code.jpg"
+                         alt="The alert system script connecting SQL Server, Telegram, and email">
+                </div>
+
+            </div>
+
+            <div class="jrad-dashboard-copy">
+
+                <div class="jrad-section-label">03 / FROM DETECTION TO ACTION</div>
+
+                <h2>A validated rule is only useful if someone sees it.</h2>
+
+                <p>
+                    Two layers sit on top of detection, aimed at two different
+                    moments in the business — the next morning, and the next visit.
+                </p>
+
+                <ul class="jrad-insights">
+
+                    <li>A Python service re-runs detection, tracks who's already been alerted, and sends a per-branch digest over Telegram and email — 3,645 candidates on the first run, delivered as a handful of messages, not 3,645 pings</li>
+                    <li>Credentials live in their own config file, never in the script — so adding a recipient never means touching code</li>
+                    <li>A standalone till-side companion lets a cashier type a transfer name and get an instant read: New, Returning, or Retention Candidate — without touching the store's existing POS</li>
+
+                </ul>
+
+                <div class="jrad-strategy">
+                    <div class="jrad-strategy-label">Strategic Focus</div>
+                    <p>
+                        A digest is useful the next day. Recognition at the till
+                        is powerful the moment it happens.
+                    </p>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             ARCHITECTURE — THE CYCLE
+        ====================================================== -->
+
+        <section class="jrad-page jrad-flow">
+
+            <div class="jrad-section-label">ARCHITECTURE</div>
+
+            <h2>The cycle, end to end.</h2>
+
+            <p>
+                Two independent pipelines by design — the analytics side
+                and the till-side recognition tool never depend on each other,
+                so one can run even where the other doesn't reach.
+            </p>
+
+            <div class="jrad-flow-wrap">
+
+                <div class="jrad-flow-lane">
+
+                    <div class="jrad-flow-lane-title">Analytics Pipeline</div>
+
+                    <div class="jrad-flow-node">
+                        <strong>FactPayments</strong>
+                        <span>Payer_Name column added — additive only, nothing existing changed</span>
+                    </div>
+
+                    <div class="jrad-flow-connector"></div>
+                    <div class="jrad-flow-edge-label">Detection Runs</div>
+                    <div class="jrad-flow-connector"></div>
+
+                    <div class="jrad-flow-node">
+                        <strong>RetentionCandidates + RetentionAlertsSent</strong>
+                        <span>Who qualifies, and who's already been notified</span>
+                    </div>
+
+                    <div class="jrad-flow-connector gold"></div>
+                    <div class="jrad-flow-edge-label">Telegram + Email</div>
+                    <div class="jrad-flow-connector gold"></div>
+
+                    <div class="jrad-flow-node gold">
+                        <strong>Branch Manager</strong>
+                        <span>A per-branch digest, deduplicated</span>
+                    </div>
+
+                </div>
+
+                <div class="jrad-flow-lane">
+
+                    <div class="jrad-flow-lane-title">Till-Side Pipeline</div>
+
+                    <div class="jrad-flow-node">
+                        <strong>Till-Side App</strong>
+                        <span>A cashier types a name — five seconds, no POS changes</span>
+                    </div>
+
+                    <div class="jrad-flow-connector"></div>
+                    <div class="jrad-flow-edge-label">Shared Memory</div>
+                    <div class="jrad-flow-connector"></div>
+
+                    <div class="jrad-flow-node">
+                        <strong>SQLite Database</strong>
+                        <span>Every till in the store reads the same live memory</span>
+                    </div>
+
+                    <div class="jrad-flow-note">
+                        Independent of the SQL Server warehouse — works even where the main analytics stack doesn't reach.
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             TOOLS & TECHNIQUES
+        ====================================================== -->
+
+        <section class="jrad-page jrad-tech">
+
+            <div class="jrad-section-label">TOOLS &amp; TECHNIQUES</div>
+
+            <h2>From raw payment data to a phone buzzing.</h2>
+
+            <div class="jrad-tech-grid">
+
+                <div class="jrad-tech-card">
+                    <strong>Data Enrichment</strong>
+                    <span>Python, pandas, openpyxl, collision-free identity sampling.</span>
+                </div>
+
+                <div class="jrad-tech-card">
+                    <strong>Identity Resolution</strong>
+                    <span>rapidfuzz, blocked fuzzy matching, token-sort normalization.</span>
+                </div>
+
+                <div class="jrad-tech-card">
+                    <strong>Detection &amp; Validation</strong>
+                    <span>Statistical profiling, precision/recall testing against ground truth.</span>
+                </div>
+
+                <div class="jrad-tech-card">
+                    <strong>Data Warehouse</strong>
+                    <span>SQL Server, T-SQL, staged UPDATE joins, star schema extension.</span>
+                </div>
+
+                <div class="jrad-tech-card">
+                    <strong>Alerting</strong>
+                    <span>Telegram Bot API, SMTP with Gmail App Passwords, deduplicated tracking.</span>
+                </div>
+
+                <div class="jrad-tech-card">
+                    <strong>Real-Time Recognition</strong>
+                    <span>Flask, SQLite, REST endpoints, a responsive till-side interface.</span>
+                </div>
+
+                <div class="jrad-tech-card">
+                    <strong>Presentation</strong>
+                    <span>A stakeholder deck and print flyer, built for real pitch use.</span>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             FINAL CTA
+        ====================================================== -->
+
+        <section class="jrad-page">
+
+            <div class="jrad-final">
+
+                <h2>Built for decisions that happen at the till, not the quarter.</h2>
+
+                <p>
+                    Version 1 recommended converting frequent walk-ins into
+                    registered customers. This is what that recommendation
+                    looks like once it stops being a slide and starts being
+                    a system.
+                </p>
+
+                <a href="../jrad-retail-powerbi-dashboard/"
+                   class="jrad-btn jrad-btn-primary">
+                    Revisit Version 1
+                </a>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+
+    <!-- =========================================================
+         JAVASCRIPT
+    ========================================================= -->
+
+    <script>
+
+        document.addEventListener("DOMContentLoaded", function () {
+
+            const observerOptions = {
+                threshold: 0.12,
+                rootMargin: "0px 0px -60px 0px"
+            };
+
+            const revealObserver = new IntersectionObserver(function (entries) {
+
+                entries.forEach(function (entry) {
+
+                    if (!entry.isIntersecting) {
+                        return;
+                    }
+
+                    entry.target.classList.add("visible");
+                    revealObserver.unobserve(entry.target);
+
+                });
+
+            }, observerOptions);
+
+            document
+                .querySelectorAll(
+                    ".jrad-page, " +
+                    ".jrad-dashboard-visual, " +
+                    ".jrad-dashboard-copy, " +
+                    ".jrad-stat, " +
+                    ".jrad-tech-card, " +
+                    ".jrad-flow-node"
+                )
+                .forEach(function (element) {
+                    revealObserver.observe(element);
+                });
+
+
+            /*
+             * COUNT-UP ENGINE
+             */
+
+            const counters = document.querySelectorAll("[data-counter]");
+
+            function animateCounter(element) {
+
+                if (element.dataset.counted === "true") {
+                    return;
+                }
+
+                element.dataset.counted = "true";
+
+                const target = parseFloat(element.dataset.counter);
+                const decimals = parseInt(element.dataset.decimals || "0", 10);
+                const prefix = element.dataset.prefix || "";
+                const suffix = element.dataset.suffix || "";
+                const duration = 900;
+                const startTime = performance.now();
+
+                function updateCounter(currentTime) {
+
+                    const elapsed = currentTime - startTime;
+                    const progress = Math.min(elapsed / duration, 1);
+                    const eased = 1 - Math.pow(1 - progress, 3);
+                    const current = target * eased;
+
+                    element.textContent =
+                        prefix +
+                        current.toLocaleString("en-NG", {
+                            minimumFractionDigits: decimals,
+                            maximumFractionDigits: decimals
+                        }) +
+                        suffix;
+
+                    if (progress < 1) {
+                        requestAnimationFrame(updateCounter);
+                    } else {
+                        element.textContent =
+                            prefix +
+                            target.toLocaleString("en-NG", {
+                                minimumFractionDigits: decimals,
+                                maximumFractionDigits: decimals
+                            }) +
+                            suffix;
+                    }
+
+                }
+
+                requestAnimationFrame(updateCounter);
+
+            }
+
+            const counterObserver = new IntersectionObserver(function (entries) {
+
+                entries.forEach(function (entry) {
+
+                    if (!entry.isIntersecting) {
+                        return;
+                    }
+
+                    animateCounter(entry.target);
+                    counterObserver.unobserve(entry.target);
+
+                });
+
+            }, { threshold: 0.4 });
+
+            counters.forEach(function (counter) {
+                counterObserver.observe(counter);
+            });
+
+
+            /*
+             * HERO FALLBACK
+             */
+
+            setTimeout(function () {
+
+                const heroDashboard = document.querySelector(".jrad-hero-dashboard");
+
+                if (heroDashboard) {
+                    heroDashboard.style.opacity = "1";
+                }
+
+            }, 1400);
+
+        });
+
+    </script>
+
+</body>
+</html>

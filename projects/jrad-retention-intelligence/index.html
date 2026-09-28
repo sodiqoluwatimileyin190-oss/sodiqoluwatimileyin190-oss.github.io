@@ -2137,45 +2137,7 @@
             line-height: 1.75;
         }
 
-        /* =========================================================
-           LIMITATIONS
-        ========================================================= */
-
-        .jrad-limits {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            border: 1px solid var(--jrad-border);
-            border-radius: 20px;
-            background: var(--jrad-surface);
-            overflow: hidden;
-        }
-
-        .jrad-limit {
-            padding: 32px;
-            border-bottom: 1px solid var(--jrad-border);
-        }
-
-        .jrad-limit:nth-child(odd) {
-            border-right: 1px solid var(--jrad-border);
-        }
-
-        .jrad-limit:nth-last-child(-n + 2) {
-            border-bottom: 0;
-        }
-
-        .jrad-limit h3 {
-            margin: 0 0 10px;
-            font-size: 17px;
-            letter-spacing: -0.3px;
-        }
-
-        .jrad-limit p {
-            margin: 0;
-            color: var(--jrad-muted);
-            font-size: 13px;
-            line-height: 1.75;
-        }
-
+      
         /* =========================================================
            WHAT'S NEXT
         ========================================================= */
@@ -2671,7 +2633,6 @@
             <a href="#till">At the Till</a>
             <a href="#architecture">Architecture</a>
             <a href="#decisions">Decisions</a>
-            <a href="#limits">Limits</a>
             <a href="#next">What's Next</a>
 
         </div>
@@ -3781,69 +3742,6 @@
                     <p>
                         Adding a manager or rotating a password is a config edit, and
                         secrets stay out of the script that gets shared and versioned.
-                    </p>
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- =====================================================
-             LIMITATIONS
-        ====================================================== -->
-
-        <section class="jrad-page" id="limits">
-
-            <div class="jrad-section-head">
-
-                <div class="jrad-section-label">LIMITATIONS</div>
-
-                <h2 class="jrad-h2">What this doesn't solve yet.</h2>
-
-                <p class="jrad-lead">
-                    Stated plainly, because a pitch that hides its limits doesn't
-                    survive its first real deployment.
-                </p>
-
-            </div>
-
-            <div class="jrad-limits jrad-reveal">
-
-                <div class="jrad-limit">
-                    <h3>Synthetic data is tidier than real data</h3>
-                    <p>
-                        Real transfer names arrive truncated, abbreviated, or under a
-                        spouse's or business account. The resolver was validated on
-                        generated names; real payment records would need a fresh round
-                        of validation before any accuracy figure is quoted.
-                    </p>
-                </div>
-
-                <div class="jrad-limit">
-                    <h3>Cash customers stay invisible</h3>
-                    <p>
-                        Only transfers carry a name. The other 67,781 walk-in payments
-                        — 40% of the walk-in total — can't be recognized by this
-                        approach at all.
-                    </p>
-                </div>
-
-                <div class="jrad-limit">
-                    <h3>Two people can share a name</h3>
-                    <p>
-                        Name-based identity can't tell apart two genuine customers
-                        with the same name at the same branch. Spend patterns and visit
-                        times could help separate them; the name alone can't.
-                    </p>
-                </div>
-
-                <div class="jrad-limit">
-                    <h3>Payer names are personal data</h3>
-                    <p>
-                        A live deployment needs a clear lawful basis, limited retention
-                        and customer notice under Nigeria's Data Protection Act 2023 —
-                        designed in from the start, not bolted on later.
                     </p>
                 </div>
 

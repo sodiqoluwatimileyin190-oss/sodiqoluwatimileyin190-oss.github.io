@@ -6,24 +6,48 @@
 
     <title>JRAD Retention Intelligence | Sodiq Oluwatimileyin</title>
 
+    <meta name="description"
+          content="An end-to-end customer retention system for JRAD Retail Superstores: identity resolution on transfer payments, a validated detection rule, Telegram and email alerting, and a till-side recognition tool.">
+    <meta name="theme-color" content="#6338c7">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="JRAD Retention Intelligence | Sodiq Oluwatimileyin">
+    <meta property="og:description"
+          content="From an aggregate Power BI insight to a working system that alerts branch managers and recognizes repeat customers at the till.">
+
     <link rel="stylesheet"
           href="../../assets/css/style.css">
+
+    <script>
+        document.documentElement.classList.add("jrad-js");
+    </script>
 
     <style>
 
         /* =========================================================
            JRAD RETENTION INTELLIGENCE — VERSION 2 CASE STUDY
-           Continuation of the JRAD Power BI story
         ========================================================= */
 
         :root {
             --jrad-purple: #6338c7;
             --jrad-purple-dark: #43218f;
+            --jrad-purple-deep: #2c1466;
             --jrad-purple-light: #8e6be8;
+            --jrad-lavender: #ede7fb;
             --jrad-bg: #f8f7fb;
+            --jrad-surface: #ffffff;
             --jrad-text: #17151d;
             --jrad-muted: #696574;
+            --jrad-ink-soft: #4c5560;
+            --jrad-warn: #b4235a;
             --jrad-border: rgba(99, 56, 199, 0.12);
+            --jrad-border-strong: rgba(99, 56, 199, 0.24);
+            --jrad-shadow-sm: 0 10px 30px rgba(44, 21, 91, 0.06);
+            --jrad-shadow-md:
+                0 25px 65px rgba(47, 25, 101, 0.14),
+                0 5px 18px rgba(47, 25, 101, 0.08);
+            --jrad-mono: ui-monospace, "SFMono-Regular", "Cascadia Code", Menlo, Consolas, monospace;
+            --jrad-nav-height: 60px;
+            --jrad-ease: cubic-bezier(.2, .8, .2, 1);
         }
 
         * {
@@ -32,6 +56,7 @@
 
         html {
             scroll-behavior: smooth;
+            scroll-padding-top: calc(var(--jrad-nav-height) + 18px);
         }
 
         body {
@@ -39,6 +64,39 @@
             background: var(--jrad-bg);
             color: var(--jrad-text);
             overflow-x: hidden;
+            overflow-x: clip;
+        }
+
+        body.jrad-no-scroll {
+            overflow: hidden;
+        }
+
+        ::selection {
+            background: rgba(99, 56, 199, 0.18);
+        }
+
+        a:focus-visible,
+        button:focus-visible,
+        input:focus-visible {
+            outline: 3px solid var(--jrad-purple-light);
+            outline-offset: 3px;
+        }
+
+        /* =========================================================
+           SCROLL PROGRESS
+        ========================================================= */
+
+        .jrad-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            z-index: 100;
+            background: linear-gradient(90deg, var(--jrad-purple-light), var(--jrad-purple), var(--jrad-purple-dark));
+            transform: scaleX(0);
+            transform-origin: left center;
+            pointer-events: none;
         }
 
         /* =========================================================
@@ -54,22 +112,9 @@
             overflow: hidden;
 
             background:
-                radial-gradient(
-                    circle at 15% 20%,
-                    rgba(190, 157, 255, 0.95),
-                    transparent 34%
-                ),
-                radial-gradient(
-                    circle at 85% 85%,
-                    rgba(55, 23, 130, 0.85),
-                    transparent 45%
-                ),
-                linear-gradient(
-                    125deg,
-                    #a17ce8 0%,
-                    #754bd0 48%,
-                    #42238f 100%
-                );
+                radial-gradient(circle at 15% 20%, rgba(190, 157, 255, 0.95), transparent 34%),
+                radial-gradient(circle at 85% 85%, rgba(55, 23, 130, 0.85), transparent 45%),
+                linear-gradient(125deg, #a17ce8 0%, #754bd0 48%, #42238f 100%);
 
             color: white;
         }
@@ -114,18 +159,15 @@
             padding: 8px 16px;
             border: 1px solid rgba(255, 255, 255, 0.28);
             border-radius: 999px;
-
             font-size: 11px;
             font-weight: 800;
             letter-spacing: 1.5px;
             text-transform: uppercase;
-
             background: rgba(255, 255, 255, 0.08);
             backdrop-filter: blur(8px);
-
             opacity: 0;
             transform: translateY(18px);
-            animation: heroIn 0.55s cubic-bezier(.2, .8, .2, 1) forwards;
+            animation: heroIn 0.55s var(--jrad-ease) forwards;
         }
 
         .jrad-hero h1 {
@@ -134,66 +176,53 @@
             line-height: 0.98;
             letter-spacing: -3px;
             font-weight: 900;
-
             opacity: 0;
             transform: translateY(25px);
-            animation: heroIn 0.65s 0.08s cubic-bezier(.2, .8, .2, 1) forwards;
+            animation: heroIn 0.65s 0.08s var(--jrad-ease) forwards;
         }
 
         .jrad-hero-subtitle {
             margin: 16px 0 18px;
-
             font-size: clamp(19px, 2.2vw, 29px);
             line-height: 1.15;
             font-weight: 800;
-
             opacity: 0;
             transform: translateY(20px);
-            animation: heroIn 0.6s 0.16s cubic-bezier(.2, .8, .2, 1) forwards;
+            animation: heroIn 0.6s 0.16s var(--jrad-ease) forwards;
         }
 
         .jrad-hero-description {
-            width: min(760px, 100%);
+            width: min(720px, 100%);
             margin: 0 auto;
-
             font-size: 15px;
             line-height: 1.8;
             color: rgba(255, 255, 255, 0.86);
-
             opacity: 0;
             transform: translateY(18px);
-            animation: heroIn 0.6s 0.24s cubic-bezier(.2, .8, .2, 1) forwards;
+            animation: heroIn 0.6s 0.24s var(--jrad-ease) forwards;
         }
 
         .jrad-hero-actions {
             margin-top: 25px;
-
             display: flex;
             justify-content: center;
             gap: 10px;
             flex-wrap: wrap;
-
             opacity: 0;
             transform: translateY(18px);
-            animation: heroIn 0.55s 0.32s cubic-bezier(.2, .8, .2, 1) forwards;
+            animation: heroIn 0.55s 0.32s var(--jrad-ease) forwards;
         }
 
         .jrad-btn {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-
             padding: 12px 20px;
             border-radius: 9px;
-
             font-size: 13px;
             font-weight: 700;
             text-decoration: none;
-
-            transition:
-                transform 0.2s ease,
-                box-shadow 0.2s ease,
-                background 0.2s ease;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
         }
 
         .jrad-btn-primary {
@@ -207,56 +236,77 @@
             background: rgba(255, 255, 255, 0.08);
         }
 
+        .jrad-btn-ghost {
+            color: white;
+            text-decoration: underline;
+            text-underline-offset: 4px;
+            text-decoration-color: rgba(255, 255, 255, 0.45);
+        }
+
         .jrad-btn:hover {
             transform: translateY(-3px);
             box-shadow: 0 12px 25px rgba(0, 0, 0, 0.18);
         }
 
+        .jrad-btn-ghost:hover {
+            box-shadow: none;
+            text-decoration-color: white;
+        }
+
         /* =========================================================
-           HERO DASHBOARD
+           HERO VIDEO
         ========================================================= */
 
         .jrad-hero-dashboard {
             width: min(820px, 100%);
             margin: 45px auto 0;
-
             position: relative;
             z-index: 3;
-
             opacity: 0;
-            transform:
-                perspective(1400px)
-                translateY(45px)
-                scale(0.94);
-
-            animation:
-                heroDashboardIn
-                0.85s
-                0.38s
-                cubic-bezier(.16, .84, .25, 1)
-                forwards;
-
+            transform: perspective(1400px) translateY(45px) scale(0.94);
+            animation: heroDashboardIn 0.85s 0.38s cubic-bezier(.16, .84, .25, 1) forwards;
             transform-origin: center bottom;
         }
 
-        .jrad-hero-dashboard img,
-        .jrad-hero-dashboard video {
+        .jrad-video-wrap {
+            position: relative;
+            animation: dashboardFloat 6s 1.4s ease-in-out infinite alternate;
+        }
+
+        .jrad-video-wrap img,
+        .jrad-video-wrap video {
             display: block;
             width: 100%;
             height: auto;
-
             border-radius: 16px 16px 0 0;
-
             box-shadow:
                 0 35px 80px rgba(32, 13, 83, 0.35),
                 0 8px 30px rgba(32, 13, 83, 0.18);
+        }
 
-            animation:
-                dashboardFloat
-                6s
-                1.4s
-                ease-in-out
-                infinite alternate;
+        .jrad-video-toggle {
+            position: absolute;
+            right: 14px;
+            bottom: 14px;
+            z-index: 2;
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            padding: 8px 13px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 999px;
+            background: rgba(23, 21, 29, 0.55);
+            color: white;
+            font: inherit;
+            font-size: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            backdrop-filter: blur(8px);
+            transition: background 0.2s ease;
+        }
+
+        .jrad-video-toggle:hover {
+            background: rgba(23, 21, 29, 0.75);
         }
 
         .jrad-hero-caption {
@@ -266,7 +316,72 @@
         }
 
         /* =========================================================
-           MAIN CONTENT
+           STICKY SECTION NAV
+        ========================================================= */
+
+        .jrad-nav {
+            position: sticky;
+            top: 0;
+            z-index: 60;
+            background: rgba(248, 247, 251, 0.88);
+            backdrop-filter: saturate(160%) blur(14px);
+            -webkit-backdrop-filter: saturate(160%) blur(14px);
+            border-bottom: 1px solid var(--jrad-border);
+        }
+
+        .jrad-nav-inner {
+            position: relative;
+            width: min(1180px, 92%);
+            height: var(--jrad-nav-height);
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            overflow-x: auto;
+            scrollbar-width: none;
+        }
+
+        .jrad-nav-inner::-webkit-scrollbar {
+            display: none;
+        }
+
+        .jrad-nav a {
+            flex: 0 0 auto;
+            padding: 8px 14px;
+            border-radius: 999px;
+            color: var(--jrad-muted);
+            font-size: 13px;
+            font-weight: 700;
+            text-decoration: none;
+            white-space: nowrap;
+            transition: background 0.2s ease, color 0.2s ease;
+        }
+
+        .jrad-nav a:hover {
+            color: var(--jrad-purple);
+            background: rgba(99, 56, 199, 0.07);
+        }
+
+        .jrad-nav a.active {
+            color: white;
+            background: var(--jrad-purple);
+        }
+
+        .jrad-nav a.jrad-nav-home {
+            margin-right: 8px;
+            padding-left: 0;
+            color: var(--jrad-purple);
+            border-radius: 0;
+            border-right: 1px solid var(--jrad-border-strong);
+            padding-right: 16px;
+        }
+
+        .jrad-nav a.jrad-nav-home:hover {
+            background: none;
+        }
+
+        /* =========================================================
+           PAGE SHELL
         ========================================================= */
 
         .jrad-page {
@@ -276,62 +391,29 @@
             padding: 95px 0;
         }
 
+        .jrad-page.jrad-tight-top {
+            padding-top: 0;
+        }
+
         .jrad-page::before {
             content: "";
             position: absolute;
-
             top: 50%;
             left: 50%;
-
             width: 700px;
             height: 450px;
-
             transform: translate(-50%, -50%);
             border-radius: 50%;
-
-            background:
-                radial-gradient(
-                    circle,
-                    rgba(126, 81, 221, 0.14),
-                    transparent 70%
-                );
-
+            background: radial-gradient(circle, rgba(126, 81, 221, 0.14), transparent 70%);
             filter: blur(45px);
-
             opacity: 0;
             transition: opacity 0.7s ease;
-
             pointer-events: none;
             z-index: -1;
         }
 
         .jrad-page.visible::before {
             opacity: 1;
-        }
-
-        /* =========================================================
-           BACK LINK
-        ========================================================= */
-
-        .jrad-back {
-            width: min(1180px, 92%);
-            margin: 0 auto;
-            padding-top: 20px;
-        }
-
-        .jrad-back a {
-            color: var(--jrad-purple);
-            text-decoration: none;
-            font-size: 13px;
-            font-weight: 700;
-        }
-
-        /* =========================================================
-           PROJECT AT A GLANCE
-        ========================================================= */
-
-        .jrad-glance {
-            padding: 75px 0 30px;
         }
 
         .jrad-section-label {
@@ -343,60 +425,106 @@
             margin-bottom: 15px;
         }
 
+        .jrad-section-head {
+            max-width: 760px;
+            margin-bottom: 52px;
+        }
+
+        .jrad-section-head.center {
+            margin-left: auto;
+            margin-right: auto;
+            text-align: center;
+        }
+
+        .jrad-h2 {
+            margin: 0;
+            font-size: clamp(32px, 3.8vw, 48px);
+            line-height: 1.06;
+            letter-spacing: -1.7px;
+        }
+
+        .jrad-lead {
+            max-width: 720px;
+            margin: 18px 0 0;
+            color: var(--jrad-muted);
+            font-size: 16px;
+            line-height: 1.8;
+        }
+
+        .jrad-section-head.center .jrad-lead {
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .jrad-h3 {
+            margin: 0 0 18px;
+            font-size: 22px;
+            letter-spacing: -0.6px;
+        }
+
+        /* =========================================================
+           GENERIC REVEAL
+        ========================================================= */
+
+        .jrad-js .jrad-reveal {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.6s ease, transform 0.7s var(--jrad-ease);
+        }
+
+        .jrad-js .jrad-reveal.visible {
+            opacity: 1;
+            transform: none;
+        }
+
+        /* =========================================================
+           PROJECT AT A GLANCE
+        ========================================================= */
+
+        .jrad-glance {
+            padding: 75px 0 30px;
+        }
+
         .jrad-glance h2 {
             max-width: 760px;
             margin: 0;
-
             font-size: clamp(33px, 3.8vw, 52px);
             line-height: 1.06;
             letter-spacing: -2px;
         }
 
         .jrad-glance-description {
-            max-width: 760px;
+            max-width: 720px;
             margin-top: 22px;
-
             color: var(--jrad-muted);
             font-size: 16px;
             line-height: 1.8;
         }
 
-        /* =========================================================
-           COUNTING FIGURES
-        ========================================================= */
-
         .jrad-stats {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 16px;
-
             margin-top: 42px;
         }
 
         .jrad-stat {
             padding: 28px 24px;
-
             border: 1px solid var(--jrad-border);
             border-radius: 16px;
-
             background: rgba(255, 255, 255, 0.8);
+            box-shadow: var(--jrad-shadow-sm);
+        }
 
-            box-shadow:
-                0 10px 30px rgba(44, 21, 91, 0.06);
-
+        .jrad-js .jrad-stat {
             opacity: 0;
             transform: translateY(24px);
         }
 
-        .jrad-stat.visible {
-            animation:
-                statReveal
-                0.5s
-                cubic-bezier(.2, .8, .2, 1)
-                forwards;
+        .jrad-js .jrad-stat.visible {
+            animation: statReveal 0.5s var(--jrad-ease) forwards;
         }
 
-        .jrad-stat:nth-child(1).visible { animation-delay: 0s; }
         .jrad-stat:nth-child(2).visible { animation-delay: 0.08s; }
         .jrad-stat:nth-child(3).visible { animation-delay: 0.16s; }
         .jrad-stat:nth-child(4).visible { animation-delay: 0.24s; }
@@ -407,6 +535,7 @@
             line-height: 1;
             font-weight: 900;
             letter-spacing: -1px;
+            font-variant-numeric: tabular-nums;
         }
 
         .jrad-stat-label {
@@ -414,6 +543,92 @@
             color: var(--jrad-muted);
             font-size: 12px;
             font-weight: 700;
+        }
+
+        .jrad-meta {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+            margin: 44px 0 0;
+            padding-top: 26px;
+            border-top: 1px solid var(--jrad-border-strong);
+        }
+
+        .jrad-meta dt {
+            margin-bottom: 6px;
+            color: var(--jrad-purple);
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 0.8px;
+            text-transform: uppercase;
+        }
+
+        .jrad-meta dd {
+            margin: 0;
+            color: var(--jrad-ink-soft);
+            font-size: 14px;
+            line-height: 1.65;
+        }
+
+        .jrad-compare-block {
+            margin-top: 64px;
+        }
+
+        .jrad-compare-wrap {
+            overflow-x: auto;
+            border: 1px solid var(--jrad-border);
+            border-radius: 18px;
+            background: var(--jrad-surface);
+            box-shadow: var(--jrad-shadow-sm);
+        }
+
+        .jrad-compare {
+            width: 100%;
+            min-width: 660px;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+
+        .jrad-compare th,
+        .jrad-compare td {
+            padding: 18px 22px;
+            text-align: left;
+            vertical-align: top;
+            line-height: 1.6;
+            border-bottom: 1px solid var(--jrad-border);
+        }
+
+        .jrad-compare thead th {
+            background: #fbfaff;
+            color: var(--jrad-muted);
+            font-size: 12px;
+            font-weight: 800;
+        }
+
+        .jrad-compare thead th.v2 {
+            color: var(--jrad-purple);
+        }
+
+        .jrad-compare tbody th {
+            width: 20%;
+            color: var(--jrad-text);
+            font-size: 13px;
+            font-weight: 800;
+        }
+
+        .jrad-compare td {
+            color: var(--jrad-ink-soft);
+        }
+
+        .jrad-compare td.v2 {
+            color: var(--jrad-purple-dark);
+            font-weight: 600;
+            background: rgba(99, 56, 199, 0.04);
+        }
+
+        .jrad-compare tbody tr:last-child th,
+        .jrad-compare tbody tr:last-child td {
+            border-bottom: 0;
         }
 
         /* =========================================================
@@ -425,7 +640,6 @@
             grid-template-columns: minmax(0, 1.15fr) minmax(320px, 0.85fr);
             gap: 70px;
             align-items: center;
-
             padding: 100px 0;
         }
 
@@ -436,22 +650,17 @@
         .jrad-dashboard-section.reverse .jrad-dashboard-copy { order: 2; }
         .jrad-dashboard-section.reverse .jrad-dashboard-visual { order: 1; }
 
-        /* =========================================================
-           DASHBOARD VISUAL
-        ========================================================= */
-
         .jrad-dashboard-visual {
             width: 100%;
-
-            opacity: 0;
-            transform: translateY(28px) scale(0.965);
-
-            transition:
-                transform 0.75s cubic-bezier(.16, .84, .25, 1),
-                opacity 0.6s ease;
         }
 
-        .jrad-dashboard-visual.visible {
+        .jrad-js .jrad-dashboard-visual {
+            opacity: 0;
+            transform: translateY(28px) scale(0.965);
+            transition: transform 0.75s cubic-bezier(.16, .84, .25, 1), opacity 0.6s ease;
+        }
+
+        .jrad-js .jrad-dashboard-visual.visible {
             opacity: 1;
             transform: translateY(0) scale(1);
         }
@@ -459,28 +668,35 @@
         .jrad-dashboard-frame {
             width: 100%;
             padding: 10px;
-
             border-radius: 18px;
-
             background: rgba(255, 255, 255, 0.88);
+            box-shadow: var(--jrad-shadow-md);
+            transition: transform 0.28s ease, box-shadow 0.28s ease;
+        }
 
-            box-shadow:
-                0 25px 65px rgba(47, 25, 101, 0.14),
-                0 5px 18px rgba(47, 25, 101, 0.08);
-
-            transition:
-                transform 0.28s ease,
-                box-shadow 0.28s ease;
+        .jrad-zoom {
+            display: block;
+            width: 100%;
+            padding: 0;
+            border: 0;
+            border-radius: 11px;
+            overflow: hidden;
+            background: none;
+            cursor: zoom-in;
         }
 
         .jrad-dashboard-frame img {
             display: block;
             width: 100%;
             height: auto;
-
             border-radius: 11px;
-
             transition: transform 0.32s ease;
+        }
+
+        .jrad-frame-caption {
+            margin: 12px 4px 2px;
+            color: var(--jrad-muted);
+            font-size: 12px;
         }
 
         @media (hover: hover) and (pointer: fine) {
@@ -497,10 +713,6 @@
             }
         }
 
-        /* =========================================================
-           STORY CARDS (used in place of a screenshot for The Gap)
-        ========================================================= */
-
         .jrad-story-stack {
             display: flex;
             flex-direction: column;
@@ -508,18 +720,35 @@
         }
 
         .jrad-story-card {
-            padding: 18px 20px;
+            position: relative;
+            padding: 18px 20px 18px 56px;
             border-radius: 14px;
             background: rgba(255, 255, 255, 0.88);
             border: 1px solid var(--jrad-border);
-            box-shadow: 0 10px 30px rgba(44, 21, 91, 0.06);
+            box-shadow: var(--jrad-shadow-sm);
+        }
+
+        .jrad-story-card::before {
+            content: "?";
+            position: absolute;
+            left: 18px;
+            top: 18px;
+            width: 24px;
+            height: 24px;
+            display: grid;
+            place-items: center;
+            border-radius: 50%;
+            background: var(--jrad-lavender);
+            color: var(--jrad-purple);
+            font-size: 12px;
+            font-weight: 900;
         }
 
         .jrad-story-card strong {
             display: block;
+            margin-bottom: 4px;
             color: var(--jrad-purple);
             font-size: 13px;
-            margin-bottom: 4px;
         }
 
         .jrad-story-card span {
@@ -528,26 +757,24 @@
             line-height: 1.55;
         }
 
-        /* =========================================================
-           DASHBOARD COPY
-        ========================================================= */
-
-        .jrad-dashboard-copy {
-            opacity: 0;
-            transform: translateY(25px);
-            transition:
-                opacity 0.55s ease,
-                transform 0.65s cubic-bezier(.2, .8, .2, 1);
+        .jrad-story-card.last {
+            background: var(--jrad-surface);
+            border-color: var(--jrad-border-strong);
         }
 
-        .jrad-dashboard-copy.visible {
+        .jrad-js .jrad-dashboard-copy {
+            opacity: 0;
+            transform: translateY(25px);
+            transition: opacity 0.55s ease, transform 0.65s var(--jrad-ease);
+        }
+
+        .jrad-js .jrad-dashboard-copy.visible {
             opacity: 1;
             transform: translateY(0);
         }
 
         .jrad-dashboard-copy h2 {
             margin: 0 0 12px;
-
             font-size: clamp(28px, 3vw, 40px);
             line-height: 1.08;
             letter-spacing: -1.5px;
@@ -555,14 +782,13 @@
 
         .jrad-dashboard-copy > p {
             margin: 0 0 28px;
-
             color: var(--jrad-muted);
             font-size: 15px;
             line-height: 1.75;
         }
 
         /* =========================================================
-           INSIGHTS
+           INSIGHTS + CALLOUTS
         ========================================================= */
 
         .jrad-insights {
@@ -572,22 +798,22 @@
         }
 
         .jrad-insights li {
-            padding: 15px 0;
-            border-bottom: 1px solid var(--jrad-border);
-
             display: flex;
             gap: 13px;
-
-            color: #4c5560;
+            padding: 15px 0;
+            border-bottom: 1px solid var(--jrad-border);
+            color: var(--jrad-ink-soft);
             font-size: 13px;
             line-height: 1.65;
+        }
 
+        .jrad-js .jrad-insights li {
             opacity: 0;
             transform: translateX(-14px);
         }
 
-        .jrad-dashboard-copy.visible .jrad-insights li {
-            animation: insightIn 0.42s cubic-bezier(.2, .8, .2, 1) forwards;
+        .jrad-js .jrad-dashboard-copy.visible .jrad-insights li {
+            animation: insightIn 0.42s var(--jrad-ease) forwards;
         }
 
         .jrad-dashboard-copy.visible .jrad-insights li:nth-child(1) { animation-delay: 0.08s; }
@@ -601,89 +827,1130 @@
             width: 6px;
             height: 6px;
             margin-top: 8px;
-
             border-radius: 50%;
             background: var(--jrad-purple);
         }
 
-        /* =========================================================
-           STRATEGIC FOCUS
-        ========================================================= */
-
         .jrad-strategy {
             margin-top: 22px;
             padding: 23px 25px;
-
             border-radius: 15px;
-
             color: white;
-
             background: linear-gradient(135deg, #6940ca, #4a2495);
-
             box-shadow: 0 18px 35px rgba(75, 35, 145, 0.22);
+        }
 
+        .jrad-js .jrad-strategy {
             opacity: 0;
             transform: translateY(16px) scale(0.98);
         }
 
-        .jrad-dashboard-copy.visible .jrad-strategy {
-            animation: strategyIn 0.55s 0.35s cubic-bezier(.2, .8, .2, 1) forwards;
+        .jrad-js .jrad-dashboard-copy.visible .jrad-strategy {
+            animation: strategyIn 0.55s 0.35s var(--jrad-ease) forwards;
         }
 
         .jrad-strategy-label {
             margin-bottom: 9px;
-
             font-size: 10px;
             font-weight: 900;
             letter-spacing: 1.5px;
             text-transform: uppercase;
-
             opacity: 0.7;
         }
 
         .jrad-strategy p {
             margin: 0;
-
             font-size: 13px;
             line-height: 1.65;
             font-weight: 600;
         }
 
         /* =========================================================
-           VALIDATION CALLOUT (gold, used once for the payoff moment)
+           SIGNAL FUNNEL
         ========================================================= */
 
-        .jrad-validation {
-            margin-top: 22px;
-            padding: 23px 25px;
-            border-radius: 15px;
-            color: var(--jrad-purple-dark);
-            background: linear-gradient(135deg, #ede7fb, #d9cef5);
-            box-shadow: 0 18px 35px rgba(99, 56, 199, 0.18);
-            display: flex;
-            gap: 28px;
-
-            opacity: 0;
-            transform: translateY(16px) scale(0.98);
+        .jrad-funnel {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            display: grid;
+            gap: 14px;
         }
 
-        .jrad-dashboard-copy.visible .jrad-validation {
-            animation: strategyIn 0.55s 0.4s cubic-bezier(.2, .8, .2, 1) forwards;
+        .jrad-funnel li {
+            display: grid;
+            grid-template-columns: minmax(200px, 270px) minmax(0, 1fr) 150px;
+            gap: 22px;
+            align-items: center;
         }
 
-        .jrad-validation-figure strong {
+        .jrad-funnel-label strong {
             display: block;
-            font-size: 26px;
-            font-weight: 900;
+            font-size: 14px;
         }
 
-        .jrad-validation-figure span {
+        .jrad-funnel-label span {
+            color: var(--jrad-muted);
+            font-size: 12px;
+            line-height: 1.5;
+        }
+
+        .jrad-funnel-track {
+            height: 36px;
+            border-radius: 8px;
+            background: rgba(99, 56, 199, 0.07);
+            overflow: hidden;
+        }
+
+        .jrad-funnel-fill {
+            height: 100%;
+            width: var(--w);
+            min-width: 6px;
+            border-radius: 8px;
+            background: linear-gradient(90deg, var(--jrad-purple-light), var(--jrad-purple));
+            transition: width 1.1s var(--jrad-ease);
+        }
+
+        .jrad-js .jrad-funnel:not(.visible) .jrad-funnel-fill {
+            width: 0;
+            min-width: 0;
+        }
+
+        .jrad-funnel li:nth-child(2) .jrad-funnel-fill { transition-delay: 0.12s; }
+        .jrad-funnel li:nth-child(3) .jrad-funnel-fill { transition-delay: 0.24s; }
+        .jrad-funnel li:nth-child(5) .jrad-funnel-fill { transition-delay: 0.42s; }
+        .jrad-funnel li:nth-child(6) .jrad-funnel-fill { transition-delay: 0.54s; }
+
+        .jrad-funnel li.people .jrad-funnel-fill {
+            background: linear-gradient(90deg, var(--jrad-purple), var(--jrad-purple-deep));
+        }
+
+        .jrad-funnel-value {
+            text-align: right;
+            color: var(--jrad-purple-dark);
+            font-size: 20px;
+            font-weight: 900;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .jrad-funnel-value small {
+            display: block;
+            color: var(--jrad-muted);
             font-size: 11px;
             font-weight: 700;
         }
 
+        .jrad-funnel li.jrad-funnel-divider {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin: 8px 0;
+            color: var(--jrad-purple);
+            font-size: 12px;
+            font-weight: 800;
+        }
+
+        .jrad-funnel li.jrad-funnel-divider::before,
+        .jrad-funnel li.jrad-funnel-divider::after {
+            content: "";
+            flex: 1;
+            height: 1px;
+            background: repeating-linear-gradient(90deg, var(--jrad-border-strong) 0 6px, transparent 6px 12px);
+        }
+
+        .jrad-funnel-note {
+            margin: 28px 0 0;
+            color: var(--jrad-muted);
+            font-size: 13px;
+            line-height: 1.7;
+        }
+
         /* =========================================================
-           ARCHITECTURE / THE CYCLE (modern animated diagram)
+           STEPS
+        ========================================================= */
+
+        .jrad-steps {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            counter-reset: jrad-step;
+        }
+
+        .jrad-steps li {
+            position: relative;
+            padding-right: 22px;
+            counter-increment: jrad-step;
+        }
+
+        .jrad-steps li::before {
+            content: counter(jrad-step);
+            position: relative;
+            z-index: 1;
+            display: grid;
+            place-items: center;
+            width: 34px;
+            height: 34px;
+            margin-bottom: 16px;
+            border-radius: 50%;
+            background: var(--jrad-purple);
+            color: white;
+            font-size: 13px;
+            font-weight: 900;
+        }
+
+        .jrad-steps li::after {
+            content: "";
+            position: absolute;
+            top: 16px;
+            left: 42px;
+            right: 8px;
+            height: 2px;
+            background: repeating-linear-gradient(90deg, var(--jrad-border-strong) 0 6px, transparent 6px 12px);
+        }
+
+        .jrad-steps li:last-child::after {
+            display: none;
+        }
+
+        .jrad-steps strong {
+            display: block;
+            margin-bottom: 6px;
+            font-size: 15px;
+        }
+
+        .jrad-steps span {
+            display: block;
+            color: var(--jrad-muted);
+            font-size: 13px;
+            line-height: 1.65;
+        }
+
+        .jrad-steps code,
+        .jrad-trace code {
+            font-family: var(--jrad-mono);
+            font-size: 12px;
+            color: var(--jrad-purple-dark);
+        }
+
+        .jrad-steps code {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 4px 8px;
+            border-radius: 6px;
+            background: rgba(99, 56, 199, 0.08);
+        }
+
+        .jrad-steps.vertical {
+            grid-template-columns: 1fr;
+            gap: 26px;
+        }
+
+        .jrad-steps.vertical li {
+            display: grid;
+            grid-template-columns: 34px minmax(0, 1fr);
+            column-gap: 16px;
+            padding-right: 0;
+        }
+
+        .jrad-steps.vertical li::before {
+            grid-row: 1 / span 2;
+            margin-bottom: 0;
+        }
+
+        .jrad-steps.vertical li > * {
+            grid-column: 2;
+        }
+
+        .jrad-steps.vertical li::after {
+            top: 40px;
+            bottom: -22px;
+            left: 16px;
+            right: auto;
+            width: 2px;
+            height: auto;
+            background: repeating-linear-gradient(180deg, var(--jrad-border-strong) 0 6px, transparent 6px 12px);
+        }
+
+        /* =========================================================
+           FIX LOG
+        ========================================================= */
+
+        .jrad-fixes-head {
+            margin-top: 80px;
+        }
+
+        .jrad-fixes {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px;
+        }
+
+        .jrad-fix {
+            padding: 30px;
+            border-radius: 18px;
+            background: var(--jrad-surface);
+            border: 1px solid var(--jrad-border);
+            box-shadow: var(--jrad-shadow-sm);
+        }
+
+        .jrad-fix-tag {
+            display: inline-block;
+            margin-bottom: 14px;
+            padding: 5px 11px;
+            border-radius: 999px;
+            background: var(--jrad-lavender);
+            color: var(--jrad-purple);
+            font-size: 11px;
+            font-weight: 800;
+        }
+
+        .jrad-fix h3 {
+            margin: 0 0 18px;
+            font-size: 21px;
+            letter-spacing: -0.5px;
+        }
+
+        .jrad-fix dl {
+            margin: 0;
+            display: grid;
+            gap: 14px;
+        }
+
+        .jrad-fix dt {
+            margin-bottom: 3px;
+            font-size: 12px;
+            font-weight: 800;
+        }
+
+        .jrad-fix dd {
+            margin: 0;
+            color: var(--jrad-muted);
+            font-size: 13px;
+            line-height: 1.65;
+        }
+
+        .jrad-fix-metric {
+            display: flex;
+            align-items: baseline;
+            gap: 12px;
+            margin-top: 20px;
+            padding-top: 18px;
+            border-top: 1px dashed var(--jrad-border-strong);
+        }
+
+        .jrad-fix-metric strong {
+            flex: 0 0 auto;
+            color: var(--jrad-purple-dark);
+            font-size: 30px;
+            font-weight: 900;
+            letter-spacing: -1px;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .jrad-fix-metric span {
+            color: var(--jrad-muted);
+            font-size: 12px;
+            line-height: 1.5;
+        }
+
+        /* =========================================================
+           RESOLVER LAB
+        ========================================================= */
+
+        .jrad-lab {
+            display: grid;
+            grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+            margin-top: 80px;
+            border-radius: 22px;
+            border: 1px solid var(--jrad-border);
+            background: var(--jrad-surface);
+            box-shadow: var(--jrad-shadow-md);
+            overflow: hidden;
+        }
+
+        .jrad-lab-input {
+            padding: 36px;
+            background: linear-gradient(160deg, #f3effd, #ffffff 72%);
+            border-right: 1px solid var(--jrad-border);
+        }
+
+        .jrad-lab-output {
+            padding: 36px;
+        }
+
+        .jrad-lab h3 {
+            margin: 0 0 8px;
+            font-size: 24px;
+            letter-spacing: -0.6px;
+        }
+
+        .jrad-lab-note {
+            margin: 0 0 26px;
+            color: var(--jrad-muted);
+            font-size: 13px;
+            line-height: 1.65;
+        }
+
+        .jrad-field {
+            display: block;
+            margin-bottom: 14px;
+        }
+
+        .jrad-field > span {
+            display: block;
+            margin-bottom: 6px;
+            font-size: 12px;
+            font-weight: 800;
+        }
+
+        .jrad-input {
+            width: 100%;
+            padding: 13px 14px;
+            border: 1px solid var(--jrad-border-strong);
+            border-radius: 10px;
+            background: white;
+            color: var(--jrad-text);
+            font: inherit;
+            font-size: 15px;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .jrad-input:focus {
+            outline: none;
+            border-color: var(--jrad-purple);
+            box-shadow: 0 0 0 4px rgba(99, 56, 199, 0.14);
+        }
+
+        .jrad-chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 20px;
+        }
+
+        .jrad-chips-label {
+            width: 100%;
+            color: var(--jrad-muted);
+            font-size: 11px;
+            font-weight: 800;
+        }
+
+        .jrad-chip {
+            padding: 7px 12px;
+            border: 1px solid var(--jrad-border-strong);
+            border-radius: 999px;
+            background: white;
+            color: var(--jrad-purple-dark);
+            font: inherit;
+            font-size: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.2s ease, border-color 0.2s ease;
+        }
+
+        .jrad-chip:hover {
+            background: var(--jrad-lavender);
+            border-color: var(--jrad-purple-light);
+        }
+
+        .jrad-trace {
+            margin: 0;
+        }
+
+        .jrad-trace > div {
+            display: grid;
+            grid-template-columns: 170px minmax(0, 1fr);
+            gap: 16px;
+            align-items: center;
+            padding: 13px 0;
+            border-bottom: 1px solid var(--jrad-border);
+        }
+
+        .jrad-trace dt {
+            color: var(--jrad-muted);
+            font-size: 12px;
+            font-weight: 800;
+        }
+
+        .jrad-trace dd {
+            margin: 0;
+            font-size: 14px;
+            overflow-wrap: anywhere;
+        }
+
+        .jrad-trace code {
+            font-size: 13px;
+        }
+
+        .jrad-meter {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .jrad-meter-track {
+            flex: 1;
+            height: 8px;
+            border-radius: 999px;
+            background: rgba(99, 56, 199, 0.1);
+            overflow: hidden;
+        }
+
+        .jrad-meter-fill {
+            width: 0;
+            height: 100%;
+            border-radius: 999px;
+            background: var(--jrad-purple);
+            transition: width 0.45s var(--jrad-ease);
+        }
+
+        .jrad-meter strong {
+            min-width: 44px;
+            text-align: right;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .jrad-pill {
+            display: inline-flex;
+            align-items: center;
+            padding: 4px 11px;
+            border-radius: 999px;
+            font-size: 12px;
+            font-weight: 800;
+        }
+
+        .jrad-pill.ok {
+            background: var(--jrad-purple);
+            color: white;
+        }
+
+        .jrad-pill.neutral {
+            background: #efeef2;
+            color: #55525e;
+        }
+
+        .jrad-pill.bad {
+            background: #fbe8ef;
+            color: var(--jrad-warn);
+        }
+
+        .jrad-verdict {
+            display: flex;
+            gap: 14px;
+            align-items: flex-start;
+            margin-top: 22px;
+            padding: 18px 20px;
+            border-radius: 14px;
+            background: #f1f0f4;
+            color: var(--jrad-text);
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+
+        .jrad-verdict[data-state="same"] {
+            background: linear-gradient(135deg, #6940ca, #4a2495);
+            color: white;
+        }
+
+        .jrad-verdict[data-state="caught"] {
+            background: var(--jrad-lavender);
+            color: var(--jrad-purple-dark);
+        }
+
+        .jrad-tick {
+            flex: 0 0 auto;
+            width: 32px;
+            height: 32px;
+            display: grid;
+            place-items: center;
+            border-radius: 50%;
+            background: rgba(99, 56, 199, 0.12);
+            font-weight: 900;
+        }
+
+        .jrad-verdict[data-state="same"] .jrad-tick {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .jrad-verdict-title {
+            margin-bottom: 3px;
+            font-size: 16px;
+            font-weight: 900;
+        }
+
+        .jrad-verdict-text {
+            font-size: 13px;
+            line-height: 1.6;
+            opacity: 0.88;
+        }
+
+        /* =========================================================
+           VALIDATION
+        ========================================================= */
+
+        .jrad-validate {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+            gap: 60px;
+            align-items: start;
+        }
+
+        .jrad-rule {
+            padding: 32px;
+            border-radius: 20px;
+            background: linear-gradient(145deg, var(--jrad-purple-dark), var(--jrad-purple-deep));
+            color: white;
+            box-shadow: 0 30px 60px rgba(44, 20, 102, 0.28);
+        }
+
+        .jrad-rule-title {
+            margin-bottom: 18px;
+            font-size: 12px;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+            opacity: 0.72;
+        }
+
+        .jrad-rule pre {
+            margin: 0;
+            color: #e9e2ff;
+            font-family: var(--jrad-mono);
+            font-size: 14px;
+            line-height: 1.9;
+            white-space: pre-wrap;
+        }
+
+        .jrad-rule .k {
+            color: #c3adff;
+            font-weight: 700;
+        }
+
+        .jrad-rule-foot {
+            margin-top: 22px;
+            padding-top: 18px;
+            border-top: 1px solid rgba(255, 255, 255, 0.14);
+            color: rgba(255, 255, 255, 0.78);
+            font-size: 13px;
+            line-height: 1.65;
+        }
+
+        .jrad-rings {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-top: 16px;
+        }
+
+        .jrad-ring {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            padding: 24px;
+            border-radius: 18px;
+            border: 1px solid var(--jrad-border);
+            background: var(--jrad-surface);
+            box-shadow: var(--jrad-shadow-sm);
+        }
+
+        .jrad-ring-figure {
+            position: relative;
+            width: 116px;
+            height: 116px;
+        }
+
+        .jrad-ring-figure svg {
+            width: 116px;
+            height: 116px;
+            transform: rotate(-90deg);
+        }
+
+        .jrad-ring-bg {
+            fill: none;
+            stroke: rgba(99, 56, 199, 0.1);
+            stroke-width: 10;
+        }
+
+        .jrad-ring-value {
+            fill: none;
+            stroke: var(--jrad-purple);
+            stroke-width: 10;
+            stroke-linecap: round;
+            stroke-dasharray: 100;
+            stroke-dashoffset: var(--offset);
+            transition: stroke-dashoffset 1.3s var(--jrad-ease);
+        }
+
+        .jrad-js .jrad-ring:not(.visible) .jrad-ring-value {
+            stroke-dashoffset: 100;
+        }
+
+        .jrad-ring-figure strong {
+            position: absolute;
+            inset: 0;
+            display: grid;
+            place-items: center;
+            color: var(--jrad-purple-dark);
+            font-size: 24px;
+            font-weight: 900;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .jrad-ring h3 {
+            margin: 0;
+            font-size: 15px;
+        }
+
+        .jrad-ring p {
+            margin: 5px 0 0;
+            color: var(--jrad-muted);
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        .jrad-explain {
+            padding: 26px 0;
+            border-bottom: 1px solid var(--jrad-border);
+        }
+
+        .jrad-explain:first-child {
+            padding-top: 0;
+        }
+
+        .jrad-explain:last-child {
+            border-bottom: 0;
+        }
+
+        .jrad-explain h3 {
+            margin: 0 0 8px;
+            font-size: 18px;
+            letter-spacing: -0.4px;
+        }
+
+        .jrad-explain p {
+            margin: 0;
+            color: var(--jrad-ink-soft);
+            font-size: 14px;
+            line-height: 1.75;
+        }
+
+        /* =========================================================
+           DEDUPLICATION
+        ========================================================= */
+
+        .jrad-dedup {
+            display: grid;
+            grid-template-columns: minmax(0, 1.2fr) minmax(260px, 0.8fr);
+            gap: 60px;
+            align-items: center;
+            padding: 46px;
+            border-radius: 24px;
+            border: 1px solid var(--jrad-border);
+            background: var(--jrad-surface);
+            box-shadow: var(--jrad-shadow-sm);
+        }
+
+        .jrad-dedup-copy > p {
+            margin: 0 0 30px;
+            color: var(--jrad-muted);
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+        .jrad-phone {
+            width: min(290px, 100%);
+            margin: 0 auto;
+            padding: 11px;
+            border-radius: 38px;
+            background: var(--jrad-text);
+            box-shadow: 0 35px 70px rgba(32, 13, 83, 0.28);
+        }
+
+        .jrad-phone .jrad-zoom {
+            border-radius: 28px;
+        }
+
+        .jrad-phone img {
+            display: block;
+            width: 100%;
+            height: auto;
+            border-radius: 28px;
+        }
+
+        .jrad-phone-caption {
+            margin-top: 14px;
+            text-align: center;
+            color: var(--jrad-muted);
+            font-size: 12px;
+        }
+
+        /* =========================================================
+           TILL SIMULATOR
+        ========================================================= */
+
+        .jrad-till-band {
+            background: linear-gradient(180deg, rgba(237, 231, 251, 0) 0%, #efe9fc 14%, #efe9fc 86%, rgba(237, 231, 251, 0) 100%);
+        }
+
+        .jrad-till-section {
+            display: grid;
+            grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+            gap: 64px;
+            align-items: center;
+            padding: 120px 0;
+        }
+
+        .jrad-till-copy h2 {
+            margin: 0 0 14px;
+            font-size: clamp(30px, 3.3vw, 44px);
+            line-height: 1.06;
+            letter-spacing: -1.6px;
+        }
+
+        .jrad-till-copy > p {
+            margin: 0;
+            color: var(--jrad-muted);
+            font-size: 15px;
+            line-height: 1.75;
+        }
+
+        .jrad-legend {
+            display: grid;
+            gap: 14px;
+            margin: 28px 0 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .jrad-legend li {
+            display: grid;
+            grid-template-columns: 170px minmax(0, 1fr);
+            gap: 14px;
+            align-items: start;
+            color: var(--jrad-ink-soft);
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        .jrad-status {
+            display: inline-flex;
+            align-items: center;
+            justify-self: start;
+            gap: 7px;
+            padding: 5px 11px;
+            border-radius: 999px;
+            font-size: 12px;
+            font-weight: 800;
+            white-space: nowrap;
+        }
+
+        .jrad-status::before {
+            content: "";
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: currentColor;
+        }
+
+        .jrad-status.new {
+            background: #e9e8ee;
+            color: #55525e;
+        }
+
+        .jrad-status.returning {
+            background: #ddd2fa;
+            color: var(--jrad-purple-dark);
+        }
+
+        .jrad-status.candidate {
+            background: var(--jrad-purple);
+            color: white;
+        }
+
+        .jrad-sim-note {
+            margin: 26px 0 0;
+            padding: 14px 16px;
+            border-left: 3px solid var(--jrad-purple);
+            border-radius: 0 10px 10px 0;
+            background: rgba(255, 255, 255, 0.7);
+            color: var(--jrad-muted);
+            font-size: 12px;
+            line-height: 1.65;
+        }
+
+        .jrad-device {
+            padding: 14px;
+            border-radius: 28px;
+            background: linear-gradient(160deg, #2a1a52, var(--jrad-text));
+            box-shadow:
+                0 40px 90px rgba(32, 13, 83, 0.32),
+                0 10px 30px rgba(32, 13, 83, 0.18);
+        }
+
+        .jrad-screen {
+            border-radius: 18px;
+            background: #fbfaff;
+            overflow: hidden;
+        }
+
+        .jrad-app-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 12px;
+            padding: 15px 18px;
+            background: var(--jrad-purple);
+            color: white;
+        }
+
+        .jrad-app-title {
+            font-size: 14px;
+            font-weight: 900;
+        }
+
+        .jrad-app-sub {
+            margin-top: 2px;
+            font-size: 11px;
+            opacity: 0.78;
+        }
+
+        .jrad-tills {
+            display: inline-flex;
+            padding: 3px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.14);
+        }
+
+        .jrad-tills button {
+            padding: 6px 11px;
+            border: 0;
+            border-radius: 999px;
+            background: transparent;
+            color: rgba(255, 255, 255, 0.82);
+            font: inherit;
+            font-size: 11px;
+            font-weight: 800;
+            cursor: pointer;
+            transition: background 0.2s ease, color 0.2s ease;
+        }
+
+        .jrad-tills button[aria-pressed="true"] {
+            background: white;
+            color: var(--jrad-purple-dark);
+        }
+
+        .jrad-app-body {
+            display: grid;
+            gap: 16px;
+            padding: 20px 18px;
+        }
+
+        .jrad-app-form {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) 150px;
+            gap: 10px;
+        }
+
+        .jrad-app-form .jrad-field {
+            margin: 0;
+        }
+
+        .jrad-app-body .jrad-chips {
+            margin-top: 0;
+        }
+
+        .jrad-app-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .jrad-app-btn {
+            flex: 1 1 160px;
+            padding: 12px 14px;
+            border: 0;
+            border-radius: 10px;
+            font: inherit;
+            font-size: 13px;
+            font-weight: 800;
+            cursor: pointer;
+            transition: transform 0.15s ease, background 0.2s ease;
+        }
+
+        .jrad-app-btn.primary {
+            background: var(--jrad-purple);
+            color: white;
+        }
+
+        .jrad-app-btn.primary:hover {
+            background: var(--jrad-purple-dark);
+        }
+
+        .jrad-app-btn.secondary {
+            background: var(--jrad-lavender);
+            color: var(--jrad-purple-dark);
+        }
+
+        .jrad-app-btn.secondary:hover {
+            background: #e0d6f8;
+        }
+
+        .jrad-app-btn:active {
+            transform: scale(0.98);
+        }
+
+        .jrad-app-error {
+            margin: -6px 0 0;
+            color: var(--jrad-warn);
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .jrad-app-error:empty {
+            display: none;
+        }
+
+        .jrad-result {
+            min-height: 176px;
+            padding: 18px;
+            border-radius: 14px;
+            border: 1px solid var(--jrad-border);
+            background: white;
+        }
+
+        .jrad-result.flash {
+            animation: resultFlash 0.7s var(--jrad-ease);
+        }
+
+        .jrad-result-empty {
+            margin: 0;
+            color: var(--jrad-muted);
+            font-size: 13px;
+            line-height: 1.65;
+        }
+
+        .jrad-result-head {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 14px;
+        }
+
+        .jrad-result-name {
+            font-size: 18px;
+            font-weight: 900;
+            letter-spacing: -0.3px;
+        }
+
+        .jrad-result-match {
+            margin-top: 2px;
+            color: var(--jrad-muted);
+            font-size: 12px;
+        }
+
+        .jrad-result-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin: 0 0 14px;
+        }
+
+        .jrad-result-stats div {
+            padding: 10px 12px;
+            border-radius: 10px;
+            background: #f6f4fc;
+        }
+
+        .jrad-result-stats dt {
+            color: var(--jrad-muted);
+            font-size: 11px;
+            font-weight: 700;
+        }
+
+        .jrad-result-stats dd {
+            margin: 2px 0 0;
+            font-size: 15px;
+            font-weight: 900;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .jrad-result-action {
+            margin: 0;
+            color: var(--jrad-ink-soft);
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        .jrad-result-change {
+            margin: 10px 0 0;
+            color: var(--jrad-purple);
+            font-size: 12px;
+            font-weight: 800;
+        }
+
+        .jrad-log-title {
+            margin-bottom: 8px;
+            color: var(--jrad-muted);
+            font-size: 11px;
+            font-weight: 800;
+        }
+
+        .jrad-log {
+            display: grid;
+            gap: 6px;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .jrad-log li {
+            display: flex;
+            justify-content: space-between;
+            gap: 12px;
+            padding: 8px 10px;
+            border-radius: 8px;
+            background: #f6f4fc;
+            color: var(--jrad-ink-soft);
+            font-size: 12px;
+        }
+
+        .jrad-log li.empty {
+            justify-content: flex-start;
+            color: var(--jrad-muted);
+        }
+
+        .jrad-log li span:last-child {
+            color: var(--jrad-muted);
+            white-space: nowrap;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .jrad-app-foot {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            padding: 12px 18px;
+            border-top: 1px solid var(--jrad-border);
+            color: var(--jrad-muted);
+            font-size: 11px;
+        }
+
+        .jrad-link-btn {
+            padding: 0;
+            border: 0;
+            background: none;
+            color: var(--jrad-purple);
+            font: inherit;
+            font-weight: 800;
+            cursor: pointer;
+        }
+
+        /* =========================================================
+           ARCHITECTURE
         ========================================================= */
 
         .jrad-flow {
@@ -691,26 +1958,12 @@
             text-align: center;
         }
 
-        .jrad-flow h2 {
-            margin: 0;
-            font-size: clamp(32px, 3.8vw, 48px);
-            letter-spacing: -1.7px;
-        }
-
-        .jrad-flow > p {
-            max-width: 730px;
-            margin: 18px auto 55px;
-            color: var(--jrad-muted);
-            line-height: 1.75;
-            font-size: 15px;
-        }
-
         .jrad-flow-wrap {
             display: flex;
             justify-content: center;
-            gap: 70px;
-            flex-wrap: wrap;
             align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 70px;
         }
 
         .jrad-flow-lane {
@@ -720,48 +1973,50 @@
         }
 
         .jrad-flow-lane-title {
+            margin-bottom: 26px;
+            color: var(--jrad-purple);
             font-size: 12px;
             font-weight: 900;
             letter-spacing: 1px;
             text-transform: uppercase;
-            color: var(--jrad-purple);
-            margin-bottom: 26px;
         }
 
         .jrad-flow-node {
-            width: 260px;
+            width: 270px;
             padding: 18px 22px;
             border-radius: 14px;
-            background: white;
             border: 1px solid var(--jrad-border);
+            background: white;
             box-shadow: 0 10px 30px rgba(47, 25, 101, 0.07);
             text-align: left;
+        }
 
+        .jrad-js .jrad-flow-node {
             opacity: 0;
             transform: translateY(20px);
         }
 
-        .jrad-flow-node.visible {
-            animation: techIn 0.5s cubic-bezier(.2, .8, .2, 1) forwards;
+        .jrad-js .jrad-flow-node.visible {
+            animation: techIn 0.5s var(--jrad-ease) forwards;
         }
 
         .jrad-flow-node strong {
             display: block;
-            font-size: 14px;
-            color: var(--jrad-text);
             margin-bottom: 3px;
+            color: var(--jrad-text);
+            font-size: 14px;
         }
 
         .jrad-flow-node span {
             display: block;
-            font-size: 12px;
             color: var(--jrad-muted);
+            font-size: 12px;
             line-height: 1.5;
         }
 
         .jrad-flow-node.gold {
-            background: linear-gradient(135deg, #6940ca, #4a2495);
             border-color: transparent;
+            background: linear-gradient(135deg, #6940ca, #4a2495);
         }
 
         .jrad-flow-node.gold strong,
@@ -772,86 +2027,65 @@
         .jrad-flow-connector {
             width: 3px;
             height: 34px;
-            background: repeating-linear-gradient(
-                180deg,
-                var(--jrad-purple) 0 6px,
-                transparent 6px 14px
-            );
+            background: repeating-linear-gradient(180deg, var(--jrad-purple) 0 6px, transparent 6px 14px);
             background-size: 3px 28px;
             animation: flowMove 0.9s linear infinite;
         }
 
-        .jrad-flow-connector.gold {
-            background: repeating-linear-gradient(
-                180deg,
-                var(--jrad-purple) 0 6px,
-                transparent 6px 14px
-            );
-            background-size: 3px 28px;
-        }
-
         .jrad-flow-edge-label {
+            margin: 6px 0;
+            color: var(--jrad-muted);
             font-size: 10.5px;
             font-weight: 800;
-            color: var(--jrad-muted);
-            text-transform: uppercase;
             letter-spacing: 0.4px;
-            margin: 6px 0;
+            text-transform: uppercase;
         }
 
         .jrad-flow-note {
+            max-width: 270px;
             margin-top: 26px;
-            max-width: 260px;
-            font-size: 12px;
             color: var(--jrad-muted);
+            font-size: 12px;
             line-height: 1.6;
         }
 
         /* =========================================================
-           TECHNICAL PIPELINE
+           TOOLS & TECHNIQUES
         ========================================================= */
 
         .jrad-tech {
-            padding: 100px 0;
-        }
-
-        .jrad-tech h2 {
-            margin: 0 0 35px;
-            font-size: clamp(32px, 3.8vw, 48px);
-            letter-spacing: -1.7px;
+            padding: 40px 0 100px;
         }
 
         .jrad-tech-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(4, 1fr);
             gap: 15px;
         }
 
         .jrad-tech-card {
             padding: 24px;
-
             border: 1px solid var(--jrad-border);
             border-radius: 15px;
-
             background: white;
-
             box-shadow: 0 10px 30px rgba(47, 25, 101, 0.05);
+        }
 
+        .jrad-js .jrad-tech-card {
             opacity: 0;
             transform: translateY(25px);
         }
 
-        .jrad-tech-card.visible {
-            animation: techIn 0.48s cubic-bezier(.2, .8, .2, 1) forwards;
+        .jrad-js .jrad-tech-card.visible {
+            animation: techIn 0.48s var(--jrad-ease) forwards;
         }
 
-        .jrad-tech-card:nth-child(1).visible { animation-delay: 0s; }
-        .jrad-tech-card:nth-child(2).visible { animation-delay: 0.07s; }
-        .jrad-tech-card:nth-child(3).visible { animation-delay: 0.14s; }
-        .jrad-tech-card:nth-child(4).visible { animation-delay: 0.21s; }
-        .jrad-tech-card:nth-child(5).visible { animation-delay: 0.28s; }
-        .jrad-tech-card:nth-child(6).visible { animation-delay: 0.35s; }
-        .jrad-tech-card:nth-child(7).visible { animation-delay: 0.42s; }
+        .jrad-tech-card:nth-child(2).visible { animation-delay: 0.06s; }
+        .jrad-tech-card:nth-child(3).visible { animation-delay: 0.12s; }
+        .jrad-tech-card:nth-child(4).visible { animation-delay: 0.18s; }
+        .jrad-tech-card:nth-child(6).visible { animation-delay: 0.06s; }
+        .jrad-tech-card:nth-child(7).visible { animation-delay: 0.12s; }
+        .jrad-tech-card:nth-child(8).visible { animation-delay: 0.18s; }
 
         .jrad-tech-card strong {
             display: block;
@@ -867,18 +2101,141 @@
         }
 
         /* =========================================================
+           DECISIONS
+        ========================================================= */
+
+        .jrad-decisions {
+            border-top: 1px solid var(--jrad-border-strong);
+        }
+
+        .jrad-decision {
+            display: grid;
+            grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.3fr);
+            gap: 40px;
+            padding: 30px 0;
+            border-bottom: 1px solid var(--jrad-border);
+        }
+
+        .jrad-decision h3 {
+            margin: 0;
+            font-size: 19px;
+            line-height: 1.3;
+            letter-spacing: -0.4px;
+        }
+
+        .jrad-decision-alt {
+            margin-top: 8px;
+            color: var(--jrad-muted);
+            font-size: 12px;
+            line-height: 1.5;
+        }
+
+        .jrad-decision p {
+            margin: 0;
+            color: var(--jrad-ink-soft);
+            font-size: 14px;
+            line-height: 1.75;
+        }
+
+        /* =========================================================
+           LIMITATIONS
+        ========================================================= */
+
+        .jrad-limits {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            border: 1px solid var(--jrad-border);
+            border-radius: 20px;
+            background: var(--jrad-surface);
+            overflow: hidden;
+        }
+
+        .jrad-limit {
+            padding: 32px;
+            border-bottom: 1px solid var(--jrad-border);
+        }
+
+        .jrad-limit:nth-child(odd) {
+            border-right: 1px solid var(--jrad-border);
+        }
+
+        .jrad-limit:nth-last-child(-n + 2) {
+            border-bottom: 0;
+        }
+
+        .jrad-limit h3 {
+            margin: 0 0 10px;
+            font-size: 17px;
+            letter-spacing: -0.3px;
+        }
+
+        .jrad-limit p {
+            margin: 0;
+            color: var(--jrad-muted);
+            font-size: 13px;
+            line-height: 1.75;
+        }
+
+        /* =========================================================
+           WHAT'S NEXT
+        ========================================================= */
+
+        .jrad-roadmap {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .jrad-road {
+            padding: 30px;
+            border: 1px dashed var(--jrad-border-strong);
+            border-radius: 18px;
+            background: rgba(255, 255, 255, 0.6);
+        }
+
+        .jrad-road-tag {
+            display: inline-block;
+            margin-bottom: 16px;
+            padding: 5px 11px;
+            border-radius: 999px;
+            background: var(--jrad-purple);
+            color: white;
+            font-size: 11px;
+            font-weight: 800;
+        }
+
+        .jrad-road-tag.soft {
+            background: var(--jrad-lavender);
+            color: var(--jrad-purple);
+        }
+
+        .jrad-road h3 {
+            margin: 0 0 10px;
+            font-size: 18px;
+            letter-spacing: -0.4px;
+        }
+
+        .jrad-road p {
+            margin: 0;
+            color: var(--jrad-muted);
+            font-size: 13px;
+            line-height: 1.7;
+        }
+
+        /* =========================================================
            FINAL CTA
         ========================================================= */
 
         .jrad-final {
-            margin: 50px 0 100px;
-            padding: 55px 35px;
-            text-align: center;
+            margin: 20px 0 100px;
+            padding: 60px 35px;
             border-radius: 22px;
             color: white;
-
+            text-align: center;
             background: linear-gradient(135deg, #7046d1, #43218f);
-
             box-shadow: 0 30px 70px rgba(63, 29, 126, 0.22);
         }
 
@@ -890,9 +2247,70 @@
 
         .jrad-final p {
             max-width: 680px;
-            margin: 0 auto 25px;
+            margin: 0 auto 26px;
             color: rgba(255, 255, 255, 0.82);
             line-height: 1.7;
+        }
+
+        .jrad-final-actions {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        /* =========================================================
+           LIGHTBOX
+        ========================================================= */
+
+        .jrad-lightbox {
+            position: fixed;
+            inset: 0;
+            z-index: 200;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 5vh 4vw;
+            background: rgba(23, 21, 29, 0.88);
+            backdrop-filter: blur(6px);
+        }
+
+        .jrad-lightbox.open {
+            display: flex;
+            animation: fadeIn 0.25s ease;
+        }
+
+        .jrad-lightbox img {
+            max-width: 100%;
+            max-height: 84vh;
+            border-radius: 12px;
+            box-shadow: 0 40px 90px rgba(0, 0, 0, 0.4);
+        }
+
+        .jrad-lightbox-close {
+            position: absolute;
+            top: 18px;
+            right: 18px;
+            padding: 10px 16px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            font: inherit;
+            font-size: 13px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .jrad-lightbox-caption {
+            position: absolute;
+            bottom: 18px;
+            left: 50%;
+            max-width: 90%;
+            transform: translateX(-50%);
+            color: rgba(255, 255, 255, 0.75);
+            font-size: 13px;
+            text-align: center;
         }
 
         /* =========================================================
@@ -950,9 +2368,27 @@
             to { background-position-y: 28px; }
         }
 
+        @keyframes resultFlash {
+            0% { box-shadow: 0 0 0 0 rgba(99, 56, 199, 0.4); }
+            100% { box-shadow: 0 0 0 14px rgba(99, 56, 199, 0); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
         /* =========================================================
            RESPONSIVE
         ========================================================= */
+
+        @media (max-width: 1000px) {
+
+            .jrad-tech-grid { grid-template-columns: repeat(2, 1fr); }
+            .jrad-meta { grid-template-columns: repeat(2, 1fr); }
+            .jrad-steps { grid-template-columns: repeat(2, 1fr); row-gap: 34px; }
+            .jrad-steps li:nth-child(2)::after { display: none; }
+        }
 
         @media (max-width: 900px) {
 
@@ -972,21 +2408,115 @@
             }
 
             .jrad-stats { grid-template-columns: repeat(2, 1fr); }
-            .jrad-tech-grid { grid-template-columns: repeat(2, 1fr); }
             .jrad-flow-wrap { gap: 50px; }
+
+            .jrad-validate,
+            .jrad-dedup,
+            .jrad-till-section,
+            .jrad-lab,
+            .jrad-fixes,
+            .jrad-roadmap {
+                grid-template-columns: 1fr;
+            }
+
+            .jrad-validate { gap: 44px; }
+            .jrad-dedup { gap: 44px; padding: 34px; }
+            .jrad-till-section { gap: 48px; padding: 90px 0; }
+
+            .jrad-lab-input {
+                border-right: 0;
+                border-bottom: 1px solid var(--jrad-border);
+            }
+
+            .jrad-funnel li {
+                grid-template-columns: minmax(0, 1fr) auto;
+                grid-template-areas:
+                    "label value"
+                    "track track";
+                gap: 10px 16px;
+            }
+
+            .jrad-funnel-label { grid-area: label; }
+            .jrad-funnel-value { grid-area: value; }
+            .jrad-funnel-track { grid-area: track; height: 26px; }
+        }
+
+        @media (max-width: 700px) {
+
+            .jrad-steps {
+                grid-template-columns: 1fr;
+                row-gap: 26px;
+            }
+
+            .jrad-steps li {
+                display: grid;
+                grid-template-columns: 34px minmax(0, 1fr);
+                column-gap: 16px;
+                padding-right: 0;
+            }
+
+            .jrad-steps li::before {
+                grid-row: 1 / span 3;
+                margin-bottom: 0;
+            }
+
+            .jrad-steps li > * {
+                grid-column: 2;
+                justify-self: start;
+            }
+
+            .jrad-steps li::after,
+            .jrad-steps li:nth-child(2)::after {
+                display: block;
+                top: 40px;
+                bottom: -22px;
+                left: 16px;
+                right: auto;
+                width: 2px;
+                height: auto;
+                background: repeating-linear-gradient(180deg, var(--jrad-border-strong) 0 6px, transparent 6px 12px);
+            }
+
+            .jrad-steps li:last-child::after { display: none; }
+
+            .jrad-decision {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+
+            .jrad-limits { grid-template-columns: 1fr; }
+
+            .jrad-limit:nth-child(odd) { border-right: 0; }
+            .jrad-limit:nth-last-child(-n + 2) { border-bottom: 1px solid var(--jrad-border); }
+            .jrad-limit:last-child { border-bottom: 0; }
+
+            .jrad-trace > div {
+                grid-template-columns: 1fr;
+                gap: 6px;
+            }
+
+            .jrad-legend li {
+                grid-template-columns: 1fr;
+                gap: 6px;
+            }
+
+            .jrad-nav-inner {
+                -webkit-mask-image: linear-gradient(90deg, #000 85%, transparent);
+                mask-image: linear-gradient(90deg, #000 85%, transparent);
+            }
         }
 
         @media (max-width: 600px) {
 
             .jrad-hero { min-height: 560px; padding: 45px 18px 0; }
             .jrad-hero h1 { letter-spacing: -2px; }
-            .jrad-hero-dashboard { margin-top: 30px; transform: translateY(30px) scale(0.96); }
 
             .jrad-page { width: 90%; padding: 70px 0; }
 
             .jrad-stats { grid-template-columns: 1fr 1fr; gap: 10px; }
             .jrad-stat { padding: 20px 16px; }
             .jrad-stat-number { font-size: 28px; }
+            .jrad-meta { grid-template-columns: 1fr; gap: 18px; }
 
             .jrad-dashboard-section,
             .jrad-dashboard-section.reverse { padding: 65px 0; }
@@ -995,7 +2525,22 @@
             .jrad-dashboard-frame { padding: 7px; border-radius: 13px; }
 
             .jrad-tech-grid { grid-template-columns: 1fr; }
-            .jrad-validation { flex-direction: column; gap: 12px; }
+            .jrad-rings { grid-template-columns: 1fr; }
+
+            .jrad-lab-input,
+            .jrad-lab-output { padding: 26px 22px; }
+
+            .jrad-dedup { padding: 26px 22px; }
+            .jrad-rule { padding: 26px 22px; }
+            .jrad-rule pre { font-size: 12.5px; }
+
+            .jrad-app-form { grid-template-columns: 1fr; }
+            .jrad-result-stats { grid-template-columns: 1fr 1fr 1fr; gap: 6px; }
+            .jrad-result-stats div { padding: 8px 9px; }
+            .jrad-result-stats dd { font-size: 13px; }
+            .jrad-device { padding: 9px; border-radius: 22px; }
+
+            .jrad-video-toggle { right: 10px; bottom: 10px; padding: 6px 11px; }
 
             .jrad-hero::before,
             .jrad-hero::after { display: none; }
@@ -1017,14 +2562,15 @@
 
             .jrad-eyebrow, .jrad-hero h1, .jrad-hero-subtitle,
             .jrad-hero-description, .jrad-hero-actions, .jrad-hero-dashboard,
-            .jrad-stat, .jrad-dashboard-visual, .jrad-dashboard-copy,
-            .jrad-insights li, .jrad-strategy, .jrad-validation,
-            .jrad-tech-card, .jrad-flow-node {
+            .jrad-js .jrad-stat, .jrad-js .jrad-dashboard-visual, .jrad-js .jrad-dashboard-copy,
+            .jrad-js .jrad-insights li, .jrad-js .jrad-strategy, .jrad-js .jrad-reveal,
+            .jrad-js .jrad-tech-card, .jrad-js .jrad-flow-node {
                 opacity: 1 !important;
                 transform: none !important;
             }
 
-            .jrad-flow-connector, .jrad-flow-connector.gold {
+            .jrad-video-wrap,
+            .jrad-flow-connector {
                 animation: none !important;
             }
         }
@@ -1035,11 +2581,14 @@
 
 <body>
 
+    <div class="jrad-progress" aria-hidden="true"></div>
+
+
     <!-- =========================================================
          HERO
     ========================================================= -->
 
-    <header class="jrad-hero">
+    <header class="jrad-hero" id="top">
 
         <div class="jrad-hero-inner">
 
@@ -1047,9 +2596,7 @@
                 PROJECT 04 · CUSTOMER RETENTION INTELLIGENCE
             </div>
 
-            <h1>
-                JRAD Retention Intelligence
-            </h1>
+            <h1>JRAD Retention Intelligence</h1>
 
             <div class="jrad-hero-subtitle">
                 From an Aggregate Insight to a Working System
@@ -1065,12 +2612,15 @@
 
             <div class="jrad-hero-actions">
 
-                <a href="#story" class="jrad-btn jrad-btn-primary">
+                <a href="#overview" class="jrad-btn jrad-btn-primary">
                     Explore the Build
                 </a>
 
-                <a href="../jrad-retail-powerbi-dashboard/"
-                   class="jrad-btn jrad-btn-secondary">
+                <a href="#till" class="jrad-btn jrad-btn-secondary">
+                    Try the Till Demo
+                </a>
+
+                <a href="../jrad-retail-powerbi-dashboard/" class="jrad-btn jrad-btn-ghost">
                     See Version 1 First
                 </a>
 
@@ -1078,11 +2628,20 @@
 
             <div class="jrad-hero-dashboard">
 
-                <video autoplay loop muted playsinline
-                       poster="images/telegram-alert.jpg"
-                       aria-label="A short walkthrough of the retention pipeline, from writing the detection code to a real alert arriving on Telegram">
-                    <source src="video/jrad-lifecycle.mp4" type="video/mp4">
-                </video>
+                <div class="jrad-video-wrap">
+
+                    <video autoplay loop muted playsinline preload="metadata"
+                           poster="images/telegram-alert.jpg"
+                           aria-label="A short walkthrough of the retention pipeline, from writing the detection code to a real alert arriving on Telegram">
+                        <source src="video/jrad-lifecycle.mp4" type="video/mp4">
+                    </video>
+
+                    <button class="jrad-video-toggle" type="button" aria-label="Pause video">
+                        <svg viewBox="0 0 16 16" width="12" height="12" aria-hidden="true"><rect x="3" y="2" width="3.5" height="12" rx="1" fill="currentColor"/><rect x="9.5" y="2" width="3.5" height="12" rx="1" fill="currentColor"/></svg>
+                        <span>Pause</span>
+                    </button>
+
+                </div>
 
                 <div class="jrad-hero-caption">
                     The full pipeline, in 22 seconds — not a mockup.
@@ -1096,12 +2655,28 @@
 
 
     <!-- =========================================================
-         BACK
+         SECTION NAV
     ========================================================= -->
 
-    <div class="jrad-back">
-        <a href="../../index.html">← Back to Portfolio</a>
-    </div>
+    <nav class="jrad-nav" aria-label="Case study sections">
+
+        <div class="jrad-nav-inner">
+
+            <a class="jrad-nav-home" href="../../index.html">← Portfolio</a>
+            <a href="#overview">Overview</a>
+            <a href="#gap">The Gap</a>
+            <a href="#identity">Identity</a>
+            <a href="#validation">Validation</a>
+            <a href="#alerts">Alerts</a>
+            <a href="#till">At the Till</a>
+            <a href="#architecture">Architecture</a>
+            <a href="#decisions">Decisions</a>
+            <a href="#limits">Limits</a>
+            <a href="#next">What's Next</a>
+
+        </div>
+
+    </nav>
 
 
     <main>
@@ -1111,7 +2686,7 @@
              PROJECT AT A GLANCE
         ====================================================== -->
 
-        <section class="jrad-page jrad-glance" id="story">
+        <section class="jrad-page jrad-glance" id="overview">
 
             <div class="jrad-section-label">PROJECT AT A GLANCE</div>
 
@@ -1126,23 +2701,97 @@
             <div class="jrad-stats">
 
                 <div class="jrad-stat">
-                    <div class="jrad-stat-number" data-counter="4256" data-suffix="">0</div>
+                    <div class="jrad-stat-number" data-counter="4256">4,256</div>
                     <div class="jrad-stat-label">Recurring Identities Found</div>
                 </div>
 
                 <div class="jrad-stat">
-                    <div class="jrad-stat-number" data-counter="100" data-suffix="%">0%</div>
+                    <div class="jrad-stat-number" data-counter="100" data-suffix="%">100%</div>
                     <div class="jrad-stat-label">Detection Precision</div>
                 </div>
 
                 <div class="jrad-stat">
-                    <div class="jrad-stat-number" data-counter="88.3" data-decimals="1" data-suffix="%">0%</div>
+                    <div class="jrad-stat-number" data-counter="88.3" data-decimals="1" data-suffix="%">88.3%</div>
                     <div class="jrad-stat-label">Detection Recall</div>
                 </div>
 
                 <div class="jrad-stat">
-                    <div class="jrad-stat-number" data-counter="3" data-suffix="">0</div>
+                    <div class="jrad-stat-number" data-counter="3">3</div>
                     <div class="jrad-stat-label">Alert Channels Delivered</div>
+                </div>
+
+            </div>
+
+            <dl class="jrad-meta jrad-reveal">
+
+                <div>
+                    <dt>Builds on</dt>
+                    <dd>The JRAD Power BI dashboard (Version 1) and its SQL Server star schema</dd>
+                </div>
+
+                <div>
+                    <dt>Data</dt>
+                    <dd>Synthetic Nigerian retail dataset — 225,499 payments across JRAD branches</dd>
+                </div>
+
+                <div>
+                    <dt>Stack</dt>
+                    <dd>Python, SQL Server, Flask, SQLite, Telegram Bot API, SMTP</dd>
+                </div>
+
+                <div>
+                    <dt>Delivered</dt>
+                    <dd>Detection engine, alert service, till-side app, stakeholder deck and print flyer</dd>
+                </div>
+
+            </dl>
+
+            <div class="jrad-compare-block jrad-reveal">
+
+                <h3 class="jrad-h3">What changed from Version 1</h3>
+
+                <div class="jrad-compare-wrap">
+
+                    <table class="jrad-compare">
+
+                        <thead>
+                            <tr>
+                                <th scope="col"><span class="jrad-sr-hide">Aspect</span></th>
+                                <th scope="col">Version 1 — Power BI dashboard</th>
+                                <th scope="col" class="v2">Version 2 — Retention intelligence</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr>
+                                <th scope="row">The question</th>
+                                <td>How many walk-in customers are there, and what do they spend?</td>
+                                <td class="v2">Which walk-in just paid — and have they been here before?</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Unit of analysis</th>
+                                <td>Segments, branches and totals</td>
+                                <td class="v2">One resolved payer at a time</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Output</th>
+                                <td>A recommendation on a dashboard page</td>
+                                <td class="v2">A per-branch digest to managers and an instant read at the till</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">When it acts</th>
+                                <td>At the next business review</td>
+                                <td class="v2">The next morning, and the moment of payment</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Who uses it</th>
+                                <td>Leadership and analysts</td>
+                                <td class="v2">Branch managers and cashiers</td>
+                            </tr>
+                        </tbody>
+
+                    </table>
+
                 </div>
 
             </div>
@@ -1154,7 +2803,7 @@
              01 / THE GAP
         ====================================================== -->
 
-        <section class="jrad-page jrad-dashboard-section">
+        <section class="jrad-page jrad-dashboard-section" id="gap">
 
             <div class="jrad-dashboard-visual">
 
@@ -1170,7 +2819,7 @@
                         <span>Back again — same transfer name, an above-average basket. A different cashier serves them.</span>
                     </div>
 
-                    <div class="jrad-story-card">
+                    <div class="jrad-story-card last">
                         <strong>Day 10</strong>
                         <span>A third visit. Still nobody has connected the three. On paper, they're three strangers.</span>
                     </div>
@@ -1193,11 +2842,9 @@
                 </p>
 
                 <ul class="jrad-insights">
-
                     <li>169,244 of 225,499 payments (75%) came from Walk-In customers — no name, no history, nothing to recognize them by</li>
                     <li>Nothing in the schema linked one Walk-In visit to another, even when it was the same person</li>
                     <li>Cashiers rotate shifts, so even a genuinely familiar face went unrecognized visit to visit</li>
-
                 </ul>
 
                 <div class="jrad-strategy">
@@ -1214,14 +2861,95 @@
 
 
         <!-- =====================================================
-             02 / IDENTITY RESOLUTION & VALIDATED DETECTION
+             THE SIGNAL
         ====================================================== -->
 
-        <section class="jrad-page jrad-dashboard-section reverse">
+        <section class="jrad-page" id="signal">
+
+            <div class="jrad-section-head">
+
+                <div class="jrad-section-label">THE SIGNAL</div>
+
+                <h2 class="jrad-h2">Where the signal was hiding.</h2>
+
+                <p class="jrad-lead">
+                    Most of the business's customers were anonymous. But a transfer
+                    is never anonymous — the bank tells you who sent it. Narrowing
+                    from every payment down to the people worth a conversation:
+                </p>
+
+            </div>
+
+            <ol class="jrad-funnel jrad-reveal">
+
+                <li>
+                    <div class="jrad-funnel-label">
+                        <strong>All payments</strong>
+                        <span>Every transaction in FactPayments</span>
+                    </div>
+                    <div class="jrad-funnel-track"><div class="jrad-funnel-fill" style="--w: 100%"></div></div>
+                    <div class="jrad-funnel-value">225,499<small>payments</small></div>
+                </li>
+
+                <li>
+                    <div class="jrad-funnel-label">
+                        <strong>Walk-in payments</strong>
+                        <span>No customer record attached</span>
+                    </div>
+                    <div class="jrad-funnel-track"><div class="jrad-funnel-fill" style="--w: 75.05%"></div></div>
+                    <div class="jrad-funnel-value">169,244<small>75% of all payments</small></div>
+                </li>
+
+                <li>
+                    <div class="jrad-funnel-label">
+                        <strong>Walk-in transfers</strong>
+                        <span>Each one carries the sender's name</span>
+                    </div>
+                    <div class="jrad-funnel-track"><div class="jrad-funnel-fill" style="--w: 45%"></div></div>
+                    <div class="jrad-funnel-value">101,463<small>60% of walk-ins</small></div>
+                </li>
+
+                <li class="jrad-funnel-divider">Identity resolution turns payments into people</li>
+
+                <li class="people">
+                    <div class="jrad-funnel-label">
+                        <strong>Recurring identities</strong>
+                        <span>Resolved payers seen more than once</span>
+                    </div>
+                    <div class="jrad-funnel-track"><div class="jrad-funnel-fill" style="--w: 1.89%"></div></div>
+                    <div class="jrad-funnel-value">4,256<small>people</small></div>
+                </li>
+
+                <li class="people">
+                    <div class="jrad-funnel-label">
+                        <strong>Retention candidates</strong>
+                        <span>Also spend at or above their branch's average</span>
+                    </div>
+                    <div class="jrad-funnel-track"><div class="jrad-funnel-fill" style="--w: 1.62%"></div></div>
+                    <div class="jrad-funnel-value">3,645<small>flagged on the first run</small></div>
+                </li>
+
+            </ol>
+
+            <p class="jrad-funnel-note">
+                Bars are drawn to scale against all payments. The last two rows
+                count people, not payments — a few thousand names inside a quarter
+                of a million transactions, which is exactly why nobody at the till
+                could spot them unaided.
+            </p>
+
+        </section>
+
+
+        <!-- =====================================================
+             02 / IDENTITY RESOLUTION
+        ====================================================== -->
+
+        <section class="jrad-page jrad-dashboard-section reverse" id="identity">
 
             <div class="jrad-dashboard-copy">
 
-                <div class="jrad-section-label">02 / IDENTITY RESOLUTION &amp; VALIDATED DETECTION</div>
+                <div class="jrad-section-label">02 / IDENTITY RESOLUTION</div>
 
                 <h2>Turning a discarded signal into a detector.</h2>
 
@@ -1232,22 +2960,17 @@
                 </p>
 
                 <ul class="jrad-insights">
-
-                    <li>Enriched 101,463 Walk-In transfer payments with realistic payer identities — the first version had a name-collision bug affecting 43,502 rows, fixed by drawing names without replacement per branch</li>
-                    <li>Built a fuzzy identity resolver, blocked by surname for speed — an early loose threshold incorrectly merged distinct names ("Femi Adegbite" and "Yemi Adegbite"), tightened to require an exact token match</li>
-                    <li>Rule: 2+ visits, average spend at or above the branch's own average</li>
-
+                    <li>Enriched 101,463 Walk-In transfer payments with realistic payer identities, drawn from a Nigerian name library spanning Yoruba, Igbo, Edo, Efik/Ibibio and Urhobo/Isoko names</li>
+                    <li>Built a fuzzy identity resolver with rapidfuzz, blocked by surname so each name is only compared against plausible matches</li>
+                    <li>Added Payer_Name to FactPayments as an additive change — nothing in the existing schema was altered</li>
                 </ul>
 
-                <div class="jrad-validation">
-                    <div class="jrad-validation-figure">
-                        <strong>100%</strong>
-                        <span>PRECISION</span>
-                    </div>
-                    <div class="jrad-validation-figure">
-                        <strong>88.3%</strong>
-                        <span>RECALL</span>
-                    </div>
+                <div class="jrad-strategy">
+                    <div class="jrad-strategy-label">Strategic Focus</div>
+                    <p>
+                        The data needed to recognize repeat customers was already
+                        there — collected at every transfer, then thrown away.
+                    </p>
                 </div>
 
             </div>
@@ -1255,8 +2978,11 @@
             <div class="jrad-dashboard-visual">
 
                 <div class="jrad-dashboard-frame">
-                    <img src="images/detection-engine-code.jpg"
-                         alt="The retention detection engine resolving identities and validating precision and recall">
+                    <button class="jrad-zoom" type="button" aria-label="Enlarge screenshot of the detection engine">
+                        <img src="images/detection-engine-code.jpg"
+                             alt="The retention detection engine resolving identities and validating precision and recall"
+                             loading="lazy">
+                    </button>
                 </div>
 
             </div>
@@ -1265,23 +2991,335 @@
 
 
         <!-- =====================================================
-             03 / FROM DETECTION TO ACTION
+             UNDER THE HOOD
         ====================================================== -->
 
-        <section class="jrad-page jrad-dashboard-section">
+        <section class="jrad-page" id="how-it-works">
+
+            <div class="jrad-section-head">
+
+                <div class="jrad-section-label">UNDER THE HOOD</div>
+
+                <h2 class="jrad-h2">How a transfer name becomes an identity.</h2>
+
+                <p class="jrad-lead">
+                    Bank transfer names are messy: inconsistent casing, reordered
+                    names, stray punctuation. The resolver has to see through that
+                    noise without inventing matches that aren't there.
+                </p>
+
+            </div>
+
+            <ol class="jrad-steps jrad-reveal">
+
+                <li>
+                    <strong>Normalize</strong>
+                    <span>Lowercase, strip punctuation, collapse spaces, then sort the name tokens so word order stops mattering.</span>
+                    <code>ADEGBITE, Femi → adegbite femi</code>
+                </li>
+
+                <li>
+                    <strong>Block</strong>
+                    <span>Group names by surname. A name is only compared with others in its block, which keeps matching fast across 101,463 payments.</span>
+                </li>
+
+                <li>
+                    <strong>Score</strong>
+                    <span>Measure similarity inside each block with a token-sort ratio from rapidfuzz.</span>
+                </li>
+
+                <li>
+                    <strong>Guard</strong>
+                    <span>Require an exact token match on top of the score, so near-identical first names never merge.</span>
+                </li>
+
+            </ol>
+
+            <div class="jrad-section-head jrad-fixes-head">
+                <h3 class="jrad-h3">Two honest iterations</h3>
+                <p class="jrad-lead">
+                    Both bugs were caught before any number on this page was
+                    reported. Neither would have been visible on a dashboard.
+                </p>
+            </div>
+
+            <div class="jrad-fixes">
+
+                <article class="jrad-fix jrad-reveal">
+
+                    <span class="jrad-fix-tag">Iteration 1 · Data enrichment</span>
+
+                    <h3>Names that collided</h3>
+
+                    <dl>
+                        <div>
+                            <dt>What went wrong</dt>
+                            <dd>The first version drew payer names with replacement, so different customers at the same branch could be handed the same name — manufacturing repeat visitors who didn't exist.</dd>
+                        </div>
+                        <div>
+                            <dt>The fix</dt>
+                            <dd>Names are now drawn without replacement within each branch, so every distinct customer keeps a distinct identity.</dd>
+                        </div>
+                    </dl>
+
+                    <div class="jrad-fix-metric">
+                        <strong>43,502</strong>
+                        <span>rows affected before the fix — 42.9% of all enriched payments</span>
+                    </div>
+
+                </article>
+
+                <article class="jrad-fix jrad-reveal">
+
+                    <span class="jrad-fix-tag">Iteration 2 · Identity resolution</span>
+
+                    <h3>Names that merged</h3>
+
+                    <dl>
+                        <div>
+                            <dt>What went wrong</dt>
+                            <dd>An early, loose similarity threshold treated "Femi Adegbite" and "Yemi Adegbite" as one person — two real customers collapsed into one.</dd>
+                        </div>
+                        <div>
+                            <dt>The fix</dt>
+                            <dd>The resolver was tightened to require an exact token match, so a high similarity score alone can no longer merge two people.</dd>
+                        </div>
+                    </dl>
+
+                    <div class="jrad-fix-metric">
+                        <strong>1 letter</strong>
+                        <span>separates Femi from Yemi — and one customer from two</span>
+                    </div>
+
+                </article>
+
+            </div>
+
+            <div class="jrad-lab jrad-reveal" id="resolver-lab">
+
+                <div class="jrad-lab-input">
+
+                    <h3>Try the resolver</h3>
+
+                    <p class="jrad-lab-note">
+                        A simplified version of the matching logic, running in
+                        your browser. Type two transfer names, or pick a pair.
+                    </p>
+
+                    <label class="jrad-field">
+                        <span>Transfer name A</span>
+                        <input class="jrad-input" id="resolverA" type="text" value="Femi Adegbite" autocomplete="off" spellcheck="false" maxlength="60">
+                    </label>
+
+                    <label class="jrad-field">
+                        <span>Transfer name B</span>
+                        <input class="jrad-input" id="resolverB" type="text" value="Yemi Adegbite" autocomplete="off" spellcheck="false" maxlength="60">
+                    </label>
+
+                    <div class="jrad-chips">
+                        <span class="jrad-chips-label">Try a pair</span>
+                        <button class="jrad-chip" type="button" data-a="Femi Adegbite" data-b="Yemi Adegbite">The Femi / Yemi bug</button>
+                        <button class="jrad-chip" type="button" data-a="ADEGBITE FEMI" data-b="femi adegbite">Reordered and shouting</button>
+                        <button class="jrad-chip" type="button" data-a="Chiamaka  Okafor." data-b="chiamaka okafor">Stray punctuation</button>
+                        <button class="jrad-chip" type="button" data-a="Tunde Bakare" data-b="Ngozi Eze">No shared name</button>
+                    </div>
+
+                </div>
+
+                <div class="jrad-lab-output">
+
+                    <dl class="jrad-trace">
+
+                        <div>
+                            <dt>Normalized A</dt>
+                            <dd><code id="traceNormA">—</code></dd>
+                        </div>
+
+                        <div>
+                            <dt>Normalized B</dt>
+                            <dd><code id="traceNormB">—</code></dd>
+                        </div>
+
+                        <div>
+                            <dt>Surname block</dt>
+                            <dd id="traceBlock">—</dd>
+                        </div>
+
+                        <div>
+                            <dt>Token-sort similarity</dt>
+                            <dd>
+                                <div class="jrad-meter">
+                                    <div class="jrad-meter-track"><div class="jrad-meter-fill" id="traceMeter"></div></div>
+                                    <strong id="traceScore">—</strong>
+                                </div>
+                            </dd>
+                        </div>
+
+                        <div>
+                            <dt>Early loose rule (≥ 85)</dt>
+                            <dd id="traceLoose">—</dd>
+                        </div>
+
+                        <div>
+                            <dt>Final rule</dt>
+                            <dd id="traceFinal">—</dd>
+                        </div>
+
+                    </dl>
+
+                    <div class="jrad-verdict" id="resolverVerdict" data-state="idle" aria-live="polite">
+                        <div class="jrad-tick" aria-hidden="true">?</div>
+                        <div>
+                            <div class="jrad-verdict-title">Enter two names</div>
+                            <div class="jrad-verdict-text">Type two transfer names, or pick a pair.</div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             03 / VALIDATED DETECTION
+        ====================================================== -->
+
+        <section class="jrad-page" id="validation">
+
+            <div class="jrad-section-head">
+
+                <div class="jrad-section-label">03 / VALIDATED DETECTION</div>
+
+                <h2 class="jrad-h2">A rule you can check, scored against the truth.</h2>
+
+                <p class="jrad-lead">
+                    A detection rule is only as good as the evidence behind it.
+                    Because every payer identity in the dataset was generated, the
+                    genuine repeat customers were known in advance — so the rule
+                    could be scored, not just trusted.
+                </p>
+
+            </div>
+
+            <div class="jrad-validate">
+
+                <div>
+
+                    <div class="jrad-rule jrad-reveal">
+
+                        <div class="jrad-rule-title">The detection rule</div>
+
+<pre><span class="k">FOR EACH</span> resolved payer at a branch
+  visits    = count of transfer payments
+  avg_spend = mean payment amount
+
+<span class="k">FLAG AS</span> retention candidate
+  <span class="k">WHEN</span> visits    &gt;= 2
+   <span class="k">AND</span> avg_spend &gt;= the branch's own average</pre>
+
+                        <div class="jrad-rule-foot">
+                            Two conditions, both explainable to a branch manager
+                            in one sentence. Nothing to defend as a black box.
+                        </div>
+
+                    </div>
+
+                    <div class="jrad-rings">
+
+                        <div class="jrad-ring jrad-reveal">
+                            <div class="jrad-ring-figure">
+                                <svg viewBox="0 0 120 120" aria-hidden="true">
+                                    <circle class="jrad-ring-bg" cx="60" cy="60" r="50"></circle>
+                                    <circle class="jrad-ring-value" cx="60" cy="60" r="50" pathLength="100" style="--offset: 0"></circle>
+                                </svg>
+                                <strong>100%</strong>
+                            </div>
+                            <div>
+                                <h3>Precision</h3>
+                                <p>Every customer the rule flagged was a genuine repeat, above-average spender. Zero false alarms.</p>
+                            </div>
+                        </div>
+
+                        <div class="jrad-ring jrad-reveal">
+                            <div class="jrad-ring-figure">
+                                <svg viewBox="0 0 120 120" aria-hidden="true">
+                                    <circle class="jrad-ring-bg" cx="60" cy="60" r="50"></circle>
+                                    <circle class="jrad-ring-value" cx="60" cy="60" r="50" pathLength="100" style="--offset: 11.7"></circle>
+                                </svg>
+                                <strong>88.3%</strong>
+                            </div>
+                            <div>
+                                <h3>Recall</h3>
+                                <p>Of all the genuine repeat, above-average spenders in the data, the rule found 88.3%.</p>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="jrad-reveal">
+
+                    <div class="jrad-explain">
+                        <h3>Why precision matters most here</h3>
+                        <p>
+                            An alert that names the wrong customer costs a manager's
+                            trust, and a manager who stops trusting alerts stops
+                            reading them. A missed customer costs less — they walk
+                            back in, and the next visit is another chance.
+                        </p>
+                    </div>
+
+                    <div class="jrad-explain">
+                        <h3>What the 11.7% gap means</h3>
+                        <p>
+                            Some genuine repeat customers weren't flagged. It's
+                            reported as-is: a detector that misses a few customers
+                            but never invents one is the right failure mode for a
+                            first deployment.
+                        </p>
+                    </div>
+
+                    <div class="jrad-explain">
+                        <h3>Why the two fixes came first</h3>
+                        <p>
+                            Colliding names would have corrupted the ground truth
+                            itself, and merged names would have blurred who counts
+                            as a repeat customer. Validation only means something
+                            once the identities underneath it are right.
+                        </p>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             04 / FROM DETECTION TO ACTION
+        ====================================================== -->
+
+        <section class="jrad-page jrad-dashboard-section" id="alerts">
 
             <div class="jrad-dashboard-visual">
 
                 <div class="jrad-dashboard-frame">
-                    <img src="images/alert-system-code.jpg"
-                         alt="The alert system script connecting SQL Server, Telegram, and email">
+                    <button class="jrad-zoom" type="button" aria-label="Enlarge screenshot of the alert system script">
+                        <img src="images/alert-system-code.jpg"
+                             alt="The alert system script connecting SQL Server, Telegram, and email"
+                             loading="lazy">
+                    </button>
                 </div>
 
             </div>
 
             <div class="jrad-dashboard-copy">
 
-                <div class="jrad-section-label">03 / FROM DETECTION TO ACTION</div>
+                <div class="jrad-section-label">04 / FROM DETECTION TO ACTION</div>
 
                 <h2>A validated rule is only useful if someone sees it.</h2>
 
@@ -1291,11 +3329,9 @@
                 </p>
 
                 <ul class="jrad-insights">
-
-                    <li>A Python service re-runs detection, tracks who's already been alerted, and sends a per-branch digest over Telegram and email — 3,645 candidates on the first run, delivered as a handful of messages, not 3,645 pings</li>
-                    <li>Credentials live in their own config file, never in the script — so adding a recipient never means touching code</li>
-                    <li>A standalone till-side companion lets a cashier type a transfer name and get an instant read: New, Returning, or Retention Candidate — without touching the store's existing POS</li>
-
+                    <li>A Python service re-runs detection and sends each branch a digest over Telegram and email — 3,645 candidates on the first run, delivered as a handful of messages, not 3,645 pings</li>
+                    <li>RetentionAlertsSent records every customer already announced, so each new digest only carries who's new</li>
+                    <li>Credentials live in their own config file, never in the script — adding a recipient never means touching code</li>
                 </ul>
 
                 <div class="jrad-strategy">
@@ -1310,22 +3346,213 @@
 
         </section>
 
+        <section class="jrad-page jrad-tight-top" aria-labelledby="dedup-title">
+
+            <div class="jrad-dedup jrad-reveal">
+
+                <div class="jrad-dedup-copy">
+
+                    <h3 class="jrad-h3" id="dedup-title">How each run avoids repeating itself</h3>
+
+                    <p>
+                        Detection runs again and again, but a manager should only
+                        ever hear about a customer once.
+                    </p>
+
+                    <ol class="jrad-steps vertical">
+
+                        <li>
+                            <strong>Detect</strong>
+                            <span>Re-run the rule against the latest payments in SQL Server.</span>
+                        </li>
+
+                        <li>
+                            <strong>Compare</strong>
+                            <span>Check every candidate against RetentionAlertsSent.</span>
+                        </li>
+
+                        <li>
+                            <strong>Send</strong>
+                            <span>Group only the new candidates by branch and send one digest per branch.</span>
+                        </li>
+
+                        <li>
+                            <strong>Record</strong>
+                            <span>Write each announced customer to RetentionAlertsSent so they're never announced twice.</span>
+                        </li>
+
+                    </ol>
+
+                </div>
+
+                <div>
+
+                    <div class="jrad-phone">
+                        <button class="jrad-zoom" type="button" aria-label="Enlarge the Telegram alert screenshot">
+                            <img src="images/telegram-alert.jpg"
+                                 alt="A retention digest arriving on a branch manager's phone through Telegram"
+                                 loading="lazy">
+                        </button>
+                    </div>
+
+                    <div class="jrad-phone-caption">A real digest arriving on Telegram.</div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             05 / RECOGNITION AT THE TILL
+        ====================================================== -->
+
+        <section class="jrad-till-band" id="till">
+
+            <div class="jrad-page jrad-till-section">
+
+                <div class="jrad-till-copy jrad-reveal">
+
+                    <div class="jrad-section-label">05 / RECOGNITION AT THE TILL</div>
+
+                    <h2>Five seconds at the till. No POS changes.</h2>
+
+                    <p>
+                        Cashiers rotate shifts, so the person who remembers a
+                        customer is rarely the one serving them. The till-side
+                        companion gives every cashier the same memory: type the
+                        name on the transfer and get an instant read.
+                    </p>
+
+                    <ul class="jrad-legend">
+
+                        <li>
+                            <span class="jrad-status new">New</span>
+                            <span>No record of this name yet. Record the visit so the next cashier sees it.</span>
+                        </li>
+
+                        <li>
+                            <span class="jrad-status returning">Returning</span>
+                            <span>Has paid here before. Greet them back.</span>
+                        </li>
+
+                        <li>
+                            <span class="jrad-status candidate">Retention candidate</span>
+                            <span>Two or more visits at or above the branch's average spend. Invite them to register.</span>
+                        </li>
+
+                    </ul>
+
+                    <p class="jrad-sim-note">
+                        The simulator runs in your browser with sample customers and a
+                        demo branch average of ₦18,500. The real app is a Flask service
+                        backed by a SQLite database shared by every till in the store.
+                    </p>
+
+                </div>
+
+                <div class="jrad-device jrad-reveal">
+
+                    <div class="jrad-screen">
+
+                        <div class="jrad-app-bar">
+
+                            <div>
+                                <div class="jrad-app-title">JRAD Till Companion</div>
+                                <div class="jrad-app-sub">Demo branch · shared memory across tills</div>
+                            </div>
+
+                            <div class="jrad-tills" role="group" aria-label="Choose which till you are using">
+                                <button type="button" data-till="Till 1" aria-pressed="true">Till 1</button>
+                                <button type="button" data-till="Till 2" aria-pressed="false">Till 2</button>
+                                <button type="button" data-till="Till 3" aria-pressed="false">Till 3</button>
+                            </div>
+
+                        </div>
+
+                        <div class="jrad-app-body">
+
+                            <div class="jrad-app-form">
+
+                                <label class="jrad-field">
+                                    <span>Name on transfer</span>
+                                    <input class="jrad-input" id="tillName" type="text" placeholder="e.g. Femi Adegbite" autocomplete="off" spellcheck="false" maxlength="60">
+                                </label>
+
+                                <label class="jrad-field">
+                                    <span>Basket (₦)</span>
+                                    <input class="jrad-input" id="tillBasket" type="number" inputmode="numeric" min="0" step="50" placeholder="25000">
+                                </label>
+
+                            </div>
+
+                            <div class="jrad-chips">
+                                <span class="jrad-chips-label">Sample customers</span>
+                                <button class="jrad-chip jrad-till-chip" type="button" data-name="Femi Adegbite">Femi Adegbite</button>
+                                <button class="jrad-chip jrad-till-chip" type="button" data-name="adegbite femi">adegbite femi</button>
+                                <button class="jrad-chip jrad-till-chip" type="button" data-name="Yemi Adegbite">Yemi Adegbite</button>
+                                <button class="jrad-chip jrad-till-chip" type="button" data-name="Efosa Igbinedion">Efosa Igbinedion</button>
+                                <button class="jrad-chip jrad-till-chip" type="button" data-name="Bisola Adeyemi">Bisola Adeyemi</button>
+                            </div>
+
+                            <div class="jrad-app-actions">
+                                <button class="jrad-app-btn primary" id="tillLookup" type="button">Look up customer</button>
+                                <button class="jrad-app-btn secondary" id="tillRecord" type="button">Record this visit</button>
+                            </div>
+
+                            <p class="jrad-app-error" id="tillError" role="alert"></p>
+
+                            <div class="jrad-result" id="tillResult" aria-live="polite">
+                                <p class="jrad-result-empty">
+                                    Type a name and look it up. Try this: look up Yemi Adegbite,
+                                    enter a basket of ₦25,000, record the visit — then switch
+                                    to another till and look the same name up again.
+                                </p>
+                            </div>
+
+                            <div>
+                                <div class="jrad-log-title">Recent activity — all tills</div>
+                                <ul class="jrad-log" id="tillLog">
+                                    <li class="empty">No visits recorded in this session yet.</li>
+                                </ul>
+                            </div>
+
+                        </div>
+
+                        <div class="jrad-app-foot">
+                            <span>Session only — nothing leaves this page.</span>
+                            <button class="jrad-link-btn" id="tillReset" type="button">Reset demo</button>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
 
         <!-- =====================================================
              ARCHITECTURE — THE CYCLE
         ====================================================== -->
 
-        <section class="jrad-page jrad-flow">
+        <section class="jrad-page jrad-flow" id="architecture">
 
-            <div class="jrad-section-label">ARCHITECTURE</div>
+            <div class="jrad-section-head center">
 
-            <h2>The cycle, end to end.</h2>
+                <div class="jrad-section-label">ARCHITECTURE</div>
 
-            <p>
-                Two independent pipelines by design — the analytics side
-                and the till-side recognition tool never depend on each other,
-                so one can run even where the other doesn't reach.
-            </p>
+                <h2 class="jrad-h2">The cycle, end to end.</h2>
+
+                <p class="jrad-lead">
+                    Two independent pipelines by design — the analytics side
+                    and the till-side recognition tool never depend on each other,
+                    so one can run even where the other doesn't reach.
+                </p>
+
+            </div>
 
             <div class="jrad-flow-wrap">
 
@@ -1339,7 +3566,16 @@
                     </div>
 
                     <div class="jrad-flow-connector"></div>
-                    <div class="jrad-flow-edge-label">Detection Runs</div>
+                    <div class="jrad-flow-edge-label">Identity resolution</div>
+                    <div class="jrad-flow-connector"></div>
+
+                    <div class="jrad-flow-node">
+                        <strong>Resolved Payers</strong>
+                        <span>Normalized, blocked by surname, guarded by exact token match</span>
+                    </div>
+
+                    <div class="jrad-flow-connector"></div>
+                    <div class="jrad-flow-edge-label">Detection runs</div>
                     <div class="jrad-flow-connector"></div>
 
                     <div class="jrad-flow-node">
@@ -1347,9 +3583,9 @@
                         <span>Who qualifies, and who's already been notified</span>
                     </div>
 
-                    <div class="jrad-flow-connector gold"></div>
+                    <div class="jrad-flow-connector"></div>
                     <div class="jrad-flow-edge-label">Telegram + Email</div>
-                    <div class="jrad-flow-connector gold"></div>
+                    <div class="jrad-flow-connector"></div>
 
                     <div class="jrad-flow-node gold">
                         <strong>Branch Manager</strong>
@@ -1368,7 +3604,7 @@
                     </div>
 
                     <div class="jrad-flow-connector"></div>
-                    <div class="jrad-flow-edge-label">Shared Memory</div>
+                    <div class="jrad-flow-edge-label">Flask REST endpoints</div>
                     <div class="jrad-flow-connector"></div>
 
                     <div class="jrad-flow-node">
@@ -1376,8 +3612,18 @@
                         <span>Every till in the store reads the same live memory</span>
                     </div>
 
+                    <div class="jrad-flow-connector"></div>
+                    <div class="jrad-flow-edge-label">Instant read</div>
+                    <div class="jrad-flow-connector"></div>
+
+                    <div class="jrad-flow-node gold">
+                        <strong>Cashier</strong>
+                        <span>New, Returning, or Retention Candidate</span>
+                    </div>
+
                     <div class="jrad-flow-note">
-                        Independent of the SQL Server warehouse — works even where the main analytics stack doesn't reach.
+                        Independent of the SQL Server warehouse — works even where
+                        the main analytics stack doesn't reach.
                     </div>
 
                 </div>
@@ -1391,27 +3637,31 @@
              TOOLS & TECHNIQUES
         ====================================================== -->
 
-        <section class="jrad-page jrad-tech">
+        <section class="jrad-page jrad-tech" id="tools">
 
-            <div class="jrad-section-label">TOOLS &amp; TECHNIQUES</div>
+            <div class="jrad-section-head">
 
-            <h2>From raw payment data to a phone buzzing.</h2>
+                <div class="jrad-section-label">TOOLS &amp; TECHNIQUES</div>
+
+                <h2 class="jrad-h2">From raw payment data to a phone buzzing.</h2>
+
+            </div>
 
             <div class="jrad-tech-grid">
 
                 <div class="jrad-tech-card">
                     <strong>Data Enrichment</strong>
-                    <span>Python, pandas, openpyxl, collision-free identity sampling.</span>
+                    <span>Python, pandas, openpyxl, collision-free identity sampling per branch.</span>
                 </div>
 
                 <div class="jrad-tech-card">
                     <strong>Identity Resolution</strong>
-                    <span>rapidfuzz, blocked fuzzy matching, token-sort normalization.</span>
+                    <span>rapidfuzz, surname blocking, token-sort normalization, exact-token guard.</span>
                 </div>
 
                 <div class="jrad-tech-card">
                     <strong>Detection &amp; Validation</strong>
-                    <span>Statistical profiling, precision/recall testing against ground truth.</span>
+                    <span>Statistical profiling, precision and recall scored against ground truth.</span>
                 </div>
 
                 <div class="jrad-tech-card">
@@ -1434,7 +3684,220 @@
                     <span>A stakeholder deck and print flyer, built for real pitch use.</span>
                 </div>
 
+                <div class="jrad-tech-card">
+                    <strong>Interactive Case Study</strong>
+                    <span>HTML, CSS and vanilla JavaScript — the resolver and till simulators on this page.</span>
+                </div>
+
             </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             DECISIONS & TRADE-OFFS
+        ====================================================== -->
+
+        <section class="jrad-page" id="decisions">
+
+            <div class="jrad-section-head">
+
+                <div class="jrad-section-label">DECISIONS &amp; TRADE-OFFS</div>
+
+                <h2 class="jrad-h2">The choices that shaped it.</h2>
+
+                <p class="jrad-lead">
+                    Every system is a set of trade-offs. These are the ones that
+                    mattered most, and why each went the way it did.
+                </p>
+
+            </div>
+
+            <div class="jrad-decisions">
+
+                <div class="jrad-decision jrad-reveal">
+                    <div>
+                        <h3>Standalone at the till, not built into the POS</h3>
+                        <div class="jrad-decision-alt">Instead of integrating with the store's point-of-sale system</div>
+                    </div>
+                    <p>
+                        Touching a store's POS means vendor involvement and head-office
+                        IT approval. A standalone tool can be trialled at a single
+                        branch without anyone else's sign-off, and removed just as easily.
+                    </p>
+                </div>
+
+                <div class="jrad-decision jrad-reveal">
+                    <div>
+                        <h3>One digest per branch, not one alert per customer</h3>
+                        <div class="jrad-decision-alt">Instead of a notification for every candidate</div>
+                    </div>
+                    <p>
+                        3,645 candidates on the first run would have been 3,645
+                        notifications. Batched by branch, it becomes a handful of
+                        messages a manager will actually read.
+                    </p>
+                </div>
+
+                <div class="jrad-decision jrad-reveal">
+                    <div>
+                        <h3>Zero false alarms over maximum coverage</h3>
+                        <div class="jrad-decision-alt">Instead of a looser rule that catches more and gets some wrong</div>
+                    </div>
+                    <p>
+                        Trust is the scarce resource. The rule runs at 100% precision
+                        and reports its 88.3% recall openly, rather than trading a
+                        manager's confidence for a bigger number.
+                    </p>
+                </div>
+
+                <div class="jrad-decision jrad-reveal">
+                    <div>
+                        <h3>An additive schema change</h3>
+                        <div class="jrad-decision-alt">Instead of restructuring FactPayments</div>
+                    </div>
+                    <p>
+                        Payer_Name was added as a new column and nothing existing
+                        changed, so nothing Version 1 depends on had to be rebuilt.
+                    </p>
+                </div>
+
+                <div class="jrad-decision jrad-reveal">
+                    <div>
+                        <h3>SQLite at the till, SQL Server for analytics</h3>
+                        <div class="jrad-decision-alt">Instead of every till querying the warehouse</div>
+                    </div>
+                    <p>
+                        The two pipelines never depend on each other. The till tool
+                        keeps working even in a store the analytics stack doesn't reach.
+                    </p>
+                </div>
+
+                <div class="jrad-decision jrad-reveal">
+                    <div>
+                        <h3>Credentials in config, not in code</h3>
+                        <div class="jrad-decision-alt">Instead of tokens and passwords inside the script</div>
+                    </div>
+                    <p>
+                        Adding a manager or rotating a password is a config edit, and
+                        secrets stay out of the script that gets shared and versioned.
+                    </p>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             LIMITATIONS
+        ====================================================== -->
+
+        <section class="jrad-page" id="limits">
+
+            <div class="jrad-section-head">
+
+                <div class="jrad-section-label">LIMITATIONS</div>
+
+                <h2 class="jrad-h2">What this doesn't solve yet.</h2>
+
+                <p class="jrad-lead">
+                    Stated plainly, because a pitch that hides its limits doesn't
+                    survive its first real deployment.
+                </p>
+
+            </div>
+
+            <div class="jrad-limits jrad-reveal">
+
+                <div class="jrad-limit">
+                    <h3>Synthetic data is tidier than real data</h3>
+                    <p>
+                        Real transfer names arrive truncated, abbreviated, or under a
+                        spouse's or business account. The resolver was validated on
+                        generated names; real payment records would need a fresh round
+                        of validation before any accuracy figure is quoted.
+                    </p>
+                </div>
+
+                <div class="jrad-limit">
+                    <h3>Cash customers stay invisible</h3>
+                    <p>
+                        Only transfers carry a name. The other 67,781 walk-in payments
+                        — 40% of the walk-in total — can't be recognized by this
+                        approach at all.
+                    </p>
+                </div>
+
+                <div class="jrad-limit">
+                    <h3>Two people can share a name</h3>
+                    <p>
+                        Name-based identity can't tell apart two genuine customers
+                        with the same name at the same branch. Spend patterns and visit
+                        times could help separate them; the name alone can't.
+                    </p>
+                </div>
+
+                <div class="jrad-limit">
+                    <h3>Payer names are personal data</h3>
+                    <p>
+                        A live deployment needs a clear lawful basis, limited retention
+                        and customer notice under Nigeria's Data Protection Act 2023 —
+                        designed in from the start, not bolted on later.
+                    </p>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             WHAT'S NEXT
+        ====================================================== -->
+
+        <section class="jrad-page" id="next">
+
+            <div class="jrad-section-head">
+
+                <div class="jrad-section-label">WHAT'S NEXT</div>
+
+                <h2 class="jrad-h2">Where it goes from here.</h2>
+
+            </div>
+
+            <ul class="jrad-roadmap">
+
+                <li class="jrad-road jrad-reveal">
+                    <span class="jrad-road-tag">Planned</span>
+                    <h3>Churn early-warning</h3>
+                    <p>
+                        Retention's other half: spotting customers who used to be
+                        loyal and have quietly stopped coming — while there's still
+                        time to win them back.
+                    </p>
+                </li>
+
+                <li class="jrad-road jrad-reveal">
+                    <span class="jrad-road-tag">Planned</span>
+                    <h3>A pilot with independent supermarkets</h3>
+                    <p>
+                        Owner-operated stores first: one decision-maker, no head-office
+                        approval chain, and a fast answer on whether the alerts change
+                        anything at the till.
+                    </p>
+                </li>
+
+                <li class="jrad-road jrad-reveal">
+                    <span class="jrad-road-tag soft">Exploring</span>
+                    <h3>Beyond retail</h3>
+                    <p>
+                        The same pattern — a name on every payment, a repeat customer
+                        nobody recognizes — shows up in hotels and restaurants.
+                    </p>
+                </li>
+
+            </ul>
 
         </section>
 
@@ -1443,7 +3906,7 @@
              FINAL CTA
         ====================================================== -->
 
-        <section class="jrad-page">
+        <section class="jrad-page jrad-tight-top">
 
             <div class="jrad-final">
 
@@ -1456,10 +3919,17 @@
                     a system.
                 </p>
 
-                <a href="../jrad-retail-powerbi-dashboard/"
-                   class="jrad-btn jrad-btn-primary">
-                    Revisit Version 1
-                </a>
+                <div class="jrad-final-actions">
+
+                    <a href="../jrad-retail-powerbi-dashboard/" class="jrad-btn jrad-btn-primary">
+                        Revisit Version 1
+                    </a>
+
+                    <a href="../../index.html" class="jrad-btn jrad-btn-secondary">
+                        Back to Portfolio
+                    </a>
+
+                </div>
 
             </div>
 
@@ -1467,6 +3937,16 @@
 
     </main>
 
+
+    <!-- =========================================================
+         LIGHTBOX
+    ========================================================= -->
+
+    <div class="jrad-lightbox" role="dialog" aria-modal="true" aria-label="Enlarged image" aria-hidden="true">
+        <button class="jrad-lightbox-close" type="button">Close</button>
+        <img src="" alt="">
+        <div class="jrad-lightbox-caption"></div>
+    </div>
 
 
     <!-- =========================================================
@@ -1477,45 +3957,58 @@
 
         document.addEventListener("DOMContentLoaded", function () {
 
-            const observerOptions = {
-                threshold: 0.12,
-                rootMargin: "0px 0px -60px 0px"
-            };
-
-            const revealObserver = new IntersectionObserver(function (entries) {
-
-                entries.forEach(function (entry) {
-
-                    if (!entry.isIntersecting) {
-                        return;
-                    }
-
-                    entry.target.classList.add("visible");
-                    revealObserver.unobserve(entry.target);
-
-                });
-
-            }, observerOptions);
-
-            document
-                .querySelectorAll(
-                    ".jrad-page, " +
-                    ".jrad-dashboard-visual, " +
-                    ".jrad-dashboard-copy, " +
-                    ".jrad-stat, " +
-                    ".jrad-tech-card, " +
-                    ".jrad-flow-node"
-                )
-                .forEach(function (element) {
-                    revealObserver.observe(element);
-                });
+            const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+            const hasObserver = "IntersectionObserver" in window;
 
 
             /*
-             * COUNT-UP ENGINE
+             * REVEAL
+             */
+
+            const revealTargets = document.querySelectorAll(
+                ".jrad-page, .jrad-dashboard-visual, .jrad-dashboard-copy, " +
+                ".jrad-stat, .jrad-tech-card, .jrad-flow-node, .jrad-reveal"
+            );
+
+            if (!hasObserver || reduceMotion) {
+
+                revealTargets.forEach(function (element) {
+                    element.classList.add("visible");
+                });
+
+            } else {
+
+                const revealObserver = new IntersectionObserver(function (entries) {
+                    entries.forEach(function (entry) {
+                        if (!entry.isIntersecting) {
+                            return;
+                        }
+                        entry.target.classList.add("visible");
+                        revealObserver.unobserve(entry.target);
+                    });
+                }, { threshold: 0.1, rootMargin: "0px 0px -60px 0px" });
+
+                revealTargets.forEach(function (element) {
+                    revealObserver.observe(element);
+                });
+            }
+
+
+            /*
+             * COUNT-UP
              */
 
             const counters = document.querySelectorAll("[data-counter]");
+
+            function formatCounter(element, value) {
+                const decimals = parseInt(element.dataset.decimals || "0", 10);
+                return (element.dataset.prefix || "") +
+                    value.toLocaleString("en-NG", {
+                        minimumFractionDigits: decimals,
+                        maximumFractionDigits: decimals
+                    }) +
+                    (element.dataset.suffix || "");
+            }
 
             function animateCounter(element) {
 
@@ -1526,62 +4019,639 @@
                 element.dataset.counted = "true";
 
                 const target = parseFloat(element.dataset.counter);
-                const decimals = parseInt(element.dataset.decimals || "0", 10);
-                const prefix = element.dataset.prefix || "";
-                const suffix = element.dataset.suffix || "";
                 const duration = 900;
                 const startTime = performance.now();
 
-                function updateCounter(currentTime) {
-
-                    const elapsed = currentTime - startTime;
-                    const progress = Math.min(elapsed / duration, 1);
+                function frame(now) {
+                    const progress = Math.min((now - startTime) / duration, 1);
                     const eased = 1 - Math.pow(1 - progress, 3);
-                    const current = target * eased;
-
-                    element.textContent =
-                        prefix +
-                        current.toLocaleString("en-NG", {
-                            minimumFractionDigits: decimals,
-                            maximumFractionDigits: decimals
-                        }) +
-                        suffix;
-
+                    element.textContent = formatCounter(element, progress < 1 ? target * eased : target);
                     if (progress < 1) {
-                        requestAnimationFrame(updateCounter);
-                    } else {
-                        element.textContent =
-                            prefix +
-                            target.toLocaleString("en-NG", {
-                                minimumFractionDigits: decimals,
-                                maximumFractionDigits: decimals
-                            }) +
-                            suffix;
+                        requestAnimationFrame(frame);
                     }
-
                 }
 
-                requestAnimationFrame(updateCounter);
-
+                requestAnimationFrame(frame);
             }
 
-            const counterObserver = new IntersectionObserver(function (entries) {
+            if (hasObserver && !reduceMotion) {
 
-                entries.forEach(function (entry) {
+                counters.forEach(function (counter) {
+                    counter.textContent = formatCounter(counter, 0);
+                });
 
-                    if (!entry.isIntersecting) {
+                const counterObserver = new IntersectionObserver(function (entries) {
+                    entries.forEach(function (entry) {
+                        if (!entry.isIntersecting) {
+                            return;
+                        }
+                        animateCounter(entry.target);
+                        counterObserver.unobserve(entry.target);
+                    });
+                }, { threshold: 0.4 });
+
+                counters.forEach(function (counter) {
+                    counterObserver.observe(counter);
+                });
+            }
+
+
+            /*
+             * SCROLL PROGRESS
+             */
+
+            const progressBar = document.querySelector(".jrad-progress");
+            let progressTicking = false;
+
+            function updateProgress() {
+                const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+                const ratio = maxScroll > 0 ? Math.min(Math.max(window.scrollY / maxScroll, 0), 1) : 0;
+                progressBar.style.transform = "scaleX(" + ratio + ")";
+                progressTicking = false;
+            }
+
+            window.addEventListener("scroll", function () {
+                if (!progressTicking) {
+                    requestAnimationFrame(updateProgress);
+                    progressTicking = true;
+                }
+            }, { passive: true });
+
+            updateProgress();
+
+
+            /*
+             * SCROLLSPY
+             */
+
+            const navInner = document.querySelector(".jrad-nav-inner");
+            const navLinks = Array.from(document.querySelectorAll(".jrad-nav a[href^='#']"));
+            let activeId = null;
+
+            function setActive(id) {
+
+                if (id === activeId) {
+                    return;
+                }
+
+                activeId = id;
+
+                navLinks.forEach(function (link) {
+
+                    const isActive = link.getAttribute("href") === "#" + id;
+                    link.classList.toggle("active", isActive);
+
+                    if (isActive) {
+                        link.setAttribute("aria-current", "true");
+                        const target = link.offsetLeft - (navInner.clientWidth / 2) + (link.offsetWidth / 2);
+                        navInner.scrollTo({ left: target, behavior: reduceMotion ? "auto" : "smooth" });
+                    } else {
+                        link.removeAttribute("aria-current");
+                    }
+                });
+            }
+
+            if (hasObserver) {
+
+                const spyObserver = new IntersectionObserver(function (entries) {
+                    entries.forEach(function (entry) {
+                        if (entry.isIntersecting) {
+                            setActive(entry.target.id);
+                        }
+                    });
+                }, { rootMargin: "-40% 0px -55% 0px" });
+
+                const hero = document.getElementById("top");
+
+                if (hero) {
+                    spyObserver.observe(hero);
+                }
+
+                navLinks.forEach(function (link) {
+                    const section = document.querySelector(link.getAttribute("href"));
+                    if (section) {
+                        spyObserver.observe(section);
+                    }
+                });
+            }
+
+
+            /*
+             * HERO VIDEO CONTROL
+             */
+
+            const video = document.querySelector(".jrad-video-wrap video");
+            const videoToggle = document.querySelector(".jrad-video-toggle");
+
+            const pauseIcon = '<svg viewBox="0 0 16 16" width="12" height="12" aria-hidden="true"><rect x="3" y="2" width="3.5" height="12" rx="1" fill="currentColor"/><rect x="9.5" y="2" width="3.5" height="12" rx="1" fill="currentColor"/></svg>';
+            const playIcon = '<svg viewBox="0 0 16 16" width="12" height="12" aria-hidden="true"><path d="M4 2.5v11a.5.5 0 0 0 .77.42l8.5-5.5a.5.5 0 0 0 0-.84l-8.5-5.5A.5.5 0 0 0 4 2.5z" fill="currentColor"/></svg>';
+
+            if (video && videoToggle) {
+
+                function syncVideoToggle() {
+                    const paused = video.paused;
+                    videoToggle.innerHTML = (paused ? playIcon : pauseIcon) + "<span>" + (paused ? "Play" : "Pause") + "</span>";
+                    videoToggle.setAttribute("aria-label", paused ? "Play video" : "Pause video");
+                }
+
+                if (reduceMotion) {
+                    video.removeAttribute("autoplay");
+                    video.pause();
+                }
+
+                videoToggle.addEventListener("click", function () {
+                    if (video.paused) {
+                        const attempt = video.play();
+                        if (attempt && attempt.catch) {
+                            attempt.catch(function () {});
+                        }
+                    } else {
+                        video.pause();
+                    }
+                });
+
+                video.addEventListener("play", syncVideoToggle);
+                video.addEventListener("pause", syncVideoToggle);
+                syncVideoToggle();
+            }
+
+
+            /*
+             * SHARED NAME HELPERS
+             */
+
+            function nameTokens(value) {
+                return value
+                    .normalize("NFD")
+                    .replace(/[\u0300-\u036f]/g, "")
+                    .toLowerCase()
+                    .replace(/[^a-z\s]/g, " ")
+                    .split(/\s+/)
+                    .filter(Boolean);
+            }
+
+            function sortedKey(tokens) {
+                return tokens.slice().sort().join(" ");
+            }
+
+            function lcsLength(a, b) {
+                let previous = new Array(b.length + 1).fill(0);
+                for (let i = 1; i <= a.length; i++) {
+                    const current = [0];
+                    for (let j = 1; j <= b.length; j++) {
+                        current[j] = a[i - 1] === b[j - 1]
+                            ? previous[j - 1] + 1
+                            : Math.max(previous[j], current[j - 1]);
+                    }
+                    previous = current;
+                }
+                return previous[b.length];
+            }
+
+            function similarity(a, b) {
+                if (!a.length && !b.length) {
+                    return 100;
+                }
+                return (200 * lcsLength(a, b)) / (a.length + b.length);
+            }
+
+            function escapeHtml(value) {
+                return String(value)
+                    .replace(/&/g, "&amp;")
+                    .replace(/</g, "&lt;")
+                    .replace(/>/g, "&gt;")
+                    .replace(/"/g, "&quot;")
+                    .replace(/'/g, "&#39;");
+            }
+
+
+            /*
+             * RESOLVER LAB
+             */
+
+            const resolverA = document.getElementById("resolverA");
+            const resolverB = document.getElementById("resolverB");
+
+            if (resolverA && resolverB) {
+
+                const traceNormA = document.getElementById("traceNormA");
+                const traceNormB = document.getElementById("traceNormB");
+                const traceBlock = document.getElementById("traceBlock");
+                const traceMeter = document.getElementById("traceMeter");
+                const traceScore = document.getElementById("traceScore");
+                const traceLoose = document.getElementById("traceLoose");
+                const traceFinal = document.getElementById("traceFinal");
+                const verdict = document.getElementById("resolverVerdict");
+                const verdictTick = verdict.querySelector(".jrad-tick");
+                const verdictTitle = verdict.querySelector(".jrad-verdict-title");
+                const verdictText = verdict.querySelector(".jrad-verdict-text");
+
+                function pill(kind, label) {
+                    return '<span class="jrad-pill ' + kind + '">' + label + "</span>";
+                }
+
+                function setVerdict(state, tick, title, text) {
+                    verdict.setAttribute("data-state", state);
+                    verdictTick.textContent = tick;
+                    verdictTitle.textContent = title;
+                    verdictText.textContent = text;
+                }
+
+                function renderResolver() {
+
+                    const tokensA = nameTokens(resolverA.value);
+                    const tokensB = nameTokens(resolverB.value);
+
+                    if (!tokensA.length || !tokensB.length) {
+                        traceNormA.textContent = tokensA.length ? sortedKey(tokensA) : "—";
+                        traceNormB.textContent = tokensB.length ? sortedKey(tokensB) : "—";
+                        traceBlock.textContent = "—";
+                        traceMeter.style.width = "0%";
+                        traceScore.textContent = "—";
+                        traceLoose.textContent = "—";
+                        traceFinal.textContent = "—";
+                        setVerdict("idle", "?", "Enter two names", "Type two transfer names, or pick a pair.");
                         return;
                     }
 
-                    animateCounter(entry.target);
-                    counterObserver.unobserve(entry.target);
+                    const keyA = sortedKey(tokensA);
+                    const keyB = sortedKey(tokensB);
+                    const shared = tokensA.filter(function (token) {
+                        return tokensB.indexOf(token) !== -1;
+                    });
+                    const score = similarity(keyA, keyB);
+                    const looseMerge = shared.length > 0 && score >= 85;
+                    const same = keyA === keyB;
 
+                    traceNormA.textContent = keyA;
+                    traceNormB.textContent = keyB;
+
+                    traceBlock.textContent = shared.length
+                        ? "Same block — both contain \u201c" + shared[0] + "\u201d"
+                        : "Different blocks — never compared";
+
+                    traceMeter.style.width = score.toFixed(1) + "%";
+                    traceScore.textContent = score.toFixed(1);
+
+                    if (looseMerge) {
+                        traceLoose.innerHTML = same ? pill("ok", "Merge") : pill("bad", "Merge — wrong");
+                    } else {
+                        traceLoose.innerHTML = pill("neutral", "Keep apart");
+                    }
+
+                    traceFinal.innerHTML = same ? pill("ok", "Merge") : pill("neutral", "Keep apart");
+
+                    if (same) {
+                        setVerdict("same", "\u2713", "Same person",
+                            "Identical once normalized. Casing, word order and punctuation don't create new customers.");
+                    } else if (looseMerge) {
+                        setVerdict("caught", "\u2260", "Different people",
+                            "Similar enough (" + score.toFixed(1) + ") to fool a loose threshold. This is exactly the bug the exact-token rule fixed.");
+                    } else if (shared.length) {
+                        setVerdict("different", "\u2260", "Different people",
+                            "They share a name, but the rest of it doesn't line up.");
+                    } else {
+                        setVerdict("different", "\u2260", "Different people",
+                            "No shared name, so the resolver never even compares them. Blocking is what keeps matching fast.");
+                    }
+                }
+
+                resolverA.addEventListener("input", renderResolver);
+                resolverB.addEventListener("input", renderResolver);
+
+                document.querySelectorAll("#resolver-lab .jrad-chip").forEach(function (chip) {
+                    chip.addEventListener("click", function () {
+                        resolverA.value = chip.dataset.a;
+                        resolverB.value = chip.dataset.b;
+                        renderResolver();
+                    });
                 });
 
-            }, { threshold: 0.4 });
+                renderResolver();
+            }
 
-            counters.forEach(function (counter) {
-                counterObserver.observe(counter);
+
+            /*
+             * TILL SIMULATOR
+             */
+
+            const tillName = document.getElementById("tillName");
+
+            if (tillName) {
+
+                const BRANCH_AVERAGE = 18500;
+
+                const SEED = [
+                    { name: "Femi Adegbite", visits: [21500, 26800, 24600] },
+                    { name: "Chiamaka Okafor", visits: [29400, 35200, 31100, 30900] },
+                    { name: "Yemi Adegbite", visits: [16200] },
+                    { name: "Efosa Igbinedion", visits: [11800, 13000] },
+                    { name: "Ini Etim", visits: [22750, 19900] },
+                    { name: "Oghenekaro Edafe", visits: [9600] }
+                ];
+
+                const STATUS_LABEL = {
+                    "new": "New",
+                    "returning": "Returning",
+                    "candidate": "Retention candidate"
+                };
+
+                const tillBasket = document.getElementById("tillBasket");
+                const tillLookup = document.getElementById("tillLookup");
+                const tillRecord = document.getElementById("tillRecord");
+                const tillError = document.getElementById("tillError");
+                const tillResult = document.getElementById("tillResult");
+                const tillLog = document.getElementById("tillLog");
+                const tillReset = document.getElementById("tillReset");
+                const tillButtons = document.querySelectorAll(".jrad-tills button");
+                const emptyResultHtml = tillResult.innerHTML;
+
+                let store = new Map();
+                let activity = [];
+                let activeTill = "Till 1";
+
+                function keyOf(raw) {
+                    return sortedKey(nameTokens(raw));
+                }
+
+                function displayName(raw) {
+                    return raw.trim().replace(/\s+/g, " ").split(" ").map(function (word) {
+                        return word.charAt(0).toUpperCase() + word.slice(1).toLowerCase();
+                    }).join(" ");
+                }
+
+                function average(values) {
+                    return values.reduce(function (sum, value) { return sum + value; }, 0) / values.length;
+                }
+
+                function naira(value) {
+                    return "\u20a6" + Math.round(value).toLocaleString("en-NG");
+                }
+
+                function statusOf(record) {
+                    if (!record || !record.visits.length) {
+                        return "new";
+                    }
+                    if (record.visits.length >= 2 && average(record.visits) >= BRANCH_AVERAGE) {
+                        return "candidate";
+                    }
+                    return "returning";
+                }
+
+                function resetStore() {
+                    store = new Map();
+                    SEED.forEach(function (person) {
+                        store.set(keyOf(person.name), { name: person.name, visits: person.visits.slice() });
+                    });
+                    activity = [];
+                }
+
+                function showError(message) {
+                    tillError.textContent = message;
+                }
+
+                function flashResult() {
+                    if (reduceMotion) {
+                        return;
+                    }
+                    tillResult.classList.remove("flash");
+                    void tillResult.offsetWidth;
+                    tillResult.classList.add("flash");
+                }
+
+                function renderLog() {
+
+                    if (!activity.length) {
+                        tillLog.innerHTML = '<li class="empty">No visits recorded in this session yet.</li>';
+                        return;
+                    }
+
+                    tillLog.innerHTML = activity.map(function (item) {
+                        return "<li><span>" + escapeHtml(item.till) + " recorded " + escapeHtml(item.name) +
+                            "</span><span>" + naira(item.amount) + "</span></li>";
+                    }).join("");
+                }
+
+                function renderResult(raw, change) {
+
+                    const key = keyOf(raw);
+
+                    if (!key) {
+                        showError("Type the name on the transfer first.");
+                        return;
+                    }
+
+                    showError("");
+
+                    const record = store.get(key);
+                    const status = statusOf(record);
+                    const typedName = displayName(raw);
+
+                    let heading;
+                    let matchLine;
+                    let visitsText;
+                    let averageText;
+                    let versusText;
+                    let action;
+
+                    if (!record) {
+
+                        heading = typedName;
+                        matchLine = "No match in shared memory";
+                        visitsText = "0";
+                        averageText = "—";
+                        versusText = "—";
+                        action = "First recorded visit. Add the basket and record it so every till recognizes them next time.";
+
+                    } else {
+
+                        const avg = average(record.visits);
+                        const diff = avg - BRANCH_AVERAGE;
+
+                        heading = record.name;
+                        matchLine = record.name.toLowerCase() === raw.trim().replace(/\s+/g, " ").toLowerCase()
+                            ? "Exact match in shared memory"
+                            : "Matched \u201c" + record.name + "\u201d from \u201c" + raw.trim() + "\u201d";
+                        visitsText = String(record.visits.length);
+                        averageText = naira(avg);
+                        versusText = (diff >= 0 ? "+" : "\u2212") + naira(Math.abs(diff));
+
+                        if (status === "candidate") {
+                            action = "Repeat, above-average spender. Invite them to register as a member today.";
+                        } else if (record.visits.length < 2) {
+                            action = "Seen once before. Welcome them back — another visit that keeps their average at " +
+                                naira(BRANCH_AVERAGE) + " or more makes them a retention candidate.";
+                        } else {
+                            action = "A regular, but spending below this branch's " + naira(BRANCH_AVERAGE) +
+                                " average. Greet them back; no invite yet.";
+                        }
+                    }
+
+                    let html =
+                        '<div class="jrad-result-head">' +
+                            "<div>" +
+                                '<div class="jrad-result-name">' + escapeHtml(heading) + "</div>" +
+                                '<div class="jrad-result-match">' + escapeHtml(matchLine) + " \u00b7 looked up on " + escapeHtml(activeTill) + "</div>" +
+                            "</div>" +
+                            '<span class="jrad-status ' + status + '">' + STATUS_LABEL[status] + "</span>" +
+                        "</div>" +
+                        '<dl class="jrad-result-stats">' +
+                            "<div><dt>Visits</dt><dd>" + visitsText + "</dd></div>" +
+                            "<div><dt>Avg basket</dt><dd>" + averageText + "</dd></div>" +
+                            "<div><dt>vs branch avg</dt><dd>" + versusText + "</dd></div>" +
+                        "</dl>" +
+                        '<p class="jrad-result-action">' + escapeHtml(action) + "</p>";
+
+                    if (change) {
+                        html += '<p class="jrad-result-change">Status updated: ' +
+                            STATUS_LABEL[change.from] + " \u2192 " + STATUS_LABEL[change.to] + "</p>";
+                    }
+
+                    tillResult.innerHTML = html;
+                    flashResult();
+                }
+
+                function recordVisit() {
+
+                    const raw = tillName.value;
+                    const key = keyOf(raw);
+                    const amount = Number(tillBasket.value);
+
+                    if (!key) {
+                        showError("Type the name on the transfer first.");
+                        tillName.focus();
+                        return;
+                    }
+
+                    if (!amount || amount <= 0) {
+                        showError("Enter the basket amount to record a visit.");
+                        tillBasket.focus();
+                        return;
+                    }
+
+                    const before = statusOf(store.get(key));
+
+                    if (!store.has(key)) {
+                        store.set(key, { name: displayName(raw), visits: [] });
+                    }
+
+                    const record = store.get(key);
+                    record.visits.push(amount);
+
+                    const after = statusOf(record);
+
+                    activity.unshift({ till: activeTill, name: record.name, amount: amount });
+                    activity = activity.slice(0, 4);
+
+                    renderLog();
+                    renderResult(raw, before !== after ? { from: before, to: after } : null);
+                    tillBasket.value = "";
+                }
+
+                tillLookup.addEventListener("click", function () {
+                    renderResult(tillName.value, null);
+                });
+
+                tillRecord.addEventListener("click", recordVisit);
+
+                tillName.addEventListener("keydown", function (event) {
+                    if (event.key === "Enter") {
+                        renderResult(tillName.value, null);
+                    }
+                });
+
+                tillBasket.addEventListener("keydown", function (event) {
+                    if (event.key === "Enter") {
+                        recordVisit();
+                    }
+                });
+
+                document.querySelectorAll(".jrad-till-chip").forEach(function (chip) {
+                    chip.addEventListener("click", function () {
+                        tillName.value = chip.dataset.name;
+                        renderResult(chip.dataset.name, null);
+                    });
+                });
+
+                tillButtons.forEach(function (button) {
+                    button.addEventListener("click", function () {
+                        activeTill = button.dataset.till;
+                        tillButtons.forEach(function (other) {
+                            other.setAttribute("aria-pressed", other === button ? "true" : "false");
+                        });
+                        if (tillName.value.trim()) {
+                            renderResult(tillName.value, null);
+                        }
+                    });
+                });
+
+                tillReset.addEventListener("click", function () {
+                    resetStore();
+                    tillName.value = "";
+                    tillBasket.value = "";
+                    showError("");
+                    tillResult.innerHTML = emptyResultHtml;
+                    renderLog();
+                });
+
+                resetStore();
+                renderLog();
+            }
+
+
+            /*
+             * LIGHTBOX
+             */
+
+            const lightbox = document.querySelector(".jrad-lightbox");
+            const lightboxImage = lightbox.querySelector("img");
+            const lightboxCaption = lightbox.querySelector(".jrad-lightbox-caption");
+            const lightboxClose = lightbox.querySelector(".jrad-lightbox-close");
+            let lastFocused = null;
+
+            function openLightbox(trigger) {
+                const image = trigger.querySelector("img");
+                lastFocused = trigger;
+                lightboxImage.src = image.currentSrc || image.src;
+                lightboxImage.alt = image.alt;
+                lightboxCaption.textContent = image.alt;
+                lightbox.classList.add("open");
+                lightbox.setAttribute("aria-hidden", "false");
+                document.body.classList.add("jrad-no-scroll");
+                lightboxClose.focus();
+            }
+
+            function closeLightbox() {
+                lightbox.classList.remove("open");
+                lightbox.setAttribute("aria-hidden", "true");
+                document.body.classList.remove("jrad-no-scroll");
+                if (lastFocused) {
+                    lastFocused.focus();
+                }
+            }
+
+            document.querySelectorAll(".jrad-zoom").forEach(function (trigger) {
+                trigger.addEventListener("click", function () {
+                    openLightbox(trigger);
+                });
+            });
+
+            lightboxClose.addEventListener("click", closeLightbox);
+
+            lightbox.addEventListener("click", function (event) {
+                if (event.target === lightbox) {
+                    closeLightbox();
+                }
+            });
+
+            document.addEventListener("keydown", function (event) {
+                if (event.key === "Escape" && lightbox.classList.contains("open")) {
+                    closeLightbox();
+                }
+                if (event.key === "Tab" && lightbox.classList.contains("open")) {
+                    event.preventDefault();
+                    lightboxClose.focus();
+                }
             });
 
 
@@ -1590,13 +4660,10 @@
              */
 
             setTimeout(function () {
-
                 const heroDashboard = document.querySelector(".jrad-hero-dashboard");
-
                 if (heroDashboard) {
                     heroDashboard.style.opacity = "1";
                 }
-
             }, 1400);
 
         });

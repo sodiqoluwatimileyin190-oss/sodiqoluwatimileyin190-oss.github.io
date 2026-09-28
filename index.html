@@ -6,13 +6,13 @@
 
     <title>Sodiq Oluwatimileyin | Data Analysis Portfolio</title>
 
-     <meta name="description" content="Data Analyst & Business Intelligence portfolio by Sodiq Oluwatimileyin — Power BI, DAX, SQL, and Deneb/Vega-Lite projects turning real-world business observations into decision-ready insights.">
+    <meta name="description" content="Data analyst portfolio by Sodiq Oluwatimileyin: SQL, Power BI, DAX, Python and Deneb/Vega-Lite projects built from real-world business observations, with every result tested before it's trusted.">
 
     <!-- Open Graph / LinkedIn / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://sodiqoluwatimileyin190-oss.github.io/index.html">
     <meta property="og:title" content="Sodiq Oluwatimileyin | Data Analyst & Business Intelligence Portfolio">
-    <meta property="og:description" content="Power BI, DAX, SQL, and Deneb/Vega-Lite projects turning real-world business observations into data systems, analytical insights, and decision-driven solutions.">
+    <meta property="og:description" content="SQL, Power BI, DAX, Python and Deneb/Vega-Lite projects turning real-world business observations into data systems, tested insights and decisions.">
     <meta property="og:image" content="https://sodiqoluwatimileyin190-oss.github.io/projects/jrad-retail-powerbi-dashboard/images/executive-overview.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
@@ -20,7 +20,7 @@
     <!-- X / Twitter -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Sodiq Oluwatimileyin | Data Analyst & Business Intelligence Portfolio">
-    <meta name="twitter:description" content="Power BI, DAX, SQL, and Deneb/Vega-Lite projects turning real-world business observations into data systems, analytical insights, and decision-driven solutions.">
+    <meta name="twitter:description" content="SQL, Power BI, DAX, Python and Deneb/Vega-Lite projects turning real-world business observations into data systems, tested insights and decisions.">
     <meta name="twitter:image" content="https://sodiqoluwatimileyin190-oss.github.io/projects/jrad-retail-powerbi-dashboard/images/executive-overview.png">
 
     <link rel="icon" type="image/png" href="/favicon-32x32.png">
@@ -38,47 +38,94 @@
 
     <!-- Main stylesheet -->
     <link rel="stylesheet" href="assets/css/style.css">
-</head>
 
-<script>
-document.addEventListener("DOMContentLoaded", function () {
+    <!-- Page-level additions (kept small and scoped so style.css stays in charge) -->
+    <style>
+        .hero-latest {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            margin-top: 34px;
+            padding: 9px 9px 9px 16px;
+            border: 1px solid rgba(255, 255, 255, 0.22);
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.06);
+            color: #fff;
+            font-size: 13px;
+            text-decoration: none;
+            transition: border-color 0.2s ease, background 0.2s ease;
+        }
 
-    const params = new URLSearchParams(window.location.search);
+        .hero-latest:hover {
+            border-color: rgba(255, 255, 255, 0.5);
+            background: rgba(255, 255, 255, 0.1);
+        }
 
-    if (params.get("sent") === "true") {
+        .hero-latest b {
+            font-size: 10px;
+            letter-spacing: 1.4px;
+            font-weight: 800;
+            opacity: 0.7;
+        }
 
-        const form = document.querySelector(".contact-form");
+        .hero-latest span.go {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: #fff;
+            color: #43218f;
+            font-size: 12px;
+        }
 
-        if (form) {
+        .hero-latest:focus-visible {
+            outline: 3px solid #b9a3f5;
+            outline-offset: 3px;
+        }
+    </style>
 
-            form.innerHTML = `
-                <div class="form-success">
-                    <div class="form-success-icon">
-                        <i class="fas fa-check"></i>
+    <script>
+    document.addEventListener("DOMContentLoaded", function () {
+
+        const params = new URLSearchParams(window.location.search);
+
+        if (params.get("sent") === "true") {
+
+            const form = document.querySelector(".contact-form");
+
+            if (form) {
+
+                form.innerHTML = `
+                    <div class="form-success">
+                        <div class="form-success-icon">
+                            <i class="fas fa-check"></i>
+                        </div>
+
+                        <h3>Message Sent Successfully</h3>
+
+                        <p>
+                            Thank you for reaching out.
+                            I'll get back to you as soon as possible.
+                        </p>
+
+                        <button
+                            type="button"
+                            class="btn contact-btn"
+                            onclick="window.history.replaceState({}, document.title, window.location.pathname); location.reload();">
+                            Send Another Message
+                        </button>
                     </div>
+                `;
 
-                    <h3>Message Sent Successfully</h3>
-
-                    <p>
-                        Thank you for reaching out.
-                        I'll get back to you as soon as possible.
-                    </p>
-
-                    <button
-                        type="button"
-                        class="btn contact-btn"
-                        onclick="window.history.replaceState({}, document.title, window.location.pathname); location.reload();">
-                        Send Another Message
-                    </button>
-                </div>
-            `;
+            }
 
         }
 
-    }
-
-});
-</script>
+    });
+    </script>
+</head>
 
 <body>
 
@@ -97,7 +144,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         <div class="hero-kicker hero-animate">
             <span class="status-dot"></span>
-            DATA ANALYST · BUSINESS INTELLIGENCE
+            DATA ANALYST · SQL · POWER BI · PYTHON
         </div>
 
         <h1 class="hero-title hero-animate">
@@ -106,24 +153,24 @@ document.addEventListener("DOMContentLoaded", function () {
         </h1>
 
         <p class="hero-role hero-animate">
-            Data Analyst | Business Intelligence |
-            SQL • Power BI • Excel • Python
+            I start with something I noticed in real life, build the data
+            behind it, and test the result before I trust it.
         </p>
 
         <p class="portfolio-tagline hero-animate">
-            Turning real-world business observations into data systems,
-            analytical insights, and decision-driven solutions.
+            A 2-million-row retail system I designed from scratch, the SQL
+            and Power BI built on top of it, and a Python scanner I tested
+            until it proved me wrong.
         </p>
 
         <div class="social-links hero-animate">
 
-               <a href="https://www.tiktok.com/@timmyyo.0?_r=1&_t=ZG-99QmRiYv5IP"
+            <a href="https://www.tiktok.com/@timmyyo.0?_r=1&_t=ZG-99QmRiYv5IP"
                target="_blank"
                rel="noopener"
                title="TikTok"
                aria-label="TikTok">
                 <i class="fab fa-tiktok"></i>
-            </a>
             </a>
 
             <a href="https://github.com/sodiqoluwatimileyin190-oss"
@@ -151,10 +198,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
         </div>
 
-        <div class="hero-scroll hero-animate">
-            <span>SCROLL TO EXPLORE</span>
-            <i class="fas fa-arrow-down"></i>
-        </div>
+        <a class="hero-latest hero-animate" href="projects/crypto-accumulation-scanner/">
+            <b>LATEST</b>
+            Most of my signals were wrong. Here's how I found out.
+            <span class="go"><i class="fas fa-arrow-right"></i></span>
+        </a>
 
     </div>
 </header>
@@ -183,83 +231,65 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 <!-- =========================================================
-     SKILLS MARQUEE
+     EVIDENCE MARQUEE (numbers from the projects, not buzzwords)
 ========================================================= -->
 
-<div class="skills-marquee">
+<div class="skills-marquee" aria-label="Project highlights">
 
     <div class="marquee-track">
 
         <div class="marquee-content">
 
-            <span>DATA ANALYSIS</span>
+            <span>2M+ ROWS OF RETAIL DATA DESIGNED</span>
             <b>◆</b>
 
-            <span>BUSINESS INTELLIGENCE</span>
+            <span>1.8M TRANSACTION LINES IN POWER BI</span>
             <b>◆</b>
 
-            <span>POWER BI</span>
+            <span>99K OLIST ORDERS ANALYSED</span>
             <b>◆</b>
 
-            <span>DAX</span>
+            <span>961-SAMPLE BACKTEST</span>
             <b>◆</b>
 
             <span>SQL</span>
             <b>◆</b>
 
-             <span>PYTHON</span>
+            <span>DAX</span>
             <b>◆</b>
-            
+
+            <span>PYTHON / PANDAS</span>
+            <b>◆</b>
+
             <span>DENEB / VEGA-LITE</span>
-            <b>◆</b>
-
-            <span>VISUAL ENGINEERING</span>
-            <b>◆</b>
-
-            <span>DATA MODELLING</span>
-            <b>◆</b>
-
-            <span>EXECUTIVE STORYTELLING</span>
-            <b>◆</b>
-
-            <span>RETAIL ANALYTICS</span>
             <b>◆</b>
 
         </div>
 
-        <div class="marquee-content">
+        <div class="marquee-content" aria-hidden="true">
 
-            <span>DATA ANALYSIS</span>
+            <span>2M+ ROWS OF RETAIL DATA DESIGNED</span>
             <b>◆</b>
 
-            <span>BUSINESS INTELLIGENCE</span>
+            <span>1.8M TRANSACTION LINES IN POWER BI</span>
             <b>◆</b>
 
-            <span>POWER BI</span>
+            <span>99K OLIST ORDERS ANALYSED</span>
             <b>◆</b>
 
-            <span>DAX</span>
+            <span>961-SAMPLE BACKTEST</span>
             <b>◆</b>
 
             <span>SQL</span>
             <b>◆</b>
 
-            <span>PYTHON</span>
+            <span>DAX</span>
             <b>◆</b>
-            
+
+            <span>PYTHON / PANDAS</span>
+            <b>◆</b>
+
             <span>DENEB / VEGA-LITE</span>
-            <b>◆</b>
-
-            <span>VISUAL ENGINEERING</span>
-            <b>◆</b>
-
-            <span>DATA MODELLING</span>
-            <b>◆</b>
-
-            <span>EXECUTIVE STORYTELLING</span>
-            <b>◆</b>
-
-            <span>RETAIL ANALYTICS</span>
             <b>◆</b>
 
         </div>
@@ -314,40 +344,37 @@ document.addEventListener("DOMContentLoaded", function () {
             <div class="about-text reveal">
 
                 <p>
-                    I’m a Data Analyst focused on transforming real-world
-                    business observations into structured data systems,
-                    analytical insights, and decision-driven solutions.
-                    My work combines business understanding with SQL,
-                    Excel, Python, Power BI, and data visualization to
-                    investigate how customers behave, where businesses
-                    lose revenue, and where operational improvements can
-                    create measurable impact.
+                    I'm a data analyst who usually starts with something I've
+                    noticed in real life rather than a clean dataset. Watching
+                    how a supermarket chain like Jendol runs its tills, branches
+                    and loyalty scheme became a 2-million-row simulated retail
+                    system, then a SQL analysis of it, then a Power BI dashboard
+                    on top.
                 </p>
 
                 <p>
-                    Beyond analyzing existing datasets, I am particularly
-                    interested in understanding how data is created.
-                    I design business rules, customer behaviours,
-                    distributions, events, and transactional logic to
-                    build realistic simulated data environments when
-                    suitable real-world data is unavailable.
+                    When the right data doesn't exist, I design it: the
+                    customers, the business rules, the seasonal events and the
+                    edge cases. When it does exist, I question it. My crypto
+                    scanner is the clearest example. The first backtest looked
+                    great, and it was wrong, so I rebuilt the test until the
+                    result could be trusted.
                 </p>
 
                 <p>
-                    My portfolio demonstrates the complete analytical
-                    journey — from observing a business problem and
-                    designing the underlying data logic, to generating
-                    and engineering large-scale datasets, querying them
-                    with SQL, and communicating insights through
-                    interactive dashboards and visual storytelling.
+                    I work in SQL, Excel, Python and Power BI. The part I care
+                    about most is the last step: turning an analysis into
+                    something a manager can actually act on.
                 </p>
 
                 <div class="about-signature">
-                    <span>Business Thinking</span>
+                    <span>Observe</span>
                     <i class="fas fa-arrow-right"></i>
-                    <span>Data Systems</span>
+                    <span>Build the data</span>
                     <i class="fas fa-arrow-right"></i>
-                    <span>Decision Intelligence</span>
+                    <span>Test it</span>
+                    <i class="fas fa-arrow-right"></i>
+                    <span>Decide</span>
                 </div>
 
             </div>
@@ -378,9 +405,10 @@ document.addEventListener("DOMContentLoaded", function () {
             <div class="heading-line"></div>
 
             <p class="section-intro">
-                A portfolio built around the complete analytical journey —
-                from business observation and data architecture to SQL
-                analysis, Power BI intelligence, and strategic decision-making.
+                Projects 01 to 03 are one continuous story: I designed a
+                retail business in data, queried it in SQL, then built the
+                Power BI layer a manager would use. Project 04 applies the
+                same thinking to a bank's loan campaign.
             </p>
 
         </div>
@@ -438,17 +466,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
                     <div class="project-buttons">
 
-                        <a href="projects/jrad-retail-data-system/"
-                           target="_blank"
-                           class="btn">
+                        <a href="projects/jrad-retail-data-system/" class="btn">
                             Explore Data System
                             <i class="fas fa-arrow-right"></i>
                         </a>
 
-                        <a href="https://github.com/sodiqoluwatimileyin190-oss/sodiqoluwatimileyin190-oss.github.io/tree/main/projects/jrad-retail-data-system"
-                           target="_blank"
-                           rel="noopener"
-                           class="btn btn-secondary">
+                        <a href="https://github.com/sodiqoluwatimileyin190-oss/sodiqoluwatimileyin190-oss.github.io/tree/main/projects/jrad-retail-data-system" target="_blank" rel="noopener" class="btn btn-secondary">
                             GitHub
                             <i class="fab fa-github"></i>
                         </a>
@@ -509,17 +532,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
                     <div class="project-buttons">
 
-                        <a href="projects/jrad-retail-sql-analysis/"
-                           target="_blank"
-                           class="btn">
+                        <a href="projects/jrad-retail-sql-analysis/" class="btn">
                             Explore Analysis
                             <i class="fas fa-arrow-right"></i>
                         </a>
 
-                        <a href="https://github.com/sodiqoluwatimileyin190-oss/sodiqoluwatimileyin190-oss.github.io/tree/main/projects/jrad-retail-sql-analysis"
-                           target="_blank"
-                           rel="noopener"
-                           class="btn btn-secondary">
+                        <a href="https://github.com/sodiqoluwatimileyin190-oss/sodiqoluwatimileyin190-oss.github.io/tree/main/projects/jrad-retail-sql-analysis" target="_blank" rel="noopener" class="btn btn-secondary">
                             GitHub
                             <i class="fab fa-github"></i>
                         </a>
@@ -582,17 +600,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
                     <div class="project-buttons">
 
-                        <a href="projects/jrad-retail-powerbi-dashboard/"
-                           target="_blank"
-                           class="btn">
+                        <a href="projects/jrad-retail-powerbi-dashboard/" class="btn">
                             Explore Dashboard
                             <i class="fas fa-arrow-right"></i>
                         </a>
 
-                        <a href="https://github.com/sodiqoluwatimileyin190-oss/sodiqoluwatimileyin190-oss.github.io/tree/main/projects/jrad-retail-powerbi-dashboard"
-                           target="_blank"
-                           rel="noopener"
-                           class="btn btn-secondary">
+                        <a href="https://github.com/sodiqoluwatimileyin190-oss/sodiqoluwatimileyin190-oss.github.io/tree/main/projects/jrad-retail-powerbi-dashboard" target="_blank" rel="noopener" class="btn btn-secondary">
                             GitHub
                             <i class="fab fa-github"></i>
                         </a>
@@ -652,24 +665,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
                     <div class="project-buttons">
 
-                        <a href="projects/thera-bank-loan-analytics/"
-                           target="_blank"
-                           class="btn">
-
+                        <a href="projects/thera-bank-loan-analytics/" class="btn">
                             Explore Analysis
                             <i class="fas fa-arrow-right"></i>
-
                         </a>
 
-
-                        <a href="https://github.com/sodiqoluwatimileyin190-oss/sodiqoluwatimileyin190-oss.github.io/tree/main/projects/thera-bank-loan-analytics"
-                           target="_blank"
-                           rel="noopener noreferrer"
-                           class="btn btn-secondary">
-
+                        <a href="https://github.com/sodiqoluwatimileyin190-oss/sodiqoluwatimileyin190-oss.github.io/tree/main/projects/thera-bank-loan-analytics" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
                             GitHub
                             <i class="fab fa-github"></i>
-
                         </a>
 
                     </div>
@@ -706,9 +709,10 @@ document.addEventListener("DOMContentLoaded", function () {
             <div class="heading-line"></div>
 
             <p>
-                Additional analytical case studies demonstrating
-                how I apply data analysis, SQL, Python, Power BI and business
-                intelligence across different industries and datasets.
+                Shorter case studies on public and live data: an
+                e-commerce marketplace analysed with SQL and Power BI,
+                and a Python market scanner I backtested until it
+                showed me which of my ideas actually worked.
             </p>
 
         </div>
@@ -788,22 +792,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 <div class="project-buttons">
 
-                    <a
-                        href="projects/olist-customer-retention/"
-                        target="_blank"
-                        class="btn"
-                    >
+                    <a href="projects/olist-customer-retention/" class="btn">
                         Explore Analysis
                         <i class="fas fa-arrow-right"></i>
                     </a>
 
-
-                    <a
-                        href="https://github.com/sodiqoluwatimileyin190-oss/sodiqoluwatimileyin190-oss.github.io/tree/main/projects/olist-customer-retention"
-                        target="_blank"
-                        rel="noopener"
-                        class="btn btn-secondary"
-                    >
+                    <a href="https://github.com/sodiqoluwatimileyin190-oss/sodiqoluwatimileyin190-oss.github.io/tree/main/projects/olist-customer-retention" target="_blank" rel="noopener" class="btn btn-secondary">
                         GitHub
                         <i class="fab fa-github"></i>
                     </a>
@@ -813,6 +807,8 @@ document.addEventListener("DOMContentLoaded", function () {
             </div>
 
         </article>
+
+
         <!-- =================================================
              CRYPTO ACCUMULATION SCANNER
         ================================================== -->
@@ -822,8 +818,8 @@ document.addEventListener("DOMContentLoaded", function () {
             <div class="secondary-project-image">
 
                 <img
-                    src="projects/crypto-accumulation-scanner/images/crypto-scanner-cover.jpg"
-                    alt="Crypto Accumulation Scanner: a Python market scanner with a Telegram alert"
+                    src="projects/crypto-accumulation-scanner/images/crypto-scanner-card.jpg"
+                    alt="Crypto Accumulation Scanner: a Telegram alert ranking coins by tier"
                 >
 
                 <div class="secondary-project-image-overlay"></div>
@@ -887,22 +883,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
                 <div class="project-buttons">
 
-                    
-                        href="projects/crypto-accumulation-scanner/"
-                        target="_blank"
-                        class="btn"
-                    >
+                    <a href="projects/crypto-accumulation-scanner/" class="btn">
                         Explore Case Study
                         <i class="fas fa-arrow-right"></i>
                     </a>
 
-
-                    
-                        href="https://github.com/sodiqoluwatimileyin190-oss/crypto-accumulation-scanner"
-                        target="_blank"
-                        rel="noopener"
-                        class="btn btn-secondary"
-                    >
+                    <a href="https://github.com/sodiqoluwatimileyin190-oss/crypto-accumulation-scanner" target="_blank" rel="noopener" class="btn btn-secondary">
                         GitHub
                         <i class="fab fa-github"></i>
                     </a>
@@ -912,9 +898,12 @@ document.addEventListener("DOMContentLoaded", function () {
             </div>
 
         </article>
+
     </div>
 
 </section>
+
+
 <!-- =========================================================
      SKILLS / CAPABILITIES
 ========================================================= -->
@@ -936,9 +925,9 @@ document.addEventListener("DOMContentLoaded", function () {
             <div class="heading-line"></div>
 
             <p class="section-intro">
-                From data engineering and analytical modeling to
-                interactive business intelligence, customer analytics
-                and decision-ready storytelling.
+                The tools and methods behind the projects above, from
+                designing data and cleaning it, to modelling, testing
+                and presenting it.
             </p>
 
         </div>
@@ -947,9 +936,7 @@ document.addEventListener("DOMContentLoaded", function () {
         <div class="skills-table">
 
 
-            <!-- =================================================
-                 01 — DATA VISUALIZATION
-            ================================================== -->
+            <!-- 01 — DATA VISUALIZATION -->
 
             <article class="skill-column skill-card reveal">
 
@@ -960,61 +947,25 @@ document.addEventListener("DOMContentLoaded", function () {
                     </div>
 
                     <div class="skill-title-wrap">
-
-                        <span class="skill-index">
-                            01
-                        </span>
-
-                        <h3>
-                            Data Visualization
-                        </h3>
-
+                        <span class="skill-index">01</span>
+                        <h3>Data Visualization</h3>
                     </div>
 
                 </div>
 
-
                 <ul class="skill-list">
-
-                    <li>
-                        <span>Power BI</span>
-                        <i class="fas fa-arrow-right"></i>
-                    </li>
-
-                    <li>
-                        <span>Tableau</span>
-                        <i class="fas fa-arrow-right"></i>
-                    </li>
-
-                    <li>
-                        <span>Excel Dashboards</span>
-                        <i class="fas fa-arrow-right"></i>
-                    </li>
-
-                    <li>
-                        <span>Deneb</span>
-                        <i class="fas fa-arrow-right"></i>
-                    </li>
-
-                    <li>
-                        <span>Vega-Lite</span>
-                        <i class="fas fa-arrow-right"></i>
-                    </li>
-
-                    <li>
-                        <span>Data Storytelling</span>
-                        <i class="fas fa-arrow-right"></i>
-                    </li>
-
+                    <li><span>Power BI</span><i class="fas fa-arrow-right"></i></li>
+                    <li><span>Tableau</span><i class="fas fa-arrow-right"></i></li>
+                    <li><span>Excel Dashboards</span><i class="fas fa-arrow-right"></i></li>
+                    <li><span>Deneb</span><i class="fas fa-arrow-right"></i></li>
+                    <li><span>Vega-Lite</span><i class="fas fa-arrow-right"></i></li>
+                    <li><span>Data Storytelling</span><i class="fas fa-arrow-right"></i></li>
                 </ul>
 
             </article>
 
 
-
-            <!-- =================================================
-                 02 — DATA ANALYSIS
-            ================================================== -->
+            <!-- 02 — DATA ANALYSIS -->
 
             <article class="skill-column skill-card reveal">
 
@@ -1025,66 +976,26 @@ document.addEventListener("DOMContentLoaded", function () {
                     </div>
 
                     <div class="skill-title-wrap">
-
-                        <span class="skill-index">
-                            02
-                        </span>
-
-                        <h3>
-                            Data Analysis
-                        </h3>
-
+                        <span class="skill-index">02</span>
+                        <h3>Data Analysis</h3>
                     </div>
 
                 </div>
 
-
                 <ul class="skill-list">
-
-                    <li>
-                        <span>SQL</span>
-                        <i class="fas fa-arrow-right"></i>
-                    </li>
-
-                    <li>
-                        <span>Advanced Excel</span>
-                        <i class="fas fa-arrow-right"></i>
-                    </li>
-
-                    <li>
-                        <span>Python / Pandas</span>
-                        <i class="fas fa-arrow-right"></i>
-                    </li>
-
-                    <li>
-                        <span>Exploratory Data Analysis</span>
-                        <i class="fas fa-arrow-right"></i>
-                    </li>
-
-                    <li>
-                        <span>Business Analysis</span>
-                        <i class="fas fa-arrow-right"></i>
-                    </li>
-
-                    <li>
-                        <span>Customer & Sales Analysis</span>
-                        <i class="fas fa-arrow-right"></i>
-                    </li>
-
-                    <li>
-                        <span>RFM Analysis</span>
-                        <i class="fas fa-arrow-right"></i>
-                    </li>
-
+                    <li><span>SQL</span><i class="fas fa-arrow-right"></i></li>
+                    <li><span>Advanced Excel</span><i class="fas fa-arrow-right"></i></li>
+                    <li><span>Python / Pandas</span><i class="fas fa-arrow-right"></i></li>
+                    <li><span>Exploratory Data Analysis</span><i class="fas fa-arrow-right"></i></li>
+                    <li><span>Backtesting &amp; Validation</span><i class="fas fa-arrow-right"></i></li>
+                    <li><span>Customer &amp; Sales Analysis</span><i class="fas fa-arrow-right"></i></li>
+                    <li><span>RFM Analysis</span><i class="fas fa-arrow-right"></i></li>
                 </ul>
 
             </article>
 
 
-
-            <!-- =================================================
-                 03 — DATA MODELING & BI
-            ================================================== -->
+            <!-- 03 — DATA MODELING & BI -->
 
             <article class="skill-column skill-card reveal">
 
@@ -1095,66 +1006,26 @@ document.addEventListener("DOMContentLoaded", function () {
                     </div>
 
                     <div class="skill-title-wrap">
-
-                        <span class="skill-index">
-                            03
-                        </span>
-
-                        <h3>
-                            Data Modeling &amp; BI
-                        </h3>
-
+                        <span class="skill-index">03</span>
+                        <h3>Data Modeling &amp; BI</h3>
                     </div>
 
                 </div>
 
-
                 <ul class="skill-list">
-
-                    <li>
-                        <span>DAX</span>
-                        <i class="fas fa-arrow-right"></i>
-                    </li>
-
-                    <li>
-                        <span>Power BI Data Modeling</span>
-                        <i class="fas fa-arrow-right"></i>
-                    </li>
-
-                    <li>
-                        <span>Star Schema Design</span>
-                        <i class="fas fa-arrow-right"></i>
-                    </li>
-
-                    <li>
-                        <span>Dimensional Modeling</span>
-                        <i class="fas fa-arrow-right"></i>
-                    </li>
-
-                    <li>
-                        <span>Data Relationships</span>
-                        <i class="fas fa-arrow-right"></i>
-                    </li>
-
-                    <li>
-                        <span>KPI &amp; Measure Engineering</span>
-                        <i class="fas fa-arrow-right"></i>
-                    </li>
-
-                    <li>
-                        <span>Time Intelligence</span>
-                        <i class="fas fa-arrow-right"></i>
-                    </li>
-
+                    <li><span>DAX</span><i class="fas fa-arrow-right"></i></li>
+                    <li><span>Power BI Data Modeling</span><i class="fas fa-arrow-right"></i></li>
+                    <li><span>Star Schema Design</span><i class="fas fa-arrow-right"></i></li>
+                    <li><span>Dimensional Modeling</span><i class="fas fa-arrow-right"></i></li>
+                    <li><span>Data Relationships</span><i class="fas fa-arrow-right"></i></li>
+                    <li><span>KPI &amp; Measure Engineering</span><i class="fas fa-arrow-right"></i></li>
+                    <li><span>Time Intelligence</span><i class="fas fa-arrow-right"></i></li>
                 </ul>
 
             </article>
 
 
-
-            <!-- =================================================
-                 04 — DATA ENGINEERING
-            ================================================== -->
+            <!-- 04 — DATA ENGINEERING -->
 
             <article class="skill-column skill-card reveal">
 
@@ -1165,66 +1036,26 @@ document.addEventListener("DOMContentLoaded", function () {
                     </div>
 
                     <div class="skill-title-wrap">
-
-                        <span class="skill-index">
-                            04
-                        </span>
-
-                        <h3>
-                            Data Engineering
-                        </h3>
-
+                        <span class="skill-index">04</span>
+                        <h3>Data Engineering</h3>
                     </div>
 
                 </div>
 
-
                 <ul class="skill-list">
-
-                    <li>
-                        <span>Data Cleaning</span>
-                        <i class="fas fa-arrow-right"></i>
-                    </li>
-
-                    <li>
-                        <span>Data Validation</span>
-                        <i class="fas fa-arrow-right"></i>
-                    </li>
-
-                    <li>
-                        <span>Data Quality Assessment</span>
-                        <i class="fas fa-arrow-right"></i>
-                    </li>
-
-                    <li>
-                        <span>ETL Processes</span>
-                        <i class="fas fa-arrow-right"></i>
-                    </li>
-
-                    <li>
-                        <span>Transactional Data Design</span>
-                        <i class="fas fa-arrow-right"></i>
-                    </li>
-
-                    <li>
-                        <span>Data Generation &amp; Simulation</span>
-                        <i class="fas fa-arrow-right"></i>
-                    </li>
-
-                    <li>
-                        <span>Relational Data Structures</span>
-                        <i class="fas fa-arrow-right"></i>
-                    </li>
-
+                    <li><span>Data Cleaning</span><i class="fas fa-arrow-right"></i></li>
+                    <li><span>Data Validation</span><i class="fas fa-arrow-right"></i></li>
+                    <li><span>API Data Collection</span><i class="fas fa-arrow-right"></i></li>
+                    <li><span>ETL Processes</span><i class="fas fa-arrow-right"></i></li>
+                    <li><span>Transactional Data Design</span><i class="fas fa-arrow-right"></i></li>
+                    <li><span>Data Generation &amp; Simulation</span><i class="fas fa-arrow-right"></i></li>
+                    <li><span>Scheduled Automation</span><i class="fas fa-arrow-right"></i></li>
                 </ul>
 
             </article>
 
 
-
-            <!-- =================================================
-                 05 — BUSINESS INTELLIGENCE
-            ================================================== -->
+            <!-- 05 — BUSINESS INTELLIGENCE -->
 
             <article class="skill-column skill-card reveal">
 
@@ -1235,66 +1066,26 @@ document.addEventListener("DOMContentLoaded", function () {
                     </div>
 
                     <div class="skill-title-wrap">
-
-                        <span class="skill-index">
-                            05
-                        </span>
-
-                        <h3>
-                            Business Intelligence
-                        </h3>
-
+                        <span class="skill-index">05</span>
+                        <h3>Business Intelligence</h3>
                     </div>
 
                 </div>
 
-
                 <ul class="skill-list">
-
-                    <li>
-                        <span>Executive Dashboards</span>
-                        <i class="fas fa-arrow-right"></i>
-                    </li>
-
-                    <li>
-                        <span>Retail Analytics</span>
-                        <i class="fas fa-arrow-right"></i>
-                    </li>
-
-                    <li>
-                        <span>Banking Analytics</span>
-                        <i class="fas fa-arrow-right"></i>
-                    </li>
-
-                    <li>
-                        <span>Sales &amp; Revenue Analysis</span>
-                        <i class="fas fa-arrow-right"></i>
-                    </li>
-
-                    <li>
-                        <span>Customer Segmentation</span>
-                        <i class="fas fa-arrow-right"></i>
-                    </li>
-
-                    <li>
-                        <span>Customer Behaviour Analysis</span>
-                        <i class="fas fa-arrow-right"></i>
-                    </li>
-
-                    <li>
-                        <span>Churn &amp; Retention Analysis</span>
-                        <i class="fas fa-arrow-right"></i>
-                    </li>
-
+                    <li><span>Executive Dashboards</span><i class="fas fa-arrow-right"></i></li>
+                    <li><span>Retail Analytics</span><i class="fas fa-arrow-right"></i></li>
+                    <li><span>Banking Analytics</span><i class="fas fa-arrow-right"></i></li>
+                    <li><span>Sales &amp; Revenue Analysis</span><i class="fas fa-arrow-right"></i></li>
+                    <li><span>Customer Segmentation</span><i class="fas fa-arrow-right"></i></li>
+                    <li><span>Customer Behaviour Analysis</span><i class="fas fa-arrow-right"></i></li>
+                    <li><span>Churn &amp; Retention Analysis</span><i class="fas fa-arrow-right"></i></li>
                 </ul>
 
             </article>
 
 
-
-            <!-- =================================================
-                 06 — DECISION INTELLIGENCE
-            ================================================== -->
+            <!-- 06 — DECISION INTELLIGENCE -->
 
             <article class="skill-column skill-card reveal">
 
@@ -1305,57 +1096,20 @@ document.addEventListener("DOMContentLoaded", function () {
                     </div>
 
                     <div class="skill-title-wrap">
-
-                        <span class="skill-index">
-                            06
-                        </span>
-
-                        <h3>
-                            Decision Intelligence
-                        </h3>
-
+                        <span class="skill-index">06</span>
+                        <h3>Decision Intelligence</h3>
                     </div>
 
                 </div>
 
-
                 <ul class="skill-list">
-
-                    <li>
-                        <span>Business Problem Framing</span>
-                        <i class="fas fa-arrow-right"></i>
-                    </li>
-
-                    <li>
-                        <span>Customer Profiling</span>
-                        <i class="fas fa-arrow-right"></i>
-                    </li>
-
-                    <li>
-                        <span>Marketing &amp; Campaign Analysis</span>
-                        <i class="fas fa-arrow-right"></i>
-                    </li>
-
-                    <li>
-                        <span>Performance Analysis</span>
-                        <i class="fas fa-arrow-right"></i>
-                    </li>
-
-                    <li>
-                        <span>Operational Analysis</span>
-                        <i class="fas fa-arrow-right"></i>
-                    </li>
-
-                    <li>
-                        <span>Strategic Recommendations</span>
-                        <i class="fas fa-arrow-right"></i>
-                    </li>
-
-                    <li>
-                        <span>Data-Driven Decision Making</span>
-                        <i class="fas fa-arrow-right"></i>
-                    </li>
-
+                    <li><span>Business Problem Framing</span><i class="fas fa-arrow-right"></i></li>
+                    <li><span>Customer Profiling</span><i class="fas fa-arrow-right"></i></li>
+                    <li><span>Marketing &amp; Campaign Analysis</span><i class="fas fa-arrow-right"></i></li>
+                    <li><span>Performance Analysis</span><i class="fas fa-arrow-right"></i></li>
+                    <li><span>Operational Analysis</span><i class="fas fa-arrow-right"></i></li>
+                    <li><span>Strategic Recommendations</span><i class="fas fa-arrow-right"></i></li>
+                    <li><span>Data-Driven Decision Making</span><i class="fas fa-arrow-right"></i></li>
                 </ul>
 
             </article>
@@ -1364,9 +1118,7 @@ document.addEventListener("DOMContentLoaded", function () {
         </div>
 
 
-        <!-- =====================================================
-             CAPABILITY STATEMENT
-        ====================================================== -->
+        <!-- CAPABILITY STATEMENT -->
 
         <div class="skills-closing reveal">
 
@@ -1374,7 +1126,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
             <p>
                 <strong>
-                    Data → Analysis → Modeling → Visualization → Decision
+                    Every skill above is used in at least one project on this page.
                 </strong>
             </p>
 
@@ -1400,114 +1152,70 @@ document.addEventListener("DOMContentLoaded", function () {
             <span class="section-eyebrow">04 · CONTACT</span>
 
             <h2>
-                Let's Build Something <span>Meaningful</span>
+                Have a data problem? <span>Let's talk.</span>
             </h2>
 
             <div class="heading-line"></div>
 
             <p class="section-intro">
-                Interested in collaborating, discussing a data problem,
-                or exploring an analytical project? Send me a message.
+                A role, a project, or a question about something on this
+                page. Send a message and I'll reply personally.
             </p>
 
         </div>
 
 
-      <form action="https://formsubmit.co/sodiqoluwatimileyin190@gmail.com"
-      method="POST"
-      class="contact-form reveal">
+        <form action="https://formsubmit.co/sodiqoluwatimileyin190@gmail.com"
+              method="POST"
+              class="contact-form reveal">
 
-    <!-- FormSubmit settings -->
-    <input type="hidden" name="_subject" value="New Portfolio Contact Message">
-    <input type="hidden" name="_captcha" value="false">
-    <input type="hidden" name="_template" value="table">
+            <!-- FormSubmit settings -->
+            <input type="hidden" name="_subject" value="New Portfolio Contact Message">
+            <input type="hidden" name="_captcha" value="false">
+            <input type="hidden" name="_template" value="table">
 
-    <!-- Redirect after successful submission -->
-    <input type="hidden"
-           name="_next"
-           value="https://sodiqoluwatimileyin190-oss.github.io/?sent=true">
-
-
-    <div class="contact-form-top">
-
-        <span>GET IN TOUCH</span>
-
-        <div class="contact-form-line"></div>
-
-    </div>
+            <!-- Redirect after successful submission -->
+            <input type="hidden"
+                   name="_next"
+                   value="https://sodiqoluwatimileyin190-oss.github.io/?sent=true">
 
 
-    <div class="form-group">
-
-        <label for="name">Name</label>
-
-        <input
-            type="text"
-            name="name"
-            id="name"
-            placeholder="Your name"
-            autocomplete="name"
-            required
-        >
-
-    </div>
+            <div class="contact-form-top">
+                <span>GET IN TOUCH</span>
+                <div class="contact-form-line"></div>
+            </div>
 
 
-    <div class="form-group">
-
-        <label for="email">Email</label>
-
-        <input
-            type="email"
-            name="email"
-            id="email"
-            placeholder="Your email"
-            autocomplete="email"
-            required
-        >
-
-    </div>
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" name="name" id="name" placeholder="Your name" autocomplete="name" required>
+            </div>
 
 
-    <div class="form-group">
-
-        <label for="subject">Subject</label>
-
-        <input
-            type="text"
-            name="subject"
-            id="subject"
-            placeholder="What would you like to discuss?"
-            required
-        >
-
-    </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" name="email" id="email" placeholder="Your email" autocomplete="email" required>
+            </div>
 
 
-    <div class="form-group">
-
-        <label for="message">Message</label>
-
-        <textarea
-            name="message"
-            id="message"
-            rows="6"
-            placeholder="Tell me about it..."
-            required
-        ></textarea>
-
-    </div>
+            <div class="form-group">
+                <label for="subject">Subject</label>
+                <input type="text" name="subject" id="subject" placeholder="What would you like to discuss?" required>
+            </div>
 
 
-    <button type="submit" class="btn contact-btn">
+            <div class="form-group">
+                <label for="message">Message</label>
+                <textarea name="message" id="message" rows="6" placeholder="Tell me about it..." required></textarea>
+            </div>
 
-        <span>Send Message</span>
 
-        <i class="fas fa-paper-plane"></i>
+            <button type="submit" class="btn contact-btn">
+                <span>Send Message</span>
+                <i class="fas fa-paper-plane"></i>
+            </button>
 
-    </button>
-
-</form>
+        </form>
 
     </div>
 
@@ -1527,15 +1235,14 @@ document.addEventListener("DOMContentLoaded", function () {
             <span>ST</span>
 
             <p>
-                Data Analysis · Business Intelligence ·
-                Decision Intelligence
+                SQL · Power BI · Python · Built and tested by hand
             </p>
 
         </div>
 
         <div class="footer-socials">
 
-               <a href="https://www.tiktok.com/@timmyyo.0?_r=1&_t=ZG-99QmRiYv5IP"
+            <a href="https://www.tiktok.com/@timmyyo.0?_r=1&_t=ZG-99QmRiYv5IP"
                target="_blank"
                rel="noopener"
                aria-label="TikTok">
@@ -1575,37 +1282,26 @@ document.addEventListener("DOMContentLoaded", function () {
 
 document.addEventListener("DOMContentLoaded", function () {
 
-    const revealElements =
-        document.querySelectorAll(".reveal");
+    const revealElements = document.querySelectorAll(".reveal");
 
-    const observer =
-        new IntersectionObserver(
-            (entries, observer) => {
+    const observer = new IntersectionObserver((entries, observer) => {
 
-                entries.forEach((entry) => {
+        entries.forEach((entry) => {
 
-                    if (entry.isIntersecting) {
-
-                        entry.target.classList.add("visible");
-
-                        observer.unobserve(entry.target);
-
-                    }
-
-                });
-
-            },
-            {
-                threshold: 0.12,
-                rootMargin: "0px 0px -50px 0px"
+            if (entry.isIntersecting) {
+                entry.target.classList.add("visible");
+                observer.unobserve(entry.target);
             }
-        );
 
+        });
+
+    }, {
+        threshold: 0.12,
+        rootMargin: "0px 0px -50px 0px"
+    });
 
     revealElements.forEach((element) => {
-
         observer.observe(element);
-
     });
 
 });

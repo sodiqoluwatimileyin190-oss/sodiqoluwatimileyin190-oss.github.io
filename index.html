@@ -84,6 +84,29 @@
             outline: 3px solid #b9a3f5;
             outline-offset: 3px;
         }
+
+        .project-demo-link {
+            display: inline-flex;
+            align-items: center;
+            align-self: flex-start;
+            gap: 8px;
+            margin: 0 0 20px;
+            color: #6338c7;
+            font-size: 13px;
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        .project-demo-link:hover {
+            text-decoration: underline;
+            text-underline-offset: 4px;
+        }
+
+        .project-demo-link:focus-visible {
+            outline: 3px solid #b9a3f5;
+            outline-offset: 3px;
+            border-radius: 4px;
+        }
     </style>
 
     <script>
@@ -405,10 +428,10 @@
             <div class="heading-line"></div>
 
             <p class="section-intro">
-                Projects 01 to 03 are one continuous story: I designed a
-                retail business in data, queried it in SQL, then built the
-                Power BI layer a manager would use. Project 04 applies the
-                same thinking to a bank's loan campaign.
+                These four projects are one continuous story: I designed a
+                retail business in data, queried it in SQL, built the
+                Power BI layer a manager would use, then turned the
+                dashboard's biggest recommendation into a working system.
             </p>
 
         </div>
@@ -629,13 +652,13 @@
 
                 <div class="project-image-wrap">
 
-                    <img src="projects/thera-bank-loan-analytics/images/thera-bank-cover.png"
-                         alt="THERA Bank Personal Loan Campaign Analysis">
+                    <img src="projects/jrad-retention-intelligence/images/detection-engine-code.jpg"
+                         alt="JRAD Retention Intelligence: the detection engine resolving payer identities and validating precision and recall">
 
                     <div class="project-image-overlay"></div>
 
                     <span class="project-category">
-                        BANKING ANALYTICS
+                        RETENTION INTELLIGENCE
                     </span>
 
                 </div>
@@ -644,33 +667,40 @@
                 <div class="project-card-content">
 
                     <div class="project-meta">
-                        <span>POWER BI</span>
-                        <span>DATA ANALYSIS</span>
-                        <span>CUSTOMER SEGMENTATION</span>
+                        <span>PYTHON</span>
+                        <span>SQL SERVER</span>
+                        <span>FLASK</span>
+                        <span>TELEGRAM API</span>
                     </div>
 
-
                     <h3>
-                        THERA Bank — Personal Loan Campaign Analysis
+                        JRAD Retention Intelligence:
+                        From an Insight to a Working System
                     </h3>
 
-
                     <p>
-                        A focused Power BI case study analyzing customer
-                        behaviour and personal loan acceptance to identify
-                        high-potential customer segments and improve
-                        campaign targeting.
+                        The Power BI dashboard could count walk-in
+                        customers but couldn't say who they were. I
+                        resolved payer identities from 101,463 transfer
+                        payments, validated a detection rule at 100%
+                        precision and 88.3% recall, then built Telegram
+                        and email alerts plus a till-side tool that
+                        recognizes repeat customers in seconds.
                     </p>
 
+                    <a class="project-demo-link" href="projects/jrad-retention-intelligence/#till">
+                        <i class="fas fa-circle-play"></i>
+                        Try the interactive till demo
+                    </a>
 
                     <div class="project-buttons">
 
-                        <a href="projects/thera-bank-loan-analytics/" class="btn">
-                            Explore Analysis
+                        <a href="projects/jrad-retention-intelligence/" class="btn">
+                            Explore Case Study
                             <i class="fas fa-arrow-right"></i>
                         </a>
 
-                        <a href="https://github.com/sodiqoluwatimileyin190-oss/sodiqoluwatimileyin190-oss.github.io/tree/main/projects/thera-bank-loan-analytics" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+                        <a href="https://github.com/sodiqoluwatimileyin190-oss/sodiqoluwatimileyin190-oss.github.io/tree/main/projects/jrad-retention-intelligence" target="_blank" rel="noopener" class="btn btn-secondary">
                             GitHub
                             <i class="fab fa-github"></i>
                         </a>
@@ -688,11 +718,12 @@
 
 </section>
 
+
 <!-- =========================================================
      OTHER ANALYTICAL PROJECTS
 ========================================================= -->
 
-<section class="other-projects">
+<section class="other-projects" id="other-projects">
 
     <div class="container">
 
@@ -709,10 +740,11 @@
             <div class="heading-line"></div>
 
             <p>
-                Shorter case studies on public and live data: an
-                e-commerce marketplace analysed with SQL and Power BI,
-                and a Python market scanner I backtested until it
-                showed me which of my ideas actually worked.
+                Shorter case studies beyond the JRAD story: an e-commerce
+                marketplace analysed with SQL and Power BI, a Python market
+                scanner I backtested until it showed me which of my ideas
+                actually worked, and a bank's personal loan campaign broken
+                down in Power BI.
             </p>
 
         </div>
@@ -889,6 +921,98 @@
                     </a>
 
                     <a href="https://github.com/sodiqoluwatimileyin190-oss/crypto-accumulation-scanner" target="_blank" rel="noopener" class="btn btn-secondary">
+                        GitHub
+                        <i class="fab fa-github"></i>
+                    </a>
+
+                </div>
+
+            </div>
+
+        </article>
+
+
+        <!-- =================================================
+             THERA BANK
+        ================================================== -->
+
+        <article class="secondary-project-card reveal">
+
+            <div class="secondary-project-image">
+
+                <img
+                    src="projects/thera-bank-loan-analytics/images/thera-bank-cover.png"
+                    alt="THERA Bank Personal Loan Campaign Analysis"
+                >
+
+                <div class="secondary-project-image-overlay"></div>
+
+                <span class="secondary-project-category">
+                    BANKING ANALYTICS
+                </span>
+
+            </div>
+
+
+            <div class="secondary-project-content">
+
+                <div class="secondary-project-number">
+                    CASE STUDY 03
+                </div>
+
+
+                <div class="project-meta">
+
+                    <span>POWER BI</span>
+                    <span>DAX</span>
+                    <span>CUSTOMER SEGMENTATION</span>
+                    <span>CAMPAIGN TARGETING</span>
+
+                </div>
+
+
+                <h3>
+                    THERA Bank — Personal Loan Campaign Analysis
+                </h3>
+
+
+                <p>
+                    A Power BI case study on who actually converts in a
+                    bank's personal loan campaign. Higher income and
+                    professional or graduate education stood out as the
+                    strongest signals, which I turned into customer
+                    profiles for sharper campaign targeting.
+                </p>
+
+
+                <div class="secondary-project-highlights">
+
+                    <div>
+                        <strong>5,000</strong>
+                        <span>Customers</span>
+                    </div>
+
+                    <div>
+                        <strong>9.6%</strong>
+                        <span>Acceptance Rate</span>
+                    </div>
+
+                    <div>
+                        <strong>3</strong>
+                        <span>Dashboard Pages</span>
+                    </div>
+
+                </div>
+
+
+                <div class="project-buttons">
+
+                    <a href="projects/thera-bank-loan-analytics/" class="btn">
+                        Explore Analysis
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+
+                    <a href="https://github.com/sodiqoluwatimileyin190-oss/sodiqoluwatimileyin190-oss.github.io/tree/main/projects/thera-bank-loan-analytics" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
                         GitHub
                         <i class="fab fa-github"></i>
                     </a>

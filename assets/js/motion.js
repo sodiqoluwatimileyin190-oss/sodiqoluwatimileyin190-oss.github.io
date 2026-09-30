@@ -140,7 +140,7 @@
             const floor = typeof getFloor === "function" ? getFloor() : null;
 
             if (typeof floor === "number" && isFinite(floor)) {
-                maxBar = Math.min(maxBar, Math.max(height * 0.1, bottom - floor - (compact ? 32 : 40)));
+                   maxBar = Math.min(maxBar, Math.max(24, bottom - floor - (compact ? 32 : 40)));
             }
 
             const regular = [];

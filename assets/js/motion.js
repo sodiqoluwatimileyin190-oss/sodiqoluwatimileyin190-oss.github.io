@@ -19,6 +19,11 @@
     const legend = document.querySelector(".hero-legend");
     const nav = document.querySelector(".site-nav");
 
+    const fontsReady = document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve();
+
+    const HERO_SHIFT = 0.14;
+    let heroShift = 0;
+
     function clamp(value, min, max) {
         return Math.min(max, Math.max(min, value));
     }
@@ -37,12 +42,28 @@
         }
     }
 
+    function heroContentFloor() {
+
+        if (!hero) {
+            return null;
+        }
+
+        const inner = hero.querySelector(".hero-inner");
+        const last = hero.querySelector(".hero-latest");
+
+        if (!inner || !last) {
+            return null;
+        }
+
+        return inner.offsetTop + last.offsetTop + last.offsetHeight - inner.offsetHeight * heroShift;
+    }
+
 
     /* =====================================================
        SIGNAL FIELD — raw transactions assembling into a chart
     ====================================================== */
 
-    function createSignalField(canvas, host) {
+    function createSignalField(canvas, host, getFloor) {
 
         const ctx = canvas.getContext("2d");
 
@@ -52,6 +73,8 @@
 
         const BAR_VALUES = [0.32, 0.4, 0.36, 0.48, 0.45, 0.56, 0.52, 0.64, 0.61, 0.74, 0.83, 1];
         const WINDOW = 0.35;
+
+        const seeds = [];
 
         const state = {
             width: 0,
@@ -71,6 +94,23 @@
             autoDone: false,
             staticMode: false
         };
+
+        function seed(index) {
+
+            if (!seeds[index]) {
+                seeds[index] = {
+                    x: Math.random(),
+                    y: Math.random(),
+                    amp: 4 + Math.random() * 10,
+                    speed: 0.25 + Math.random() * 0.55,
+                    phase: Math.random() * Math.PI * 2,
+                    a0: 0.18 + Math.random() * 0.4,
+                    jitter: Math.random()
+                };
+            }
+
+            return seeds[index];
+        }
 
         function build() {
 
@@ -92,14 +132,21 @@
             const left = width * (compact ? 0.07 : 0.1);
             const right = width * (compact ? 0.93 : 0.9);
             const bottom = height - (compact ? 64 : 76);
-            const maxBar = height * (compact ? 0.22 : 0.3);
             const slot = (right - left) / values.length;
             const cols = Math.max(2, Math.floor((slot * 0.6) / pitch));
             const barWidth = cols * pitch;
 
+            let maxBar = height * (compact ? 0.22 : 0.3);
+            const floor = typeof getFloor === "function" ? getFloor() : null;
+
+            if (typeof floor === "number" && isFinite(floor)) {
+                maxBar = Math.min(maxBar, Math.max(height * 0.1, bottom - floor - (compact ? 32 : 40)));
+            }
+
             const regular = [];
             const highlight = [];
             const trend = [];
+            let k = 0;
 
             values.forEach(function (value, bar) {
 
@@ -115,17 +162,19 @@
                 for (let row = 0; row < rows; row++) {
                     for (let col = 0; col < cols; col++) {
 
+                        const s = seed(k++);
+
                         const particle = {
                             tx: x0 + col * pitch + pitch / 2,
                             ty: bottom - row * pitch - pitch / 2,
-                            sx: Math.random() * width,
-                            sy: Math.random() * height,
-                            amp: 4 + Math.random() * 10,
-                            speed: 0.25 + Math.random() * 0.55,
-                            phase: Math.random() * Math.PI * 2,
-                            a0: 0.18 + Math.random() * 0.4,
+                            sx: s.x * width,
+                            sy: s.y * height,
+                            amp: s.amp,
+                            speed: s.speed,
+                            phase: s.phase,
+                            a0: s.a0,
                             a1: isLast ? 0.95 : 0.34 + (row / rows) * 0.36,
-                            delay: (bar / values.length) * 0.4 + (row / rows) * 0.18 + Math.random() * 0.07
+                            delay: (bar / values.length) * 0.4 + (row / rows) * 0.18 + s.jitter * 0.07
                         };
 
                         (isLast ? highlight : regular).push(particle);
@@ -306,6 +355,13 @@
             });
         }
 
+        function rebuild() {
+            build();
+            if (state.staticMode) {
+                draw(0);
+            }
+        }
+
         let resizeTimer = 0;
 
         window.addEventListener("resize", function () {
@@ -315,10 +371,7 @@
                 if (Math.abs(rect.width - state.width) < 1 && Math.abs(rect.height - state.height) < 140) {
                     return;
                 }
-                build();
-                if (state.staticMode) {
-                    draw(0);
-                }
+                rebuild();
             }, 180);
         });
 
@@ -371,12 +424,13 @@
             setProgress: setProgress,
             autoPlay: autoPlay,
             cancelAuto: cancelAuto,
-            renderStatic: renderStatic
+            renderStatic: renderStatic,
+            rebuild: rebuild
         };
     }
 
     const heroCanvas = document.querySelector(".hero-canvas");
-    const field = heroCanvas && hero ? createSignalField(heroCanvas, hero) : null;
+    const field = heroCanvas && hero ? createSignalField(heroCanvas, hero, heroContentFloor) : null;
 
     if (field) {
         root.classList.add("has-canvas");
@@ -392,6 +446,9 @@
         root.classList.remove("js-motion");
 
         if (field) {
+
+            fontsReady.then(field.rebuild);
+
             if (reduceMotion) {
                 field.renderStatic(1);
                 setLegend(1);
@@ -409,6 +466,7 @@
         if (field) {
             field.renderStatic(1);
             setLegend(1);
+            fontsReady.then(field.rebuild);
         }
 
         return;
@@ -475,6 +533,16 @@
         }
     }
 
+    function isUtilityHash(hash) {
+        return hash === "#top" || hash === "#main";
+    }
+
+    function clearHash() {
+        if (window.history && window.history.replaceState) {
+            window.history.replaceState(null, "", window.location.pathname + window.location.search);
+        }
+    }
+
     document.addEventListener("click", function (event) {
 
         const link = event.target.closest('a[href^="#"]');
@@ -493,7 +561,9 @@
         event.preventDefault();
         scrollToTarget(target, false);
 
-        if (window.history && window.history.replaceState) {
+        if (isUtilityHash(hash)) {
+            clearHash();
+        } else if (window.history && window.history.replaceState) {
             window.history.replaceState(null, "", hash);
         }
 
@@ -521,6 +591,8 @@
             if (context.conditions.pinned) {
 
                 field.cancelAuto();
+                heroShift = HERO_SHIFT;
+                field.rebuild();
 
                 const heroTimeline = gsap.timeline({
                     scrollTrigger: {
@@ -537,12 +609,16 @@
                     }
                 });
 
-                heroTimeline.to(".hero-inner", { yPercent: -8, opacity: 0.38, ease: "none" }, 0);
+                heroTimeline.to(".hero-inner", { yPercent: -HERO_SHIFT * 100, opacity: 0.3, ease: "none" }, 0);
 
-            } else {
-
-                field.autoPlay(1.4, 2.8, setLegend);
+                return function () {
+                    heroShift = 0;
+                };
             }
+
+            heroShift = 0;
+            field.rebuild();
+            field.autoPlay(1.4, 2.8, setLegend);
         });
     }
 
@@ -1152,8 +1228,6 @@
         timeline.to(items, { opacity: 1, y: 0, duration: 1.1, stagger: 0.08 }, 0.45);
     }
 
-    const fontsReady = document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve();
-
     Promise.race([
         fontsReady,
         new Promise(function (resolve) { setTimeout(resolve, 1500); })
@@ -1165,6 +1239,9 @@
     ====================================================== */
 
     fontsReady.then(function () {
+        if (field) {
+            field.rebuild();
+        }
         ScrollTrigger.refresh();
     });
 
@@ -1172,7 +1249,24 @@
 
         ScrollTrigger.refresh();
 
-        const target = findTarget(window.location.hash);
+        const hash = window.location.hash;
+
+        if (isUtilityHash(hash)) {
+
+            clearHash();
+
+            requestAnimationFrame(function () {
+                if (lenis) {
+                    lenis.scrollTo(0, { immediate: true, force: true });
+                } else {
+                    window.scrollTo(0, 0);
+                }
+            });
+
+            return;
+        }
+
+        const target = findTarget(hash);
 
         if (target) {
             requestAnimationFrame(function () {

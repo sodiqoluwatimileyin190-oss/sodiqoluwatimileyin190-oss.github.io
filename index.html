@@ -7,6 +7,7 @@
     <title>Sodiq Oluwatimileyin | Data Analysis Portfolio</title>
 
     <meta name="description" content="Data analyst portfolio by Sodiq Oluwatimileyin: SQL, Power BI, DAX, Python and Deneb/Vega-Lite projects built from real-world business observations, with every result tested before it's trusted.">
+    <meta name="theme-color" content="#17113f">
 
     <!-- Open Graph / LinkedIn / Facebook -->
     <meta property="og:type" content="website">
@@ -26,7 +27,6 @@
     <link rel="icon" type="image/png" href="/favicon-32x32.png">
     <link rel="apple-touch-icon" href="/favicon-32x32.png">
 
-
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -36,78 +36,21 @@
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 
-    <!-- Main stylesheet -->
-    <link rel="stylesheet" href="assets/css/style.css">
+    <!-- Smooth scroll base styles -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lenis@1.3.26/dist/lenis.css">
 
-    <!-- Page-level additions (kept small and scoped so style.css stays in charge) -->
-    <style>
-        .hero-latest {
-            display: inline-flex;
-            align-items: center;
-            gap: 12px;
-            margin-top: 34px;
-            padding: 9px 9px 9px 16px;
-            border: 1px solid rgba(255, 255, 255, 0.22);
-            border-radius: 999px;
-            background: rgba(255, 255, 255, 0.06);
-            color: #fff;
-            font-size: 13px;
-            text-decoration: none;
-            transition: border-color 0.2s ease, background 0.2s ease;
-        }
+    <!-- Homepage stylesheet -->
+    <link rel="stylesheet" href="assets/css/home.css">
 
-        .hero-latest:hover {
-            border-color: rgba(255, 255, 255, 0.5);
-            background: rgba(255, 255, 255, 0.1);
-        }
+    <script>
+        document.documentElement.classList.add("js-motion");
 
-        .hero-latest b {
-            font-size: 10px;
-            letter-spacing: 1.4px;
-            font-weight: 800;
-            opacity: 0.7;
-        }
-
-        .hero-latest span.go {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 28px;
-            height: 28px;
-            border-radius: 50%;
-            background: #fff;
-            color: #43218f;
-            font-size: 12px;
-        }
-
-        .hero-latest:focus-visible {
-            outline: 3px solid #b9a3f5;
-            outline-offset: 3px;
-        }
-
-        .project-demo-link {
-            display: inline-flex;
-            align-items: center;
-            align-self: flex-start;
-            gap: 8px;
-            margin: 0 0 20px;
-            color: #6338c7;
-            font-size: 13px;
-            font-weight: 700;
-            text-decoration: none;
-        }
-
-        .project-demo-link:hover {
-            text-decoration: underline;
-            text-underline-offset: 4px;
-        }
-
-        .project-demo-link:focus-visible {
-            outline: 3px solid #b9a3f5;
-            outline-offset: 3px;
-            border-radius: 4px;
-        }
-    </style>
+        window.setTimeout(function () {
+            if (!window.__motionReady) {
+                document.documentElement.classList.remove("js-motion");
+            }
+        }, 4000);
+    </script>
 
     <script>
     document.addEventListener("DOMContentLoaded", function () {
@@ -152,41 +95,43 @@
 
 <body>
 
+<a class="skip-link" href="#main">Skip to content</a>
+
+
 <!-- =========================================================
      HERO
 ========================================================= -->
 
-<header class="hero">
+<header class="hero" id="top">
 
-    <div class="hero-glow hero-glow-one"></div>
-    <div class="hero-glow hero-glow-two"></div>
+    <canvas class="hero-canvas" aria-hidden="true"></canvas>
 
-    <div class="hero-grid"></div>
+    <div class="hero-shade" aria-hidden="true"></div>
 
     <div class="container hero-inner">
 
-        <div class="hero-kicker hero-animate">
+        <div class="hero-kicker" data-hero-item>
             <span class="status-dot"></span>
             DATA ANALYST · SQL · POWER BI · PYTHON
         </div>
 
-        <h1 class="hero-title hero-animate">
-            Sodiq
-            <span>Oluwatimileyin</span>
+        <h1 class="hero-title">
+            <span class="hero-title-line">Sodiq</span>
+            <span class="hero-title-line hero-title-accent">Oluwatimileyin</span>
         </h1>
 
-        <p class="hero-role hero-animate">
+        <p class="hero-role" data-hero-item>
             I start with something I noticed in real life, build the data
             behind it, and test the result before I trust it.
         </p>
 
-        <p class="portfolio-tagline hero-animate">
+        <p class="hero-tagline" data-hero-item>
             A 2-million-row retail system I designed from scratch, the SQL
             and Power BI built on top of it, and a Python scanner I tested
             until it proved me wrong.
         </p>
 
-        <div class="social-links hero-animate">
+        <div class="hero-social" data-hero-item>
 
             <a href="https://www.tiktok.com/@timmyyo.0?_r=1&_t=ZG-99QmRiYv5IP"
                target="_blank"
@@ -221,13 +166,26 @@
 
         </div>
 
-        <a class="hero-latest hero-animate" href="projects/crypto-accumulation-scanner/">
+        <a class="hero-latest" data-hero-item href="projects/crypto-accumulation-scanner/">
             <b>LATEST</b>
             Most of my signals were wrong. Here's how I found out.
             <span class="go"><i class="fas fa-arrow-right"></i></span>
         </a>
 
     </div>
+
+    <div class="hero-legend" data-hero-item data-state="signal" aria-hidden="true">
+        <span class="hero-legend-state is-raw">Raw transactions</span>
+        <span class="hero-legend-state is-signal">A signal you can act on</span>
+    </div>
+
+    <div class="hero-cue" data-hero-item aria-hidden="true">
+        <div class="hero-cue-inner">
+            <span>Scroll</span>
+            <span class="hero-cue-line"></span>
+        </div>
+    </div>
+
 </header>
 
 
@@ -235,170 +193,95 @@
      NAVIGATION
 ========================================================= -->
 
-<nav>
+<nav class="site-nav" aria-label="Main navigation">
+
     <div class="container nav-inner">
 
-        <div class="nav-brand">
-            <span>ST</span>
-        </div>
+        <a class="nav-brand" href="#top" aria-label="Back to top">ST</a>
 
-        <ul>
-            <li><a href="#about">About</a></li>
-            <li><a href="#projects">Projects</a></li>
-            <li><a href="#skills">Skills</a></li>
-            <li><a href="#contact">Contact</a></li>
+        <ul class="nav-links">
+            <li><a href="#about" data-nav-link="about">About</a></li>
+            <li><a href="#projects" data-nav-link="projects">Projects</a></li>
+            <li><a href="#skills" data-nav-link="skills">Skills</a></li>
+            <li><a href="#contact" data-nav-link="contact">Contact</a></li>
         </ul>
 
+        <a class="nav-cv" href="assets/Sodiq Oluwatimileyin_CV.pdf" download data-magnetic>
+            <i class="fas fa-file-arrow-down" aria-hidden="true"></i>
+            <span>CV</span>
+        </a>
+
     </div>
+
+    <span class="nav-progress" aria-hidden="true"></span>
+
 </nav>
 
 
-<!-- =========================================================
-     EVIDENCE MARQUEE (numbers from the projects, not buzzwords)
-========================================================= -->
-
-<div class="skills-marquee" aria-label="Project highlights">
-
-    <div class="marquee-track">
-
-        <div class="marquee-content">
-
-            <span>2M+ ROWS OF RETAIL DATA DESIGNED</span>
-            <b>◆</b>
-
-            <span>1.8M TRANSACTION LINES IN POWER BI</span>
-            <b>◆</b>
-
-            <span>99K OLIST ORDERS ANALYSED</span>
-            <b>◆</b>
-
-            <span>961-SAMPLE BACKTEST</span>
-            <b>◆</b>
-
-            <span>SQL</span>
-            <b>◆</b>
-
-            <span>DAX</span>
-            <b>◆</b>
-
-            <span>PYTHON / PANDAS</span>
-            <b>◆</b>
-
-            <span>DENEB / VEGA-LITE</span>
-            <b>◆</b>
-
-        </div>
-
-        <div class="marquee-content" aria-hidden="true">
-
-            <span>2M+ ROWS OF RETAIL DATA DESIGNED</span>
-            <b>◆</b>
-
-            <span>1.8M TRANSACTION LINES IN POWER BI</span>
-            <b>◆</b>
-
-            <span>99K OLIST ORDERS ANALYSED</span>
-            <b>◆</b>
-
-            <span>961-SAMPLE BACKTEST</span>
-            <b>◆</b>
-
-            <span>SQL</span>
-            <b>◆</b>
-
-            <span>DAX</span>
-            <b>◆</b>
-
-            <span>PYTHON / PANDAS</span>
-            <b>◆</b>
-
-            <span>DENEB / VEGA-LITE</span>
-            <b>◆</b>
-
-        </div>
-
-    </div>
-</div>
+<main id="main" tabindex="-1">
 
 
-<!-- =========================================================
-     ABOUT
-========================================================= -->
+    <!-- =====================================================
+         EVIDENCE MARQUEE
+    ====================================================== -->
 
-<section id="about" class="section about-section">
+    <div class="marquee" aria-label="Project highlights">
 
-    <div class="container">
+        <div class="marquee-track">
 
-        <div class="section-heading reveal">
+            <div class="marquee-content">
 
-            <span class="section-eyebrow">01 · PROFILE</span>
+                <span>2M+ ROWS OF RETAIL DATA DESIGNED</span>
+                <b>◆</b>
 
-            <h2>
-                About <span>Me</span>
-            </h2>
+                <span>1.8M TRANSACTION LINES IN POWER BI</span>
+                <b>◆</b>
 
-            <div class="heading-line"></div>
+                <span>99K OLIST ORDERS ANALYSED</span>
+                <b>◆</b>
 
-        </div>
+                <span>961-SAMPLE BACKTEST</span>
+                <b>◆</b>
 
+                <span>SQL</span>
+                <b>◆</b>
 
-        <div class="about-content">
+                <span>DAX</span>
+                <b>◆</b>
 
-            <div class="about-image-wrap reveal">
+                <span>PYTHON / PANDAS</span>
+                <b>◆</b>
 
-                <div class="about-image-glow"></div>
-
-                <div class="about-image-frame">
-
-                    <img src="assets/images/profile-placeholder.png"
-                         alt="Sodiq Oluwatimileyin"
-                         class="profile-photo">
-
-                </div>
-
-                <div class="about-image-label">
-                    <span>DATA</span>
-                    <strong>ANALYST</strong>
-                </div>
+                <span>DENEB / VEGA-LITE</span>
+                <b>◆</b>
 
             </div>
 
+            <div class="marquee-content" aria-hidden="true">
 
-            <div class="about-text reveal">
+                <span>2M+ ROWS OF RETAIL DATA DESIGNED</span>
+                <b>◆</b>
 
-                <p>
-                    I'm a data analyst who usually starts with something I've
-                    noticed in real life rather than a clean dataset. Watching
-                    how a supermarket chain like Jendol runs its tills, branches
-                    and loyalty scheme became a 2-million-row simulated retail
-                    system, then a SQL analysis of it, then a Power BI dashboard
-                    on top.
-                </p>
+                <span>1.8M TRANSACTION LINES IN POWER BI</span>
+                <b>◆</b>
 
-                <p>
-                    When the right data doesn't exist, I design it: the
-                    customers, the business rules, the seasonal events and the
-                    edge cases. When it does exist, I question it. My crypto
-                    scanner is the clearest example. The first backtest looked
-                    great, and it was wrong, so I rebuilt the test until the
-                    result could be trusted.
-                </p>
+                <span>99K OLIST ORDERS ANALYSED</span>
+                <b>◆</b>
 
-                <p>
-                    I work in SQL, Excel, Python and Power BI. The part I care
-                    about most is the last step: turning an analysis into
-                    something a manager can actually act on.
-                </p>
+                <span>961-SAMPLE BACKTEST</span>
+                <b>◆</b>
 
-                <div class="about-signature">
-                    <span>Observe</span>
-                    <i class="fas fa-arrow-right"></i>
-                    <span>Build the data</span>
-                    <i class="fas fa-arrow-right"></i>
-                    <span>Test it</span>
-                    <i class="fas fa-arrow-right"></i>
-                    <span>Decide</span>
-                </div>
+                <span>SQL</span>
+                <b>◆</b>
+
+                <span>DAX</span>
+                <b>◆</b>
+
+                <span>PYTHON / PANDAS</span>
+                <b>◆</b>
+
+                <span>DENEB / VEGA-LITE</span>
+                <b>◆</b>
 
             </div>
 
@@ -406,962 +289,898 @@
 
     </div>
 
-</section>
 
+    <!-- =====================================================
+         ABOUT
+    ====================================================== -->
 
-<!-- =========================================================
-     PROJECTS
-========================================================= -->
+    <section id="about" class="section about" data-nav-section="about">
 
-<section id="projects" class="section projects-section">
+        <div class="container">
 
-    <div class="container">
-
-        <div class="section-heading reveal">
-
-            <span class="section-eyebrow">02 · SELECTED WORK</span>
-
-            <h2>
-                Featured <span>Projects</span>
-            </h2>
-
-            <div class="heading-line"></div>
-
-            <p class="section-intro">
-                These four projects are one continuous story: I designed a
-                retail business in data, queried it in SQL, built the
-                Power BI layer a manager would use, then turned the
-                dashboard's biggest recommendation into a working system.
-            </p>
-
-        </div>
-
-
-        <div class="projects-grid">
-
-
-            <!-- =================================================
-                 PROJECT 1
-            ================================================== -->
-
-            <article class="project-card reveal">
-
-                <div class="project-number">
-                    01
+            <header class="section-head">
+                <div>
+                    <span class="eyebrow">01 · PROFILE</span>
+                    <h2 class="section-title" data-split>About Me</h2>
                 </div>
+            </header>
 
-                <div class="project-image-wrap">
+            <div class="about-grid">
 
-                    <img src="projects/jrad-retail-data-system/images/jrad-retail-data-system.jpeg"
-                         alt="JRAD Retail Data System">
+                <figure class="about-photo" data-reveal>
 
-                    <div class="project-image-overlay"></div>
-
-                    <span class="project-category">
-                        DATA ENGINEERING
-                    </span>
-
-                </div>
-
-
-                <div class="project-card-content">
-
-                    <div class="project-meta">
-                        <span>EXCEL</span>
-                        <span>PYTHON</span>
-                        <span>DATA SYSTEMS</span>
+                    <div class="about-photo-frame">
+                        <img src="assets/images/profile-placeholder.png"
+                             alt="Sodiq Oluwatimileyin"
+                             loading="lazy">
                     </div>
 
-                    <h3>
-                        From Real-Life Observation to a
-                        2M+ Row Retail Data System
-                    </h3>
+                    <figcaption class="about-photo-label">
+                        <span>DATA</span>
+                        <strong>ANALYST</strong>
+                    </figcaption>
 
-                    <p>
-                        A full-scale retail data engineering project
-                        inspired by real-life Jendol superstores
-                        observations. I designed the business logic,
-                        customer behaviour, product ecosystem, branch
-                        patterns, seasonal events, loyalty mechanics
-                        and transaction rules before building a scalable
-                        simulated retail data system using Excel and Python.
+                </figure>
+
+                <div class="about-copy">
+
+                    <p class="about-lead" data-scrub-words>
+                        I'm a data analyst who usually starts with something I've
+                        noticed in real life rather than a clean dataset. Watching
+                        how a supermarket chain like Jendol runs its tills, branches
+                        and loyalty scheme became a 2-million-row simulated retail
+                        system, then a SQL analysis of it, then a Power BI dashboard
+                        on top.
                     </p>
 
-                    <div class="project-buttons">
-
-                        <a href="projects/jrad-retail-data-system/" class="btn">
-                            Explore Data System
-                            <i class="fas fa-arrow-right"></i>
-                        </a>
-
-                        <a href="https://github.com/sodiqoluwatimileyin190-oss/sodiqoluwatimileyin190-oss.github.io/tree/main/projects/jrad-retail-data-system" target="_blank" rel="noopener" class="btn btn-secondary">
-                            GitHub
-                            <i class="fab fa-github"></i>
-                        </a>
-
-                    </div>
-
-                </div>
-
-            </article>
-
-
-            <!-- =================================================
-                 PROJECT 2
-            ================================================== -->
-
-            <article class="project-card reveal">
-
-                <div class="project-number">
-                    02
-                </div>
-
-                <div class="project-image-wrap">
-
-                    <img src="projects/jrad-retail-sql-analysis/images/jrad-retail-sql-analysis.jpeg"
-                         alt="JRAD Retail SQL Business Analysis">
-
-                    <div class="project-image-overlay"></div>
-
-                    <span class="project-category">
-                        SQL ANALYTICS
-                    </span>
-
-                </div>
-
-
-                <div class="project-card-content">
-
-                    <div class="project-meta">
-                        <span>SQL</span>
-                        <span>MYSQL</span>
-                        <span>BUSINESS ANALYSIS</span>
-                    </div>
-
-                    <h3>
-                        Inside the Retail Engine:
-                        SQL Business Analysis
-                    </h3>
-
-                    <p>
-                        Transforming a large-scale simulated retail
-                        system into actionable business intelligence
-                        using SQL. The analysis explores customer
-                        behaviour, loyalty performance, anonymous
-                        high-value shoppers, product demand, branch
-                        performance, stock-out risks and revenue
-                        opportunities.
+                    <p data-reveal>
+                        When the right data doesn't exist, I design it: the
+                        customers, the business rules, the seasonal events and the
+                        edge cases. When it does exist, I question it. My crypto
+                        scanner is the clearest example. The first backtest looked
+                        great, and it was wrong, so I rebuilt the test until the
+                        result could be trusted.
                     </p>
 
-                    <div class="project-buttons">
-
-                        <a href="projects/jrad-retail-sql-analysis/" class="btn">
-                            Explore Analysis
-                            <i class="fas fa-arrow-right"></i>
-                        </a>
-
-                        <a href="https://github.com/sodiqoluwatimileyin190-oss/sodiqoluwatimileyin190-oss.github.io/tree/main/projects/jrad-retail-sql-analysis" target="_blank" rel="noopener" class="btn btn-secondary">
-                            GitHub
-                            <i class="fab fa-github"></i>
-                        </a>
-
-                    </div>
-
-                </div>
-
-            </article>
-
-
-            <!-- =================================================
-                 PROJECT 3
-            ================================================== -->
-
-            <article class="project-card project-card-featured reveal">
-
-                <div class="project-number">
-                    03
-                </div>
-
-                <div class="project-image-wrap">
-
-                    <img src="projects/jrad-retail-powerbi-dashboard/images/executive-overview.png"
-                         alt="JRAD Retail Power BI Dashboard">
-
-                    <div class="project-image-overlay"></div>
-
-                    <span class="project-category">
-                        BUSINESS INTELLIGENCE
-                    </span>
-
-                </div>
-
-
-                <div class="project-card-content">
-
-                    <div class="project-meta">
-                        <span>POWER BI</span>
-                        <span>DAX</span>
-                        <span>DENEB</span>
-                        <span>VEGA-LITE</span>
-                    </div>
-
-                    <h3>
-                        JRAD Retail Power BI:
-                        Executive Intelligence & Visual Engineering
-                    </h3>
-
-                    <p>
-                        A Power BI retail intelligence solution built
-                        from the JRAD Superstores 2026 data ecosystem.
-                        The project combines Power BI, DAX, time
-                        intelligence, Deneb and custom visual engineering
-                        to transform 1.8M+ transaction lines into
-                        decision-ready insights across revenue,
-                        branches, departments, customer personas
-                        and business performance.
+                    <p data-reveal>
+                        I work in SQL, Excel, Python and Power BI. The part I care
+                        about most is the last step: turning an analysis into
+                        something a manager can actually act on.
                     </p>
 
-                    <div class="project-buttons">
-
-                        <a href="projects/jrad-retail-powerbi-dashboard/" class="btn">
-                            Explore Dashboard
-                            <i class="fas fa-arrow-right"></i>
-                        </a>
-
-                        <a href="https://github.com/sodiqoluwatimileyin190-oss/sodiqoluwatimileyin190-oss.github.io/tree/main/projects/jrad-retail-powerbi-dashboard" target="_blank" rel="noopener" class="btn btn-secondary">
-                            GitHub
-                            <i class="fab fa-github"></i>
-                        </a>
-
-                    </div>
-
                 </div>
 
-            </article>
+            </div>
+
+        </div>
+
+    </section>
 
 
-            <!-- =================================================
-                 PROJECT 4
-            ================================================== -->
+    <!-- =====================================================
+         METHOD
+    ====================================================== -->
 
-            <article class="project-card reveal">
+    <section id="method" class="method" data-nav-section="about" aria-labelledby="method-title">
 
-                <div class="project-number">
-                    04
+        <div class="container method-inner">
+
+            <div class="method-head">
+                <span class="eyebrow eyebrow-light">HOW I WORK</span>
+                <h2 class="method-title" id="method-title" data-split>The same four steps, every project.</h2>
+                <div class="method-meter" aria-hidden="true">
+                    <span class="method-meter-fill"></span>
                 </div>
+            </div>
 
-                <div class="project-image-wrap">
+            <ol class="method-steps">
 
-                    <img src="projects/jrad-retention-intelligence/images/detection-engine-code.jpg"
-                         alt="JRAD Retention Intelligence: the detection engine resolving payer identities and validating precision and recall">
-
-                    <div class="project-image-overlay"></div>
-
-                    <span class="project-category">
-                        RETENTION INTELLIGENCE
-                    </span>
-
-                </div>
-
-
-                <div class="project-card-content">
-
-                    <div class="project-meta">
-                        <span>PYTHON</span>
-                        <span>SQL SERVER</span>
-                        <span>FLASK</span>
-                        <span>TELEGRAM API</span>
-                    </div>
-
-                    <h3>
-                        JRAD Retention Intelligence:
-                        From an Insight to a Working System
-                    </h3>
-
-                    <p>
-                        The Power BI dashboard could count walk-in
-                        customers but couldn't say who they were. I
-                        resolved payer identities from 101,463 transfer
-                        payments, validated a detection rule at 100%
-                        precision and 88.3% recall, then built Telegram
-                        and email alerts plus a till-side tool that
-                        recognizes repeat customers in seconds.
+                <li class="method-step">
+                    <h3 class="method-word"><span class="method-index">01</span>Observe</h3>
+                    <p class="method-text">
+                        Start with something real. Watching how a supermarket runs
+                        its tills, branches and loyalty scheme became the whole
+                        JRAD project.
                     </p>
+                </li>
 
-                    <a class="project-demo-link" href="projects/jrad-retention-intelligence/#till">
-                        <i class="fas fa-circle-play"></i>
-                        Try the interactive till demo
-                    </a>
+                <li class="method-step">
+                    <h3 class="method-word"><span class="method-index">02</span>Build the data</h3>
+                    <p class="method-text">
+                        When the right data doesn't exist, I design it: the
+                        customers, the business rules, the seasonal events and the
+                        edge cases. Over 2 million rows, from scratch.
+                    </p>
+                </li>
 
-                    <div class="project-buttons">
+                <li class="method-step">
+                    <h3 class="method-word"><span class="method-index">03</span>Test it</h3>
+                    <p class="method-text">
+                        When data does exist, I question it. My crypto scanner's
+                        first backtest looked great and was wrong, so I rebuilt the
+                        test until the result could be trusted.
+                    </p>
+                </li>
 
-                        <a href="projects/jrad-retention-intelligence/" class="btn">
-                            Explore Case Study
-                            <i class="fas fa-arrow-right"></i>
+                <li class="method-step">
+                    <h3 class="method-word"><span class="method-index">04</span>Decide</h3>
+                    <p class="method-text">
+                        The step that matters most: an analysis a manager can act
+                        on, all the way to an alert that reaches a branch manager's
+                        phone.
+                    </p>
+                </li>
+
+            </ol>
+
+        </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         FEATURED PROJECTS
+    ====================================================== -->
+
+    <section id="projects" class="work" data-nav-section="projects">
+
+        <div class="container work-head">
+
+            <div class="work-head-copy">
+                <span class="eyebrow">02 · SELECTED WORK</span>
+                <h2 class="section-title" data-split>Featured Projects</h2>
+            </div>
+
+            <div class="work-head-side">
+
+                <p class="section-intro" data-reveal>
+                    These four projects are one continuous story: I designed a
+                    retail business in data, queried it in SQL, built the
+                    Power BI layer a manager would use, then turned the
+                    dashboard's biggest recommendation into a working system.
+                </p>
+
+                <div class="work-progress-wrap" aria-hidden="true">
+                    <ol class="work-progress">
+                        <li class="is-active"><span>01</span>Data system</li>
+                        <li><span>02</span>SQL analysis</li>
+                        <li><span>03</span>Power BI</li>
+                        <li><span>04</span>Retention</li>
+                    </ol>
+                    <div class="work-progress-bar">
+                        <span class="work-progress-fill"></span>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="work-viewport">
+
+            <div class="work-track">
+
+
+                <!-- PROJECT 1 -->
+
+                <article class="work-card">
+
+                    <div class="work-media">
+                        <div class="work-media-zoom">
+                            <img src="projects/jrad-retail-data-system/images/jrad-retail-data-system.jpeg"
+                                 alt="JRAD Retail Data System"
+                                 loading="lazy">
+                        </div>
+                        <span class="work-number">01</span>
+                        <span class="work-category">DATA ENGINEERING</span>
+                    </div>
+
+                    <div class="work-body">
+
+                        <div class="tags">
+                            <span>EXCEL</span>
+                            <span>PYTHON</span>
+                            <span>DATA SYSTEMS</span>
+                        </div>
+
+                        <h3>From Real-Life Observation to a 2M+ Row Retail Data System</h3>
+
+                        <p>
+                            A full-scale retail data engineering project
+                            inspired by real-life Jendol superstores
+                            observations. I designed the business logic,
+                            customer behaviour, product ecosystem, branch
+                            patterns, seasonal events, loyalty mechanics
+                            and transaction rules before building a scalable
+                            simulated retail data system using Excel and Python.
+                        </p>
+
+                        <div class="actions">
+
+                            <a href="projects/jrad-retail-data-system/" class="btn">
+                                Explore Data System
+                                <i class="fas fa-arrow-right"></i>
+                            </a>
+
+                            <a href="https://github.com/sodiqoluwatimileyin190-oss/sodiqoluwatimileyin190-oss.github.io/tree/main/projects/jrad-retail-data-system" target="_blank" rel="noopener" class="btn btn-ghost">
+                                GitHub
+                                <i class="fab fa-github"></i>
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+                <!-- PROJECT 2 -->
+
+                <article class="work-card">
+
+                    <div class="work-media">
+                        <div class="work-media-zoom">
+                            <img src="projects/jrad-retail-sql-analysis/images/jrad-retail-sql-analysis.jpeg"
+                                 alt="JRAD Retail SQL Business Analysis"
+                                 loading="lazy">
+                        </div>
+                        <span class="work-number">02</span>
+                        <span class="work-category">SQL ANALYTICS</span>
+                    </div>
+
+                    <div class="work-body">
+
+                        <div class="tags">
+                            <span>SQL</span>
+                            <span>MYSQL</span>
+                            <span>BUSINESS ANALYSIS</span>
+                        </div>
+
+                        <h3>Inside the Retail Engine: SQL Business Analysis</h3>
+
+                        <p>
+                            Transforming a large-scale simulated retail
+                            system into actionable business intelligence
+                            using SQL. The analysis explores customer
+                            behaviour, loyalty performance, anonymous
+                            high-value shoppers, product demand, branch
+                            performance, stock-out risks and revenue
+                            opportunities.
+                        </p>
+
+                        <div class="actions">
+
+                            <a href="projects/jrad-retail-sql-analysis/" class="btn">
+                                Explore Analysis
+                                <i class="fas fa-arrow-right"></i>
+                            </a>
+
+                            <a href="https://github.com/sodiqoluwatimileyin190-oss/sodiqoluwatimileyin190-oss.github.io/tree/main/projects/jrad-retail-sql-analysis" target="_blank" rel="noopener" class="btn btn-ghost">
+                                GitHub
+                                <i class="fab fa-github"></i>
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+                <!-- PROJECT 3 -->
+
+                <article class="work-card">
+
+                    <div class="work-media">
+                        <div class="work-media-zoom">
+                            <img src="projects/jrad-retail-powerbi-dashboard/images/executive-overview.png"
+                                 alt="JRAD Retail Power BI Dashboard"
+                                 loading="lazy">
+                        </div>
+                        <span class="work-number">03</span>
+                        <span class="work-category">BUSINESS INTELLIGENCE</span>
+                    </div>
+
+                    <div class="work-body">
+
+                        <div class="tags">
+                            <span>POWER BI</span>
+                            <span>DAX</span>
+                            <span>DENEB</span>
+                            <span>VEGA-LITE</span>
+                        </div>
+
+                        <h3>JRAD Retail Power BI: Executive Intelligence &amp; Visual Engineering</h3>
+
+                        <p>
+                            A Power BI retail intelligence solution built
+                            from the JRAD Superstores 2026 data ecosystem.
+                            The project combines Power BI, DAX, time
+                            intelligence, Deneb and custom visual engineering
+                            to transform 1.8M+ transaction lines into
+                            decision-ready insights across revenue,
+                            branches, departments, customer personas
+                            and business performance.
+                        </p>
+
+                        <div class="actions">
+
+                            <a href="projects/jrad-retail-powerbi-dashboard/" class="btn">
+                                Explore Dashboard
+                                <i class="fas fa-arrow-right"></i>
+                            </a>
+
+                            <a href="https://github.com/sodiqoluwatimileyin190-oss/sodiqoluwatimileyin190-oss.github.io/tree/main/projects/jrad-retail-powerbi-dashboard" target="_blank" rel="noopener" class="btn btn-ghost">
+                                GitHub
+                                <i class="fab fa-github"></i>
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+                <!-- PROJECT 4 -->
+
+                <article class="work-card">
+
+                    <div class="work-media">
+                        <div class="work-media-zoom">
+                            <img src="projects/jrad-retention-intelligence/images/detection-engine-code.jpg"
+                                 alt="JRAD Retention Intelligence: the detection engine resolving payer identities and validating precision and recall"
+                                 loading="lazy">
+                        </div>
+                        <span class="work-number">04</span>
+                        <span class="work-category">RETENTION INTELLIGENCE</span>
+                    </div>
+
+                    <div class="work-body">
+
+                        <div class="tags">
+                            <span>PYTHON</span>
+                            <span>SQL SERVER</span>
+                            <span>FLASK</span>
+                            <span>TELEGRAM API</span>
+                        </div>
+
+                        <h3>JRAD Retention Intelligence: From an Insight to a Working System</h3>
+
+                        <p>
+                            The Power BI dashboard could count walk-in
+                            customers but couldn't say who they were. I
+                            resolved payer identities from 101,463 transfer
+                            payments, validated a detection rule at 100%
+                            precision and 88.3% recall, then built Telegram
+                            and email alerts plus a till-side tool that
+                            recognizes repeat customers in seconds.
+                        </p>
+
+                        <a class="work-demo" href="projects/jrad-retention-intelligence/#till">
+                            <i class="fas fa-circle-play" aria-hidden="true"></i>
+                            Try the interactive till demo
                         </a>
 
-                        <a href="https://github.com/sodiqoluwatimileyin190-oss/sodiqoluwatimileyin190-oss.github.io/tree/main/projects/jrad-retention-intelligence" target="_blank" rel="noopener" class="btn btn-secondary">
-                            GitHub
-                            <i class="fab fa-github"></i>
-                        </a>
+                        <div class="actions">
+
+                            <a href="projects/jrad-retention-intelligence/" class="btn">
+                                Explore Case Study
+                                <i class="fas fa-arrow-right"></i>
+                            </a>
+
+                            <a href="https://github.com/sodiqoluwatimileyin190-oss/sodiqoluwatimileyin190-oss.github.io/tree/main/projects/jrad-retention-intelligence" target="_blank" rel="noopener" class="btn btn-ghost">
+                                GitHub
+                                <i class="fab fa-github"></i>
+                            </a>
+
+                        </div>
 
                     </div>
 
-                </div>
+                </article>
 
-            </article>
-
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- =========================================================
-     OTHER ANALYTICAL PROJECTS
-========================================================= -->
-
-<section class="other-projects" id="other-projects">
-
-    <div class="container">
-
-        <div class="other-projects-heading reveal">
-
-            <span class="section-eyebrow">
-                02.5 · OTHER ANALYTICAL PROJECTS
-            </span>
-
-            <h2>
-                Other <span>Analytical Projects</span>
-            </h2>
-
-            <div class="heading-line"></div>
-
-            <p>
-                Shorter case studies beyond the JRAD story: an e-commerce
-                marketplace analysed with SQL and Power BI, a Python market
-                scanner I backtested until it showed me which of my ideas
-                actually worked, and a bank's personal loan campaign broken
-                down in Power BI.
-            </p>
-
-        </div>
-
-
-        <!-- =================================================
-             OLIST
-        ================================================== -->
-
-        <article class="secondary-project-card reveal">
-
-            <div class="secondary-project-image">
-
-                <img
-                    src="projects/olist-customer-retention/images/overview.png"
-                    alt="Olist Customer & E-Commerce Analytics Dashboard"
-                >
-
-                <div class="secondary-project-image-overlay"></div>
-
-                <span class="secondary-project-category">
-                    E-COMMERCE ANALYTICS
-                </span>
 
             </div>
 
+        </div>
 
-            <div class="secondary-project-content">
+    </section>
 
-                <div class="secondary-project-number">
-                    CASE STUDY 01
+
+    <!-- =====================================================
+         OTHER ANALYTICAL PROJECTS
+    ====================================================== -->
+
+    <section id="other-projects" class="section cases" data-nav-section="projects">
+
+        <div class="container">
+
+            <header class="section-head">
+
+                <div>
+                    <span class="eyebrow">02.5 · OTHER ANALYTICAL PROJECTS</span>
+                    <h2 class="section-title" data-split>Other Analytical Projects</h2>
                 </div>
 
-
-                <div class="project-meta">
-
-                    <span>SQL</span>
-                    <span>POWER BI</span>
-                    <span>CUSTOMER ANALYTICS</span>
-                    <span>RETENTION</span>
-
-                </div>
-
-
-                <h3>
-                    Olist Customer & E-Commerce Analytics
-                </h3>
-
-
-                <p>
-                    A focused e-commerce analytics case study using
-                    the Brazilian Olist marketplace dataset to examine
-                    customer behaviour, purchasing frequency, retention,
-                    product performance and delivery operations.
+                <p class="section-intro" data-reveal>
+                    Shorter case studies beyond the JRAD story: an e-commerce
+                    marketplace analysed with SQL and Power BI, a Python market
+                    scanner I backtested until it showed me which of my ideas
+                    actually worked, and a bank's personal loan campaign broken
+                    down in Power BI.
                 </p>
 
+            </header>
 
-                <div class="secondary-project-highlights">
+            <div class="case-list">
 
-                    <div>
-                        <strong>99K+</strong>
-                        <span>Customers</span>
+
+                <!-- OLIST -->
+
+                <article class="case">
+
+                    <div class="case-media">
+                        <div class="case-media-zoom">
+                            <img src="projects/olist-customer-retention/images/overview.png"
+                                 alt="Olist Customer & E-Commerce Analytics Dashboard"
+                                 loading="lazy">
+                        </div>
+                        <span class="case-category">E-COMMERCE ANALYTICS</span>
                     </div>
 
-                    <div>
-                        <strong>99K+</strong>
-                        <span>Orders</span>
+                    <div class="case-body">
+
+                        <div class="case-number">CASE STUDY 01</div>
+
+                        <div class="tags">
+                            <span>SQL</span>
+                            <span>POWER BI</span>
+                            <span>CUSTOMER ANALYTICS</span>
+                            <span>RETENTION</span>
+                        </div>
+
+                        <h3>Olist Customer &amp; E-Commerce Analytics</h3>
+
+                        <p>
+                            A focused e-commerce analytics case study using
+                            the Brazilian Olist marketplace dataset to examine
+                            customer behaviour, purchasing frequency, retention,
+                            product performance and delivery operations.
+                        </p>
+
+                        <div class="stats">
+                            <div>
+                                <strong>99K+</strong>
+                                <span>Customers</span>
+                            </div>
+                            <div>
+                                <strong>99K+</strong>
+                                <span>Orders</span>
+                            </div>
+                            <div>
+                                <strong>3</strong>
+                                <span>Analytical Views</span>
+                            </div>
+                        </div>
+
+                        <div class="actions">
+
+                            <a href="projects/olist-customer-retention/" class="btn">
+                                Explore Analysis
+                                <i class="fas fa-arrow-right"></i>
+                            </a>
+
+                            <a href="https://github.com/sodiqoluwatimileyin190-oss/sodiqoluwatimileyin190-oss.github.io/tree/main/projects/olist-customer-retention" target="_blank" rel="noopener" class="btn btn-ghost">
+                                GitHub
+                                <i class="fab fa-github"></i>
+                            </a>
+
+                        </div>
+
                     </div>
 
-                    <div>
-                        <strong>3</strong>
-                        <span>Analytical Views</span>
+                </article>
+
+
+                <!-- CRYPTO ACCUMULATION SCANNER -->
+
+                <article class="case">
+
+                    <div class="case-media">
+                        <div class="case-media-zoom">
+                            <img src="projects/crypto-accumulation-scanner/images/crypto-scanner-card.jpg"
+                                 alt="Crypto Accumulation Scanner: a Telegram alert ranking coins by tier"
+                                 loading="lazy">
+                        </div>
+                        <span class="case-category">PYTHON ANALYTICS</span>
                     </div>
 
-                </div>
+                    <div class="case-body">
+
+                        <div class="case-number">CASE STUDY 02</div>
+
+                        <div class="tags">
+                            <span>PYTHON</span>
+                            <span>PANDAS</span>
+                            <span>BACKTESTING</span>
+                            <span>AUTOMATION</span>
+                        </div>
+
+                        <h3>Crypto Accumulation Scanner: Testing a Market Signal Honestly</h3>
+
+                        <p>
+                            A Python scanner that finds crypto coins quietly coiling
+                            before a breakout. A fair backtest showed most of my
+                            signals didn't work, so I rebuilt it around the evidence
+                            and automated it with Telegram alerts every 4 hours.
+                        </p>
+
+                        <div class="stats">
+                            <div>
+                                <strong>961</strong>
+                                <span>Backtest Samples</span>
+                            </div>
+                            <div>
+                                <strong>13</strong>
+                                <span>Signals Tested</span>
+                            </div>
+                            <div>
+                                <strong>+7.1%</strong>
+                                <span>Strongest Edge</span>
+                            </div>
+                        </div>
+
+                        <div class="actions">
+
+                            <a href="projects/crypto-accumulation-scanner/" class="btn">
+                                Explore Case Study
+                                <i class="fas fa-arrow-right"></i>
+                            </a>
+
+                            <a href="https://github.com/sodiqoluwatimileyin190-oss/crypto-accumulation-scanner" target="_blank" rel="noopener" class="btn btn-ghost">
+                                GitHub
+                                <i class="fab fa-github"></i>
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </article>
 
 
-                <div class="project-buttons">
+                <!-- THERA BANK -->
 
-                    <a href="projects/olist-customer-retention/" class="btn">
-                        Explore Analysis
-                        <i class="fas fa-arrow-right"></i>
-                    </a>
+                <article class="case">
 
-                    <a href="https://github.com/sodiqoluwatimileyin190-oss/sodiqoluwatimileyin190-oss.github.io/tree/main/projects/olist-customer-retention" target="_blank" rel="noopener" class="btn btn-secondary">
-                        GitHub
-                        <i class="fab fa-github"></i>
-                    </a>
+                    <div class="case-media">
+                        <div class="case-media-zoom">
+                            <img src="projects/thera-bank-loan-analytics/images/thera-bank-cover.png"
+                                 alt="THERA Bank Personal Loan Campaign Analysis"
+                                 loading="lazy">
+                        </div>
+                        <span class="case-category">BANKING ANALYTICS</span>
+                    </div>
 
-                </div>
+                    <div class="case-body">
+
+                        <div class="case-number">CASE STUDY 03</div>
+
+                        <div class="tags">
+                            <span>POWER BI</span>
+                            <span>DAX</span>
+                            <span>CUSTOMER SEGMENTATION</span>
+                            <span>CAMPAIGN TARGETING</span>
+                        </div>
+
+                        <h3>THERA Bank — Personal Loan Campaign Analysis</h3>
+
+                        <p>
+                            A Power BI case study on who actually converts in a
+                            bank's personal loan campaign. Higher income and
+                            professional or graduate education stood out as the
+                            strongest signals, which I turned into customer
+                            profiles for sharper campaign targeting.
+                        </p>
+
+                        <div class="stats">
+                            <div>
+                                <strong>5,000</strong>
+                                <span>Customers</span>
+                            </div>
+                            <div>
+                                <strong>9.6%</strong>
+                                <span>Acceptance Rate</span>
+                            </div>
+                            <div>
+                                <strong>3</strong>
+                                <span>Dashboard Pages</span>
+                            </div>
+                        </div>
+
+                        <div class="actions">
+
+                            <a href="projects/thera-bank-loan-analytics/" class="btn">
+                                Explore Analysis
+                                <i class="fas fa-arrow-right"></i>
+                            </a>
+
+                            <a href="https://github.com/sodiqoluwatimileyin190-oss/sodiqoluwatimileyin190-oss.github.io/tree/main/projects/thera-bank-loan-analytics" target="_blank" rel="noopener noreferrer" class="btn btn-ghost">
+                                GitHub
+                                <i class="fab fa-github"></i>
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
 
             </div>
 
-        </article>
+        </div>
+
+    </section>
 
 
-        <!-- =================================================
-             CRYPTO ACCUMULATION SCANNER
-        ================================================== -->
+    <!-- =====================================================
+         SKILLS / CAPABILITIES
+    ====================================================== -->
 
-        <article class="secondary-project-card reveal">
+    <section id="skills" class="section skills" data-nav-section="skills">
 
-            <div class="secondary-project-image">
+        <div class="container">
 
-                <img
-                    src="projects/crypto-accumulation-scanner/images/crypto-scanner-card.jpg"
-                    alt="Crypto Accumulation Scanner: a Telegram alert ranking coins by tier"
-                >
+            <header class="section-head">
 
-                <div class="secondary-project-image-overlay"></div>
-
-                <span class="secondary-project-category">
-                    PYTHON ANALYTICS
-                </span>
-
-            </div>
-
-
-            <div class="secondary-project-content">
-
-                <div class="secondary-project-number">
-                    CASE STUDY 02
+                <div>
+                    <span class="eyebrow">03 · CAPABILITIES</span>
+                    <h2 class="section-title" data-split>Technical Skillset</h2>
                 </div>
 
-
-                <div class="project-meta">
-
-                    <span>PYTHON</span>
-                    <span>PANDAS</span>
-                    <span>BACKTESTING</span>
-                    <span>AUTOMATION</span>
-
-                </div>
-
-
-                <h3>
-                    Crypto Accumulation Scanner: Testing a Market Signal Honestly
-                </h3>
-
-
-                <p>
-                    A Python scanner that finds crypto coins quietly coiling
-                    before a breakout. A fair backtest showed most of my
-                    signals didn't work, so I rebuilt it around the evidence
-                    and automated it with Telegram alerts every 4 hours.
+                <p class="section-intro" data-reveal>
+                    The tools and methods behind the projects above, from
+                    designing data and cleaning it, to modelling, testing
+                    and presenting it.
                 </p>
 
+            </header>
 
-                <div class="secondary-project-highlights">
+            <div class="skills-grid">
 
-                    <div>
-                        <strong>961</strong>
-                        <span>Backtest Samples</span>
+                <article class="skill-card">
+                    <div class="skill-header">
+                        <div class="skill-icon"><i class="fas fa-chart-pie"></i></div>
+                        <div class="skill-title-wrap">
+                            <span class="skill-index">01</span>
+                            <h3>Data Visualization</h3>
+                        </div>
                     </div>
+                    <ul class="skill-list">
+                        <li><span>Power BI</span><i class="fas fa-arrow-right"></i></li>
+                        <li><span>Tableau</span><i class="fas fa-arrow-right"></i></li>
+                        <li><span>Excel Dashboards</span><i class="fas fa-arrow-right"></i></li>
+                        <li><span>Deneb</span><i class="fas fa-arrow-right"></i></li>
+                        <li><span>Vega-Lite</span><i class="fas fa-arrow-right"></i></li>
+                        <li><span>Data Storytelling</span><i class="fas fa-arrow-right"></i></li>
+                    </ul>
+                </article>
 
-                    <div>
-                        <strong>13</strong>
-                        <span>Signals Tested</span>
+                <article class="skill-card">
+                    <div class="skill-header">
+                        <div class="skill-icon"><i class="fas fa-magnifying-glass-chart"></i></div>
+                        <div class="skill-title-wrap">
+                            <span class="skill-index">02</span>
+                            <h3>Data Analysis</h3>
+                        </div>
                     </div>
+                    <ul class="skill-list">
+                        <li><span>SQL</span><i class="fas fa-arrow-right"></i></li>
+                        <li><span>Advanced Excel</span><i class="fas fa-arrow-right"></i></li>
+                        <li><span>Python / Pandas</span><i class="fas fa-arrow-right"></i></li>
+                        <li><span>Exploratory Data Analysis</span><i class="fas fa-arrow-right"></i></li>
+                        <li><span>Backtesting &amp; Validation</span><i class="fas fa-arrow-right"></i></li>
+                        <li><span>Customer &amp; Sales Analysis</span><i class="fas fa-arrow-right"></i></li>
+                        <li><span>RFM Analysis</span><i class="fas fa-arrow-right"></i></li>
+                    </ul>
+                </article>
 
-                    <div>
-                        <strong>+7.1%</strong>
-                        <span>Strongest Edge</span>
+                <article class="skill-card">
+                    <div class="skill-header">
+                        <div class="skill-icon"><i class="fas fa-diagram-project"></i></div>
+                        <div class="skill-title-wrap">
+                            <span class="skill-index">03</span>
+                            <h3>Data Modeling &amp; BI</h3>
+                        </div>
                     </div>
+                    <ul class="skill-list">
+                        <li><span>DAX</span><i class="fas fa-arrow-right"></i></li>
+                        <li><span>Power BI Data Modeling</span><i class="fas fa-arrow-right"></i></li>
+                        <li><span>Star Schema Design</span><i class="fas fa-arrow-right"></i></li>
+                        <li><span>Dimensional Modeling</span><i class="fas fa-arrow-right"></i></li>
+                        <li><span>Data Relationships</span><i class="fas fa-arrow-right"></i></li>
+                        <li><span>KPI &amp; Measure Engineering</span><i class="fas fa-arrow-right"></i></li>
+                        <li><span>Time Intelligence</span><i class="fas fa-arrow-right"></i></li>
+                    </ul>
+                </article>
 
-                </div>
+                <article class="skill-card">
+                    <div class="skill-header">
+                        <div class="skill-icon"><i class="fas fa-database"></i></div>
+                        <div class="skill-title-wrap">
+                            <span class="skill-index">04</span>
+                            <h3>Data Engineering</h3>
+                        </div>
+                    </div>
+                    <ul class="skill-list">
+                        <li><span>Data Cleaning</span><i class="fas fa-arrow-right"></i></li>
+                        <li><span>Data Validation</span><i class="fas fa-arrow-right"></i></li>
+                        <li><span>API Data Collection</span><i class="fas fa-arrow-right"></i></li>
+                        <li><span>ETL Processes</span><i class="fas fa-arrow-right"></i></li>
+                        <li><span>Transactional Data Design</span><i class="fas fa-arrow-right"></i></li>
+                        <li><span>Data Generation &amp; Simulation</span><i class="fas fa-arrow-right"></i></li>
+                        <li><span>Scheduled Automation</span><i class="fas fa-arrow-right"></i></li>
+                    </ul>
+                </article>
 
+                <article class="skill-card">
+                    <div class="skill-header">
+                        <div class="skill-icon"><i class="fas fa-chart-line"></i></div>
+                        <div class="skill-title-wrap">
+                            <span class="skill-index">05</span>
+                            <h3>Business Intelligence</h3>
+                        </div>
+                    </div>
+                    <ul class="skill-list">
+                        <li><span>Executive Dashboards</span><i class="fas fa-arrow-right"></i></li>
+                        <li><span>Retail Analytics</span><i class="fas fa-arrow-right"></i></li>
+                        <li><span>Banking Analytics</span><i class="fas fa-arrow-right"></i></li>
+                        <li><span>Sales &amp; Revenue Analysis</span><i class="fas fa-arrow-right"></i></li>
+                        <li><span>Customer Segmentation</span><i class="fas fa-arrow-right"></i></li>
+                        <li><span>Customer Behaviour Analysis</span><i class="fas fa-arrow-right"></i></li>
+                        <li><span>Churn &amp; Retention Analysis</span><i class="fas fa-arrow-right"></i></li>
+                    </ul>
+                </article>
 
-                <div class="project-buttons">
-
-                    <a href="projects/crypto-accumulation-scanner/" class="btn">
-                        Explore Case Study
-                        <i class="fas fa-arrow-right"></i>
-                    </a>
-
-                    <a href="https://github.com/sodiqoluwatimileyin190-oss/crypto-accumulation-scanner" target="_blank" rel="noopener" class="btn btn-secondary">
-                        GitHub
-                        <i class="fab fa-github"></i>
-                    </a>
-
-                </div>
+                <article class="skill-card">
+                    <div class="skill-header">
+                        <div class="skill-icon"><i class="fas fa-lightbulb"></i></div>
+                        <div class="skill-title-wrap">
+                            <span class="skill-index">06</span>
+                            <h3>Decision Intelligence</h3>
+                        </div>
+                    </div>
+                    <ul class="skill-list">
+                        <li><span>Business Problem Framing</span><i class="fas fa-arrow-right"></i></li>
+                        <li><span>Customer Profiling</span><i class="fas fa-arrow-right"></i></li>
+                        <li><span>Marketing &amp; Campaign Analysis</span><i class="fas fa-arrow-right"></i></li>
+                        <li><span>Performance Analysis</span><i class="fas fa-arrow-right"></i></li>
+                        <li><span>Operational Analysis</span><i class="fas fa-arrow-right"></i></li>
+                        <li><span>Strategic Recommendations</span><i class="fas fa-arrow-right"></i></li>
+                        <li><span>Data-Driven Decision Making</span><i class="fas fa-arrow-right"></i></li>
+                    </ul>
+                </article>
 
             </div>
 
-        </article>
+            <p class="skills-closing" data-reveal>
+                <span class="skills-closing-line"></span>
+                <strong>Every skill above is used in at least one project on this page.</strong>
+                <span class="skills-closing-line"></span>
+            </p>
+
+        </div>
+
+    </section>
 
 
-        <!-- =================================================
-             THERA BANK
-        ================================================== -->
+    <!-- =====================================================
+         CONTACT
+    ====================================================== -->
 
-        <article class="secondary-project-card reveal">
+    <section id="contact" class="section contact" data-nav-section="contact">
 
-            <div class="secondary-project-image">
+        <div class="container contact-grid">
 
-                <img
-                    src="projects/thera-bank-loan-analytics/images/thera-bank-cover.png"
-                    alt="THERA Bank Personal Loan Campaign Analysis"
-                >
+            <div class="contact-copy">
 
-                <div class="secondary-project-image-overlay"></div>
+                <span class="eyebrow">04 · CONTACT</span>
 
-                <span class="secondary-project-category">
-                    BANKING ANALYTICS
-                </span>
+                <h2 class="section-title" data-split>Have a data problem? Let's talk.</h2>
 
-            </div>
-
-
-            <div class="secondary-project-content">
-
-                <div class="secondary-project-number">
-                    CASE STUDY 03
-                </div>
-
-
-                <div class="project-meta">
-
-                    <span>POWER BI</span>
-                    <span>DAX</span>
-                    <span>CUSTOMER SEGMENTATION</span>
-                    <span>CAMPAIGN TARGETING</span>
-
-                </div>
-
-
-                <h3>
-                    THERA Bank — Personal Loan Campaign Analysis
-                </h3>
-
-
-                <p>
-                    A Power BI case study on who actually converts in a
-                    bank's personal loan campaign. Higher income and
-                    professional or graduate education stood out as the
-                    strongest signals, which I turned into customer
-                    profiles for sharper campaign targeting.
+                <p class="section-intro" data-reveal>
+                    A role, a project, or a question about something on this
+                    page. Send a message and I'll reply personally.
                 </p>
 
+                <div class="contact-links" data-reveal>
 
-                <div class="secondary-project-highlights">
-
-                    <div>
-                        <strong>5,000</strong>
-                        <span>Customers</span>
-                    </div>
-
-                    <div>
-                        <strong>9.6%</strong>
-                        <span>Acceptance Rate</span>
-                    </div>
-
-                    <div>
-                        <strong>3</strong>
-                        <span>Dashboard Pages</span>
-                    </div>
-
-                </div>
-
-
-                <div class="project-buttons">
-
-                    <a href="projects/thera-bank-loan-analytics/" class="btn">
-                        Explore Analysis
-                        <i class="fas fa-arrow-right"></i>
+                    <a href="https://github.com/sodiqoluwatimileyin190-oss" target="_blank" rel="noopener">
+                        <i class="fab fa-github" aria-hidden="true"></i>
+                        <span>GitHub</span>
                     </a>
 
-                    <a href="https://github.com/sodiqoluwatimileyin190-oss/sodiqoluwatimileyin190-oss.github.io/tree/main/projects/thera-bank-loan-analytics" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
-                        GitHub
-                        <i class="fab fa-github"></i>
+                    <a href="https://x.com/timmyyo0?s=21" target="_blank" rel="noopener">
+                        <i class="fab fa-x-twitter" aria-hidden="true"></i>
+                        <span>X</span>
+                    </a>
+
+                    <a href="assets/Sodiq Oluwatimileyin_CV.pdf" download>
+                        <i class="fas fa-file-arrow-down" aria-hidden="true"></i>
+                        <span>Download CV</span>
                     </a>
 
                 </div>
 
             </div>
 
-        </article>
+            <form action="https://formsubmit.co/sodiqoluwatimileyin190@gmail.com"
+                  method="POST"
+                  class="contact-form"
+                  data-reveal>
 
-    </div>
+                <!-- FormSubmit settings -->
+                <input type="hidden" name="_subject" value="New Portfolio Contact Message">
+                <input type="hidden" name="_captcha" value="false">
+                <input type="hidden" name="_template" value="table">
 
-</section>
+                <!-- Redirect after successful submission -->
+                <input type="hidden"
+                       name="_next"
+                       value="https://sodiqoluwatimileyin190-oss.github.io/?sent=true#contact">
 
+                <div class="contact-form-top">
+                    <span>GET IN TOUCH</span>
+                    <div class="contact-form-line"></div>
+                </div>
 
-<!-- =========================================================
-     SKILLS / CAPABILITIES
-========================================================= -->
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" name="name" id="name" placeholder="Your name" autocomplete="name" required>
+                </div>
 
-<section id="skills" class="section skills-section">
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" name="email" id="email" placeholder="Your email" autocomplete="email" required>
+                </div>
 
-    <div class="container">
+                <div class="form-group">
+                    <label for="subject">Subject</label>
+                    <input type="text" name="subject" id="subject" placeholder="What would you like to discuss?" required>
+                </div>
 
-        <div class="section-heading reveal">
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea name="message" id="message" rows="6" placeholder="Tell me about it..." required></textarea>
+                </div>
 
-            <span class="section-eyebrow">
-                03 · CAPABILITIES
-            </span>
+                <button type="submit" class="btn contact-btn" data-magnetic>
+                    <span>Send Message</span>
+                    <i class="fas fa-paper-plane"></i>
+                </button>
 
-            <h2>
-                Technical <span>Skillset</span>
-            </h2>
-
-            <div class="heading-line"></div>
-
-            <p class="section-intro">
-                The tools and methods behind the projects above, from
-                designing data and cleaning it, to modelling, testing
-                and presenting it.
-            </p>
+            </form>
 
         </div>
 
+    </section>
 
-        <div class="skills-table">
-
-
-            <!-- 01 — DATA VISUALIZATION -->
-
-            <article class="skill-column skill-card reveal">
-
-                <div class="skill-header">
-
-                    <div class="skill-icon">
-                        <i class="fas fa-chart-pie"></i>
-                    </div>
-
-                    <div class="skill-title-wrap">
-                        <span class="skill-index">01</span>
-                        <h3>Data Visualization</h3>
-                    </div>
-
-                </div>
-
-                <ul class="skill-list">
-                    <li><span>Power BI</span><i class="fas fa-arrow-right"></i></li>
-                    <li><span>Tableau</span><i class="fas fa-arrow-right"></i></li>
-                    <li><span>Excel Dashboards</span><i class="fas fa-arrow-right"></i></li>
-                    <li><span>Deneb</span><i class="fas fa-arrow-right"></i></li>
-                    <li><span>Vega-Lite</span><i class="fas fa-arrow-right"></i></li>
-                    <li><span>Data Storytelling</span><i class="fas fa-arrow-right"></i></li>
-                </ul>
-
-            </article>
-
-
-            <!-- 02 — DATA ANALYSIS -->
-
-            <article class="skill-column skill-card reveal">
-
-                <div class="skill-header">
-
-                    <div class="skill-icon">
-                        <i class="fas fa-magnifying-glass-chart"></i>
-                    </div>
-
-                    <div class="skill-title-wrap">
-                        <span class="skill-index">02</span>
-                        <h3>Data Analysis</h3>
-                    </div>
-
-                </div>
-
-                <ul class="skill-list">
-                    <li><span>SQL</span><i class="fas fa-arrow-right"></i></li>
-                    <li><span>Advanced Excel</span><i class="fas fa-arrow-right"></i></li>
-                    <li><span>Python / Pandas</span><i class="fas fa-arrow-right"></i></li>
-                    <li><span>Exploratory Data Analysis</span><i class="fas fa-arrow-right"></i></li>
-                    <li><span>Backtesting &amp; Validation</span><i class="fas fa-arrow-right"></i></li>
-                    <li><span>Customer &amp; Sales Analysis</span><i class="fas fa-arrow-right"></i></li>
-                    <li><span>RFM Analysis</span><i class="fas fa-arrow-right"></i></li>
-                </ul>
-
-            </article>
-
-
-            <!-- 03 — DATA MODELING & BI -->
-
-            <article class="skill-column skill-card reveal">
-
-                <div class="skill-header">
-
-                    <div class="skill-icon">
-                        <i class="fas fa-diagram-project"></i>
-                    </div>
-
-                    <div class="skill-title-wrap">
-                        <span class="skill-index">03</span>
-                        <h3>Data Modeling &amp; BI</h3>
-                    </div>
-
-                </div>
-
-                <ul class="skill-list">
-                    <li><span>DAX</span><i class="fas fa-arrow-right"></i></li>
-                    <li><span>Power BI Data Modeling</span><i class="fas fa-arrow-right"></i></li>
-                    <li><span>Star Schema Design</span><i class="fas fa-arrow-right"></i></li>
-                    <li><span>Dimensional Modeling</span><i class="fas fa-arrow-right"></i></li>
-                    <li><span>Data Relationships</span><i class="fas fa-arrow-right"></i></li>
-                    <li><span>KPI &amp; Measure Engineering</span><i class="fas fa-arrow-right"></i></li>
-                    <li><span>Time Intelligence</span><i class="fas fa-arrow-right"></i></li>
-                </ul>
-
-            </article>
-
-
-            <!-- 04 — DATA ENGINEERING -->
-
-            <article class="skill-column skill-card reveal">
-
-                <div class="skill-header">
-
-                    <div class="skill-icon">
-                        <i class="fas fa-database"></i>
-                    </div>
-
-                    <div class="skill-title-wrap">
-                        <span class="skill-index">04</span>
-                        <h3>Data Engineering</h3>
-                    </div>
-
-                </div>
-
-                <ul class="skill-list">
-                    <li><span>Data Cleaning</span><i class="fas fa-arrow-right"></i></li>
-                    <li><span>Data Validation</span><i class="fas fa-arrow-right"></i></li>
-                    <li><span>API Data Collection</span><i class="fas fa-arrow-right"></i></li>
-                    <li><span>ETL Processes</span><i class="fas fa-arrow-right"></i></li>
-                    <li><span>Transactional Data Design</span><i class="fas fa-arrow-right"></i></li>
-                    <li><span>Data Generation &amp; Simulation</span><i class="fas fa-arrow-right"></i></li>
-                    <li><span>Scheduled Automation</span><i class="fas fa-arrow-right"></i></li>
-                </ul>
-
-            </article>
-
-
-            <!-- 05 — BUSINESS INTELLIGENCE -->
-
-            <article class="skill-column skill-card reveal">
-
-                <div class="skill-header">
-
-                    <div class="skill-icon">
-                        <i class="fas fa-chart-line"></i>
-                    </div>
-
-                    <div class="skill-title-wrap">
-                        <span class="skill-index">05</span>
-                        <h3>Business Intelligence</h3>
-                    </div>
-
-                </div>
-
-                <ul class="skill-list">
-                    <li><span>Executive Dashboards</span><i class="fas fa-arrow-right"></i></li>
-                    <li><span>Retail Analytics</span><i class="fas fa-arrow-right"></i></li>
-                    <li><span>Banking Analytics</span><i class="fas fa-arrow-right"></i></li>
-                    <li><span>Sales &amp; Revenue Analysis</span><i class="fas fa-arrow-right"></i></li>
-                    <li><span>Customer Segmentation</span><i class="fas fa-arrow-right"></i></li>
-                    <li><span>Customer Behaviour Analysis</span><i class="fas fa-arrow-right"></i></li>
-                    <li><span>Churn &amp; Retention Analysis</span><i class="fas fa-arrow-right"></i></li>
-                </ul>
-
-            </article>
-
-
-            <!-- 06 — DECISION INTELLIGENCE -->
-
-            <article class="skill-column skill-card reveal">
-
-                <div class="skill-header">
-
-                    <div class="skill-icon">
-                        <i class="fas fa-lightbulb"></i>
-                    </div>
-
-                    <div class="skill-title-wrap">
-                        <span class="skill-index">06</span>
-                        <h3>Decision Intelligence</h3>
-                    </div>
-
-                </div>
-
-                <ul class="skill-list">
-                    <li><span>Business Problem Framing</span><i class="fas fa-arrow-right"></i></li>
-                    <li><span>Customer Profiling</span><i class="fas fa-arrow-right"></i></li>
-                    <li><span>Marketing &amp; Campaign Analysis</span><i class="fas fa-arrow-right"></i></li>
-                    <li><span>Performance Analysis</span><i class="fas fa-arrow-right"></i></li>
-                    <li><span>Operational Analysis</span><i class="fas fa-arrow-right"></i></li>
-                    <li><span>Strategic Recommendations</span><i class="fas fa-arrow-right"></i></li>
-                    <li><span>Data-Driven Decision Making</span><i class="fas fa-arrow-right"></i></li>
-                </ul>
-
-            </article>
-
-
-        </div>
-
-
-        <!-- CAPABILITY STATEMENT -->
-
-        <div class="skills-closing reveal">
-
-            <span class="skills-closing-line"></span>
-
-            <p>
-                <strong>
-                    Every skill above is used in at least one project on this page.
-                </strong>
-            </p>
-
-            <span class="skills-closing-line"></span>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- =========================================================
-     CONTACT
-========================================================= -->
-
-<section id="contact" class="section contact-section">
-
-    <div class="container">
-
-        <div class="section-heading reveal">
-
-            <span class="section-eyebrow">04 · CONTACT</span>
-
-            <h2>
-                Have a data problem? <span>Let's talk.</span>
-            </h2>
-
-            <div class="heading-line"></div>
-
-            <p class="section-intro">
-                A role, a project, or a question about something on this
-                page. Send a message and I'll reply personally.
-            </p>
-
-        </div>
-
-
-        <form action="https://formsubmit.co/sodiqoluwatimileyin190@gmail.com"
-              method="POST"
-              class="contact-form reveal">
-
-            <!-- FormSubmit settings -->
-            <input type="hidden" name="_subject" value="New Portfolio Contact Message">
-            <input type="hidden" name="_captcha" value="false">
-            <input type="hidden" name="_template" value="table">
-
-            <!-- Redirect after successful submission -->
-            <input type="hidden"
-                   name="_next"
-                   value="https://sodiqoluwatimileyin190-oss.github.io/?sent=true">
-
-
-            <div class="contact-form-top">
-                <span>GET IN TOUCH</span>
-                <div class="contact-form-line"></div>
-            </div>
-
-
-            <div class="form-group">
-                <label for="name">Name</label>
-                <input type="text" name="name" id="name" placeholder="Your name" autocomplete="name" required>
-            </div>
-
-
-            <div class="form-group">
-                <label for="email">Email</label>
-                <input type="email" name="email" id="email" placeholder="Your email" autocomplete="email" required>
-            </div>
-
-
-            <div class="form-group">
-                <label for="subject">Subject</label>
-                <input type="text" name="subject" id="subject" placeholder="What would you like to discuss?" required>
-            </div>
-
-
-            <div class="form-group">
-                <label for="message">Message</label>
-                <textarea name="message" id="message" rows="6" placeholder="Tell me about it..." required></textarea>
-            </div>
-
-
-            <button type="submit" class="btn contact-btn">
-                <span>Send Message</span>
-                <i class="fas fa-paper-plane"></i>
-            </button>
-
-        </form>
-
-    </div>
-
-</section>
+</main>
 
 
 <!-- =========================================================
      FOOTER
 ========================================================= -->
 
-<footer>
+<footer class="site-footer">
 
     <div class="container footer-inner">
 
         <div class="footer-brand">
-
             <span>ST</span>
-
-            <p>
-                SQL · Power BI · Python · Built and tested by hand
-            </p>
-
+            <p>SQL · Power BI · Python · Built and tested by hand</p>
         </div>
 
         <div class="footer-socials">
@@ -1399,42 +1218,15 @@
 
 
 <!-- =========================================================
-     SCROLL REVEAL
+     MOTION LIBRARIES
 ========================================================= -->
 
-<script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/SplitText.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.3.26/dist/lenis.min.js"></script>
 
-document.addEventListener("DOMContentLoaded", function () {
-
-    const revealElements = document.querySelectorAll(".reveal");
-
-    const observer = new IntersectionObserver((entries, observer) => {
-
-        entries.forEach((entry) => {
-
-            if (entry.isIntersecting) {
-                entry.target.classList.add("visible");
-                observer.unobserve(entry.target);
-            }
-
-        });
-
-    }, {
-        threshold: 0.12,
-        rootMargin: "0px 0px -50px 0px"
-    });
-
-    revealElements.forEach((element) => {
-        observer.observe(element);
-    });
-
-});
-
-</script>
-
-
-<!-- Existing JS -->
-<script src="assets/js/main.js"></script>
+<script src="assets/js/motion.js"></script>
 
 </body>
 </html>

@@ -1744,20 +1744,15 @@ section {
         margin-bottom: 44px;
     }
 
-    .about-grid {
+       .about-grid {
         grid-template-columns: 1fr;
-        justify-items: center;
-        text-align: center;
+        justify-items: start;
+        text-align: left;
     }
 
     .about-photo {
         max-width: 280px;
     }
-
-    .about-copy p:not(.about-lead) {
-        margin-inline: auto;
-    }
-
     .method-step {
         grid-template-columns: 1fr;
         gap: 12px;
@@ -1831,7 +1826,7 @@ section {
     }
 
     .hero-inner {
-        padding: 84px 0 130px;
+        padding: 84px 0 230px;
     }
 
     .hero-legend {

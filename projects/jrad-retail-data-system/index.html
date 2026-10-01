@@ -1,709 +1,975 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>JRAD Retail Data System | Sodiq Oluwatimileyin</title>
 
-    <style>
-        /* =========================================================
-           JRAD RETAIL DATA SYSTEM — PROJECT 1
-           Visual language aligned with Projects 2 & 3
-           ========================================================= */
+    <meta name="description" content="A ground-up retail data engineering project: business rules, distribution libraries and a Python generation engine that produced 225,499 receipts and 1.8M+ transaction lines for SQL and Power BI.">
+    <meta name="theme-color" content="#17113f">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="JRAD Retail Data System: From Observation to a 2M+ Row Retail Ecosystem">
+    <meta property="og:description" content="How real-world superstore observations became a 1.8M-line synthetic retail dataset, built in Excel and Python.">
+    <meta property="og:image" content="https://sodiqoluwatimileyin190-oss.github.io/projects/jrad-retail-data-system/images/jrad-retail-data-system.jpeg">
+    <meta property="og:url" content="https://sodiqoluwatimileyin190-oss.github.io/projects/jrad-retail-data-system/">
+    <meta name="twitter:card" content="summary_large_image">
 
-        * {
-            box-sizing: border-box;
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lenis@1.3.26/dist/lenis.css">
+
+    <script>
+        document.documentElement.classList.add("ds-js");
+
+        window.setTimeout(function () {
+            if (!window.__dsReady) {
+                document.documentElement.classList.remove("ds-js");
+            }
+        }, 4000);
+    </script>
+
+    <style>
+
+        /* =========================================================
+           JRAD RETAIL DATA SYSTEM — PROJECT 01 (MOTION EDITION)
+        ========================================================= */
+
+        :root {
+            --ink: #0d0928;
+            --ink-2: #17113f;
+            --ink-3: #2a1c62;
+            --purple: #7c5cd6;
+            --purple-deep: #6847c7;
+            --purple-light: #a68be0;
+            --lilac: #bca6ff;
+            --lavender: #f5f2ff;
+            --paper: #faf9fd;
+            --text: #17152b;
+            --text-soft: #66627a;
+            --text-faint: #8b879e;
+            --border: #e8e3f3;
+            --shadow-sm: 0 10px 30px rgba(35, 20, 80, 0.06);
+            --shadow-md: 0 25px 65px rgba(35, 20, 80, 0.12);
+            --font-display: "Playfair Display", Georgia, "Times New Roman", serif;
+            --font-body: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+            --mono: ui-monospace, "SFMono-Regular", "Cascadia Code", Menlo, Consolas, monospace;
+            --ease-out: cubic-bezier(.22, 1, .36, 1);
+            --nav-h: 58px;
+            --stack-step: 14px;
         }
+
+        *, *::before, *::after { box-sizing: border-box; }
+
+        body, h1, h2, h3, p, ul, ol, dl, dd, figure, pre { margin: 0; padding: 0; }
 
         html {
             scroll-behavior: smooth;
+            scroll-padding-top: calc(var(--nav-h) + 16px);
+            -webkit-text-size-adjust: 100%;
         }
 
         body {
-            margin: 0;
-            font-family: Arial, Helvetica, sans-serif;
-            background: #ffffff;
-            color: #171717;
+            font-family: var(--font-body);
+            font-size: 16px;
             line-height: 1.7;
+            color: var(--text);
+            background: var(--paper);
+            overflow-x: hidden;
+            overflow-x: clip;
+            -webkit-font-smoothing: antialiased;
         }
 
-        img {
-            max-width: 100%;
+        body.ds-no-scroll { overflow: hidden; }
+
+        img { display: block; max-width: 100%; }
+
+        a { color: inherit; text-decoration: none; }
+
+        button { font: inherit; color: inherit; }
+
+        ::selection { background: var(--purple); color: #fff; }
+
+        :focus-visible { outline: 3px solid var(--lilac); outline-offset: 3px; }
+
+        [tabindex="-1"]:focus { outline: none; }
+
+        section { scroll-margin-top: var(--nav-h); }
+
+        .ds-wrap { width: min(1180px, 90%); margin-inline: auto; }
+
+        .ds-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            z-index: 1100;
+            background: linear-gradient(90deg, var(--purple-light), var(--purple), var(--lilac));
+            transform: scaleX(0);
+            transform-origin: left center;
+            pointer-events: none;
         }
 
-        a {
-            text-decoration: none;
-        }
-
-        /* =========================================================
-           CONTAINER
-           ========================================================= */
-
-        .container {
-            width: min(1180px, 92%);
-            margin: 0 auto;
-        }
 
         /* =========================================================
            HERO
-           ========================================================= */
+        ========================================================= */
 
-        .hero {
+        .ds-hero {
             position: relative;
             overflow: hidden;
-            padding: 85px 0 75px;
-            text-align: center;
-            color: #ffffff;
+            padding: 92px 0 100px;
+            color: #fff;
             background:
-                radial-gradient(
-                    circle at 20% 10%,
-                    #a68be0 0%,
-                    #7c5cd6 35%,
-                    #3d2a8a 100%
-                );
+                radial-gradient(circle at 12% 18%, rgba(166, 139, 224, 0.30), transparent 34%),
+                radial-gradient(circle at 88% 78%, rgba(124, 92, 214, 0.28), transparent 36%),
+                linear-gradient(135deg, #0c0828 0%, #17113f 50%, #2a1c62 100%);
         }
 
-        .hero::before {
+        .ds-hero::before {
             content: "";
             position: absolute;
-            width: 420px;
-            height: 420px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.07);
-            top: -230px;
-            right: -120px;
+            inset: 0;
+            opacity: 0.08;
+            pointer-events: none;
+            background-image:
+                linear-gradient(rgba(255, 255, 255, 0.25) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.25) 1px, transparent 1px);
+            background-size: 55px 55px;
+            -webkit-mask-image: linear-gradient(to bottom, #000, transparent 75%);
+            mask-image: linear-gradient(to bottom, #000, transparent 75%);
         }
 
-        .hero::after {
-            content: "";
-            position: absolute;
-            width: 320px;
-            height: 320px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.05);
-            bottom: -210px;
-            left: -100px;
-        }
-
-        .hero-content {
+        .ds-hero-grid {
             position: relative;
             z-index: 2;
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+            gap: clamp(36px, 5vw, 64px);
+            align-items: center;
         }
 
-        .eyebrow {
-            display: inline-block;
-            margin-bottom: 18px;
-            padding: 8px 15px;
-            border: 1px solid rgba(255, 255, 255, 0.25);
+        .ds-eyebrow {
+            display: inline-flex;
+            padding: 8px 16px;
+            border: 1px solid rgba(255, 255, 255, 0.18);
             border-radius: 999px;
-            background: rgba(255, 255, 255, 0.10);
-            font-size: 0.78rem;
-            font-weight: 800;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
+            background: rgba(255, 255, 255, 0.06);
+            backdrop-filter: blur(10px);
+            color: #e8e1ff;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 2px;
         }
 
-        .hero h1 {
-            margin: 0;
-            font-size: clamp(2.4rem, 5vw, 4.5rem);
-            line-height: 1.04;
-            letter-spacing: -0.045em;
+        .ds-title {
+            margin-top: 24px;
+            font-family: var(--font-display);
+            font-size: clamp(2.8rem, 6vw, 5.2rem);
+            font-weight: 700;
+            line-height: 0.98;
+            letter-spacing: -0.035em;
         }
 
-        .hero h1 span {
-            display: block;
-            margin-top: 8px;
-            opacity: 0.82;
+        .ds-title .ds-char { display: inline-block; will-change: transform; }
+
+        .ds-subtitle {
+            margin-top: 16px;
+            color: var(--lilac);
+            font-family: var(--font-display);
+            font-size: clamp(1.2rem, 2.2vw, 1.7rem);
+            font-weight: 600;
+            line-height: 1.3;
         }
 
-        .hero-subtitle {
-            max-width: 780px;
-            margin: 24px auto 0;
-            color: #eee9ff;
-            font-size: 1.1rem;
-            line-height: 1.75;
+        .ds-desc {
+            max-width: 560px;
+            margin-top: 18px;
+            color: rgba(255, 255, 255, 0.72);
+            font-size: 1.02rem;
         }
 
-        /* =========================================================
-           BUTTONS
-           ========================================================= */
-
-        .actions {
+        .ds-actions {
             display: flex;
-            justify-content: center;
             flex-wrap: wrap;
-            gap: 13px;
-            margin-top: 32px;
+            align-items: center;
+            gap: 12px;
+            margin-top: 30px;
         }
 
-        .btn {
+        .ds-btn {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            padding: 13px 23px;
+            gap: 9px;
+            min-height: 46px;
+            padding: 12px 20px;
+            border: 1px solid transparent;
             border-radius: 10px;
-            font-weight: 700;
-            transition:
-                transform 0.2s ease,
-                box-shadow 0.2s ease,
-                background 0.2s ease;
-        }
-
-        .btn:hover {
-            transform: translateY(-2px);
-        }
-
-        .btn-primary {
-            background: #ffffff;
-            color: #5d3baa;
-            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
-        }
-
-        .btn-secondary {
-            border: 1px solid rgba(255, 255, 255, 0.25);
-            background: rgba(255, 255, 255, 0.10);
-            color: #ffffff;
-        }
-
-        /* =========================================================
-           BACK TO PORTFOLIO
-           ========================================================= */
-
-        .top-navigation {
-            padding: 25px 0 0;
-        }
-
-        .back-link {
-            color: #7046c6;
-            font-size: 0.9rem;
-            font-weight: 700;
-        }
-
-        .back-link:hover {
-            text-decoration: underline;
-        }
-
-        /* =========================================================
-           GENERAL SECTIONS
-           ========================================================= */
-
-        .section {
-            padding: 85px 0;
-        }
-
-        .section-light {
-            background: #f8f7fb;
-        }
-
-        .section-heading {
-            max-width: 780px;
-            margin-bottom: 42px;
-        }
-
-        .section-label {
-            color: #7046c6;
-            font-size: 0.78rem;
+            font-size: 13px;
             font-weight: 800;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
+            transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
         }
 
-        .section-heading h2 {
-            margin: 9px 0 15px;
-            font-size: clamp(1.9rem, 4vw, 2.8rem);
-            line-height: 1.15;
-            letter-spacing: -0.04em;
+        .ds-btn-primary { background: #fff; color: var(--ink-2); }
+        .ds-btn-primary:hover { background: var(--lilac); }
+
+        .ds-btn-secondary {
+            border-color: rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.06);
+            color: #fff;
         }
 
-        .section-heading p {
-            margin: 0;
-            color: #666;
-            line-height: 1.75;
+        .ds-btn-secondary:hover { border-color: rgba(255, 255, 255, 0.7); background: rgba(255, 255, 255, 0.12); }
+
+        .ds-btn-ghost {
+            color: #fff;
+            text-decoration: underline;
+            text-underline-offset: 4px;
+            text-decoration-color: rgba(255, 255, 255, 0.45);
         }
+
+        .ds-btn-ghost:hover { text-decoration-color: #fff; }
+
+        .ds-terminal {
+            overflow: hidden;
+            border: 1px solid rgba(188, 166, 255, 0.22);
+            border-radius: 18px;
+            background: #0b0820;
+            box-shadow: 0 50px 110px rgba(5, 2, 25, 0.55), 0 10px 30px rgba(5, 2, 25, 0.3);
+        }
+
+        .ds-term-bar {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 16px;
+            border-bottom: 1px solid rgba(188, 166, 255, 0.14);
+            color: rgba(233, 226, 255, 0.6);
+            font-family: var(--mono);
+            font-size: 12px;
+        }
+
+        .ds-term-bar i {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(188, 166, 255, 0.22);
+        }
+
+        .ds-term-bar span { margin-left: 6px; }
+
+        .ds-term-replay {
+            margin-left: auto;
+            padding: 4px 10px;
+            border: 1px solid rgba(188, 166, 255, 0.3);
+            border-radius: 999px;
+            background: none;
+            color: var(--lilac);
+            font-size: 11px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .ds-term-replay:hover { border-color: var(--lilac); }
+
+        .ds-term-body {
+            min-height: 418px;
+            padding: 18px 20px 22px;
+            overflow: hidden;
+            color: #d9cdfb;
+            font-family: var(--mono);
+            font-size: 13px;
+            line-height: 1.7;
+            white-space: pre;
+        }
+
+        .ds-line { display: block; }
+        .ds-line.cmd { color: #fff; }
+        .ds-line.cmd b { color: var(--lilac); font-weight: 500; }
+        .ds-line.rule { color: rgba(188, 166, 255, 0.4); }
+        .ds-line.ok { color: #9fe6b8; font-weight: 700; }
+        .ds-line.total { color: #fff; }
+        .ds-line.total em { color: var(--lilac); font-style: normal; font-weight: 700; }
+
+        .ds-caret {
+            display: inline-block;
+            width: 8px;
+            height: 1em;
+            margin-left: 2px;
+            vertical-align: -2px;
+            background: var(--lilac);
+            animation: dsBlink 1s steps(1) infinite;
+        }
+
+        .ds-term-caption {
+            margin-top: 14px;
+            color: rgba(255, 255, 255, 0.55);
+            font-size: 12px;
+        }
+
+        @media (prefers-reduced-motion: no-preference) {
+            .ds-js [data-hero-item] { opacity: 0; transform: translateY(24px); }
+            .ds-js .ds-title { visibility: hidden; }
+        }
+
 
         /* =========================================================
-           PROJECT AT A GLANCE
-           ========================================================= */
+           SECTION NAV
+        ========================================================= */
 
-        .stats {
+        .ds-nav {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: rgba(250, 249, 253, 0.9);
+            backdrop-filter: saturate(160%) blur(14px);
+            -webkit-backdrop-filter: saturate(160%) blur(14px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .ds-nav-inner {
+            position: relative;
+            width: min(1180px, 92%);
+            height: var(--nav-h);
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            overflow-x: auto;
+            scrollbar-width: none;
+        }
+
+        .ds-nav-inner::-webkit-scrollbar { display: none; }
+
+        .ds-nav a {
+            flex: 0 0 auto;
+            padding: 8px 14px;
+            border-radius: 999px;
+            color: var(--text-soft);
+            font-size: 13px;
+            font-weight: 700;
+            white-space: nowrap;
+            transition: background 0.2s ease, color 0.2s ease;
+        }
+
+        .ds-nav a:hover { color: var(--purple-deep); background: rgba(124, 92, 214, 0.08); }
+        .ds-nav a.is-active { color: #fff; background: var(--purple-deep); }
+
+        .ds-nav a.ds-nav-home {
+            margin-right: 8px;
+            padding-left: 0;
+            padding-right: 16px;
+            border-radius: 0;
+            border-right: 1px solid var(--border);
+            color: var(--purple-deep);
+        }
+
+        .ds-nav a.ds-nav-home:hover { background: none; }
+
+
+        /* =========================================================
+           SECTION SHELL
+        ========================================================= */
+
+        .ds-section { padding: clamp(84px, 10vw, 128px) 0; }
+        .ds-white { background: #fff; }
+
+        .ds-head { max-width: 760px; margin-bottom: 52px; }
+
+        .ds-label {
+            display: block;
+            margin-bottom: 14px;
+            color: var(--purple);
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 2.2px;
+        }
+
+        .ds-h2 {
+            color: var(--ink-2);
+            font-family: var(--font-display);
+            font-size: clamp(2.1rem, 4.4vw, 3.4rem);
+            font-weight: 700;
+            line-height: 1.08;
+            letter-spacing: -0.02em;
+        }
+
+        .ds-lead { max-width: 680px; margin-top: 18px; color: var(--text-soft); font-size: 1.02rem; }
+
+        .line-mask {
+            display: block;
+            overflow: hidden;
+            overflow: clip;
+            padding-bottom: 0.14em;
+            margin-bottom: -0.14em;
+        }
+
+        .split-line { display: block; }
+
+
+        /* =========================================================
+           OVERVIEW + PROBLEM + SCOPE
+        ========================================================= */
+
+        .ds-stats {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
+            grid-template-columns: repeat(4, minmax(0, 1fr));
             gap: 16px;
         }
 
-        .stat-card {
-            padding: 28px 22px;
-            border: 1px solid #e7e2ef;
-            border-radius: 16px;
-            background: #ffffff;
-            transition:
-                transform 0.2s ease,
-                box-shadow 0.2s ease;
-        }
-
-        .stat-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 35px rgba(45, 29, 91, 0.08);
-        }
-
-        .stat-card strong {
-            display: block;
-            margin-bottom: 6px;
-            color: #7046c6;
-            font-size: 1.65rem;
-            line-height: 1.2;
-        }
-
-        .stat-card span {
-            color: #666;
-            font-size: 0.9rem;
-        }
-
-        /* =========================================================
-           BUSINESS PROBLEM
-           ========================================================= */
-
-        .problem-grid {
-            display: grid;
-            grid-template-columns: 0.85fr 1.15fr;
-            gap: 60px;
-            align-items: center;
-        }
-
-        .problem-title {
-            margin: 0;
-            font-size: clamp(2rem, 4vw, 3.1rem);
-            line-height: 1.12;
-            letter-spacing: -0.04em;
-        }
-
-        .problem-copy {
-            color: #555;
-            font-size: 1.03rem;
-            line-height: 1.8;
-        }
-
-        /* =========================================================
-           DISCLAIMER
-           ========================================================= */
-
-        .disclaimer {
-            margin-bottom: 30px;
-            padding: 24px 26px;
-            border-left: 4px solid #7046c6;
-            border-radius: 14px;
-            background: #f7f4fc;
-        }
-
-        .disclaimer h3 {
-            margin: 0 0 8px;
-            color: #5d3baa;
-            font-size: 1rem;
-        }
-
-        .disclaimer p {
-            margin: 6px 0 0;
-            color: #666;
-            font-size: 0.92rem;
-            line-height: 1.7;
-        }
-
-        /* =========================================================
-           SYSTEM FOUNDATION
-           ========================================================= */
-
-        .foundation-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 18px;
-        }
-
-        .foundation-card {
-            padding: 28px;
-            border: 1px solid #e7e2ef;
-            border-radius: 17px;
-            background: #ffffff;
-            transition:
-                transform 0.2s ease,
-                box-shadow 0.2s ease;
-        }
-
-        .foundation-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 15px 35px rgba(45, 29, 91, 0.08);
-        }
-
-        .foundation-number {
-            color: #7046c6;
-            font-size: 0.78rem;
-            font-weight: 800;
-        }
-
-        .foundation-card h3 {
-            margin: 11px 0 9px;
-            font-size: 1.1rem;
-        }
-
-        .foundation-card p {
-            margin: 0;
-            color: #666;
-            font-size: 0.93rem;
-            line-height: 1.65;
-        }
-
-        /* =========================================================
-           ARTIFACTS
-           ========================================================= */
-
-        .artifact {
-            margin-bottom: 75px;
-        }
-
-        .artifact:last-child {
-            margin-bottom: 0;
-        }
-
-        .artifact-header {
-            margin-bottom: 23px;
-        }
-
-        .artifact-number {
-            color: #7046c6;
-            font-size: 0.78rem;
-            font-weight: 800;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-        }
-
-        .artifact-header h3 {
-            margin: 7px 0 8px;
-            font-size: 1.65rem;
-            letter-spacing: -0.025em;
-        }
-
-        .artifact-header p {
-            max-width: 790px;
-            margin: 0;
-            color: #666;
-            line-height: 1.7;
-        }
-
-        .image-frame {
-            overflow: hidden;
-            border: 1px solid #e6e2eb;
+        .ds-stat {
+            padding: 28px 24px;
+            border: 1px solid var(--border);
             border-radius: 18px;
-            background: #ffffff;
-            box-shadow: 0 20px 55px rgba(45, 29, 91, 0.10);
+            background: #fff;
+            box-shadow: var(--shadow-sm);
         }
 
-        .project-image {
+        .ds-stat strong {
             display: block;
-            width: 100%;
-            height: auto;
+            color: var(--purple-deep);
+            font-family: var(--font-display);
+            font-size: clamp(1.9rem, 3vw, 2.6rem);
+            line-height: 1;
+            font-variant-numeric: tabular-nums;
         }
 
-        .artifact-caption {
-            margin-top: 17px;
-            padding: 18px 20px;
-            border-left: 4px solid #7046c6;
-            border-radius: 12px;
-            background: #f7f4fc;
-            color: #5d5d5d;
-            font-size: 0.9rem;
-            line-height: 1.65;
+        .ds-stat span {
+            display: block;
+            margin-top: 10px;
+            color: var(--text-soft);
+            font-size: 13px;
+            font-weight: 600;
         }
+
+        .ds-problem {
+            display: grid;
+            grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+            gap: clamp(32px, 6vw, 72px);
+            align-items: start;
+        }
+
+        .ds-problem-copy p { color: #4f4b5e; font-size: 1.02rem; line-height: 1.8; }
+        .ds-problem-copy p + p { margin-top: 16px; }
+
+        .ds-note {
+            margin-top: 28px;
+            padding: 22px 24px;
+            border: 1px solid var(--border);
+            border-left: 4px solid var(--purple);
+            border-radius: 14px;
+            background: var(--lavender);
+        }
+
+        .ds-note strong { display: block; margin-bottom: 6px; color: var(--ink-2); font-size: 14px; }
+        .ds-note p { color: var(--text-soft); font-size: 0.9rem; line-height: 1.7; }
+        .ds-note p + p { margin-top: 8px; }
+
+        .ds-scope {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 16px;
+        }
+
+        .ds-scope article {
+            padding: 26px;
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            background: #fff;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .ds-scope h3 { margin-bottom: 8px; color: var(--ink-2); font-size: 1.05rem; }
+        .ds-scope p { color: var(--text-soft); font-size: 0.92rem; line-height: 1.65; }
+
 
         /* =========================================================
-           PYTHON SECTION
-           ========================================================= */
+           THE BUILD — STACKING ARTIFACT DECK
+        ========================================================= */
 
-        .python-section {
-            background:
-                linear-gradient(
-                    135deg,
-                    #f8f7fb 0%,
-                    #f2edfb 100%
-                );
+        .ds-build { background: linear-gradient(180deg, var(--paper), #efe9fc 30%, #efe9fc 85%, var(--paper)); }
+
+        .ds-deck { position: relative; }
+
+        .ds-card {
+            position: sticky;
+            top: calc(var(--nav-h) + 24px + var(--i) * var(--stack-step));
+            display: grid;
+            grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+            gap: clamp(24px, 4vw, 44px);
+            align-items: center;
+            min-height: min(540px, calc(100vh - var(--nav-h) - 140px));
+            margin-bottom: 48px;
+            padding: clamp(24px, 3.4vw, 40px);
+            overflow: hidden;
+            border: 1px solid var(--border);
+            border-radius: 26px;
+            background: #fff;
+            box-shadow: 0 -12px 40px rgba(23, 17, 63, 0.06), var(--shadow-md);
+            transform-origin: 50% 0%;
         }
 
-        .python-intro {
-            max-width: 800px;
-            color: #555;
-            line-height: 1.8;
+        .ds-card:last-child { margin-bottom: 0; }
+
+        .ds-card-marker { display: block; height: 0; }
+
+        .ds-card-shade {
+            position: absolute;
+            inset: 0;
+            z-index: 3;
+            border-radius: inherit;
+            background: var(--ink-2);
+            opacity: 0;
+            pointer-events: none;
         }
 
-        /* =========================================================
-           TOOL STACK
-           ========================================================= */
+        .ds-card-num {
+            display: block;
+            margin-bottom: 10px;
+            color: var(--purple);
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 2px;
+        }
 
-        .tools {
+        .ds-card h3 {
+            color: var(--ink-2);
+            font-family: var(--font-display);
+            font-size: clamp(1.6rem, 2.6vw, 2.2rem);
+            line-height: 1.12;
+        }
+
+        .ds-card-copy > p { margin-top: 12px; color: var(--text-soft); font-size: 0.95rem; line-height: 1.7; }
+
+        .ds-facts {
             display: flex;
             flex-wrap: wrap;
-            gap: 12px;
-        }
-
-        .tool {
-            padding: 13px 18px;
-            border-radius: 10px;
-            background: #f2edfb;
-            color: #5d3baa;
-            font-weight: 700;
-            font-size: 0.9rem;
-            border: 1px solid #e5ddf5;
-        }
-
-        /* =========================================================
-           WORKFLOW
-           ========================================================= */
-
-        .workflow {
-            display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            gap: 12px;
-            margin: 0;
-            padding: 0;
+            gap: 8px;
+            margin-top: 20px;
             list-style: none;
         }
 
-        .workflow-step {
-            padding: 25px 18px;
-            border: 1px solid #e7e2ef;
-            border-radius: 14px;
-            background: #ffffff;
+        .ds-facts li {
+            padding: 8px 12px;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            background: var(--paper);
+            color: var(--text-soft);
+            font-size: 12px;
+            font-weight: 600;
+            line-height: 1.4;
         }
 
-        .workflow-step span {
-            display: block;
-            margin-bottom: 9px;
-            color: #7046c6;
-            font-size: 0.75rem;
+        .ds-facts b {
+            color: var(--ink-2);
+            font-size: 15px;
             font-weight: 800;
-            letter-spacing: 0.08em;
+            font-variant-numeric: tabular-nums;
         }
 
-        .workflow-step strong {
+        .ds-facts code {
+            color: var(--purple-deep);
+            font-family: var(--mono);
+            font-size: 12px;
+        }
+
+        .ds-card-media {
+            position: relative;
             display: block;
-            margin-bottom: 7px;
-            font-size: 0.95rem;
+            width: 100%;
+            aspect-ratio: 1919 / 1030;
+            padding: 0;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            background: #f2f0f6;
+            cursor: zoom-in;
         }
 
-        .workflow-step p {
-            margin: 0;
-            color: #666;
-            font-size: 0.83rem;
-            line-height: 1.55;
+        .ds-card-media img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: 0 0;
+            transform: scale(calc(var(--zoom, 1) * var(--settle, 1)));
+            transform-origin: var(--origin, 0% 0%);
         }
+
+        .ds-zoom-hint {
+            position: absolute;
+            right: 12px;
+            bottom: 12px;
+            padding: 6px 10px;
+            border-radius: 999px;
+            background: rgba(23, 17, 63, 0.82);
+            color: #fff;
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            opacity: 0;
+            transform: translateY(4px);
+            transition: opacity 0.25s ease, transform 0.25s ease;
+        }
+
+        .ds-card-media:hover .ds-zoom-hint,
+        .ds-card-media:focus-visible .ds-zoom-hint { opacity: 1; transform: none; }
+
+        .ds-card.is-final { background: var(--ink-2); border-color: transparent; }
+        .ds-card.is-final .ds-card-num { color: var(--lilac); }
+        .ds-card.is-final h3 { color: #fff; }
+        .ds-card.is-final .ds-card-copy > p { color: rgba(255, 255, 255, 0.72); }
+        .ds-card.is-final .ds-facts li { border-color: rgba(188, 166, 255, 0.2); background: rgba(255, 255, 255, 0.05); color: rgba(255, 255, 255, 0.7); }
+        .ds-card.is-final .ds-facts b { color: #fff; }
+        .ds-card.is-final .ds-card-media { border-color: rgba(188, 166, 255, 0.2); background: #0b0820; }
+
 
         /* =========================================================
-           SKILLS
-           ========================================================= */
+           WORKFLOW
+        ========================================================= */
 
-        .skills-grid {
+        .ds-flow {
+            position: relative;
+            --p: 1;
+        }
+
+        .ds-flow-list {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: repeat(5, minmax(0, 1fr));
             gap: 18px;
+            list-style: none;
         }
 
-        .skill-card {
-            padding: 26px;
-            border: 1px solid #e7e2ef;
-            border-radius: 16px;
-            background: #ffffff;
+        @media (prefers-reduced-motion: no-preference) {
+            .ds-js .ds-flow { --p: 0; }
         }
 
-        .skill-card h3 {
-            margin: 0 0 10px;
-            font-size: 1.05rem;
+        .ds-flow-track,
+        .ds-flow-fill {
+            position: absolute;
+            top: 17px;
+            left: 17px;
+            right: 17px;
+            height: 2px;
+            border-radius: 2px;
         }
 
-        .skill-card p {
-            margin: 0;
-            color: #666;
-            font-size: 0.93rem;
-            line-height: 1.65;
+        .ds-flow-track { background: var(--border); }
+
+        .ds-flow-fill {
+            background: linear-gradient(90deg, var(--purple-light), var(--purple-deep));
+            transform: scaleX(var(--p));
+            transform-origin: left center;
         }
 
-        /* =========================================================
-           OUTCOME
-           ========================================================= */
+        .ds-flow li { position: relative; z-index: 1; }
 
-        .outcome {
+        .ds-flow-dot {
             display: grid;
-            grid-template-columns: 0.8fr 1.2fr;
-            gap: 50px;
+            place-items: center;
+            width: 36px;
+            height: 36px;
+            margin-bottom: 18px;
+            border: 2px solid var(--border);
+            border-radius: 50%;
+            background: #fff;
+            color: var(--text-faint);
+            font-size: 12px;
+            font-weight: 800;
+            transition: background 0.35s ease, color 0.35s ease, border-color 0.35s ease;
+        }
+
+        .ds-flow li.is-lit .ds-flow-dot,
+        .ds-flow:not(.is-driven) li .ds-flow-dot {
+            border-color: var(--purple-deep);
+            background: var(--purple-deep);
+            color: #fff;
+        }
+
+        .ds-flow strong { display: block; margin-bottom: 6px; color: var(--ink-2); font-size: 1.05rem; }
+        .ds-flow p { color: var(--text-soft); font-size: 0.9rem; line-height: 1.6; }
+
+
+        /* =========================================================
+           SKILLS + OUTCOME + FINAL
+        ========================================================= */
+
+        .ds-skills {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 16px;
+        }
+
+        .ds-skill {
+            padding: 26px;
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            background: #fff;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .ds-skill strong { display: block; margin-bottom: 8px; color: var(--purple-deep); font-size: 15px; }
+        .ds-skill span { color: var(--text-soft); font-size: 14px; line-height: 1.65; }
+
+        .ds-tools {
+            display: flex;
+            flex-wrap: wrap;
             align-items: center;
+            gap: 10px;
+            margin-top: 28px;
         }
 
-        .outcome-title {
-            margin: 0;
-            font-size: clamp(2rem, 4vw, 3rem);
-            line-height: 1.1;
-            letter-spacing: -0.04em;
+        .ds-tools span:first-child { margin-right: 6px; color: var(--text-faint); font-size: 13px; font-weight: 700; }
+
+        .ds-tools b {
+            padding: 9px 15px;
+            border: 1px solid #e3d9f4;
+            border-radius: 999px;
+            background: var(--lavender);
+            color: var(--purple-deep);
+            font-size: 13px;
+            font-weight: 700;
         }
 
-        .outcome-copy {
-            color: #555;
-            font-size: 1.02rem;
-            line-height: 1.8;
+        .ds-outcome {
+            display: grid;
+            grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+            gap: clamp(32px, 6vw, 72px);
+            align-items: start;
         }
+
+        .ds-outcome-copy p { color: #4f4b5e; font-size: 1.02rem; line-height: 1.8; }
+        .ds-outcome-copy p + p { margin-top: 16px; }
+
+        .ds-final {
+            margin-top: 72px;
+            padding: 64px 36px;
+            border-radius: 24px;
+            color: #fff;
+            text-align: center;
+            background:
+                radial-gradient(circle at 20% 10%, rgba(166, 139, 224, 0.35), transparent 40%),
+                linear-gradient(135deg, var(--ink-2), var(--ink-3));
+            box-shadow: 0 30px 70px rgba(23, 17, 63, 0.28);
+        }
+
+        .ds-final h2 { font-family: var(--font-display); font-size: clamp(2rem, 4vw, 3.2rem); line-height: 1.1; }
+        .ds-final p { max-width: 620px; margin: 16px auto 28px; color: rgba(255, 255, 255, 0.75); }
+        .ds-final .ds-actions { justify-content: center; margin-top: 0; }
+
+        .ds-footer { padding: 34px 0 48px; color: var(--text-faint); font-size: 13px; }
+        .ds-footer a { color: var(--purple-deep); font-weight: 700; }
+
 
         /* =========================================================
-           FINAL CTA
-           ========================================================= */
+           LIGHTBOX
+        ========================================================= */
 
-        .final-cta {
-            padding: 90px 0;
+        .ds-lightbox {
+            position: fixed;
+            inset: 0;
+            z-index: 2000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 5vh 4vw;
+            background: rgba(13, 9, 40, 0.9);
+            backdrop-filter: blur(6px);
+        }
+
+        .ds-lightbox.open { display: flex; animation: dsFade 0.25s ease; }
+
+        .ds-lightbox img {
+            max-width: 100%;
+            max-height: 86vh;
+            border-radius: 12px;
+            box-shadow: 0 40px 90px rgba(0, 0, 0, 0.45);
+        }
+
+        .ds-lightbox-close {
+            position: absolute;
+            top: 18px;
+            right: 18px;
+            padding: 10px 16px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            font-size: 13px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .ds-lightbox-caption {
+            position: absolute;
+            bottom: 18px;
+            left: 50%;
+            max-width: 90%;
+            transform: translateX(-50%);
+            color: rgba(255, 255, 255, 0.75);
+            font-size: 13px;
             text-align: center;
         }
 
-        .final-cta h2 {
-            margin: 0 0 14px;
-            font-size: clamp(2rem, 4vw, 3rem);
-            letter-spacing: -0.04em;
-        }
+        @keyframes dsFade { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes dsBlink { 50% { opacity: 0; } }
 
-        .final-cta p {
-            max-width: 650px;
-            margin: 0 auto;
-            color: #666;
-            line-height: 1.7;
-        }
-
-        .final-cta .btn-primary {
-            background: #7046c6;
-            color: #ffffff;
-        }
-
-        /* =========================================================
-           FOOTER
-           ========================================================= */
-
-        footer {
-            padding: 30px 0;
-            text-align: center;
-            border-top: 1px solid #ece9f1;
-            color: #777;
-            font-size: 0.85rem;
-        }
 
         /* =========================================================
            RESPONSIVE
-           ========================================================= */
+        ========================================================= */
 
         @media (max-width: 1000px) {
+            .ds-hero-grid { grid-template-columns: 1fr; }
+            .ds-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+            .ds-scope, .ds-skills { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        }
 
-            .stats {
-                grid-template-columns: repeat(2, 1fr);
-            }
+        @media (max-width: 900px) {
 
-            .foundation-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
+            :root { --stack-step: 8px; }
 
-            .workflow {
-                grid-template-columns: repeat(2, 1fr);
-            }
+            .ds-problem, .ds-outcome { grid-template-columns: 1fr; }
 
-            .problem-grid,
-            .outcome {
+            .ds-card {
                 grid-template-columns: 1fr;
-                gap: 25px;
+                gap: 18px;
+                min-height: 0;
+                margin-bottom: 32px;
+            }
+
+            .ds-card-copy > p { font-size: 0.9rem; }
+
+            .ds-flow-list { grid-template-columns: 1fr; gap: 26px; }
+
+            .ds-flow li {
+                display: grid;
+                grid-template-columns: 36px minmax(0, 1fr);
+                column-gap: 16px;
+            }
+
+            .ds-flow-dot { grid-row: 1 / span 2; margin-bottom: 0; }
+            .ds-flow li > :not(.ds-flow-dot) { grid-column: 2; }
+
+            .ds-flow-track,
+            .ds-flow-fill {
+                top: 17px;
+                bottom: 17px;
+                left: 17px;
+                right: auto;
+                width: 2px;
+                height: auto;
+            }
+
+            .ds-flow-fill {
+                background: linear-gradient(180deg, var(--purple-light), var(--purple-deep));
+                transform: scaleY(var(--p));
+                transform-origin: center top;
             }
         }
 
-        @media (max-width: 760px) {
-
-            .hero {
-                padding: 65px 0 55px;
+        @media (max-width: 700px) {
+            .ds-nav-inner {
+                -webkit-mask-image: linear-gradient(90deg, #000 85%, transparent);
+                mask-image: linear-gradient(90deg, #000 85%, transparent);
             }
 
-            .section {
-                padding: 60px 0;
-            }
-
-            .foundation-grid,
-            .skills-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .problem-grid,
-            .outcome {
-                grid-template-columns: 1fr;
-            }
-
-            .workflow {
-                grid-template-columns: 1fr;
-            }
+            .ds-term-body { min-height: 0; font-size: 11px; }
         }
 
-        @media (max-width: 560px) {
-
-            .stats {
-                grid-template-columns: 1fr;
-            }
-
-            .hero h1 {
-                font-size: 2.45rem;
-            }
-
-            .hero-subtitle {
-                font-size: 0.98rem;
-            }
-
-            .image-frame {
-                border-radius: 12px;
-            }
-
-            .actions {
-                flex-direction: column;
-            }
-
-            .btn {
-                width: 100%;
-            }
+        @media (max-width: 600px) {
+            .ds-hero { padding: 68px 0 76px; }
+            .ds-actions .ds-btn { width: 100%; }
+            .ds-stats { gap: 10px; }
+            .ds-stat { padding: 20px 16px; }
+            .ds-scope, .ds-skills { grid-template-columns: 1fr; }
+            .ds-facts li { font-size: 11px; }
+            .ds-facts b { font-size: 13px; }
+            .ds-final { padding: 48px 22px; }
         }
+
+        @media (max-width: 480px) {
+            .ds-title { font-size: 11vw; }
+            .ds-eyebrow { font-size: 9px; letter-spacing: 1.3px; }
+            .ds-term-body { padding: 14px 14px 16px; font-size: 10px; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+
+            html { scroll-behavior: auto; }
+
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+
+            .ds-card { position: relative; top: auto; }
+        }
+
     </style>
 </head>
 
 
 <body>
 
+    <div class="ds-progress" aria-hidden="true"></div>
+
 
     <!-- =========================================================
          HERO
-         ========================================================= -->
+    ========================================================= -->
 
-    <header class="hero">
+    <header class="ds-hero" id="top">
 
-        <div class="container hero-content">
+        <div class="ds-wrap ds-hero-grid">
 
-            <div class="eyebrow">
-                Data Engineering & Synthetic Data
+            <div>
+
+                <div class="ds-eyebrow" data-hero-item>PROJECT 01 · DATA ENGINEERING &amp; SYNTHETIC DATA</div>
+
+                <h1 class="ds-title">JRAD Retail Data System</h1>
+
+                <p class="ds-subtitle" data-hero-item>From Observation to a 2M+ Row Retail Ecosystem</p>
+
+                <p class="ds-desc" data-hero-item>
+                    A ground-up retail data engineering project inspired by
+                    real-world Nigerian superstore operations, transforming
+                    business observations and behavioural rules into a scalable
+                    synthetic retail data system for SQL analysis and Power BI.
+                </p>
+
+                <div class="ds-actions" data-hero-item>
+
+                    <a href="#build" class="ds-btn ds-btn-primary">See How It Was Built</a>
+
+                    <a href="https://github.com/sodiqoluwatimileyin190-oss/sodiqoluwatimileyin190-oss.github.io/tree/main/projects/jrad-retail-data-system"
+                       target="_blank"
+                       rel="noopener"
+                       class="ds-btn ds-btn-secondary">View Project on GitHub</a>
+
+                </div>
+
             </div>
 
-            <h1>
-                JRAD Retail Data System
-                <span>From Observation to a 2M+ Row Retail Ecosystem</span>
-            </h1>
+            <div data-hero-item>
 
-            <p class="hero-subtitle">
-                A ground-up retail data engineering project inspired by
-                real-world Nigerian superstore operations, transforming
-                business observations and behavioural rules into a scalable
-                synthetic retail data system for SQL analysis and Power BI.
-            </p>
+                <div class="ds-terminal" role="img" aria-label="Replay of the generation run: 225,499 receipts, 1,807,529 transaction lines and 225,499 payments generated">
 
-            <div class="actions">
+                    <div class="ds-term-bar">
+                        <i></i><i></i><i></i>
+                        <span>sales_transaction_generator.py</span>
+                        <button class="ds-term-replay" type="button" hidden>Replay</button>
+                    </div>
 
-                <a
-                    href="https://github.com/sodiqoluwatimileyin190-oss/sodiqoluwatimileyin190-oss.github.io"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="btn btn-primary">
-                    View on GitHub
-                </a>
+<pre class="ds-term-body" aria-hidden="true"><code><span class="ds-line cmd"><b>(.venv) PS&gt;</b> python sales_transaction_generator.py</span><span class="ds-line">2026-01-01 | 611 customers</span><span class="ds-line">2026-02-01 | 931 customers</span><span class="ds-line">2026-03-01 | 949 customers</span><span class="ds-line">2026-04-01 | 515 customers</span><span class="ds-line">2026-05-01 | 781 customers</span><span class="ds-line">2026-06-01 | 500 customers</span><span class="ds-line">2026-07-01 | 488 customers</span><span class="ds-line">2026-08-01 | 1195 customers</span><span class="ds-line">2026-09-01 | 489 customers</span><span class="ds-line">2026-10-01 | 541 customers</span><span class="ds-line">2026-11-01 | 915 customers</span><span class="ds-line">2026-12-01 | 470 customers</span><span class="ds-line rule">==========================================</span><span class="ds-line ok">SIMULATION COMPLETE</span><span class="ds-line rule">==========================================</span><span class="ds-line total">Receipts Generated   : <em>225,499</em></span><span class="ds-line total">Transaction Lines    : <em>1,807,529</em></span><span class="ds-line total">Payments Generated   : <em>225,499</em></span></code></pre>
+
+                </div>
+
+                <p class="ds-term-caption">A replay of the real output from the full-year generation run.</p>
 
             </div>
 
@@ -712,70 +978,73 @@
     </header>
 
 
-    <main>
+    <!-- =========================================================
+         SECTION NAV
+    ========================================================= -->
 
+    <nav class="ds-nav" aria-label="Case study sections">
 
-        <!-- =====================================================
-             NAVIGATION
-             ===================================================== -->
+        <div class="ds-nav-inner">
 
-        <div class="container top-navigation">
-
-            <a href="../../index.html" class="back-link">
-                ← Back to Portfolio
-            </a>
+            <a class="ds-nav-home" href="../../index.html#projects">← Portfolio</a>
+            <a href="#overview">Overview</a>
+            <a href="#problem">The Problem</a>
+            <a href="#scope">Scope</a>
+            <a href="#build">The Build</a>
+            <a href="#workflow">Workflow</a>
+            <a href="#skills">Skills</a>
+            <a href="#outcome">Outcome</a>
 
         </div>
+
+    </nav>
+
+
+    <main id="main" tabindex="-1">
 
 
         <!-- =====================================================
              PROJECT AT A GLANCE
-             ===================================================== -->
+        ====================================================== -->
 
-        <section class="section section-light">
+        <section class="ds-section" id="overview" data-nav>
 
-            <div class="container">
+            <div class="ds-wrap">
 
-                <div class="section-heading">
+                <div class="ds-head">
 
-                    <div class="section-label">
-                        Project at a Glance
-                    </div>
+                    <span class="ds-label">PROJECT AT A GLANCE</span>
 
-                    <h2>
-                        Building the retail data foundation from the ground up.
-                    </h2>
+                    <h2 class="ds-h2" data-split>Building the retail data foundation from the ground up.</h2>
 
-                    <p>
-                        Instead of starting with a ready-made dataset, the
-                        project was designed as a complete synthetic retail
-                        ecosystem — from product and customer foundations
-                        through behavioural modelling and large-scale
-                        transaction generation.
+                    <p class="ds-lead" data-reveal>
+                        Instead of starting with a ready-made dataset, the project
+                        was designed as a complete synthetic retail ecosystem — from
+                        product and customer foundations through behavioural
+                        modelling and large-scale transaction generation.
                     </p>
 
                 </div>
 
+                <div class="ds-stats">
 
-                <div class="stats">
-
-                    <div class="stat-card">
-                        <strong>1.8M+</strong>
+                    <div class="ds-stat" data-reveal>
+                        <strong data-count>1.8M+</strong>
                         <span>Transaction Lines</span>
                     </div>
 
-                    <div class="stat-card">
-                        <strong>225,499</strong>
+                    <div class="ds-stat" data-reveal>
+                        <strong data-count>225,499</strong>
                         <span>Receipts Generated</span>
                     </div>
 
-                    <div class="stat-card">
-                        <strong>525</strong>
+                    <div class="ds-stat" data-reveal>
+                        <strong data-count>525</strong>
                         <span>Products / SKUs</span>
                     </div>
 
-                    <div class="stat-card">
-                        <strong>5</strong>
+                    <div class="ds-stat" data-reveal>
+                        <strong data-count>5</strong>
                         <span>Retail Branches</span>
                     </div>
 
@@ -787,83 +1056,49 @@
 
 
         <!-- =====================================================
-             BUSINESS PROBLEM
-             ===================================================== -->
+             THE BUSINESS PROBLEM
+        ====================================================== -->
 
-        <section class="section">
+        <section class="ds-section ds-white" id="problem" data-nav>
 
-            <div class="container">
+            <div class="ds-wrap ds-problem">
 
-                <div class="problem-grid">
-
-                    <div>
-
-                        <div class="section-label">
-                            The Business Problem
-                        </div>
-
-                        <h2 class="problem-title">
-                            How do you build a realistic retail dataset when the data doesn't already exist?
-                        </h2>
-
-                    </div>
-
-
-                    <div class="problem-copy">
-
-                        <p>
-                            Retail analytics depends on data that reflects
-                            how a real business actually operates. A simple
-                            random dataset would not capture the relationships
-                            between customers, products, branches, payments,
-                            seasonality and purchasing behaviour.
-                        </p>
-
-                        <p>
-                            The objective was therefore to design a retail
-                            data environment where those relationships were
-                            explicitly defined and then translated into
-                            interconnected synthetic data.
-                        </p>
-
-                    </div>
-
+                <div>
+                    <span class="ds-label">THE BUSINESS PROBLEM</span>
+                    <h2 class="ds-h2" data-split>How do you build a realistic retail dataset when the data doesn't already exist?</h2>
                 </div>
 
-            </div>
+                <div class="ds-problem-copy">
 
-        </section>
-
-
-        <!-- =====================================================
-             DISCLAIMER
-             ===================================================== -->
-
-        <section class="section section-light">
-
-            <div class="container">
-
-                <div class="disclaimer">
-
-                    <h3>
-                        Project Disclaimer
-                    </h3>
-
-                    <p>
-                        JRAD Retail is a fictional and simulated retail
-                        environment created for portfolio and analytical
-                        purposes. The project is not affiliated with,
-                        endorsed by, or based on proprietary data from
-                        any real retailer.
+                    <p data-reveal>
+                        Retail analytics depends on data that reflects how a real
+                        business actually operates. A simple random dataset would
+                        not capture the relationships between customers, products,
+                        branches, payments, seasonality and purchasing behaviour.
                     </p>
 
-                    <p>
-                        The business scenarios and operational behaviours
-                        were informed by real-world observations of Nigerian
-                        superstore environments and translated into custom
-                        business rules, probability distributions and
-                        simulation logic.
+                    <p data-reveal>
+                        The objective was therefore to design a retail data
+                        environment where those relationships were explicitly
+                        defined and then translated into interconnected
+                        synthetic data.
                     </p>
+
+                    <aside class="ds-note" data-reveal>
+                        <strong>Project disclaimer</strong>
+                        <p>
+                            JRAD Retail is a fictional and simulated retail environment
+                            created for portfolio and analytical purposes. The project is
+                            not affiliated with, endorsed by, or based on proprietary data
+                            from any real retailer.
+                        </p>
+                        <p>
+                            The business scenarios and operational behaviours were informed
+                            by real-world observations of Nigerian superstore environments
+                            and translated into custom business rules, probability
+                            distributions and simulation logic.
+                        </p>
+                    </aside>
 
                 </div>
 
@@ -874,86 +1109,56 @@
 
         <!-- =====================================================
              PROJECT SCOPE
-             ===================================================== -->
+        ====================================================== -->
 
-        <section class="section">
+        <section class="ds-section" id="scope" data-nav>
 
-            <div class="container">
+            <div class="ds-wrap">
 
-                <div class="section-heading">
+                <div class="ds-head">
 
-                    <div class="section-label">
-                        Project Scope
-                    </div>
+                    <span class="ds-label">PROJECT SCOPE</span>
 
-                    <h2>
-                        A connected retail ecosystem, not just a transaction table.
-                    </h2>
+                    <h2 class="ds-h2" data-split>A connected retail ecosystem, not just a transaction table.</h2>
 
-                    <p>
-                        The system was designed to represent multiple
-                        dimensions of retail operations and customer
-                        behaviour.
+                    <p class="ds-lead" data-reveal>
+                        The system was designed to represent multiple dimensions of
+                        retail operations and customer behaviour.
                     </p>
 
                 </div>
 
+                <div class="ds-scope">
 
-                <div class="foundation-grid">
-
-                    <div class="foundation-card">
-                        <div class="foundation-number">01</div>
+                    <article data-reveal>
                         <h3>Customer Data</h3>
-                        <p>
-                            Customer identities, demographics, registration,
-                            loyalty behaviour and acquisition channels.
-                        </p>
-                    </div>
+                        <p>Customer identities, demographics, registration, loyalty behaviour and acquisition channels.</p>
+                    </article>
 
-                    <div class="foundation-card">
-                        <div class="foundation-number">02</div>
+                    <article data-reveal>
                         <h3>Product Data</h3>
-                        <p>
-                            Product master information supporting purchasing,
-                            pricing, demand and downstream transaction logic.
-                        </p>
-                    </div>
+                        <p>Product master information supporting purchasing, pricing, demand and downstream transaction logic.</p>
+                    </article>
 
-                    <div class="foundation-card">
-                        <div class="foundation-number">03</div>
+                    <article data-reveal>
                         <h3>Sales Transactions</h3>
-                        <p>
-                            Large-scale receipt and transaction-line data
-                            generated from interconnected business rules.
-                        </p>
-                    </div>
+                        <p>Large-scale receipt and transaction-line data generated from interconnected business rules.</p>
+                    </article>
 
-                    <div class="foundation-card">
-                        <div class="foundation-number">04</div>
+                    <article data-reveal>
                         <h3>Branch Behaviour</h3>
-                        <p>
-                            Branch-level activity and customer distribution
-                            designed to create realistic operational variation.
-                        </p>
-                    </div>
+                        <p>Branch-level activity and customer distribution designed to create realistic operational variation.</p>
+                    </article>
 
-                    <div class="foundation-card">
-                        <div class="foundation-number">05</div>
+                    <article data-reveal>
                         <h3>Business Events</h3>
-                        <p>
-                            Seasonal and event-driven effects influencing
-                            traffic, spending, demand and peak shopping periods.
-                        </p>
-                    </div>
+                        <p>Seasonal and event-driven effects influencing traffic, spending, demand and peak shopping periods.</p>
+                    </article>
 
-                    <div class="foundation-card">
-                        <div class="foundation-number">06</div>
+                    <article data-reveal>
                         <h3>Operational Data</h3>
-                        <p>
-                            Loyalty, payments, customer experience, queues
-                            and pricing history supporting broader analytics.
-                        </p>
-                    </div>
+                        <p>Loyalty, payments, customer experience, queues and pricing history supporting broader analytics.</p>
+                    </article>
 
                 </div>
 
@@ -963,362 +1168,179 @@
 
 
         <!-- =====================================================
-             BUILDING THE RETAIL FOUNDATION
-             ===================================================== -->
+             THE BUILD — ARTIFACT DECK
+        ====================================================== -->
 
-        <section class="section section-light">
+        <section class="ds-section ds-build" id="build" data-nav>
 
-            <div class="container">
+            <div class="ds-wrap">
 
-                <div class="section-heading">
+                <div class="ds-head">
 
-                    <div class="section-label">
-                        Building the Retail Foundation
-                    </div>
+                    <span class="ds-label">THE BUILD</span>
 
-                    <h2>
-                        Designing the inputs before generating the transactions.
-                    </h2>
+                    <h2 class="ds-h2" data-split>Designing the inputs before generating the transactions.</h2>
 
-                    <p>
-                        The system began with structured reference libraries
-                        and business foundations that would later drive the
-                        Python generation process.
+                    <p class="ds-lead" data-reveal>
+                        Seven artifacts, in the order they were built. Each one feeds
+                        the next — keep scrolling and they stack into the finished
+                        dataset.
                     </p>
 
                 </div>
 
+                <div class="ds-deck">
 
-                <!-- PRODUCT MASTER -->
-
-                <article class="artifact">
-
-                    <div class="artifact-header">
-
-                        <div class="artifact-number">
-                            Artifact 01
+                    <article class="ds-card" style="--i: 0">
+                        <div class="ds-card-copy">
+                            <span class="ds-card-num">ARTIFACT 01</span>
+                            <h3>Product Master</h3>
+                            <p>
+                                The commercial foundation of the ecosystem: every product
+                                the simulated business sells, with attributes that influence
+                                purchasing, pricing, demand, storage and downstream
+                                transaction behaviour.
+                            </p>
+                            <ul class="ds-facts">
+                                <li><b>525</b> products / SKUs</li>
+                                <li><b>16</b> attributes each, from base price to inflation sensitivity</li>
+                            </ul>
                         </div>
+                        <button class="ds-card-media" type="button" aria-label="Enlarge the Product Master">
+                            <img src="images/01-product-master.png" alt="JRAD Retail Product Master in Excel" loading="lazy" style="--zoom: 1.3; --origin: 0% 78%">
+                            <span class="ds-zoom-hint">CLICK TO ENLARGE</span>
+                        </button>
+                        <span class="ds-card-shade" aria-hidden="true"></span>
+                    </article>
 
-                        <h3>
-                            Product Master
-                        </h3>
-
-                        <p>
-                            The Product Master served as the commercial
-                            foundation of the JRAD Retail ecosystem,
-                            defining the products available across the
-                            simulated business and establishing attributes
-                            that influence purchasing, pricing, demand,
-                            storage and downstream transaction behaviour.
-                        </p>
-
-                    </div>
-
-                    <div class="image-frame">
-
-                        <img
-                            src="images/01-product-master.png"
-                            alt="JRAD Retail Product Master"
-                            class="project-image">
-
-                    </div>
-
-                </article>
-
-
-                <!-- DISTRIBUTION LIBRARY -->
-
-                <article class="artifact">
-
-                    <div class="artifact-header">
-
-                        <div class="artifact-number">
-                            Artifact 02
+                    <article class="ds-card" style="--i: 1">
+                        <div class="ds-card-copy">
+                            <span class="ds-card-num">ARTIFACT 02</span>
+                            <h3>Distribution Library</h3>
+                            <p>
+                                Probability distributions and business rules for customer and
+                                transaction behaviour: branch-level customer distribution, age,
+                                demographics, registration, loyalty, payment methods, basket
+                                sizes and acquisition channels.
+                            </p>
+                            <ul class="ds-facts">
+                                <li><b>5</b> branches</li>
+                                <li><b>800</b> registered customers</li>
+                                <li><b>10+</b> distribution sheets</li>
+                            </ul>
                         </div>
+                        <button class="ds-card-media" type="button" aria-label="Enlarge the Distribution Library">
+                            <img src="images/02-distribution-library.png" alt="JRAD Retail Distribution Library branch profile in Excel" loading="lazy" style="--zoom: 2.2; --origin: 0% 33%">
+                            <span class="ds-zoom-hint">CLICK TO ENLARGE</span>
+                        </button>
+                        <span class="ds-card-shade" aria-hidden="true"></span>
+                    </article>
 
-                        <h3>
-                            Distribution Library
-                        </h3>
-
-                        <p>
-                            A custom Distribution Library was created in
-                            Excel to define realistic probability
-                            distributions and business rules for customer
-                            and transaction behaviour.
-                        </p>
-
-                    </div>
-
-                    <div class="image-frame">
-
-                        <img
-                            src="images/02-distribution-library.png"
-                            alt="JRAD Retail Distribution Library"
-                            class="project-image">
-
-                    </div>
-
-                    <div class="artifact-caption">
-                        Branch-level customer distribution, age,
-                        demographic patterns, registration behaviour,
-                        loyalty membership, payment methods, basket sizes
-                        and acquisition channels were incorporated into
-                        the modelling framework.
-                    </div>
-
-                </article>
-
-
-                <!-- NIGERIAN IDENTITY LIBRARY -->
-
-                <article class="artifact">
-
-                    <div class="artifact-header">
-
-                        <div class="artifact-number">
-                            Artifact 03
+                    <article class="ds-card" style="--i: 2">
+                        <div class="ds-card-copy">
+                            <span class="ds-card-num">ARTIFACT 03</span>
+                            <h3>Nigerian Identity Library</h3>
+                            <p>
+                                Structured pools of first names, surnames and gender-specific
+                                names, grouped by ethnicity, so generated customers carry
+                                realistic Nigerian identities.
+                            </p>
+                            <ul class="ds-facts">
+                                <li><b>840</b> names</li>
+                                <li><b>18</b> name sheets</li>
+                                <li><b>6</b> groups: Yoruba, Igbo, Edo, Efik/Ibibio, Urhobo/Isoko, Others</li>
+                            </ul>
                         </div>
+                        <button class="ds-card-media" type="button" aria-label="Enlarge the Nigerian Identity Library">
+                            <img src="images/03-nigerian-identity-library.png" alt="JRAD Retail Nigerian Identity Library metadata in Excel" loading="lazy" style="--zoom: 2; --origin: 0% 40%">
+                            <span class="ds-zoom-hint">CLICK TO ENLARGE</span>
+                        </button>
+                        <span class="ds-card-shade" aria-hidden="true"></span>
+                    </article>
 
-                        <h3>
-                            Nigerian Identity Library
-                        </h3>
-
-                        <p>
-                            A dedicated Identity Library was created to
-                            generate realistic Nigerian customer identities
-                            using structured pools of first names, surnames,
-                            gender-specific names and ethnic name groups.
-                        </p>
-
-                    </div>
-
-                    <div class="image-frame">
-
-                        <img
-                            src="images/03-nigerian-identity-library.png"
-                            alt="JRAD Retail Nigerian Identity Library"
-                            class="project-image">
-
-                    </div>
-
-                </article>
-
-
-                <!-- CUSTOMER MASTER -->
-
-                <article class="artifact">
-
-                    <div class="artifact-header">
-
-                        <div class="artifact-number">
-                            Artifact 04
+                    <article class="ds-card" style="--i: 3">
+                        <div class="ds-card-copy">
+                            <span class="ds-card-num">ARTIFACT 04</span>
+                            <h3>Customer Master</h3>
+                            <p>
+                                Identity data, demographic distributions, branch logic,
+                                registration, loyalty and acquisition rules combined into
+                                structured customer records.
+                            </p>
+                            <ul class="ds-facts">
+                                <li><b>16</b> fields per customer</li>
+                                <li>IDs like <code>CUS-BR001-000001</code> encode the branch</li>
+                            </ul>
                         </div>
+                        <button class="ds-card-media" type="button" aria-label="Enlarge the Customer Master">
+                            <img src="images/04-customer-master.png" alt="JRAD Retail Customer Master in Excel" loading="lazy" style="--zoom: 1.3; --origin: 0% 78%">
+                            <span class="ds-zoom-hint">CLICK TO ENLARGE</span>
+                        </button>
+                        <span class="ds-card-shade" aria-hidden="true"></span>
+                    </article>
 
-                        <h3>
-                            Customer Master Output
-                        </h3>
-
-                        <p>
-                            The generation process combined identity data,
-                            demographic distributions, branch logic,
-                            registration behaviour, loyalty status,
-                            acquisition channels and other defined business
-                            rules to produce structured customer records.
-                        </p>
-
-                    </div>
-
-                    <div class="image-frame">
-
-                        <img
-                            src="images/04-customer-master.png"
-                            alt="JRAD Retail Customer Master"
-                            class="project-image">
-
-                    </div>
-
-                </article>
-
-
-                <!-- BUSINESS EVENTS -->
-
-                <article class="artifact">
-
-                    <div class="artifact-header">
-
-                        <div class="artifact-number">
-                            Artifact 05
+                    <article class="ds-card" style="--i: 4">
+                        <div class="ds-card-copy">
+                            <span class="ds-card-num">ARTIFACT 05</span>
+                            <h3>Business Events &amp; Seasonality</h3>
+                            <p>
+                                Simulated events that shift customer traffic, basket size,
+                                spending, product demand and peak shopping hours across
+                                the year.
+                            </p>
+                            <ul class="ds-facts">
+                                <li><b>10</b> events across 2026</li>
+                                <li><b>3</b> multipliers: traffic, basket, spend</li>
+                                <li>up to <b>1.6×</b> traffic in the Christmas season</li>
+                            </ul>
                         </div>
+                        <button class="ds-card-media" type="button" aria-label="Enlarge the Business Events table">
+                            <img src="images/05-business-events.png" alt="JRAD Retail Business Events 2026 in Excel" loading="lazy" style="--zoom: 1.3; --origin: 0% 78%">
+                            <span class="ds-zoom-hint">CLICK TO ENLARGE</span>
+                        </button>
+                        <span class="ds-card-shade" aria-hidden="true"></span>
+                    </article>
 
-                        <h3>
-                            Business Events & Seasonality
-                        </h3>
-
-                        <p>
-                            Simulated business events were incorporated to
-                            influence customer traffic, basket size,
-                            spending, product demand and peak shopping hours.
-                        </p>
-
-                    </div>
-
-                    <div class="image-frame">
-
-                        <img
-                            src="images/05-business-events.png"
-                            alt="JRAD Retail Business Events"
-                            class="project-image">
-
-                    </div>
-
-                </article>
-
-            </div>
-
-        </section>
-
-
-        <!-- =====================================================
-             PYTHON DATA GENERATION
-             ===================================================== -->
-
-        <section class="section python-section">
-
-            <div class="container">
-
-                <div class="section-heading">
-
-                    <div class="section-label">
-                        Python Data Generation
-                    </div>
-
-                    <h2>
-                        Turning business rules into large-scale synthetic data.
-                    </h2>
-
-                    <p class="python-intro">
-                        A custom Python-based transaction generation engine
-                        was developed to simulate realistic retail activity
-                        across the JRAD Retail Data System. The generator
-                        applied business rules, customer behaviour, branch
-                        activity, product demand, pricing logic and transaction
-                        patterns to create the final large-scale dataset.
-                    </p>
-
-                </div>
-
-
-                <!-- TRANSACTION GENERATION -->
-
-                <article class="artifact">
-
-                    <div class="artifact-header">
-
-                        <div class="artifact-number">
-                            Generation Engine
+                    <article class="ds-card" style="--i: 5">
+                        <div class="ds-card-copy">
+                            <span class="ds-card-num">ARTIFACT 06</span>
+                            <h3>Transaction Generation Engine</h3>
+                            <p>
+                                A custom Python engine that applies the business rules,
+                                customer behaviour, branch activity, product demand and
+                                pricing logic to simulate a full year of trading.
+                            </p>
+                            <ul class="ds-facts">
+                                <li><b>20+</b> Python modules</li>
+                                <li><b>5</b> input workbooks, <b>1</b> transactions file out</li>
+                            </ul>
                         </div>
+                        <button class="ds-card-media" type="button" aria-label="Enlarge the transaction generator code">
+                            <img src="images/06-python-transaction-generation.jpeg" alt="The Python transaction generator in VS Code, loading the five input workbooks" loading="lazy" style="--zoom: 1.25; --origin: 0% 50%">
+                            <span class="ds-zoom-hint">CLICK TO ENLARGE</span>
+                        </button>
+                        <span class="ds-card-shade" aria-hidden="true"></span>
+                    </article>
 
-                        <h3>
-                            Transaction Generation Engine
-                        </h3>
-
-                        <p>
-                            The Python engine transformed the defined retail
-                            rules and behavioural distributions into
-                            interconnected transaction activity.
-                        </p>
-
-                    </div>
-
-                    <div class="image-frame">
-
-                        <img
-                            src="images/06-python-transaction-generation.jpeg"
-                            alt="JRAD Python Transaction Generator"
-                            class="project-image">
-
-                    </div>
-
-                </article>
-
-
-                <!-- OUTPUT -->
-
-                <article class="artifact">
-
-                    <div class="artifact-header">
-
-                        <div class="artifact-number">
-                            Generation Output
+                    <article class="ds-card is-final" style="--i: 6">
+                        <div class="ds-card-copy">
+                            <span class="ds-card-num">ARTIFACT 07</span>
+                            <h3>Large-Scale Dataset Generation</h3>
+                            <p>
+                                The finished run: a large-scale simulated retail dataset,
+                                ready for analysis in SQL, Excel and Power BI.
+                            </p>
+                            <ul class="ds-facts">
+                                <li><b data-count>225,499</b> receipts</li>
+                                <li><b data-count>1,807,529</b> transaction lines</li>
+                                <li><b data-count>225,499</b> payments</li>
+                            </ul>
                         </div>
-
-                        <h3>
-                            Large-Scale Dataset Generation
-                        </h3>
-
-                        <p>
-                            The generation process produced
-                            <strong>225,499 receipts</strong> and more than
-                            <strong>1.8 million transaction lines</strong>,
-                            creating a large-scale simulated retail dataset
-                            for further analysis in SQL, Excel and Power BI.
-                        </p>
-
-                    </div>
-
-                    <div class="image-frame">
-
-                        <img
-                            src="images/07-transaction-output.jpeg"
-                            alt="JRAD Transaction Generation Results"
-                            class="project-image">
-
-                    </div>
-
-                </article>
-
-            </div>
-
-        </section>
-
-
-        <!-- =====================================================
-             TECHNICAL STACK
-             ===================================================== -->
-
-        <section class="section">
-
-            <div class="container">
-
-                <div class="section-heading">
-
-                    <div class="section-label">
-                        Technical Stack
-                    </div>
-
-                    <h2>
-                        Tools used across the data-generation pipeline.
-                    </h2>
-
-                </div>
-
-                <div class="tools">
-
-                    <div class="tool">
-                        Microsoft Excel
-                    </div>
-
-                    <div class="tool">
-                        Python
-                    </div>
-
-                    <div class="tool">
-                        SQL
-                    </div>
-
-                    <div class="tool">
-                        Power BI
-                    </div>
+                        <button class="ds-card-media" type="button" aria-label="Enlarge the generation output">
+                            <img src="images/07-transaction-output.jpeg" alt="Terminal output of the generation run: 225,499 receipts and 1,807,529 transaction lines" loading="lazy" style="--zoom: 2.2; --origin: 27.5% 100%">
+                            <span class="ds-zoom-hint">CLICK TO ENLARGE</span>
+                        </button>
+                    </article>
 
                 </div>
 
@@ -1329,173 +1351,63 @@
 
         <!-- =====================================================
              PROJECT WORKFLOW
-             ===================================================== -->
+        ====================================================== -->
 
-        <section class="section section-light">
+        <section class="ds-section ds-white" id="workflow" data-nav>
 
-            <div class="container">
+            <div class="ds-wrap">
 
-                <div class="section-heading">
+                <div class="ds-head">
 
-                    <div class="section-label">
-                        Project Workflow
-                    </div>
+                    <span class="ds-label">PROJECT WORKFLOW</span>
 
-                    <h2>
-                        From real-world observation to analytical data.
-                    </h2>
+                    <h2 class="ds-h2" data-split>From real-world observation to analytical data.</h2>
 
-                    <p>
-                        The project followed a structured pipeline in which
-                        each stage supplied the foundation for the next.
+                    <p class="ds-lead" data-reveal>
+                        A structured pipeline in which each stage supplied the
+                        foundation for the next.
                     </p>
 
                 </div>
 
+                <div class="ds-flow">
 
-                <ol class="workflow">
+                    <span class="ds-flow-track" aria-hidden="true"></span>
+                    <span class="ds-flow-fill" aria-hidden="true"></span>
 
-                    <li class="workflow-step">
+                    <ol class="ds-flow-list">
 
-                        <span>01</span>
-
+                    <li>
+                        <span class="ds-flow-dot">01</span>
                         <strong>Observe</strong>
-
-                        <p>
-                            Document realistic retail business behaviour.
-                        </p>
-
+                        <p>Document realistic retail business behaviour.</p>
                     </li>
 
-
-                    <li class="workflow-step">
-
-                        <span>02</span>
-
+                    <li>
+                        <span class="ds-flow-dot">02</span>
                         <strong>Design</strong>
-
-                        <p>
-                            Define the retail data structure and entities.
-                        </p>
-
+                        <p>Define the retail data structure and entities.</p>
                     </li>
 
-
-                    <li class="workflow-step">
-
-                        <span>03</span>
-
+                    <li>
+                        <span class="ds-flow-dot">03</span>
                         <strong>Model</strong>
-
-                        <p>
-                            Build product, customer and behavioural libraries.
-                        </p>
-
+                        <p>Build product, customer and behavioural libraries.</p>
                     </li>
 
-
-                    <li class="workflow-step">
-
-                        <span>04</span>
-
+                    <li>
+                        <span class="ds-flow-dot">04</span>
                         <strong>Generate</strong>
-
-                        <p>
-                            Use Python to generate interconnected datasets.
-                        </p>
-
+                        <p>Use Python to generate interconnected datasets.</p>
                     </li>
 
-
-                    <li class="workflow-step">
-
-                        <span>05</span>
-
+                    <li>
+                        <span class="ds-flow-dot">05</span>
                         <strong>Analyse</strong>
-
-                        <p>
-                            Prepare the resulting ecosystem for SQL and BI.
-                        </p>
-
+                        <p>Prepare the resulting ecosystem for SQL and BI.</p>
                     </li>
 
-                </ol>
-
-            </div>
-
-        </section>
-
-
-        <!-- =====================================================
-             SKILLS
-             ===================================================== -->
-
-        <section class="section">
-
-            <div class="container">
-
-                <div class="section-heading">
-
-                    <div class="section-label">
-                        Skills Demonstrated
-                    </div>
-
-                    <h2>
-                        Engineering a dataset with business logic at its core.
-                    </h2>
-
-                </div>
-
-
-                <div class="skills-grid">
-
-                    <div class="skill-card">
-                        <h3>Data Generation</h3>
-                        <p>
-                            Building large-scale synthetic datasets from
-                            defined business rules and behavioural patterns.
-                        </p>
-                    </div>
-
-                    <div class="skill-card">
-                        <h3>Distribution Modelling</h3>
-                        <p>
-                            Translating expected customer and transaction
-                            behaviour into structured probability distributions.
-                        </p>
-                    </div>
-
-                    <div class="skill-card">
-                        <h3>Business Rule Design</h3>
-                        <p>
-                            Converting real-world retail observations into
-                            explicit logic that can drive data generation.
-                        </p>
-                    </div>
-
-                    <div class="skill-card">
-                        <h3>Data Architecture</h3>
-                        <p>
-                            Designing interconnected retail entities capable
-                            of supporting downstream analytics.
-                        </p>
-                    </div>
-
-                    <div class="skill-card">
-                        <h3>Data Cleaning</h3>
-                        <p>
-                            Preparing generated datasets for reliable
-                            analytical use across the wider project.
-                        </p>
-                    </div>
-
-                    <div class="skill-card">
-                        <h3>Business Intelligence</h3>
-                        <p>
-                            Creating the underlying data foundation required
-                            for SQL analysis and Power BI reporting.
-                        </p>
-                    </div>
+                    </ol>
 
                 </div>
 
@@ -1505,91 +1417,122 @@
 
 
         <!-- =====================================================
-             PROJECT OUTCOME
-             ===================================================== -->
+             SKILLS DEMONSTRATED
+        ====================================================== -->
 
-        <section class="section section-light">
+        <section class="ds-section" id="skills" data-nav>
 
-            <div class="container">
+            <div class="ds-wrap">
 
-                <div class="outcome">
+                <div class="ds-head">
+
+                    <span class="ds-label">SKILLS DEMONSTRATED</span>
+
+                    <h2 class="ds-h2" data-split>Engineering a dataset with business logic at its core.</h2>
+
+                </div>
+
+                <div class="ds-skills">
+
+                    <div class="ds-skill" data-reveal>
+                        <strong>Data Generation</strong>
+                        <span>Building large-scale synthetic datasets from defined business rules and behavioural patterns.</span>
+                    </div>
+
+                    <div class="ds-skill" data-reveal>
+                        <strong>Distribution Modelling</strong>
+                        <span>Translating expected customer and transaction behaviour into structured probability distributions.</span>
+                    </div>
+
+                    <div class="ds-skill" data-reveal>
+                        <strong>Business Rule Design</strong>
+                        <span>Converting real-world retail observations into explicit logic that can drive data generation.</span>
+                    </div>
+
+                    <div class="ds-skill" data-reveal>
+                        <strong>Data Architecture</strong>
+                        <span>Designing interconnected retail entities capable of supporting downstream analytics.</span>
+                    </div>
+
+                    <div class="ds-skill" data-reveal>
+                        <strong>Data Cleaning</strong>
+                        <span>Preparing generated datasets for reliable analytical use across the wider project.</span>
+                    </div>
+
+                    <div class="ds-skill" data-reveal>
+                        <strong>Business Intelligence</strong>
+                        <span>Creating the underlying data foundation required for SQL analysis and Power BI reporting.</span>
+                    </div>
+
+                </div>
+
+                <div class="ds-tools" data-reveal>
+                    <span>Built with</span>
+                    <b>Microsoft Excel</b>
+                    <b>Python</b>
+                    <b>SQL</b>
+                    <b>Power BI</b>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             PROJECT OUTCOME + NEXT
+        ====================================================== -->
+
+        <section class="ds-section ds-white" id="outcome" data-nav>
+
+            <div class="ds-wrap">
+
+                <div class="ds-outcome">
 
                     <div>
-
-                        <div class="section-label">
-                            Project Outcome
-                        </div>
-
-                        <h2 class="outcome-title">
-                            A complete retail ecosystem built for analytics.
-                        </h2>
-
+                        <span class="ds-label">PROJECT OUTCOME</span>
+                        <h2 class="ds-h2" data-split>A complete retail ecosystem built for analytics.</h2>
                     </div>
 
+                    <div class="ds-outcome-copy">
 
-                    <div class="outcome-copy">
-
-                        <p>
-                            The final result is a structured retail data
-                            ecosystem designed for end-to-end analytics.
+                        <p data-reveal>
+                            The final result is a structured retail data ecosystem
+                            designed for end-to-end analytics.
                         </p>
 
-                        <p>
-                            The project demonstrates how real-world
-                            observations and business logic can be transformed
-                            into a scalable synthetic data system that supports
-                            data validation, SQL analysis, reporting and
-                            business intelligence.
-                        </p>
-
-                        <p>
-                            This foundation feeds directly into the subsequent
-                            JRAD SQL analysis and Power BI executive intelligence
-                            projects.
+                        <p data-reveal>
+                            The project demonstrates how real-world observations and
+                            business logic can be transformed into a scalable synthetic
+                            data system that supports data validation, SQL analysis,
+                            reporting and business intelligence.
                         </p>
 
                     </div>
 
                 </div>
 
-            </div>
+                <div class="ds-final" data-reveal>
 
-        </section>
+                    <h2>Next, the data gets questioned.</h2>
 
+                    <p>
+                        This foundation feeds directly into the JRAD SQL analysis and
+                        the Power BI executive intelligence projects.
+                    </p>
 
-        <!-- =====================================================
-             FINAL CTA
-             ===================================================== -->
+                    <div class="ds-actions">
 
-        <section class="final-cta">
+                        <a href="../jrad-retail-sql-analysis/" class="ds-btn ds-btn-primary">Continue to Project 02</a>
 
-            <div class="container">
+                        <a href="https://github.com/sodiqoluwatimileyin190-oss/sodiqoluwatimileyin190-oss.github.io/tree/main/projects/jrad-retail-data-system"
+                           target="_blank"
+                           rel="noopener"
+                           class="ds-btn ds-btn-secondary">View Project on GitHub</a>
 
-                <h2>
-                    Explore the JRAD Retail Data System.
-                </h2>
+                        <a href="../../index.html#projects" class="ds-btn ds-btn-ghost">Back to Portfolio</a>
 
-                <p>
-                    Explore the project repository and see how the retail
-                    data ecosystem was designed, generated and prepared
-                    for downstream analytics.
-                </p>
-
-                <div class="actions">
-
-                    <a
-                        href="https://github.com/sodiqoluwatimileyin190-oss/sodiqoluwatimileyin190-oss.github.io"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        class="btn btn-primary">
-                        View Project on GitHub
-                    </a>
-
-                    <a
-                        href="../../index.html"
-                        class="btn btn-secondary">
-                        Back to Portfolio
-                    </a>
+                    </div>
 
                 </div>
 
@@ -1600,23 +1543,676 @@
     </main>
 
 
-    <!-- =========================================================
-         FOOTER
-         ========================================================= -->
-
-    <footer>
-
-        <div class="container">
-
-            <p>
-                © 2026 Sodiq Oluwatimileyin — Data Analysis Portfolio
-            </p>
-
+    <footer class="ds-footer">
+        <div class="ds-wrap">
+            <a href="../../index.html#projects">← Back to portfolio</a>
+            &nbsp;·&nbsp; © 2026 Sodiq Oluwatimileyin — Data Analysis Portfolio
         </div>
-
     </footer>
 
 
-</body>
+    <div class="ds-lightbox" role="dialog" aria-modal="true" aria-label="Enlarged image" aria-hidden="true">
+        <button class="ds-lightbox-close" type="button">Close</button>
+        <img src="" alt="">
+        <div class="ds-lightbox-caption"></div>
+    </div>
 
+
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/SplitText.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lenis@1.3.26/dist/lenis.min.js"></script>
+
+    <script>
+    (function () {
+
+        "use strict";
+
+        window.__dsReady = true;
+
+        const root = document.documentElement;
+        const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        const hasGSAP = typeof window.gsap !== "undefined" && typeof window.ScrollTrigger !== "undefined";
+        const hasSplit = hasGSAP && typeof window.SplitText !== "undefined";
+        const motion = hasGSAP && !reduceMotion;
+        const nav = document.querySelector(".ds-nav");
+
+        function navHeight() {
+            return nav ? nav.offsetHeight : 0;
+        }
+
+        function clamp(value, min, max) {
+            return Math.min(max, Math.max(min, value));
+        }
+
+        if (!hasGSAP) {
+            root.classList.remove("ds-js");
+        }
+
+
+        /* =====================================================
+           LIGHTBOX
+        ====================================================== */
+
+        let lenis = null;
+
+        const lightbox = document.querySelector(".ds-lightbox");
+        const lightboxImage = lightbox.querySelector("img");
+        const lightboxCaption = lightbox.querySelector(".ds-lightbox-caption");
+        const lightboxClose = lightbox.querySelector(".ds-lightbox-close");
+        let lastFocused = null;
+
+        function openLightbox(trigger) {
+            const image = trigger.querySelector("img");
+            lastFocused = trigger;
+            lightboxImage.src = image.currentSrc || image.src;
+            lightboxImage.alt = image.alt;
+            lightboxCaption.textContent = image.alt;
+            lightbox.classList.add("open");
+            lightbox.setAttribute("aria-hidden", "false");
+            document.body.classList.add("ds-no-scroll");
+            if (lenis) {
+                lenis.stop();
+            }
+            lightboxClose.focus();
+        }
+
+        function closeLightbox() {
+            lightbox.classList.remove("open");
+            lightbox.setAttribute("aria-hidden", "true");
+            document.body.classList.remove("ds-no-scroll");
+            if (lenis) {
+                lenis.start();
+            }
+            if (lastFocused) {
+                lastFocused.focus();
+            }
+        }
+
+        document.querySelectorAll(".ds-card-media").forEach(function (trigger) {
+            trigger.addEventListener("click", function () {
+                openLightbox(trigger);
+            });
+        });
+
+        lightboxClose.addEventListener("click", closeLightbox);
+
+        lightbox.addEventListener("click", function (event) {
+            if (event.target === lightbox) {
+                closeLightbox();
+            }
+        });
+
+        document.addEventListener("keydown", function (event) {
+            if (event.key === "Escape" && lightbox.classList.contains("open")) {
+                closeLightbox();
+            }
+            if (event.key === "Tab" && lightbox.classList.contains("open")) {
+                event.preventDefault();
+                lightboxClose.focus();
+            }
+        });
+
+
+        /* =====================================================
+           READING PROGRESS
+        ====================================================== */
+
+        const progressBar = document.querySelector(".ds-progress");
+        let progressTicking = false;
+
+        function updateProgress() {
+            const max = document.documentElement.scrollHeight - window.innerHeight;
+            const ratio = max > 0 ? clamp(window.scrollY / max, 0, 1) : 0;
+            progressBar.style.transform = "scaleX(" + ratio + ")";
+            progressTicking = false;
+        }
+
+        window.addEventListener("scroll", function () {
+            if (!progressTicking) {
+                requestAnimationFrame(updateProgress);
+                progressTicking = true;
+            }
+        }, { passive: true });
+
+        updateProgress();
+
+
+        /* =====================================================
+           EVERYTHING BELOW NEEDS GSAP AND MOTION
+        ====================================================== */
+
+        if (!motion) {
+            return;
+        }
+
+        gsap.registerPlugin(ScrollTrigger);
+
+        if (hasSplit) {
+            gsap.registerPlugin(SplitText);
+        }
+
+        ScrollTrigger.config({ ignoreMobileResize: true });
+
+
+        /* =====================================================
+           SMOOTH SCROLL + ANCHORS
+        ====================================================== */
+
+        if (typeof window.Lenis !== "undefined") {
+
+            lenis = new Lenis({ lerp: 0.1, smoothWheel: true });
+            lenis.on("scroll", ScrollTrigger.update);
+
+            gsap.ticker.add(function (time) {
+                lenis.raf(time * 1000);
+            });
+
+            gsap.ticker.lagSmoothing(0);
+
+        } else {
+
+            root.style.scrollBehavior = "auto";
+        }
+
+        function scrollToTarget(target, immediate) {
+
+            const offset = -navHeight();
+
+            if (lenis) {
+                lenis.scrollTo(target, { offset: offset, duration: 1.4, immediate: !!immediate, force: true });
+                return;
+            }
+
+            const top = target.getBoundingClientRect().top + window.scrollY + offset;
+            window.scrollTo({ top: top, behavior: immediate ? "auto" : "smooth" });
+        }
+
+        function findTarget(hash) {
+            if (!hash || hash.length < 2) {
+                return null;
+            }
+            try {
+                return document.querySelector(hash);
+            } catch (error) {
+                return null;
+            }
+        }
+
+        document.addEventListener("click", function (event) {
+
+            const link = event.target.closest('a[href^="#"]');
+
+            if (!link) {
+                return;
+            }
+
+            const hash = link.getAttribute("href");
+            const target = findTarget(hash);
+
+            if (!target) {
+                return;
+            }
+
+            event.preventDefault();
+            scrollToTarget(target, false);
+
+            if (window.history && window.history.replaceState) {
+                window.history.replaceState(null, "", hash === "#top" ? window.location.pathname : hash);
+            }
+        });
+
+
+        /* =====================================================
+           TERMINAL REPLAY
+        ====================================================== */
+
+        const TERM_MONTHS = [
+            ["2026-01-01", 611], ["2026-02-01", 931], ["2026-03-01", 949],
+            ["2026-04-01", 515], ["2026-05-01", 781], ["2026-06-01", 500],
+            ["2026-07-01", 488], ["2026-08-01", 1195], ["2026-09-01", 489],
+            ["2026-10-01", 541], ["2026-11-01", 915], ["2026-12-01", 470]
+        ];
+
+        const TERM_TOTALS = [
+            ["Receipts Generated   : ", 225499],
+            ["Transaction Lines    : ", 1807529],
+            ["Payments Generated   : ", 225499]
+        ];
+
+        const termCode = document.querySelector(".ds-term-body code");
+        const termReplay = document.querySelector(".ds-term-replay");
+        let termRun = 0;
+
+        function wait(ms) {
+            return new Promise(function (resolve) { setTimeout(resolve, ms); });
+        }
+
+        function addLine(className, html) {
+            const line = document.createElement("span");
+            line.className = "ds-line" + (className ? " " + className : "");
+            line.innerHTML = html;
+            termCode.appendChild(line);
+            return line;
+        }
+
+        async function playTerminal() {
+
+            if (!termCode) {
+                return;
+            }
+
+            const run = ++termRun;
+            const command = "python sales_transaction_generator.py";
+
+            termCode.innerHTML = "";
+            termReplay.hidden = true;
+
+            const cmd = addLine("cmd", "<b>(.venv) PS&gt;</b> <span></span><i class=\"ds-caret\"></i>");
+            const typed = cmd.querySelector("span");
+
+            for (let i = 1; i <= command.length; i++) {
+                if (run !== termRun) {
+                    return;
+                }
+                typed.textContent = command.slice(0, i);
+                await wait(28);
+            }
+
+            cmd.querySelector(".ds-caret").remove();
+            await wait(260);
+
+            for (let i = 0; i < TERM_MONTHS.length; i++) {
+                if (run !== termRun) {
+                    return;
+                }
+                addLine("", TERM_MONTHS[i][0] + " | " + TERM_MONTHS[i][1] + " customers");
+                await wait(110);
+            }
+
+            addLine("rule", "==========================================");
+            addLine("ok", "SIMULATION COMPLETE");
+            addLine("rule", "==========================================");
+
+            const counters = TERM_TOTALS.map(function (row) {
+                const line = addLine("total", row[0] + "<em>0</em>");
+                return { el: line.querySelector("em"), target: row[1] };
+            });
+
+            counters.forEach(function (counter) {
+                const state = { value: 0 };
+                gsap.to(state, {
+                    value: counter.target,
+                    duration: 1.4,
+                    ease: "power3.out",
+                    onUpdate: function () {
+                        counter.el.textContent = Math.round(state.value).toLocaleString("en-US");
+                    }
+                });
+            });
+
+            await wait(1500);
+
+            if (run === termRun) {
+                termReplay.hidden = false;
+            }
+        }
+
+        if (termReplay) {
+            termReplay.addEventListener("click", playTerminal);
+        }
+
+
+        /* =====================================================
+           HERO INTRO
+        ====================================================== */
+
+        function introHero() {
+
+            const title = document.querySelector(".ds-title");
+            const items = document.querySelectorAll("[data-hero-item]");
+            const timeline = gsap.timeline({ defaults: { ease: "expo.out" } });
+
+            if (title) {
+
+                if (hasSplit) {
+
+                    const split = new SplitText(title, { type: "words,chars", charsClass: "ds-char" });
+
+                    timeline.from(split.chars, {
+                        yPercent: 80,
+                        rotateX: -85,
+                        opacity: 0,
+                        transformOrigin: "50% 100%",
+                        transformPerspective: 900,
+                        duration: 1.2,
+                        stagger: 0.025
+                    }, 0.1);
+
+                } else {
+
+                    timeline.from(title, { y: 40, opacity: 0, duration: 1.1 }, 0.1);
+                }
+
+                gsap.set(title, { visibility: "visible" });
+            }
+
+            timeline.to(items, { opacity: 1, y: 0, duration: 1.1, stagger: 0.08 }, 0.35);
+            timeline.add(playTerminal, 0.9);
+        }
+
+        const fontsReady = document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve();
+
+        Promise.race([
+            fontsReady,
+            new Promise(function (resolve) { setTimeout(resolve, 1500); })
+        ]).then(introHero);
+
+
+        /* =====================================================
+           THE BUILD — cards stack, earlier ones recede
+        ====================================================== */
+
+        const cards = gsap.utils.toArray(".ds-card");
+
+        const markers = cards.map(function (card) {
+            const marker = document.createElement("span");
+            marker.className = "ds-card-marker";
+            marker.setAttribute("aria-hidden", "true");
+            card.parentNode.insertBefore(marker, card);
+            return marker;
+        });
+
+        function stackTop(index) {
+            const step = parseFloat(getComputedStyle(root).getPropertyValue("--stack-step")) || 14;
+            return navHeight() + 24 + index * step;
+        }
+
+        cards.forEach(function (card, i) {
+
+            const image = card.querySelector(".ds-card-media img");
+
+            if (image) {
+                gsap.fromTo(image,
+                    { "--settle": 1.12 },
+                    {
+                        "--settle": 1,
+                        ease: "none",
+                        scrollTrigger: {
+                            trigger: markers[i],
+                            start: "top bottom",
+                            end: function () { return "top top+=" + stackTop(i); },
+                            scrub: true,
+                            invalidateOnRefresh: true
+                        }
+                    }
+                );
+            }
+
+            const next = cards[i + 1];
+
+            if (!next) {
+                return;
+            }
+
+            const shade = card.querySelector(".ds-card-shade");
+
+            const timeline = gsap.timeline({
+                scrollTrigger: {
+                    trigger: markers[i + 1],
+                    start: "top bottom",
+                    end: function () { return "top top+=" + stackTop(i + 1); },
+                    scrub: true,
+                    invalidateOnRefresh: true
+                }
+            });
+
+            timeline.to(card, { scale: 0.94, ease: "none" }, 0);
+
+            if (shade) {
+                timeline.to(shade, { opacity: 0.32, ease: "none" }, 0);
+            }
+        });
+
+
+        /* =====================================================
+           WORKFLOW — the line draws, steps light up
+        ====================================================== */
+
+        const flow = document.querySelector(".ds-flow");
+
+        if (flow) {
+
+            const flowSteps = gsap.utils.toArray(".ds-flow li");
+
+            flow.classList.add("is-driven");
+
+            gsap.to(flow, {
+                "--p": 1,
+                ease: "none",
+                scrollTrigger: {
+                    trigger: flow,
+                    start: "top 75%",
+                    end: "bottom 55%",
+                    scrub: 0.4,
+                    onUpdate: function (self) {
+                        flowSteps.forEach(function (step, i) {
+                            step.classList.toggle("is-lit", self.progress >= i / (flowSteps.length - 1) - 0.02);
+                        });
+                    }
+                }
+            });
+        }
+
+
+        /* =====================================================
+           HEADINGS — masked line reveals
+        ====================================================== */
+
+        function maskLines(lines) {
+            lines.forEach(function (line) {
+                const mask = document.createElement("div");
+                mask.className = "line-mask";
+                line.parentNode.insertBefore(mask, line);
+                mask.appendChild(line);
+            });
+        }
+
+        function revealHeading(element) {
+
+            if (!hasSplit) {
+                gsap.from(element, {
+                    opacity: 0,
+                    y: 30,
+                    duration: 1,
+                    ease: "expo.out",
+                    scrollTrigger: { trigger: element, start: "top 88%", once: true }
+                });
+                return;
+            }
+
+            new SplitText(element, {
+                type: "lines",
+                linesClass: "split-line",
+                autoSplit: true,
+                onSplit: function (self) {
+
+                    maskLines(self.lines);
+
+                    if (element.dataset.revealed === "true") {
+                        return;
+                    }
+
+                    return gsap.from(self.lines, {
+                        yPercent: 110,
+                        duration: 1.1,
+                        ease: "expo.out",
+                        stagger: 0.1,
+                        scrollTrigger: {
+                            trigger: element,
+                            start: "top 88%",
+                            once: true,
+                            onEnter: function () {
+                                element.dataset.revealed = "true";
+                            }
+                        }
+                    });
+                }
+            });
+        }
+
+        document.querySelectorAll("[data-split]").forEach(revealHeading);
+
+
+        /* =====================================================
+           GENERIC REVEALS + COUNTERS
+        ====================================================== */
+
+        const revealElements = gsap.utils.toArray("[data-reveal]");
+
+        gsap.set(revealElements, { opacity: 0, y: 36 });
+
+        ScrollTrigger.batch(revealElements, {
+            start: "top 88%",
+            once: true,
+            onEnter: function (batch) {
+                gsap.to(batch, {
+                    opacity: 1,
+                    y: 0,
+                    duration: 1,
+                    ease: "expo.out",
+                    stagger: 0.09,
+                    overwrite: true
+                });
+            }
+        });
+
+        function formatCount(element, value) {
+            const decimals = parseInt(element.dataset.countDecimals, 10) || 0;
+            return element.dataset.countPrefix +
+                value.toLocaleString("en-US", {
+                    minimumFractionDigits: decimals,
+                    maximumFractionDigits: decimals,
+                    useGrouping: element.dataset.countGroup === "1"
+                }) +
+                element.dataset.countSuffix;
+        }
+
+        gsap.utils.toArray("[data-count]").forEach(function (element) {
+
+            const raw = element.textContent.trim();
+            const match = raw.match(/^([^\d]*)(\d[\d,]*(?:\.\d+)?)(.*)$/);
+
+            if (!match) {
+                return;
+            }
+
+            element.dataset.countPrefix = match[1];
+            element.dataset.countSuffix = match[3];
+            element.dataset.countDecimals = String((match[2].split(".")[1] || "").length);
+            element.dataset.countGroup = match[2].indexOf(",") !== -1 ? "1" : "0";
+            element.textContent = formatCount(element, 0);
+
+            const counter = { value: 0 };
+            const target = parseFloat(match[2].replace(/,/g, ""));
+
+            gsap.to(counter, {
+                value: target,
+                duration: 1.6,
+                ease: "power3.out",
+                scrollTrigger: {
+                    trigger: element.closest(".ds-card") ? element.closest(".ds-card").previousElementSibling : element,
+                    start: "top 70%",
+                    once: true
+                },
+                onUpdate: function () {
+                    element.textContent = formatCount(element, counter.value);
+                },
+                onComplete: function () {
+                    element.textContent = raw;
+                }
+            });
+        });
+
+
+        /* =====================================================
+           SECTION NAV — follows your position
+        ====================================================== */
+
+        const navInner = document.querySelector(".ds-nav-inner");
+        const navLinks = Array.prototype.slice.call(document.querySelectorAll(".ds-nav a[href^='#']"));
+        let activeId = null;
+
+        function setActive(id) {
+
+            if (id === activeId) {
+                return;
+            }
+
+            activeId = id;
+
+            navLinks.forEach(function (link) {
+
+                const on = link.getAttribute("href") === "#" + id;
+                link.classList.toggle("is-active", on);
+
+                if (on) {
+                    link.setAttribute("aria-current", "true");
+                    navInner.scrollTo({
+                        left: link.offsetLeft - navInner.clientWidth / 2 + link.offsetWidth / 2,
+                        behavior: "smooth"
+                    });
+                } else {
+                    link.removeAttribute("aria-current");
+                }
+            });
+        }
+
+        document.querySelectorAll("[data-nav]").forEach(function (section) {
+            ScrollTrigger.create({
+                trigger: section,
+                start: "top 45%",
+                end: "bottom 45%",
+                onToggle: function (self) {
+                    if (self.isActive) {
+                        setActive(section.id);
+                    }
+                }
+            });
+        });
+
+        ScrollTrigger.create({
+            trigger: "#main",
+            start: "top 45%",
+            onLeaveBack: function () {
+                setActive(null);
+            }
+        });
+
+
+        /* =====================================================
+           REFRESH + ARRIVING WITH A #HASH
+        ====================================================== */
+
+        fontsReady.then(function () {
+            ScrollTrigger.refresh();
+        });
+
+        window.addEventListener("load", function () {
+
+            ScrollTrigger.refresh();
+
+            const target = findTarget(window.location.hash);
+
+            if (target && window.location.hash !== "#top" && window.location.hash !== "#main") {
+                requestAnimationFrame(function () {
+                    scrollToTarget(target, true);
+                });
+            }
+        });
+
+    })();
+    </script>
+
+</body>
 </html>

@@ -782,78 +782,22 @@
         }
 
 
-              <!-- =====================================================
-             ORDER JOURNEY — ORDERS FLOW, FEW COME BACK
-        ====================================================== -->
+                   /* =========================================================
+           ORDER JOURNEY — CARD
+        ========================================================== */
 
-        <div
-            class="order-journey"
-            aria-label="Animated order journey: orders flow from customer to delivery, and only about 2 in 100 customers come back"
-        >
-
-            <div class="oj-stage">
-
-                <svg class="oj-svg" aria-hidden="true"></svg>
-
-                <span class="oj-arc-label" aria-hidden="true">Came back</span>
-
-                <ol class="oj-nodes">
-
-                    <li style="--x: 8%">
-                        <button class="oj-node" type="button" aria-pressed="false">
-                            <span class="oj-icon"><i class="fas fa-user"></i></span>
-                            <span class="oj-label">Customer</span>
-                        </button>
-                    </li>
-
-                    <li style="--x: 29%">
-                        <button class="oj-node" type="button" aria-pressed="false">
-                            <span class="oj-icon"><i class="fas fa-mobile-screen-button"></i></span>
-                            <span class="oj-label">Online Order</span>
-                        </button>
-                    </li>
-
-                    <li style="--x: 50%">
-                        <button class="oj-node" type="button" aria-pressed="false">
-                            <span class="oj-icon"><i class="fas fa-box"></i></span>
-                            <span class="oj-label">Processing</span>
-                        </button>
-                    </li>
-
-                    <li style="--x: 71%">
-                        <button class="oj-node" type="button" aria-pressed="false">
-                            <span class="oj-icon"><i class="fas fa-truck-fast"></i></span>
-                            <span class="oj-label">Delivery</span>
-                        </button>
-                    </li>
-
-                    <li style="--x: 92%">
-                        <button class="oj-node" type="button" aria-pressed="false">
-                            <span class="oj-icon"><i class="fas fa-house"></i></span>
-                            <span class="oj-label">Delivered</span>
-                        </button>
-                    </li>
-
-                </ol>
-
-            </div>
-
-            <div class="oj-foot">
-
-                <p class="oj-caption" aria-live="polite">
-                    Every dot is an order. Only about 2 in 100 customers came back;
-                    the rest were classified as churned. Select a stage to see what
-                    the analysis covered there.
-                </p>
-
-                <div class="oj-tally">
-                    <span><b data-oj="delivered">0</b> delivered</span>
-                    <span class="is-back"><b data-oj="returned">0</b> came back</span>
-                </div>
-
-            </div>
-
-        </div>
+        .order-journey {
+            position: relative;
+            width: min(920px, 100%);
+            margin: 55px auto 0;
+            border: 1px solid rgba(221, 212, 240, .85);
+            border-radius: 22px;
+            background: rgba(255, 255, 255, .78);
+            box-shadow: 0 20px 55px rgba(58, 38, 110, .08);
+            backdrop-filter: blur(12px);
+            opacity: 0;
+            transform: translateY(30px);
+        }
 
         /* =========================================================
            HERO OVERVIEW IMAGE
@@ -3320,7 +3264,7 @@
                 Findings
             </a>
 
-            <a href="../../index.html#projects">
+              <a href="../../index.html#other-projects">
                 Portfolio
             </a>
 
@@ -3410,115 +3354,78 @@
 
 
 
-        <!-- =====================================================
-             ANIMATED ORDER JOURNEY
+                <!-- =====================================================
+             ORDER JOURNEY — ORDERS FLOW, FEW COME BACK
         ====================================================== -->
 
         <div
             class="order-journey"
-            aria-label="Customer online order delivery journey"
+            aria-label="Animated order journey: orders flow from customer to delivery, and only about 2 in 100 customers come back"
         >
 
+            <div class="oj-stage">
 
-            <div class="journey-track"></div>
+                <svg class="oj-svg" aria-hidden="true"></svg>
 
+                <span class="oj-arc-label" aria-hidden="true">Came back</span>
 
-            <!-- 01 CUSTOMER -->
+                <ol class="oj-nodes">
 
-            <div class="journey-stage">
+                    <li style="--x: 8%">
+                        <button class="oj-node" type="button" aria-pressed="false">
+                            <span class="oj-icon"><i class="fas fa-user"></i></span>
+                            <span class="oj-label">Customer</span>
+                        </button>
+                    </li>
 
-                <div class="stage-icon">
+                    <li style="--x: 29%">
+                        <button class="oj-node" type="button" aria-pressed="false">
+                            <span class="oj-icon"><i class="fas fa-mobile-screen-button"></i></span>
+                            <span class="oj-label">Online Order</span>
+                        </button>
+                    </li>
 
-                    <i class="fas fa-user"></i>
+                    <li style="--x: 50%">
+                        <button class="oj-node" type="button" aria-pressed="false">
+                            <span class="oj-icon"><i class="fas fa-box"></i></span>
+                            <span class="oj-label">Processing</span>
+                        </button>
+                    </li>
 
+                    <li style="--x: 71%">
+                        <button class="oj-node" type="button" aria-pressed="false">
+                            <span class="oj-icon"><i class="fas fa-truck-fast"></i></span>
+                            <span class="oj-label">Delivery</span>
+                        </button>
+                    </li>
+
+                    <li style="--x: 92%">
+                        <button class="oj-node" type="button" aria-pressed="false">
+                            <span class="oj-icon"><i class="fas fa-house"></i></span>
+                            <span class="oj-label">Delivered</span>
+                        </button>
+                    </li>
+
+                </ol>
+
+            </div>
+
+            <div class="oj-foot">
+
+                <p class="oj-caption" aria-live="polite">
+                    Every dot is an order. Only about 2 in 100 customers came back;
+                    the rest were classified as churned. Select a stage to see what
+                    the analysis covered there.
+                </p>
+
+                <div class="oj-tally">
+                    <span><b data-oj="delivered">0</b> delivered</span>
+                    <span class="is-back"><b data-oj="returned">0</b> came back</span>
                 </div>
 
-                <span>
-                    Customer
-                </span>
-
             </div>
-
-
-            <!-- 02 ONLINE ORDER -->
-
-            <div class="journey-stage">
-
-                <div class="stage-icon">
-
-                    <i class="fas fa-mobile-screen-button"></i>
-
-                </div>
-
-                <span>
-                    Online Order
-                </span>
-
-            </div>
-
-
-            <!-- 03 PROCESSING -->
-
-            <div class="journey-stage">
-
-                <div class="stage-icon">
-
-                    <i class="fas fa-box"></i>
-
-                </div>
-
-                <span>
-                    Processing
-                </span>
-
-            </div>
-
-
-            <!-- 04 DELIVERY -->
-
-            <div class="journey-stage">
-
-                <div class="stage-icon">
-
-                    <i class="fas fa-truck-fast"></i>
-
-                </div>
-
-                <span>
-                    Delivery
-                </span>
-
-            </div>
-
-
-            <!-- 05 DELIVERED -->
-
-            <div class="journey-stage">
-
-                <div class="stage-icon">
-
-                    <i class="fas fa-house"></i>
-
-                </div>
-
-                <span>
-                    Delivered
-                </span>
-
-            </div>
-
-
-            <!-- MOVING ORDER -->
-
-            <div class="delivery-object">
-
-                <i class="fas fa-truck-fast"></i>
-
-            </div>
-
 
         </div>
-
 
 
         <!-- =====================================================

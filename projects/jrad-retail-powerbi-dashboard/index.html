@@ -1317,7 +1317,43 @@
                 transition-duration: 0.01ms !important;
             }
         }
+        /* =========================================================
+           LIVE LAB — PHONE FIXES
+        ========================================================= */
 
+        .pbi-viz[data-host="heatmap"],
+        .pbi-viz[data-host="salary"] {
+            min-width: 0;
+        }
+
+        .pbi-viz[data-host="waterfall"] {
+            min-width: 640px;
+        }
+
+        @media (max-width: 700px) {
+
+            .pbi-lab-tabs {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                overflow: visible;
+            }
+
+            .pbi-lab-tabs button {
+                padding: 10px 12px;
+                font-size: 13px;
+            }
+
+            #viz-revenue::before,
+            #viz-waterfall::before {
+                content: "Swipe the chart sideways to see all of it \2192";
+                display: block;
+                margin-bottom: 12px;
+                color: var(--text-faint);
+                font-size: 12px;
+                font-weight: 700;
+            }
+        }
+        
     </style>
 </head>
 
@@ -2145,7 +2181,7 @@
             salary: { height: 300 }
         };
 
-        function webSpec(key) {
+               function webSpec(key, width) {
 
             const spec = JSON.parse(
                 JSON.stringify(SPECS[key]).replace(/Segoe UI Semibold|Segoe UI/g, "Inter")
@@ -2169,6 +2205,13 @@
                         ]
                     }
                 });
+            }
+
+            if (key === "salary" && width < 600) {
+                spec.encoding.x.axis.labelExpr = "replace(datum.label, ' Week', '')";
+                spec.encoding.x.axis.labelFontSize = 11;
+                spec.encoding.y.axis.labelFontSize = 11;
+                spec.encoding.y.axis.labelLimit = 120;
             }
 
             return spec;
@@ -2252,7 +2295,7 @@
             rendered[key] = loadVega()
                 .then(function () {
                     host.innerHTML = "";
-                    return window.vegaEmbed(host, webSpec(key), { actions: false, renderer: "svg" });
+                     return window.vegaEmbed(host, webSpec(key, host.clientWidth), { actions: false, renderer: "svg" });
                 })
                 .then(function () {
                     host.classList.add("is-ready");
@@ -2266,7 +2309,25 @@
 
             return rendered[key];
         }
+        function hideTooltip() {
+            const tip = document.getElementById("vg-tooltip-element");
+            if (tip) {
+                tip.classList.remove("visible");
+            }
+        }
 
+        window.addEventListener("scroll", hideTooltip, { passive: true });
+
+        document.addEventListener("touchstart", function (event) {
+            if (!event.target.closest(".pbi-viz")) {
+                hideTooltip();
+            }
+        }, { passive: true });
+
+        document.querySelectorAll(".pbi-viz-scroll").forEach(function (scroller) {
+            scroller.addEventListener("scroll", hideTooltip, { passive: true });
+        });
+        
         const lab = document.querySelector(".pbi-lab");
 
         if (lab) {
@@ -2274,7 +2335,9 @@
             const tabs = Array.prototype.slice.call(lab.querySelectorAll('[role="tab"]'));
             let labVisible = false;
 
-            function select(tab, focus) {
+                       function select(tab, focus) {
+
+                hideTooltip();
 
                 tabs.forEach(function (other) {
                     const on = other === tab;
@@ -2289,6 +2352,10 @@
                 if (focus) {
                     tab.focus();
                 }
+
+                requestAnimationFrame(function () {
+                    window.dispatchEvent(new Event("resize"));
+                });
 
                 if (labVisible) {
                     renderViz(tab.dataset.viz);

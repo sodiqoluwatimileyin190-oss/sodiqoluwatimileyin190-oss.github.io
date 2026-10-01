@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="../../assets/css/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lenis@1.3.26/dist/lenis.css">
 
     <style>
         /* =========================================================
@@ -800,14 +800,42 @@
             .sx-fill { transition: none; }
             .sx-toggle button, .sx-big { transition: none; }
         }
+
+                /* =========================================================
+           SITE ALIGNMENT — progress bar + mobile safety
+        ========================================================= */
+
+        .sx-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            z-index: 100;
+            background: linear-gradient(90deg, var(--lilac), var(--purple), var(--purple-deep));
+            transform: scaleX(0);
+            transform-origin: left center;
+            pointer-events: none;
+        }
+
+        @media (max-width: 900px) {
+            .sx-hypo,
+            .sx-verdict,
+            .sx-shot,
+            .sx-read,
+            .sx-tiers,
+            .sx-entry,
+            .sx-status { grid-template-columns: minmax(0, 1fr); }
+        }
     </style>
 </head>
 
 <body class="sx">
 
+    <div class="sx-progress" aria-hidden="true"></div>
     <div class="sx-top">
         <div class="sx-wrap">
-            <a href="../../index.html">← Portfolio</a>
+            <a href="../../index.html#other-projects">← Portfolio</a>
             <a href="https://github.com/sodiqoluwatimileyin190-oss/crypto-accumulation-scanner" target="_blank" rel="noopener">Code on GitHub</a>
         </div>
     </div>
@@ -1222,6 +1250,7 @@
                     <div class="sx-end-links">
                         <a class="sx-btn sx-btn-solid" href="https://github.com/sodiqoluwatimileyin190-oss/crypto-accumulation-scanner" target="_blank" rel="noopener">View the code</a>
                         <a class="sx-btn sx-btn-line" href="project-carousel.pdf" target="_blank" rel="noopener">Project walkthrough (PDF)</a>
+                        <a class="sx-btn sx-btn-line" href="../thera-bank-loan-analytics/">Next case study: THERA Bank →</a>
                     </div>
                 </div>
 
@@ -1232,7 +1261,7 @@
 
     <footer class="sx-foot">
         <div class="sx-wrap">
-            <a href="../../index.html">← Back to portfolio</a>
+                        <a href="../../index.html#other-projects">← Back to portfolio</a>
             &nbsp;·&nbsp; Python, pandas, ccxt, Telegram Bot API. Research project, not financial advice.
         </div>
     </footer>
@@ -1392,6 +1421,54 @@
 
     })();
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/lenis@1.3.26/dist/lenis.min.js"></script>
 
+    <script>
+    (function () {
+
+        "use strict";
+
+        var bar = document.querySelector(".sx-progress");
+        var ticking = false;
+
+        function updateProgress() {
+            var max = document.documentElement.scrollHeight - window.innerHeight;
+            var ratio = max > 0 ? Math.min(Math.max(window.scrollY / max, 0), 1) : 0;
+            if (bar) bar.style.transform = "scaleX(" + ratio + ")";
+            ticking = false;
+        }
+
+        window.addEventListener("scroll", function () {
+            if (!ticking) { requestAnimationFrame(updateProgress); ticking = true; }
+        }, { passive: true });
+
+        updateProgress();
+
+        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches || typeof window.Lenis === "undefined") return;
+
+        var lenis = new Lenis({ lerp: 0.1, smoothWheel: true });
+
+        function raf(time) {
+            lenis.raf(time);
+            requestAnimationFrame(raf);
+        }
+
+        requestAnimationFrame(raf);
+
+        document.addEventListener("click", function (event) {
+            var link = event.target.closest('a[href^="#"]');
+            if (!link) return;
+            var hash = link.getAttribute("href");
+            if (!hash || hash.length < 2) return;
+            var target = null;
+            try { target = document.querySelector(hash); } catch (error) { target = null; }
+            if (!target) return;
+            event.preventDefault();
+            lenis.scrollTo(target, { duration: 1.4 });
+            if (window.history && window.history.replaceState) window.history.replaceState(null, "", hash);
+        });
+
+    })();
+    </script>
 </body>
 </html>

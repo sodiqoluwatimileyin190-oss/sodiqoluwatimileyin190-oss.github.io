@@ -1,110 +1,115 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>THERA Bank — Personal Loan Campaign Analysis</title>
+    <title>THERA Bank — Personal Loan Campaign Analysis | Sodiq Oluwatimileyin</title>
 
-    <meta
-        name="description"
-        content="THERA Bank Personal Loan Campaign Analysis — a Power BI case study analyzing customer behavior, loan acceptance and campaign targeting."
-    >
+    <meta name="description" content="THERA Bank Personal Loan Campaign Analysis — a Power BI case study on who accepts a personal loan offer: 5,000 customers, a 9.6% acceptance rate, and the segments that convert at nearly 80%.">
+    <meta name="theme-color" content="#17113f">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="THERA Bank: Personal Loan Campaign Analysis">
+    <meta property="og:description" content="Only 9.6% of 5,000 customers accepted the loan. Among high-income graduates it was 79.2%. A Power BI case study in campaign targeting.">
+    <meta property="og:image" content="https://sodiqoluwatimileyin190-oss.github.io/projects/thera-bank-loan-analytics/images/executive-overview.png">
+    <meta property="og:url" content="https://sodiqoluwatimileyin190-oss.github.io/projects/thera-bank-loan-analytics/">
+    <meta name="twitter:card" content="summary_large_image">
 
-    <link
-        rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
-    >
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lenis@1.3.26/dist/lenis.css">
+
+    <script>
+        document.documentElement.classList.add("tb-js");
+
+        window.setTimeout(function () {
+            if (!window.__tbReady) {
+                document.documentElement.classList.remove("tb-js");
+            }
+        }, 4000);
+    </script>
 
     <style>
 
         /* =========================================================
-           RESET
+           THERA BANK — CASE STUDY 03 (MOTION EDITION)
         ========================================================= */
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        :root {
+            --ink: #0d0928;
+            --ink-2: #17113f;
+            --ink-3: #2a1c62;
+            --purple: #7c5cd6;
+            --purple-deep: #6847c7;
+            --purple-light: #a68be0;
+            --lilac: #bca6ff;
+            --lavender: #f5f2ff;
+            --paper: #faf9fd;
+            --text: #17152b;
+            --text-soft: #66627a;
+            --text-faint: #8b879e;
+            --border: #e8e3f3;
+            --yes: #efe8ff;
+            --shadow-sm: 0 10px 30px rgba(35, 20, 80, 0.06);
+            --shadow-md: 0 25px 65px rgba(35, 20, 80, 0.12);
+            --font-display: "Playfair Display", Georgia, "Times New Roman", serif;
+            --font-body: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+            --ease-out: cubic-bezier(.22, 1, .36, 1);
+            --nav-h: 58px;
         }
+
+        *, *::before, *::after { box-sizing: border-box; }
+
+        body, h1, h2, h3, p, ul, ol, dl, dd, figure { margin: 0; padding: 0; }
 
         html {
             scroll-behavior: smooth;
+            scroll-padding-top: calc(var(--nav-h) + 16px);
+            -webkit-text-size-adjust: 100%;
         }
 
         body {
-            font-family: Arial, Helvetica, sans-serif;
-            background: #f7f8fc;
-            color: #17172f;
-            line-height: 1.6;
+            font-family: var(--font-body);
+            font-size: 16px;
+            line-height: 1.7;
+            color: var(--text);
+            background: var(--paper);
+            overflow-x: hidden;
+            overflow-x: clip;
+            -webkit-font-smoothing: antialiased;
         }
 
-        img {
-            max-width: 100%;
-            display: block;
-        }
+        body.tb-no-scroll { overflow: hidden; }
 
-        a {
-            text-decoration: none;
-        }
+        img { display: block; max-width: 100%; }
 
+        a { color: inherit; text-decoration: none; }
 
-        /* =========================================================
-           NAVIGATION
-        ========================================================= */
+        button { font: inherit; color: inherit; }
 
-        .navbar {
-            position: sticky;
+        ::selection { background: var(--purple); color: #fff; }
+
+        :focus-visible { outline: 3px solid var(--lilac); outline-offset: 3px; }
+
+        [tabindex="-1"]:focus { outline: none; }
+
+        section { scroll-margin-top: var(--nav-h); }
+
+        .tb-wrap { width: min(1180px, 90%); margin-inline: auto; }
+
+        .tb-progress {
+            position: fixed;
             top: 0;
-            z-index: 1000;
-
-            width: 100%;
-
-            background: rgba(255,255,255,0.92);
-            backdrop-filter: blur(15px);
-
-            border-bottom: 1px solid #e5e5ef;
-        }
-
-        .nav-container {
-            width: min(1180px, 92%);
-            margin: auto;
-
-            height: 72px;
-
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .brand {
-            font-size: 18px;
-            font-weight: 800;
-            letter-spacing: -0.5px;
-            color: #21184f;
-        }
-
-        .brand span {
-            color: #7356d8;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 28px;
-            align-items: center;
-        }
-
-        .nav-links a {
-            font-size: 13px;
-            font-weight: 600;
-            color: #65657b;
-
-            transition: 0.25s ease;
-        }
-
-        .nav-links a:hover {
-            color: #7356d8;
+            left: 0;
+            right: 0;
+            height: 3px;
+            z-index: 1100;
+            background: linear-gradient(90deg, var(--purple-light), var(--purple), var(--lilac));
+            transform: scaleX(0);
+            transform-origin: left center;
+            pointer-events: none;
         }
 
 
@@ -112,1455 +117,2210 @@
            HERO
         ========================================================= */
 
-        .hero {
+        .tb-hero {
             position: relative;
             overflow: hidden;
-
-            padding: 115px 20px 100px;
-
+            padding: 92px 0 96px;
+            color: #fff;
             background:
-                radial-gradient(
-                    circle at 15% 20%,
-                    rgba(124, 92, 214, 0.18),
-                    transparent 35%
-                ),
-                radial-gradient(
-                    circle at 85% 20%,
-                    rgba(82, 201, 213, 0.16),
-                    transparent 35%
-                ),
-                #ffffff;
+                radial-gradient(circle at 12% 18%, rgba(166, 139, 224, 0.30), transparent 34%),
+                radial-gradient(circle at 88% 78%, rgba(124, 92, 214, 0.28), transparent 36%),
+                linear-gradient(135deg, #0c0828 0%, #17113f 50%, #2a1c62 100%);
         }
 
-        .hero-container {
-            width: min(1080px, 92%);
-            margin: auto;
-            text-align: center;
+        .tb-hero::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            opacity: 0.08;
+            pointer-events: none;
+            background-image:
+                linear-gradient(rgba(255, 255, 255, 0.25) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.25) 1px, transparent 1px);
+            background-size: 55px 55px;
+            -webkit-mask-image: linear-gradient(to bottom, #000, transparent 75%);
+            mask-image: linear-gradient(to bottom, #000, transparent 75%);
         }
 
-        .eyebrow {
-            display: inline-block;
+        .tb-hero-grid {
+            position: relative;
+            z-index: 2;
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+            gap: clamp(36px, 5vw, 64px);
+            align-items: center;
+        }
 
+        .tb-hero-grid > * { min-width: 0; }
+
+        .tb-eyebrow {
+            display: inline-flex;
             padding: 8px 16px;
-
-            border-radius: 50px;
-
-            background: #f0ebff;
-            color: #7154d4;
-
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.06);
+            backdrop-filter: blur(10px);
+            color: #e8e1ff;
             font-size: 11px;
-            font-weight: 800;
-
-            letter-spacing: 1.8px;
-            text-transform: uppercase;
-
-            margin-bottom: 25px;
+            font-weight: 700;
+            letter-spacing: 2px;
         }
 
-        .hero h1 {
-            max-width: 900px;
-            margin: auto;
-
-            font-family: Georgia, "Times New Roman", serif;
-
-            font-size: clamp(44px, 6vw, 78px);
-            line-height: 0.98;
-
-            letter-spacing: -3px;
-
-            color: #17143d;
+        .tb-title {
+            margin-top: 24px;
+            font-family: var(--font-display);
+            font-size: clamp(3rem, 6.6vw, 5.6rem);
+            font-weight: 700;
+            line-height: 0.96;
+            letter-spacing: -0.035em;
         }
 
-        .hero h1 span {
-            color: #7558d7;
+        .tb-title .tb-char { display: inline-block; will-change: transform; }
+
+        .tb-subtitle {
+            margin-top: 16px;
+            color: var(--lilac);
+            font-family: var(--font-display);
+            font-size: clamp(1.2rem, 2.2vw, 1.7rem);
+            font-weight: 600;
+            line-height: 1.3;
         }
 
-        .hero-description {
-            max-width: 720px;
-
-            margin: 28px auto 0;
-
-            color: #68687d;
-
-            font-size: 16px;
-            line-height: 1.8;
+        .tb-desc {
+            max-width: 540px;
+            margin-top: 18px;
+            color: rgba(255, 255, 255, 0.72);
+            font-size: 1.02rem;
         }
 
-        .hero-buttons {
-            margin-top: 35px;
-
+        .tb-actions {
             display: flex;
-            justify-content: center;
-            gap: 12px;
-
             flex-wrap: wrap;
+            align-items: center;
+            gap: 12px;
+            margin-top: 30px;
         }
 
-        .btn {
+        .tb-btn {
             display: inline-flex;
             align-items: center;
+            justify-content: center;
             gap: 9px;
+            min-height: 46px;
+            padding: 12px 20px;
+            border: 1px solid transparent;
+            border-radius: 10px;
+            font-size: 13px;
+            font-weight: 800;
+            transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+        }
 
-            padding: 13px 21px;
+        .tb-btn-primary { background: #fff; color: var(--ink-2); }
+        .tb-btn-primary:hover { background: var(--lilac); }
 
-            border-radius: 8px;
+        .tb-btn-secondary {
+            border-color: rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.06);
+            color: #fff;
+        }
 
+        .tb-btn-secondary:hover { border-color: rgba(255, 255, 255, 0.7); background: rgba(255, 255, 255, 0.12); }
+
+        .tb-hero-frame {
+            padding: 8px;
+            border-radius: 18px;
+            background: rgba(255, 255, 255, 0.96);
+            box-shadow: 0 50px 110px rgba(5, 2, 25, 0.55), 0 10px 30px rgba(5, 2, 25, 0.3);
+        }
+
+        .tb-hero-frame .tb-zoom img { border-radius: 11px; }
+
+        .tb-hero-stats {
+            position: relative;
+            z-index: 2;
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 14px;
+            margin-top: 56px;
+        }
+
+        .tb-hero-stats div {
+            padding: 20px 22px;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 16px;
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+        }
+
+        .tb-hero-stats strong {
+            display: block;
+            font-family: var(--font-display);
+            font-size: clamp(1.7rem, 3vw, 2.4rem);
+            line-height: 1;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .tb-hero-stats span {
+            display: block;
+            margin-top: 8px;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        @media (prefers-reduced-motion: no-preference) {
+            .tb-js [data-hero-item] { opacity: 0; transform: translateY(24px); }
+            .tb-js .tb-title { visibility: hidden; }
+        }
+
+
+        /* =========================================================
+           SECTION NAV
+        ========================================================= */
+
+        .tb-nav {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: rgba(250, 249, 253, 0.9);
+            backdrop-filter: saturate(160%) blur(14px);
+            -webkit-backdrop-filter: saturate(160%) blur(14px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .tb-nav-inner {
+            position: relative;
+            width: min(1180px, 92%);
+            height: var(--nav-h);
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            overflow-x: auto;
+            scrollbar-width: none;
+        }
+
+        .tb-nav-inner::-webkit-scrollbar { display: none; }
+
+        .tb-nav a {
+            flex: 0 0 auto;
+            padding: 8px 14px;
+            border-radius: 999px;
+            color: var(--text-soft);
             font-size: 13px;
             font-weight: 700;
-
-            transition: 0.25s ease;
+            white-space: nowrap;
+            transition: background 0.2s ease, color 0.2s ease;
         }
 
-        .btn-primary {
-            background: #241754;
-            color: white;
+        .tb-nav a:hover { color: var(--purple-deep); background: rgba(124, 92, 214, 0.08); }
+        .tb-nav a.is-active { color: #fff; background: var(--purple-deep); }
+
+        .tb-nav a.tb-nav-home {
+            margin-right: 8px;
+            padding-left: 0;
+            padding-right: 16px;
+            border-radius: 0;
+            border-right: 1px solid var(--border);
+            color: var(--purple-deep);
         }
 
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            background: #34216e;
-        }
-
-        .btn-secondary {
-            border: 1px solid #ddd9ea;
-            background: white;
-            color: #33265c;
-        }
-
-        .btn-secondary:hover {
-            border-color: #7356d8;
-            color: #7356d8;
-        }
+        .tb-nav a.tb-nav-home:hover { background: none; }
 
 
         /* =========================================================
-           PROJECT STATS
+           SECTION SHELL
         ========================================================= */
 
-        .stats {
-            width: min(900px, 92%);
-            margin: -35px auto 80px;
+        .tb-section { padding: clamp(84px, 10vw, 128px) 0; }
+        .tb-white { background: #fff; }
 
-            position: relative;
-            z-index: 5;
+        .tb-head { max-width: 760px; margin-bottom: 52px; }
 
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-
-            background: white;
-
-            border: 1px solid #e7e5ef;
-            border-radius: 16px;
-
-            box-shadow: 0 20px 50px rgba(32, 25, 76, 0.08);
-        }
-
-        .stat {
-            padding: 27px 20px;
-            text-align: center;
-
-            border-right: 1px solid #eceaf2;
-        }
-
-        .stat:last-child {
-            border-right: none;
-        }
-
-        .stat strong {
+        .tb-label {
             display: block;
-
-            font-size: 25px;
-
-            color: #241754;
-        }
-
-        .stat span {
-            display: block;
-
-            margin-top: 4px;
-
+            margin-bottom: 14px;
+            color: var(--purple);
             font-size: 11px;
-            font-weight: 700;
-
-            color: #818096;
-
-            text-transform: uppercase;
-            letter-spacing: 0.8px;
-        }
-
-
-        /* =========================================================
-           GENERAL SECTION
-        ========================================================= */
-
-        .section {
-            padding: 95px 20px;
-        }
-
-        .section-container {
-            width: min(1080px, 92%);
-            margin: auto;
-        }
-
-        .section-label {
-            color: #7356d8;
-
-            font-size: 10px;
             font-weight: 800;
-
-            letter-spacing: 2px;
-            text-transform: uppercase;
-
-            margin-bottom: 12px;
+            letter-spacing: 2.2px;
         }
 
-        .section-heading {
-            max-width: 760px;
+        .tb-h2 {
+            color: var(--ink-2);
+            font-family: var(--font-display);
+            font-size: clamp(2.1rem, 4.4vw, 3.4rem);
+            font-weight: 700;
+            line-height: 1.08;
+            letter-spacing: -0.02em;
         }
 
-        .section-heading h2 {
-            font-family: Georgia, "Times New Roman", serif;
+        .tb-lead { max-width: 680px; margin-top: 18px; color: var(--text-soft); font-size: 1.02rem; }
 
-            font-size: clamp(34px, 4vw, 52px);
-
-            line-height: 1.05;
-
-            letter-spacing: -1.5px;
-
-            color: #17143d;
+        .line-mask {
+            display: block;
+            overflow: hidden;
+            overflow: clip;
+            padding-bottom: 0.14em;
+            margin-bottom: -0.14em;
         }
 
-        .section-heading p {
-            margin-top: 16px;
-
-            color: #737287;
-
-            font-size: 15px;
-        }
+        .split-line { display: block; }
 
 
         /* =========================================================
            OVERVIEW
         ========================================================= */
 
-        .overview {
-            background: #f7f6fb;
-        }
-
-        .overview-grid {
-            margin-top: 45px;
-
+        .tb-overview {
             display: grid;
-            grid-template-columns: 1.15fr 0.85fr;
-
-            gap: 30px;
+            grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+            gap: 18px;
         }
 
-        .overview-card {
-            background: white;
-
-            border: 1px solid #e8e6ef;
-
-            border-radius: 15px;
-
-            padding: 32px;
-
-            box-shadow: 0 10px 30px rgba(31, 24, 70, 0.04);
+        .tb-card {
+            padding: 30px;
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            background: #fff;
+            box-shadow: var(--shadow-sm);
         }
 
-        .overview-card h3 {
-            font-family: Georgia, "Times New Roman", serif;
+        .tb-card h3 { margin-bottom: 12px; color: var(--ink-2); font-family: var(--font-display); font-size: 1.45rem; }
+        .tb-card p { color: var(--text-soft); line-height: 1.8; }
 
-            font-size: 25px;
+        .tb-focus-list { display: grid; gap: 10px; list-style: none; }
 
-            margin-bottom: 15px;
-
-            color: #21184f;
-        }
-
-        .overview-card p {
-            color: #6e6d7e;
-
-            font-size: 14px;
-
-            line-height: 1.8;
-        }
-
-        .focus-list {
-            list-style: none;
-
-            margin-top: 15px;
-        }
-
-        .focus-list li {
-            display: flex;
-            gap: 11px;
-
-            padding: 11px 0;
-
-            border-bottom: 1px solid #eeeef4;
-
-            color: #57566c;
-
-            font-size: 13px;
-        }
-
-        .focus-list li:last-child {
-            border-bottom: none;
-        }
-
-        .focus-list i {
-            color: #7356d8;
-
-            margin-top: 4px;
-        }
-
-
-        /* =========================================================
-           DASHBOARD GALLERY
-        ========================================================= */
-
-        .dashboard-section {
-            background: white;
-        }
-
-        .dashboard-gallery {
-            margin-top: 50px;
-
-            display: grid;
-
-            gap: 35px;
-        }
-
-        .dashboard-card {
-            background: #fafaff;
-
-            border: 1px solid #e6e4ed;
-
-            border-radius: 18px;
-
-            padding: 14px;
-
-            box-shadow:
-                0 15px 45px rgba(35, 28, 78, 0.07);
-
-            transition: 0.3s ease;
-        }
-
-        .dashboard-card:hover {
-            transform: translateY(-4px);
-
-            box-shadow:
-                0 25px 55px rgba(35, 28, 78, 0.11);
-        }
-
-        .dashboard-image {
-            overflow: hidden;
-
-            border-radius: 11px;
-
-            background: #ddd;
-        }
-
-        .dashboard-image img {
-            width: 100%;
-
-            cursor: zoom-in;
-
-            transition: transform 0.5s ease;
-        }
-
-        .dashboard-card:hover .dashboard-image img {
-            transform: scale(1.015);
-        }
-
-        .dashboard-info {
-            padding: 20px 10px 8px;
-        }
-
-        .dashboard-number {
-            color: #7356d8;
-
-            font-size: 10px;
-            font-weight: 800;
-
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
-        }
-
-        .dashboard-info h3 {
-            margin-top: 5px;
-
-            font-family: Georgia, "Times New Roman", serif;
-
-            font-size: 24px;
-
-            color: #21184f;
-        }
-
-        .dashboard-info p {
-            margin-top: 7px;
-
-            color: #727184;
-
-            font-size: 13px;
-        }
-
-
-        /* =========================================================
-           INSIGHTS
-        ========================================================= */
-
-        .insights {
-            background: #f7f6fb;
-        }
-
-        .insight-grid {
-            margin-top: 45px;
-
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-
-            gap: 20px;
-        }
-
-        .insight-card {
-            background: white;
-
-            border: 1px solid #e7e5ee;
-
-            border-radius: 15px;
-
-            padding: 28px;
-        }
-
-        .insight-icon {
-            width: 42px;
-            height: 42px;
-
+        .tb-focus-list li {
             display: flex;
             align-items: center;
-            justify-content: center;
-
-            border-radius: 10px;
-
-            background: #eee9ff;
-
-            color: #7356d8;
-
-            margin-bottom: 20px;
+            gap: 12px;
+            padding: 11px 14px;
+            border-radius: 12px;
+            background: var(--paper);
+            color: #4f4b5e;
+            font-size: 0.93rem;
+            font-weight: 600;
         }
 
-        .insight-card h3 {
-            font-family: Georgia, "Times New Roman", serif;
-
-            font-size: 21px;
-
-            color: #21184f;
-
-            margin-bottom: 10px;
-        }
-
-        .insight-card p {
-            color: #747285;
-
-            font-size: 13px;
-
-            line-height: 1.75;
+        .tb-focus-list li::before {
+            content: "";
+            flex: 0 0 8px;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--purple);
         }
 
 
         /* =========================================================
-           TOOLS
+           WHO SAID YES — DOT STORY
         ========================================================= */
 
-        .tools {
-            margin-top: 45px;
-
-            display: flex;
-            flex-wrap: wrap;
-
-            gap: 10px;
+        .tb-signal {
+            padding: clamp(84px, 10vw, 128px) 0 40px;
+            color: #fff;
+            background:
+                radial-gradient(circle at 85% 10%, rgba(124, 92, 214, 0.25), transparent 40%),
+                radial-gradient(circle at 10% 90%, rgba(166, 139, 224, 0.14), transparent 38%),
+                var(--ink);
         }
 
-        .tool {
-            padding: 10px 16px;
+        .tb-signal .tb-label { color: var(--lilac); }
+        .tb-signal .tb-h2 { color: #fff; }
+        .tb-signal .tb-lead { color: rgba(255, 255, 255, 0.7); }
+        .tb-signal .tb-head { margin-bottom: 36px; }
 
-            border-radius: 50px;
+        .tb-signal-stage { padding-bottom: 60px; }
 
-            background: #f1edff;
+        .tb-stage-inner {
+            display: grid;
+            grid-template-columns: minmax(0, 1.35fr) minmax(0, 0.65fr);
+            gap: clamp(24px, 4vw, 48px);
+            align-items: center;
+        }
 
-            color: #5d42b9;
+        .tb-field {
+            position: relative;
+            height: 460px;
+            overflow: hidden;
+            border: 1px solid rgba(188, 166, 255, 0.14);
+            border-radius: 22px;
+            background: rgba(255, 255, 255, 0.025);
+        }
 
+        .tb-field canvas {
+            position: absolute;
+            inset: 0;
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+
+        .tb-story-panel { min-width: 0; }
+
+        .tb-story { display: grid; gap: 18px; list-style: none; }
+
+        .tb-story-step {
+            padding: 20px 22px;
+            border: 1px solid rgba(188, 166, 255, 0.14);
+            border-radius: 16px;
+            background: rgba(255, 255, 255, 0.04);
+        }
+
+        .tb-story-num {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--lilac);
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 2px;
+        }
+
+        .tb-story-step h3 {
+            margin-bottom: 8px;
+            font-family: var(--font-display);
+            font-size: clamp(1.4rem, 2.4vw, 2rem);
+            line-height: 1.15;
+        }
+
+        .tb-story-step p { color: rgba(255, 255, 255, 0.72); font-size: 0.95rem; line-height: 1.7; }
+
+        .tb-story-meta {
+            display: none;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            margin-bottom: 18px;
+        }
+
+        .tb-story-count {
+            color: #fff;
+            font-family: var(--font-display);
+            font-size: 1.3rem;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .tb-story-meter {
+            flex: 1;
+            max-width: 160px;
+            height: 3px;
+            overflow: hidden;
+            border-radius: 3px;
+            background: rgba(255, 255, 255, 0.14);
+        }
+
+        .tb-story-fill {
+            display: block;
+            height: 100%;
+            background: linear-gradient(90deg, var(--purple-light), #fff);
+            transform: scaleX(0);
+            transform-origin: left center;
+        }
+
+        .tb-legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px 18px;
+            margin-top: 22px;
+            color: rgba(255, 255, 255, 0.62);
             font-size: 12px;
+            font-weight: 600;
+        }
+
+        .tb-legend span { display: inline-flex; align-items: center; gap: 8px; }
+
+        .tb-legend i {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(140, 116, 224, 0.55);
+        }
+
+        .tb-legend i.yes { background: var(--yes); box-shadow: 0 0 0 3px rgba(239, 232, 255, 0.14); }
+
+        .tb-signal.is-story .tb-signal-stage {
+            height: calc(100vh - var(--nav-h));
+            height: calc(100svh - var(--nav-h));
+            display: flex;
+            align-items: center;
+            padding: 0;
+        }
+
+        .tb-signal.is-story .tb-field {
+            height: calc(100vh - var(--nav-h) - 96px);
+            height: calc(100svh - var(--nav-h) - 96px);
+            max-height: 620px;
+        }
+
+        .tb-signal.is-story .tb-story-meta { display: flex; }
+
+        .tb-signal.is-story .tb-story { gap: 0; min-height: 230px; }
+
+        .tb-signal.is-story .tb-story-step {
+            grid-area: 1 / 1;
+            padding: 0;
+            border: 0;
+            background: none;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(14px);
+            transition: opacity 0.45s ease, transform 0.55s var(--ease-out), visibility 0.45s;
+        }
+
+        .tb-signal.is-story .tb-story-step.is-active {
+            opacity: 1;
+            visibility: visible;
+            transform: none;
+        }
+
+
+        /* =========================================================
+           DASHBOARD PAGES
+        ========================================================= */
+
+        .tb-pages { display: grid; gap: clamp(64px, 9vw, 112px); }
+
+        .tb-page {
+            display: grid;
+            grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
+            gap: clamp(32px, 5vw, 64px);
+            align-items: center;
+        }
+
+        .tb-page.reverse .tb-shot { order: 2; }
+
+        .tb-shot {
+            position: relative;
+            overflow: hidden;
+            padding: 8px;
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            background: #fff;
+            box-shadow: var(--shadow-md);
+        }
+
+        .tb-zoom {
+            position: relative;
+            display: block;
+            width: 100%;
+            padding: 0;
+            overflow: hidden;
+            border: 0;
+            border-radius: 12px;
+            background: none;
+            cursor: zoom-in;
+        }
+
+        .tb-zoom img { width: 100%; height: auto; border-radius: 12px; }
+
+        .tb-zoom-hint {
+            position: absolute;
+            right: 12px;
+            bottom: 12px;
+            padding: 6px 10px;
+            border-radius: 999px;
+            background: rgba(23, 17, 63, 0.82);
+            color: #fff;
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            opacity: 0;
+            transform: translateY(4px);
+            transition: opacity 0.25s ease, transform 0.25s ease;
+        }
+
+        .tb-zoom:hover .tb-zoom-hint,
+        .tb-zoom:focus-visible .tb-zoom-hint { opacity: 1; transform: none; }
+
+        .tb-page-copy h3 {
+            color: var(--ink-2);
+            font-family: var(--font-display);
+            font-size: clamp(1.7rem, 3vw, 2.4rem);
+            line-height: 1.12;
+        }
+
+        .tb-page-copy > p { margin-top: 14px; color: var(--text-soft); }
+
+        .tb-insights { margin-top: 22px; list-style: none; }
+
+        .tb-insights li {
+            display: flex;
+            gap: 13px;
+            padding: 13px 0;
+            border-bottom: 1px solid var(--border);
+            color: #4f4b5e;
+            font-size: 0.92rem;
+            line-height: 1.65;
+        }
+
+        .tb-insights li::before {
+            content: "";
+            flex: 0 0 7px;
+            width: 7px;
+            height: 7px;
+            margin-top: 9px;
+            border-radius: 50%;
+            background: var(--purple);
+        }
+
+
+        /* =========================================================
+           FINDINGS + TARGET + TOOLS
+        ========================================================= */
+
+        .tb-findings {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 16px;
+        }
+
+        .tb-finding {
+            padding: 30px 28px;
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            background: #fff;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .tb-finding strong {
+            display: block;
+            margin-bottom: 16px;
+            color: var(--purple-deep);
+            font-family: var(--font-display);
+            font-size: clamp(1.8rem, 3vw, 2.4rem);
+            line-height: 1;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .tb-finding h3 { margin-bottom: 8px; color: var(--ink-2); font-size: 1.05rem; }
+        .tb-finding p { color: var(--text-soft); font-size: 0.92rem; line-height: 1.7; }
+
+        .tb-target {
+            display: grid;
+            grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.75fr);
+            gap: clamp(28px, 5vw, 56px);
+            align-items: center;
+            padding: clamp(32px, 5vw, 56px);
+            border-radius: 26px;
+            color: #fff;
+            background:
+                radial-gradient(circle at 15% 10%, rgba(166, 139, 224, 0.32), transparent 42%),
+                linear-gradient(135deg, var(--ink-2), var(--ink-3));
+            box-shadow: 0 30px 70px rgba(23, 17, 63, 0.28);
+        }
+
+        .tb-target .tb-label { color: var(--lilac); }
+        .tb-target .tb-h2 { color: #fff; font-size: clamp(1.9rem, 3.6vw, 2.8rem); }
+
+        .tb-checks { display: grid; gap: 10px; margin-top: 26px; list-style: none; }
+
+        .tb-checks li {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 600;
+        }
+
+        .tb-checks li::before {
+            content: "\2713";
+            flex: 0 0 24px;
+            width: 24px;
+            height: 24px;
+            display: grid;
+            place-items: center;
+            border-radius: 50%;
+            background: rgba(188, 166, 255, 0.18);
+            color: var(--yes);
+            font-size: 12px;
+            font-weight: 800;
+        }
+
+        .tb-target-note { margin-top: 22px; color: rgba(255, 255, 255, 0.72); font-size: 0.95rem; line-height: 1.75; }
+
+        .tb-target-stat {
+            padding: 30px;
+            border: 1px solid rgba(188, 166, 255, 0.2);
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            text-align: center;
+        }
+
+        .tb-target-stat strong {
+            display: block;
+            color: var(--yes);
+            font-family: var(--font-display);
+            font-size: clamp(3rem, 6vw, 4.6rem);
+            line-height: 1;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .tb-target-stat span { display: block; margin-top: 12px; color: rgba(255, 255, 255, 0.72); font-size: 0.92rem; }
+        .tb-target-stat small { display: block; margin-top: 14px; color: rgba(255, 255, 255, 0.5); font-size: 12px; }
+
+        .tb-chips { display: flex; flex-wrap: wrap; gap: 10px; }
+
+        .tb-chips span {
+            padding: 10px 16px;
+            border: 1px solid #e3d9f4;
+            border-radius: 999px;
+            background: var(--lavender);
+            color: var(--purple-deep);
+            font-size: 13px;
             font-weight: 700;
         }
 
-
-        /* =========================================================
-           CTA
-        ========================================================= */
-
-        .cta {
-            padding: 100px 20px;
-
+        .tb-final {
+            margin-top: 72px;
+            padding: 64px 36px;
+            border-radius: 24px;
+            color: #fff;
+            text-align: center;
             background:
-                radial-gradient(
-                    circle at 20% 10%,
-                    rgba(150, 122, 236, 0.3),
-                    transparent 30%
-                ),
-                linear-gradient(
-                    135deg,
-                    #21164d,
-                    #4a358f
-                );
-
-            color: white;
-
-            text-align: center;
+                radial-gradient(circle at 20% 10%, rgba(166, 139, 224, 0.35), transparent 40%),
+                linear-gradient(135deg, var(--ink-2), var(--ink-3));
+            box-shadow: 0 30px 70px rgba(23, 17, 63, 0.28);
         }
 
-        .cta-container {
-            width: min(800px, 92%);
-            margin: auto;
-        }
+        .tb-final h2 { font-family: var(--font-display); font-size: clamp(2rem, 4vw, 3.2rem); line-height: 1.1; }
+        .tb-final p { max-width: 560px; margin: 16px auto 28px; color: rgba(255, 255, 255, 0.75); }
+        .tb-final .tb-actions { justify-content: center; margin-top: 0; }
 
-        .cta h2 {
-            font-family: Georgia, "Times New Roman", serif;
-
-            font-size: clamp(36px, 5vw, 58px);
-
-            line-height: 1.05;
-        }
-
-        .cta p {
-            margin: 20px auto 30px;
-
-            max-width: 600px;
-
-            color: rgba(255,255,255,0.72);
-
-            font-size: 14px;
-        }
-
-        .cta .btn-primary {
-            background: white;
-            color: #241754;
-        }
-
-
-        /* =========================================================
-           FOOTER
-        ========================================================= */
-
-        footer {
-            padding: 25px 20px;
-
-            background: #171238;
-
-            color: rgba(255,255,255,0.5);
-
-            text-align: center;
-
-            font-size: 11px;
-        }
+        .tb-footer { padding: 34px 0 48px; color: var(--text-faint); font-size: 13px; }
+        .tb-footer a { color: var(--purple-deep); font-weight: 700; }
 
 
         /* =========================================================
            LIGHTBOX
         ========================================================= */
 
-        .lightbox {
+        .tb-lightbox {
             position: fixed;
-
             inset: 0;
-
             z-index: 2000;
-
-            background: rgba(10, 8, 25, 0.94);
-
             display: none;
-
             align-items: center;
             justify-content: center;
-
-            padding: 30px;
+            padding: 5vh 4vw;
+            background: rgba(13, 9, 40, 0.9);
+            backdrop-filter: blur(6px);
         }
 
-        .lightbox.active {
-            display: flex;
+        .tb-lightbox.open { display: flex; animation: tbFade 0.25s ease; }
+
+        .tb-lightbox img {
+            max-width: 100%;
+            max-height: 86vh;
+            border-radius: 12px;
+            box-shadow: 0 40px 90px rgba(0, 0, 0, 0.45);
         }
 
-        .lightbox img {
-            max-width: 95vw;
-            max-height: 92vh;
-
-            object-fit: contain;
-
-            border-radius: 8px;
-        }
-
-        .lightbox-close {
-            position: fixed;
-
-            top: 20px;
-            right: 25px;
-
-            width: 45px;
-            height: 45px;
-
-            border-radius: 50%;
-
-            border: 1px solid rgba(255,255,255,0.2);
-
-            background: rgba(255,255,255,0.1);
-
-            color: white;
-
-            font-size: 20px;
-
+        .tb-lightbox-close {
+            position: absolute;
+            top: 18px;
+            right: 18px;
+            padding: 10px 16px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            font-size: 13px;
+            font-weight: 700;
             cursor: pointer;
         }
+
+        .tb-lightbox-caption {
+            position: absolute;
+            bottom: 18px;
+            left: 50%;
+            max-width: 90%;
+            transform: translateX(-50%);
+            color: rgba(255, 255, 255, 0.75);
+            font-size: 13px;
+            text-align: center;
+        }
+
+        @keyframes tbFade { from { opacity: 0; } to { opacity: 1; } }
 
 
         /* =========================================================
            RESPONSIVE
         ========================================================= */
 
-        @media (max-width: 850px) {
-
-            .nav-links {
-                display: none;
-            }
-
-            .stats {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .stat:nth-child(2) {
-                border-right: none;
-            }
-
-            .stat:nth-child(-n+2) {
-                border-bottom: 1px solid #eceaf2;
-            }
-
-            .overview-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .insight-grid {
-                grid-template-columns: 1fr;
-            }
-
+        @media (max-width: 1000px) {
+            .tb-hero-grid { grid-template-columns: minmax(0, 1fr); }
+            .tb-hero-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
         }
 
+        @media (max-width: 900px) {
 
-        @media (max-width: 550px) {
+            .tb-overview,
+            .tb-page,
+            .tb-page.reverse,
+            .tb-target,
+            .tb-stage-inner { grid-template-columns: minmax(0, 1fr); }
 
-            .hero {
-                padding-top: 80px;
+            .tb-page.reverse .tb-shot { order: 0; }
+
+            .tb-findings { grid-template-columns: minmax(0, 1fr); }
+
+            .tb-stage-inner { gap: 18px; }
+
+            .tb-field { height: 380px; }
+
+            .tb-signal.is-story .tb-field {
+                height: 50vh;
+                height: 50svh;
             }
 
-            .hero h1 {
-                letter-spacing: -1.5px;
-            }
+            .tb-signal.is-story .tb-story { min-height: 200px; }
 
-            .stats {
-                grid-template-columns: 1fr;
-            }
+            .tb-story-step h3 { font-size: 1.3rem; }
+            .tb-story-step p { font-size: 0.9rem; }
+            .tb-legend { margin-top: 14px; }
+        }
 
-            .stat {
-                border-right: none;
-                border-bottom: 1px solid #eceaf2;
+        @media (max-width: 700px) {
+            .tb-nav-inner {
+                -webkit-mask-image: linear-gradient(90deg, #000 85%, transparent);
+                mask-image: linear-gradient(90deg, #000 85%, transparent);
             }
+        }
 
-            .stat:last-child {
-                border-bottom: none;
+        @media (max-width: 600px) {
+            .tb-hero { padding: 68px 0 72px; }
+            .tb-actions .tb-btn { width: 100%; }
+            .tb-hero-stats { gap: 10px; margin-top: 40px; }
+            .tb-hero-stats div { padding: 16px; }
+            .tb-card { padding: 24px 20px; }
+            .tb-final { padding: 48px 22px; }
+        }
+
+        @media (max-width: 480px) {
+            .tb-title { font-size: 13vw; }
+            .tb-eyebrow { font-size: 9px; letter-spacing: 1.3px; }
+            .tb-signal.is-story .tb-story { min-height: 220px; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+
+            html { scroll-behavior: auto; }
+
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
             }
-
-            .section {
-                padding: 70px 18px;
-            }
-
-            .overview-card {
-                padding: 24px;
-            }
-
-            .dashboard-card {
-                padding: 8px;
-            }
-
         }
 
     </style>
-
 </head>
 
 
 <body>
 
+    <div class="tb-progress" aria-hidden="true"></div>
 
-<!-- =========================================================
-     NAVIGATION
-========================================================= -->
 
-<nav class="navbar">
+    <!-- =========================================================
+         HERO
+    ========================================================= -->
 
-    <div class="nav-container">
+    <header class="tb-hero" id="top">
 
-        <a href="../../index.html" class="brand">
-            Sodiq<span>.</span>
-        </a>
+        <div class="tb-wrap">
 
-        <div class="nav-links">
+            <div class="tb-hero-grid">
 
-            <a href="#overview">
-                Overview
-            </a>
+                <div>
 
-            <a href="#dashboard">
-                Dashboard
-            </a>
+                    <div class="tb-eyebrow" data-hero-item>CASE STUDY 03 · BANKING ANALYTICS</div>
 
-            <a href="#insights">
-                Insights
-            </a>
+                    <h1 class="tb-title">THERA Bank</h1>
 
-            <a href="#tools">
-                Tools
-            </a>
+                    <p class="tb-subtitle" data-hero-item>Personal Loan Campaign Analysis</p>
 
-        </div>
+                    <p class="tb-desc" data-hero-item>
+                        A focused business intelligence case study analyzing
+                        customer behavior, personal loan acceptance and
+                        campaign targeting to identify higher-potential
+                        customer segments.
+                    </p>
 
-    </div>
+                    <div class="tb-actions" data-hero-item>
 
-</nav>
+                        <a href="#signal" class="tb-btn tb-btn-primary">See Who Said Yes</a>
 
+                        <a href="https://github.com/sodiqoluwatimileyin190-oss/sodiqoluwatimileyin190-oss.github.io/tree/main/projects/thera-bank-loan-analytics"
+                           target="_blank"
+                           rel="noopener"
+                           class="tb-btn tb-btn-secondary">View Project on GitHub</a>
 
-
-<!-- =========================================================
-     HERO
-========================================================= -->
-
-<section class="hero">
-
-    <div class="hero-container">
-
-        <span class="eyebrow">
-            Power BI Case Study
-        </span>
-
-        <h1>
-            THERA Bank —
-            <span>Personal Loan Campaign Analysis</span>
-        </h1>
-
-        <p class="hero-description">
-
-            A focused business intelligence case study analyzing
-            customer behavior, personal loan acceptance and
-            campaign targeting to identify higher-potential
-            customer segments.
-
-        </p>
-
-
-        <div class="hero-buttons">
-
-            <a
-                href="#dashboard"
-                class="btn btn-primary"
-            >
-                Explore Dashboard
-                <i class="fas fa-arrow-down"></i>
-            </a>
-
-            <a
-                href="https://github.com/sodiqoluwatimileyin190-oss/sodiqoluwatimileyin190-oss.github.io/tree/main/projects/thera-bank-loan-analytics"
-                target="_blank"
-                rel="noopener"
-                class="btn btn-secondary"
-            >
-                View GitHub
-                <i class="fab fa-github"></i>
-            </a>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-
-<!-- =========================================================
-     PROJECT STATS
-========================================================= -->
-
-<div class="stats">
-
-    <div class="stat">
-
-        <strong>5,000</strong>
-
-        <span>
-            Customers
-        </span>
-
-    </div>
-
-
-    <div class="stat">
-
-        <strong>480</strong>
-
-        <span>
-            Accepted Loans
-        </span>
-
-    </div>
-
-
-    <div class="stat">
-
-        <strong>9.6%</strong>
-
-        <span>
-            Acceptance Rate
-        </span>
-
-    </div>
-
-
-    <div class="stat">
-
-        <strong>3</strong>
-
-        <span>
-            Dashboard Pages
-        </span>
-
-    </div>
-
-</div>
-
-
-
-<!-- =========================================================
-     OVERVIEW
-========================================================= -->
-
-<section
-    class="section overview"
-    id="overview"
->
-
-    <div class="section-container">
-
-        <div class="section-heading">
-
-            <div class="section-label">
-                01 — Project Overview
-            </div>
-
-            <h2>
-                Understanding who converts.
-            </h2>
-
-            <p>
-
-                The analysis examines customer characteristics,
-                banking relationships and demographic segments
-                associated with personal loan acceptance.
-
-            </p>
-
-        </div>
-
-
-        <div class="overview-grid">
-
-
-            <div class="overview-card">
-
-                <h3>
-                    Business Problem
-                </h3>
-
-                <p>
-
-                    THERA Bank's personal loan campaign recorded
-                    a relatively low overall acceptance rate.
-                    The objective was to determine which customer
-                    profiles were more likely to accept a personal
-                    loan offer and translate those patterns into
-                    actionable targeting recommendations.
-
-                </p>
-
-            </div>
-
-
-            <div class="overview-card">
-
-                <h3>
-                    Analysis Focus
-                </h3>
-
-                <ul class="focus-list">
-
-                    <li>
-                        <i class="fas fa-check"></i>
-                        Personal loan acceptance
-                    </li>
-
-                    <li>
-                        <i class="fas fa-check"></i>
-                        Income & education segments
-                    </li>
-
-                    <li>
-                        <i class="fas fa-check"></i>
-                        Age & family characteristics
-                    </li>
-
-                    <li>
-                        <i class="fas fa-check"></i>
-                        Banking relationships
-                    </li>
-
-                    <li>
-                        <i class="fas fa-check"></i>
-                        Mortgage ownership
-                    </li>
-
-                </ul>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-
-<!-- =========================================================
-     DASHBOARD
-========================================================= -->
-
-<section
-    class="section dashboard-section"
-    id="dashboard"
->
-
-    <div class="section-container">
-
-        <div class="section-heading">
-
-            <div class="section-label">
-                02 — Power BI Dashboard
-            </div>
-
-            <h2>
-                From customer behavior to targeting strategy.
-            </h2>
-
-            <p>
-
-                The dashboard is structured across three analytical
-                views: executive overview, customer behavior and
-                strategic recommendations.
-
-            </p>
-
-        </div>
-
-
-        <div class="dashboard-gallery">
-
-
-            <!-- PAGE 1 -->
-
-            <article class="dashboard-card">
-
-                <div class="dashboard-image">
-
-                    <img
-                        src="images/executive-overview.png"
-                        alt="THERA Bank Executive Overview Dashboard"
-                        class="zoomable"
-                    >
+                    </div>
 
                 </div>
 
-                <div class="dashboard-info">
+                <div class="tb-hero-frame" data-hero-item>
+                    <button class="tb-zoom" type="button" aria-label="Enlarge the THERA Bank executive overview">
+                        <img src="images/executive-overview.png"
+                             alt="THERA Bank Executive Overview dashboard">
+                        <span class="tb-zoom-hint">CLICK TO ENLARGE</span>
+                    </button>
+                </div>
 
-                    <div class="dashboard-number">
-                        Dashboard 01
-                    </div>
+            </div>
 
-                    <h3>
-                        Executive Overview
-                    </h3>
+            <div class="tb-hero-stats" data-hero-item>
 
-                    <p>
+                <div>
+                    <strong data-count>5,000</strong>
+                    <span>Customers</span>
+                </div>
 
-                        High-level view of customer volume,
-                        loan acceptance, income segments,
-                        age groups and education-level performance.
+                <div>
+                    <strong data-count>480</strong>
+                    <span>Accepted Loans</span>
+                </div>
 
+                <div>
+                    <strong data-count>9.6%</strong>
+                    <span>Acceptance Rate</span>
+                </div>
+
+                <div>
+                    <strong data-count>3</strong>
+                    <span>Dashboard Pages</span>
+                </div>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- =========================================================
+         SECTION NAV
+    ========================================================= -->
+
+    <nav class="tb-nav" aria-label="Case study sections">
+
+        <div class="tb-nav-inner">
+
+            <a class="tb-nav-home" href="../../index.html#other-projects">← Portfolio</a>
+            <a href="#overview">Overview</a>
+            <a href="#signal">Who Said Yes</a>
+            <a href="#dashboard">Dashboard</a>
+            <a href="#findings">Findings</a>
+            <a href="#target">Target</a>
+            <a href="#tools">Tools</a>
+
+        </div>
+
+    </nav>
+
+
+    <main id="main" tabindex="-1">
+
+
+        <!-- =====================================================
+             01 — PROJECT OVERVIEW
+        ====================================================== -->
+
+        <section class="tb-section" id="overview" data-nav>
+
+            <div class="tb-wrap">
+
+                <div class="tb-head">
+
+                    <span class="tb-label">01 — PROJECT OVERVIEW</span>
+
+                    <h2 class="tb-h2" data-split>Understanding who converts.</h2>
+
+                    <p class="tb-lead" data-reveal>
+                        The analysis examines customer characteristics,
+                        banking relationships and demographic segments
+                        associated with personal loan acceptance.
                     </p>
 
                 </div>
 
-            </article>
+                <div class="tb-overview">
 
+                    <article class="tb-card" data-reveal>
+                        <h3>Business Problem</h3>
+                        <p>
+                            THERA Bank's personal loan campaign recorded
+                            a relatively low overall acceptance rate.
+                            The objective was to determine which customer
+                            profiles were more likely to accept a personal
+                            loan offer and translate those patterns into
+                            actionable targeting recommendations.
+                        </p>
+                    </article>
 
-
-            <!-- PAGE 2 -->
-
-            <article class="dashboard-card">
-
-                <div class="dashboard-image">
-
-                    <img
-                        src="images/customer-behavior.png"
-                        alt="THERA Bank Customer Behavior Dashboard"
-                        class="zoomable"
-                    >
+                    <article class="tb-card" data-reveal>
+                        <h3>Analysis Focus</h3>
+                        <ul class="tb-focus-list">
+                            <li>Personal loan acceptance</li>
+                            <li>Income &amp; education segments</li>
+                            <li>Age &amp; family characteristics</li>
+                            <li>Banking relationships</li>
+                            <li>Mortgage ownership</li>
+                        </ul>
+                    </article>
 
                 </div>
 
-                <div class="dashboard-info">
+            </div>
 
-                    <div class="dashboard-number">
-                        Dashboard 02
-                    </div>
+        </section>
 
-                    <h3>
-                        Customer Behavior & Banking Relationships
-                    </h3>
 
-                    <p>
+        <!-- =====================================================
+             02 — WHO SAID YES
+        ====================================================== -->
 
-                        Examines family size, professional experience,
-                        banking services, credit card ownership and
-                        mortgage relationships.
+        <section class="tb-signal" id="signal" data-nav>
 
+            <div class="tb-wrap">
+
+                <div class="tb-head">
+
+                    <span class="tb-label">02 — WHO SAID YES</span>
+
+                    <h2 class="tb-h2" data-split>From 9.6% to nearly 80%.</h2>
+
+                    <p class="tb-lead" data-reveal>
+                        Follow the campaign one filter at a time. Every dot is a
+                        customer, and the bright ones accepted the loan.
                     </p>
 
                 </div>
 
-            </article>
+            </div>
 
+            <div class="tb-signal-stage">
 
+                <div class="tb-wrap tb-stage-inner">
 
-            <!-- PAGE 3 -->
+                    <div class="tb-field"
+                         role="img"
+                         aria-label="Dot chart. 480 of 5,000 customers accepted the loan. Per 100 customers: high income 35.9, middle income 2.1; Professional 13.7, Graduate 13.0, Undergraduate 4.4; high-income Graduates 79.2 and high-income Professionals 77.6.">
+                        <canvas aria-hidden="true"></canvas>
+                    </div>
 
-            <article class="dashboard-card">
+                    <div class="tb-story-panel">
 
-                <div class="dashboard-image">
+                        <div class="tb-story-meta" aria-hidden="true">
+                            <span class="tb-story-count">01 / 04</span>
+                            <span class="tb-story-meter"><span class="tb-story-fill"></span></span>
+                        </div>
 
-                    <img
-                        src="images/strategic-recommendations.png"
-                        alt="THERA Bank Strategic Recommendations Dashboard"
-                        class="zoomable"
-                    >
+                        <ol class="tb-story">
+
+                            <li class="tb-story-step">
+                                <span class="tb-story-num">THE CAMPAIGN</span>
+                                <h3>480 of 5,000 said yes.</h3>
+                                <p>
+                                    Only 9.6% of customers accepted the personal loan
+                                    offer, which left plenty of room for sharper
+                                    targeting.
+                                </p>
+                            </li>
+
+                            <li class="tb-story-step">
+                                <span class="tb-story-num">INCOME</span>
+                                <h3>Income is the first filter.</h3>
+                                <p>
+                                    Out of every 100 high-income customers, about 36
+                                    accepted (35.9%). Among middle-income customers it
+                                    was about 2 (2.1%), and low-income customers
+                                    recorded virtually no acceptance.
+                                </p>
+                            </li>
+
+                            <li class="tb-story-step">
+                                <span class="tb-story-num">EDUCATION</span>
+                                <h3>Education sharpens it.</h3>
+                                <p>
+                                    Professional (13.7%) and Graduate (13.0%) customers
+                                    accepted at roughly three times the Undergraduate
+                                    rate (4.4%).
+                                </p>
+                            </li>
+
+                            <li class="tb-story-step">
+                                <span class="tb-story-num">THE TARGET</span>
+                                <h3>Together, they find the buyers.</h3>
+                                <p>
+                                    High-income Graduates accepted at 79.2% and
+                                    high-income Professionals at 77.6%, more than eight
+                                    times the campaign's overall rate.
+                                </p>
+                            </li>
+
+                        </ol>
+
+                        <div class="tb-legend" aria-hidden="true">
+                            <span><i class="yes"></i>Accepted the loan</span>
+                            <span><i></i>Didn't accept</span>
+                            <span>Segments shown per 100 customers</span>
+                        </div>
+
+                    </div>
 
                 </div>
 
-                <div class="dashboard-info">
+            </div>
 
-                    <div class="dashboard-number">
-                        Dashboard 03
-                    </div>
+        </section>
 
-                    <h3>
-                        Strategic Recommendations & Targeting
-                    </h3>
 
-                    <p>
+        <!-- =====================================================
+             03 — POWER BI DASHBOARD
+        ====================================================== -->
 
-                        Converts the analytical findings into
-                        actionable customer profiles and campaign
-                        targeting recommendations.
+        <section class="tb-section tb-white" id="dashboard" data-nav>
 
+            <div class="tb-wrap">
+
+                <div class="tb-head">
+
+                    <span class="tb-label">03 — POWER BI DASHBOARD</span>
+
+                    <h2 class="tb-h2" data-split>From customer behavior to targeting strategy.</h2>
+
+                    <p class="tb-lead" data-reveal>
+                        The dashboard is structured across three analytical
+                        views: executive overview, customer behavior and
+                        strategic recommendations.
                     </p>
 
                 </div>
 
-            </article>
+                <div class="tb-pages">
 
+                    <div class="tb-page">
 
-        </div>
+                        <div class="tb-shot">
+                            <button class="tb-zoom" type="button" aria-label="Enlarge the Executive Overview page">
+                                <img src="images/executive-overview.png"
+                                     alt="THERA Bank Executive Overview dashboard"
+                                     loading="lazy">
+                                <span class="tb-zoom-hint">CLICK TO ENLARGE</span>
+                            </button>
+                        </div>
 
-    </div>
+                        <div class="tb-page-copy">
+                            <span class="tb-label">DASHBOARD 01</span>
+                            <h3>Executive Overview</h3>
+                            <p data-reveal>
+                                High-level view of customer volume, loan acceptance,
+                                income segments, age groups and education-level
+                                performance.
+                            </p>
+                            <ul class="tb-insights">
+                                <li>4,520 of 5,000 customers turned the offer down.</li>
+                                <li>Age barely moves acceptance: 9.4% to 10.6% across age groups.</li>
+                                <li>High-income customers accepted at 35.9%, middle-income at 2.1%.</li>
+                            </ul>
+                        </div>
 
-</section>
+                    </div>
 
+                    <div class="tb-page reverse">
 
+                        <div class="tb-shot">
+                            <button class="tb-zoom" type="button" aria-label="Enlarge the Customer Behavior page">
+                                <img src="images/customer-behavior.png"
+                                     alt="THERA Bank Customer Behavior and Banking Relationships dashboard"
+                                     loading="lazy">
+                                <span class="tb-zoom-hint">CLICK TO ENLARGE</span>
+                            </button>
+                        </div>
 
-<!-- =========================================================
-     INSIGHTS
-========================================================= -->
+                        <div class="tb-page-copy">
+                            <span class="tb-label">DASHBOARD 02</span>
+                            <h3>Customer Behavior &amp; Banking Relationships</h3>
+                            <p data-reveal>
+                                Examines family size, professional experience,
+                                banking services, credit card ownership and
+                                mortgage relationships.
+                            </p>
+                            <ul class="tb-insights">
+                                <li>Families of three accepted most often (13.2%); single-person households least (7.3%).</li>
+                                <li>Securities account holders accepted at 11.5%, versus 9.4% without one.</li>
+                                <li>Credit cards, online banking and experience level barely moved acceptance.</li>
+                            </ul>
+                        </div>
 
-<section
-    class="section insights"
-    id="insights"
->
+                    </div>
 
-    <div class="section-container">
+                    <div class="tb-page">
 
-        <div class="section-heading">
+                        <div class="tb-shot">
+                            <button class="tb-zoom" type="button" aria-label="Enlarge the Strategic Recommendations page">
+                                <img src="images/strategic-recommendations.png"
+                                     alt="THERA Bank Strategic Recommendations and Customer Targeting dashboard"
+                                     loading="lazy">
+                                <span class="tb-zoom-hint">CLICK TO ENLARGE</span>
+                            </button>
+                        </div>
 
-            <div class="section-label">
-                03 — Key Findings
+                        <div class="tb-page-copy">
+                            <span class="tb-label">DASHBOARD 03</span>
+                            <h3>Strategic Recommendations &amp; Targeting</h3>
+                            <p data-reveal>
+                                Converts the analytical findings into actionable
+                                customer profiles and campaign targeting
+                                recommendations.
+                            </p>
+                            <ul class="tb-insights">
+                                <li>Acceptors averaged $144.75K in income versus $66.24K, and more than double the credit card spending.</li>
+                                <li>High-income Graduates (79.2%) and Professionals (77.6%) are the standout segments.</li>
+                                <li>ZIP code 94720 produced the most accepted loans (19), followed by 94305 (13).</li>
+                            </ul>
+                        </div>
+
+                    </div>
+
+                </div>
+
             </div>
 
-            <h2>
-                What the analysis revealed.
-            </h2>
-
-            <p>
-
-                The dashboard highlights several customer characteristics
-                associated with stronger loan acceptance.
-
-            </p>
-
-        </div>
+        </section>
 
 
-        <div class="insight-grid">
+        <!-- =====================================================
+             04 — KEY FINDINGS
+        ====================================================== -->
 
+        <section class="tb-section" id="findings" data-nav>
 
-            <article class="insight-card">
+            <div class="tb-wrap">
 
-                <div class="insight-icon">
+                <div class="tb-head">
 
-                    <i class="fas fa-chart-line"></i>
+                    <span class="tb-label">04 — KEY FINDINGS</span>
 
-                </div>
+                    <h2 class="tb-h2" data-split>What the analysis revealed.</h2>
 
-                <h3>
-                    Acceptance was highly concentrated
-                </h3>
-
-                <p>
-
-                    Only 9.6% of the 5,000 customers accepted
-                    the personal loan offer, indicating substantial
-                    room for more precise campaign targeting.
-
-                </p>
-
-            </article>
-
-
-
-            <article class="insight-card">
-
-                <div class="insight-icon">
-
-                    <i class="fas fa-user-graduate"></i>
+                    <p class="tb-lead" data-reveal>
+                        The dashboard highlights several customer characteristics
+                        associated with stronger loan acceptance.
+                    </p>
 
                 </div>
 
-                <h3>
-                    Education mattered
-                </h3>
+                <div class="tb-findings">
 
-                <p>
+                    <article class="tb-finding" data-reveal>
+                        <strong>9.6%</strong>
+                        <h3>Acceptance was highly concentrated</h3>
+                        <p>
+                            Only 9.6% of the 5,000 customers accepted the personal
+                            loan offer, indicating substantial room for more precise
+                            campaign targeting.
+                        </p>
+                    </article>
 
-                    Professional and graduate customers recorded
-                    considerably stronger acceptance rates than
-                    undergraduate customers.
+                    <article class="tb-finding" data-reveal>
+                        <strong>13.7% vs 4.4%</strong>
+                        <h3>Education mattered</h3>
+                        <p>
+                            Professional and graduate customers recorded considerably
+                            stronger acceptance rates than undergraduate customers.
+                        </p>
+                    </article>
 
-                </p>
-
-            </article>
-
-
-
-            <article class="insight-card">
-
-                <div class="insight-icon">
-
-                    <i class="fas fa-coins"></i>
+                    <article class="tb-finding" data-reveal>
+                        <strong>35.9% vs 2.1%</strong>
+                        <h3>Higher income was a major signal</h3>
+                        <p>
+                            Loan acceptance was heavily concentrated among
+                            higher-income customers, making income an important
+                            variable for future campaign prioritization.
+                        </p>
+                    </article>
 
                 </div>
 
-                <h3>
-                    Higher income was a major signal
-                </h3>
-
-                <p>
-
-                    Loan acceptance was heavily concentrated among
-                    higher-income customers, making income an important
-                    variable for future campaign prioritization.
-
-                </p>
-
-            </article>
-
-
-
-        </div>
-
-    </div>
-
-</section>
-
-
-
-<!-- =========================================================
-     TOOLS
-========================================================= -->
-
-<section
-    class="section"
-    id="tools"
->
-
-    <div class="section-container">
-
-        <div class="section-heading">
-
-            <div class="section-label">
-                04 — Technical Approach
             </div>
 
-            <h2>
-                Built for business decision-making.
-            </h2>
+        </section>
 
-            <p>
 
-                The project focuses on analytical reasoning,
-                segmentation and dashboard storytelling rather
-                than simply presenting charts.
+        <!-- =====================================================
+             05 — RECOMMENDED TARGET
+        ====================================================== -->
 
-            </p>
+        <section class="tb-section tb-white" id="target" data-nav>
 
+            <div class="tb-wrap">
+
+                <div class="tb-target" data-reveal>
+
+                    <div>
+
+                        <span class="tb-label">05 — RECOMMENDED TARGET PROFILE</span>
+
+                        <h2 class="tb-h2">Who the next campaign should reach first.</h2>
+
+                        <ul class="tb-checks">
+                            <li>High-income customers</li>
+                            <li>Graduate or Professional education</li>
+                            <li>Family size of 3–4</li>
+                            <li>High mortgage commitments</li>
+                            <li>Securities account holders</li>
+                        </ul>
+
+                        <p class="tb-target-note">
+                            These customer segments consistently recorded the highest
+                            loan acceptance rates across income, education, family size
+                            and banking relationship analyses. Targeting these profiles
+                            is expected to maximize campaign conversion rates and improve
+                            marketing ROI.
+                        </p>
+
+                    </div>
+
+                    <div class="tb-target-stat">
+                        <strong data-count>79.2%</strong>
+                        <span>acceptance among high-income Graduates</span>
+                        <small>versus 9.6% across the whole campaign</small>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             06 — TECHNICAL APPROACH
+        ====================================================== -->
+
+        <section class="tb-section" id="tools" data-nav>
+
+            <div class="tb-wrap">
+
+                <div class="tb-head">
+
+                    <span class="tb-label">06 — TECHNICAL APPROACH</span>
+
+                    <h2 class="tb-h2" data-split>Built for business decision-making.</h2>
+
+                    <p class="tb-lead" data-reveal>
+                        The project focuses on analytical reasoning,
+                        segmentation and dashboard storytelling rather
+                        than simply presenting charts.
+                    </p>
+
+                </div>
+
+                <div class="tb-chips" data-reveal>
+                    <span>Power BI</span>
+                    <span>DAX</span>
+                    <span>Data Modeling</span>
+                    <span>Customer Segmentation</span>
+                    <span>Business Analysis</span>
+                    <span>KPI Development</span>
+                    <span>Data Storytelling</span>
+                </div>
+
+                <div class="tb-final" data-reveal>
+
+                    <h2>Explore the analysis.</h2>
+
+                    <p>
+                        View the project repository, dashboard screenshots
+                        and supporting documentation on GitHub.
+                    </p>
+
+                    <div class="tb-actions">
+
+                        <a href="https://github.com/sodiqoluwatimileyin190-oss/sodiqoluwatimileyin190-oss.github.io/tree/main/projects/thera-bank-loan-analytics"
+                           target="_blank"
+                           rel="noopener"
+                           class="tb-btn tb-btn-primary">View Project on GitHub</a>
+
+                        <a href="../../index.html#other-projects" class="tb-btn tb-btn-secondary">Back to Portfolio</a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <footer class="tb-footer">
+        <div class="tb-wrap">
+            <a href="../../index.html#other-projects">← Back to portfolio</a>
+            &nbsp;·&nbsp; © 2026 Sodiq Oluwatimileyin. THERA Bank Analytics Case Study.
         </div>
+    </footer>
 
 
-        <div class="tools">
-
-            <span class="tool">
-                Power BI
-            </span>
-
-            <span class="tool">
-                DAX
-            </span>
-
-            <span class="tool">
-                Data Modeling
-            </span>
-
-            <span class="tool">
-                Customer Segmentation
-            </span>
-
-            <span class="tool">
-                Business Analysis
-            </span>
-
-            <span class="tool">
-                KPI Development
-            </span>
-
-            <span class="tool">
-                Data Storytelling
-            </span>
-
-        </div>
-
+    <div class="tb-lightbox" role="dialog" aria-modal="true" aria-label="Enlarged image" aria-hidden="true">
+        <button class="tb-lightbox-close" type="button">Close</button>
+        <img src="" alt="">
+        <div class="tb-lightbox-caption"></div>
     </div>
 
-</section>
+
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/SplitText.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lenis@1.3.26/dist/lenis.min.js"></script>
+
+    <script>
+    (function () {
+
+        "use strict";
+
+        window.__tbReady = true;
+
+        const root = document.documentElement;
+        const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        const hasGSAP = typeof window.gsap !== "undefined" && typeof window.ScrollTrigger !== "undefined";
+        const hasSplit = hasGSAP && typeof window.SplitText !== "undefined";
+        const motion = hasGSAP && !reduceMotion;
+        const nav = document.querySelector(".tb-nav");
+
+        function navHeight() {
+            return nav ? nav.offsetHeight : 0;
+        }
+
+        function clamp(value, min, max) {
+            return Math.min(max, Math.max(min, value));
+        }
+
+        function easeInOutCubic(t) {
+            return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+        }
+
+        if (!hasGSAP) {
+            root.classList.remove("tb-js");
+        }
 
 
+        /* =====================================================
+           WHO SAID YES — 5,000 customers as dots
+        ====================================================== */
 
-<!-- =========================================================
-     CTA
-========================================================= -->
+        const TOTAL = 5000;
+        const ACCEPTED = 480;
 
-<section class="cta">
+        const STAGES = [
+            null,
+            [["High Income", 35.9], ["Middle Income", 2.1]],
+            [["Professional", 13.7], ["Graduate", 13.0], ["Undergraduate", 4.4]],
+            [
+                ["High | Graduate", 79.2], ["High | Professional", 77.6], ["High | Undergraduate", 10.5],
+                ["Medium | Graduate", 2.5], ["Medium | Professional", 2.2], ["Medium | Undergraduate", 1.9]
+            ]
+        ];
 
-    <div class="cta-container">
+        function createField(canvas, host) {
 
-        <h2>
-            Explore the analysis.
-        </h2>
+            const ctx = canvas.getContext("2d");
 
-        <p>
+            if (!ctx) {
+                return null;
+            }
 
-            View the project repository, dashboard screenshots
-            and supporting documentation on GitHub.
+            const COLOR_YES = "#efe8ff";
+            const COLOR_NO = "#8c74e0";
+            const TAU = Math.PI * 2;
 
-        </p>
+            let seed = 20260615;
+
+            function random() {
+                seed = (seed * 1664525 + 1013904223) % 4294967296;
+                return seed / 4294967296;
+            }
+
+            const order = [];
+
+            for (let i = 0; i < TOTAL; i++) {
+                order.push(i);
+            }
+
+            for (let i = TOTAL - 1; i > 0; i--) {
+                const j = Math.floor(random() * (i + 1));
+                const swap = order[i];
+                order[i] = order[j];
+                order[j] = swap;
+            }
+
+            const yesPool = order.slice(0, ACCEPTED);
+            const noPool = order.slice(ACCEPTED);
+            const isYes = new Uint8Array(TOTAL);
+
+            yesPool.forEach(function (index) {
+                isYes[index] = 1;
+            });
+
+            const state = { width: 0, height: 0, compact: false, progress: 0, layouts: [] };
+
+            function overview(W, H) {
+
+                const X = new Float32Array(TOTAL);
+                const Y = new Float32Array(TOTAL);
+                const A = new Float32Array(TOTAL);
+                const S = new Float32Array(TOTAL);
+
+                const cols = Math.max(25, Math.round(Math.sqrt(TOTAL * W / H)));
+                const rows = Math.ceil(TOTAL / cols);
+                const pitch = Math.min((W * 0.94) / cols, (H * 0.9) / rows);
+                const size = Math.max(1.6, pitch * 0.62);
+                const left = (W - cols * pitch) / 2 + pitch / 2;
+                const top = (H - rows * pitch) / 2 + pitch / 2;
+
+                for (let i = 0; i < TOTAL; i++) {
+                    X[i] = left + (i % cols) * pitch;
+                    Y[i] = top + Math.floor(i / cols) * pitch;
+                    A[i] = isYes[i] ? 1 : 0.42;
+                    S[i] = size;
+                }
+
+                return { X: X, Y: Y, A: A, S: S, labels: [] };
+            }
+
+            function groups(list, W, H, base) {
+
+                const X = Float32Array.from(base.X);
+                const Y = Float32Array.from(base.Y);
+                const A = new Float32Array(TOTAL);
+                const S = Float32Array.from(base.S);
+
+                const cols = Math.min(list.length, 3);
+                const rows = Math.ceil(list.length / cols);
+                const labelH = state.compact ? 56 : 58;
+                const cellW = W / cols;
+                const cellH = H / rows;
+                const grid = Math.min(cellW * 0.74, (cellH - labelH) * 0.9, 240);
+                const pitch = grid / 10;
+                const size = Math.max(2, pitch * 0.64);
+                const labels = [];
+
+                let yi = 0;
+                let ni = 0;
+
+                list.forEach(function (group, g) {
+
+                    const cx = (g % cols + 0.5) * cellW;
+                    const top = Math.floor(g / cols) * cellH + (cellH - labelH - grid) / 2;
+                    const left = cx - grid / 2;
+                    const yes = Math.round(group[1]);
+
+                    for (let k = 0; k < 100; k++) {
+                        const index = k < yes ? yesPool[yi++] : noPool[ni++];
+                        X[index] = left + (k % 10) * pitch + pitch / 2;
+                        Y[index] = top + (9 - Math.floor(k / 10)) * pitch + pitch / 2;
+                        A[index] = k < yes ? 1 : 0.42;
+                        S[index] = size;
+                    }
+
+                    labels.push({
+                        x: cx,
+                        y: top + grid + (state.compact ? 8 : 12),
+                        rate: group[1].toFixed(1) + "%",
+                        lines: state.compact ? group[0].split(" | ") : [group[0]]
+                    });
+                });
+
+                return { X: X, Y: Y, A: A, S: S, labels: labels };
+            }
+
+            function drawLabels(labels, alpha) {
+
+                if (alpha <= 0) {
+                    return;
+                }
+
+                const big = state.compact ? 15 : 20;
+                const small = state.compact ? 10 : 12;
+
+                ctx.save();
+                ctx.globalAlpha = alpha;
+                ctx.textAlign = "center";
+                ctx.textBaseline = "top";
+
+                labels.forEach(function (label) {
+                    ctx.fillStyle = COLOR_YES;
+                    ctx.font = "700 " + big + "px Inter, system-ui, sans-serif";
+                    ctx.fillText(label.rate, label.x, label.y);
+                    ctx.fillStyle = "rgba(255, 255, 255, 0.62)";
+                    ctx.font = "600 " + small + "px Inter, system-ui, sans-serif";
+                    label.lines.forEach(function (line, i) {
+                        ctx.fillText(line, label.x, label.y + big + 4 + i * (small + 3));
+                    });
+                });
+
+                ctx.restore();
+            }
+
+            function draw() {
+
+                if (!state.layouts.length) {
+                    return;
+                }
+
+                const last = state.layouts.length - 1;
+                const a = Math.min(Math.floor(state.progress), last);
+                const b = Math.min(a + 1, last);
+                const t = state.progress - a;
+                const LA = state.layouts[a];
+                const LB = state.layouts[b];
+
+                ctx.clearRect(0, 0, state.width, state.height);
+
+                for (let pass = 0; pass < 2; pass++) {
+
+                    const list = pass === 0 ? noPool : yesPool;
+                    ctx.fillStyle = pass === 0 ? COLOR_NO : COLOR_YES;
+
+                    for (let n = 0; n < list.length; n++) {
+
+                        const i = list[n];
+                        const delay = (i % 97) / 97 * 0.3;
+                        const e = easeInOutCubic(clamp((t - delay) / 0.7, 0, 1));
+                        const alpha = LA.A[i] + (LB.A[i] - LA.A[i]) * e;
+
+                        if (alpha < 0.02) {
+                            continue;
+                        }
+
+                        const x = LA.X[i] + (LB.X[i] - LA.X[i]) * e;
+                        const y = LA.Y[i] + (LB.Y[i] - LA.Y[i]) * e;
+                        const r = (LA.S[i] + (LB.S[i] - LA.S[i]) * e) / 2;
+
+                        ctx.globalAlpha = alpha;
+                        ctx.beginPath();
+                        ctx.arc(x, y, r, 0, TAU);
+                        ctx.fill();
+                    }
+                }
+
+                ctx.globalAlpha = 1;
+                drawLabels(LA.labels, clamp(1 - t * 2.5, 0, 1));
+
+                if (b !== a) {
+                    drawLabels(LB.labels, clamp((t - 0.6) / 0.4, 0, 1));
+                }
+            }
+
+            function build() {
+
+                const rect = host.getBoundingClientRect();
+
+                if (!rect.width || !rect.height) {
+                    return;
+                }
+
+                if (Math.abs(rect.width - state.width) < 1 && Math.abs(rect.height - state.height) < 1 && state.layouts.length) {
+                    return;
+                }
+
+                const dpr = Math.min(window.devicePixelRatio || 1, 2);
+
+                state.width = rect.width;
+                state.height = rect.height;
+                state.compact = rect.width < 560;
+
+                canvas.width = Math.round(rect.width * dpr);
+                canvas.height = Math.round(rect.height * dpr);
+                ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+                const base = overview(rect.width, rect.height);
+                state.layouts = [base];
+
+                for (let k = 1; k < STAGES.length; k++) {
+                    state.layouts.push(groups(STAGES[k], rect.width, rect.height, base));
+                }
+
+                draw();
+            }
+
+            if ("ResizeObserver" in window) {
+                new ResizeObserver(build).observe(host);
+            } else {
+                window.addEventListener("resize", build);
+            }
+
+            if (document.fonts && document.fonts.ready) {
+                document.fonts.ready.then(draw);
+            }
+
+            build();
+
+            return {
+                setProgress: function (value) {
+                    state.progress = clamp(value, 0, STAGES.length - 1);
+                    draw();
+                },
+                rebuild: function () {
+                    state.width = 0;
+                    build();
+                }
+            };
+        }
+
+        const fieldHost = document.querySelector(".tb-field");
+        const field = fieldHost ? createField(fieldHost.querySelector("canvas"), fieldHost) : null;
 
 
-        <div class="hero-buttons">
+        /* =====================================================
+           LIGHTBOX
+        ====================================================== */
 
-            <a
-                href="https://github.com/sodiqoluwatimileyin190-oss/sodiqoluwatimileyin190-oss.github.io/tree/main/projects/thera-bank-loan-analytics"
-                target="_blank"
-                rel="noopener"
-                class="btn btn-primary"
-            >
+        let lenis = null;
 
-                View GitHub
-                <i class="fab fa-github"></i>
+        const lightbox = document.querySelector(".tb-lightbox");
+        const lightboxImage = lightbox.querySelector("img");
+        const lightboxCaption = lightbox.querySelector(".tb-lightbox-caption");
+        const lightboxClose = lightbox.querySelector(".tb-lightbox-close");
+        let lastFocused = null;
 
-            </a>
+        function openLightbox(trigger) {
+            const image = trigger.querySelector("img");
+            lastFocused = trigger;
+            lightboxImage.src = image.currentSrc || image.src;
+            lightboxImage.alt = image.alt;
+            lightboxCaption.textContent = image.alt;
+            lightbox.classList.add("open");
+            lightbox.setAttribute("aria-hidden", "false");
+            document.body.classList.add("tb-no-scroll");
+            if (lenis) {
+                lenis.stop();
+            }
+            lightboxClose.focus();
+        }
 
+        function closeLightbox() {
+            lightbox.classList.remove("open");
+            lightbox.setAttribute("aria-hidden", "true");
+            document.body.classList.remove("tb-no-scroll");
+            if (lenis) {
+                lenis.start();
+            }
+            if (lastFocused) {
+                lastFocused.focus();
+            }
+        }
 
-            <a
-                href="../../index.html#projects"
-                class="btn btn-secondary"
-            >
-
-                Back to Portfolio
-                <i class="fas fa-arrow-left"></i>
-
-            </a>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-
-<!-- =========================================================
-     FOOTER
-========================================================= -->
-
-<footer>
-
-    <p>
-        © 2026 Sodiq Oluwatimileyin. THERA Bank Analytics Case Study.
-    </p>
-
-</footer>
-
-
-
-<!-- =========================================================
-     IMAGE LIGHTBOX
-========================================================= -->
-
-<div
-    class="lightbox"
-    id="lightbox"
->
-
-    <button
-        class="lightbox-close"
-        id="lightboxClose"
-        aria-label="Close image"
-    >
-        <i class="fas fa-times"></i>
-    </button>
-
-    <img
-        id="lightboxImage"
-        src=""
-        alt="Expanded dashboard"
-    >
-
-</div>
-
-
-
-<!-- =========================================================
-     JAVASCRIPT
-========================================================= -->
-
-<script>
-
-    const zoomableImages =
-        document.querySelectorAll(".zoomable");
-
-    const lightbox =
-        document.getElementById("lightbox");
-
-    const lightboxImage =
-        document.getElementById("lightboxImage");
-
-    const lightboxClose =
-        document.getElementById("lightboxClose");
-
-
-    zoomableImages.forEach(image => {
-
-        image.addEventListener("click", () => {
-
-            lightboxImage.src = image.src;
-
-            lightbox.classList.add("active");
-
-            document.body.style.overflow = "hidden";
-
+        document.querySelectorAll(".tb-zoom").forEach(function (trigger) {
+            trigger.addEventListener("click", function () {
+                openLightbox(trigger);
+            });
         });
 
-    });
+        lightboxClose.addEventListener("click", closeLightbox);
 
-
-    function closeLightbox() {
-
-        lightbox.classList.remove("active");
-
-        document.body.style.overflow = "";
-
-    }
-
-
-    lightboxClose.addEventListener(
-        "click",
-        closeLightbox
-    );
-
-
-    lightbox.addEventListener(
-        "click",
-        event => {
-
+        lightbox.addEventListener("click", function (event) {
             if (event.target === lightbox) {
-
                 closeLightbox();
+            }
+        });
 
+        document.addEventListener("keydown", function (event) {
+            if (event.key === "Escape" && lightbox.classList.contains("open")) {
+                closeLightbox();
+            }
+            if (event.key === "Tab" && lightbox.classList.contains("open")) {
+                event.preventDefault();
+                lightboxClose.focus();
+            }
+        });
+
+
+        /* =====================================================
+           READING PROGRESS
+        ====================================================== */
+
+        const progressBar = document.querySelector(".tb-progress");
+        let progressTicking = false;
+
+        function updateProgress() {
+            const max = document.documentElement.scrollHeight - window.innerHeight;
+            const ratio = max > 0 ? clamp(window.scrollY / max, 0, 1) : 0;
+            progressBar.style.transform = "scaleX(" + ratio + ")";
+            progressTicking = false;
+        }
+
+        window.addEventListener("scroll", function () {
+            if (!progressTicking) {
+                requestAnimationFrame(updateProgress);
+                progressTicking = true;
+            }
+        }, { passive: true });
+
+        updateProgress();
+
+
+        /* =====================================================
+           EVERYTHING BELOW NEEDS GSAP AND MOTION
+        ====================================================== */
+
+        if (!motion) {
+            if (field) {
+                field.setProgress(STAGES.length - 1);
+            }
+            return;
+        }
+
+        gsap.registerPlugin(ScrollTrigger);
+
+        if (hasSplit) {
+            gsap.registerPlugin(SplitText);
+        }
+
+        ScrollTrigger.config({ ignoreMobileResize: true });
+
+
+        /* =====================================================
+           SMOOTH SCROLL + ANCHORS
+        ====================================================== */
+
+        if (typeof window.Lenis !== "undefined") {
+
+            lenis = new Lenis({ lerp: 0.1, smoothWheel: true });
+            lenis.on("scroll", ScrollTrigger.update);
+
+            gsap.ticker.add(function (time) {
+                lenis.raf(time * 1000);
+            });
+
+            gsap.ticker.lagSmoothing(0);
+
+        } else {
+
+            root.style.scrollBehavior = "auto";
+        }
+
+        function scrollToTarget(target, immediate) {
+
+            const offset = -navHeight();
+
+            if (lenis) {
+                lenis.scrollTo(target, { offset: offset, duration: 1.4, immediate: !!immediate, force: true });
+                return;
             }
 
+            const top = target.getBoundingClientRect().top + window.scrollY + offset;
+            window.scrollTo({ top: top, behavior: immediate ? "auto" : "smooth" });
         }
-    );
 
+        function findTarget(hash) {
+            if (!hash || hash.length < 2) {
+                return null;
+            }
+            try {
+                return document.querySelector(hash);
+            } catch (error) {
+                return null;
+            }
+        }
 
-    document.addEventListener(
-        "keydown",
-        event => {
+        document.addEventListener("click", function (event) {
 
-            if (event.key === "Escape") {
+            const link = event.target.closest('a[href^="#"]');
 
-                closeLightbox();
-
+            if (!link) {
+                return;
             }
 
+            const hash = link.getAttribute("href");
+            const target = findTarget(hash);
+
+            if (!target) {
+                return;
+            }
+
+            event.preventDefault();
+            scrollToTarget(target, false);
+
+            if (window.history && window.history.replaceState) {
+                window.history.replaceState(null, "", hash === "#top" ? window.location.pathname : hash);
+            }
+        });
+
+
+        /* =====================================================
+           HERO INTRO
+        ====================================================== */
+
+        function introHero() {
+
+            const title = document.querySelector(".tb-title");
+            const items = document.querySelectorAll("[data-hero-item]");
+            const timeline = gsap.timeline({ defaults: { ease: "expo.out" } });
+
+            if (title) {
+
+                if (hasSplit) {
+
+                    const split = new SplitText(title, { type: "words,chars", charsClass: "tb-char" });
+
+                    timeline.from(split.chars, {
+                        yPercent: 80,
+                        rotateX: -85,
+                        opacity: 0,
+                        transformOrigin: "50% 100%",
+                        transformPerspective: 900,
+                        duration: 1.2,
+                        stagger: 0.035
+                    }, 0.1);
+
+                } else {
+
+                    timeline.from(title, { y: 40, opacity: 0, duration: 1.1 }, 0.1);
+                }
+
+                gsap.set(title, { visibility: "visible" });
+            }
+
+            timeline.to(items, { opacity: 1, y: 0, duration: 1.1, stagger: 0.08 }, 0.35);
         }
-    );
 
-</script>
+        const fontsReady = document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve();
 
+        Promise.race([
+            fontsReady,
+            new Promise(function (resolve) { setTimeout(resolve, 1500); })
+        ]).then(introHero);
+
+
+        /* =====================================================
+           WHO SAID YES — pinned story
+        ====================================================== */
+
+        const signal = document.querySelector(".tb-signal");
+
+        if (signal && field) {
+
+            const stage = signal.querySelector(".tb-signal-stage");
+            const steps = gsap.utils.toArray(".tb-story-step");
+            const counter = signal.querySelector(".tb-story-count");
+            const fill = signal.querySelector(".tb-story-fill");
+            const proxy = { p: 0 };
+            let current = -1;
+
+            signal.classList.add("is-story");
+            field.rebuild();
+            field.setProgress(0);
+
+            function pad(n) {
+                return (n < 10 ? "0" : "") + n;
+            }
+
+            function activate(index) {
+                if (index === current) {
+                    return;
+                }
+                current = index;
+                steps.forEach(function (step, i) {
+                    step.classList.toggle("is-active", i === index);
+                });
+                if (counter) {
+                    counter.textContent = pad(index + 1) + " / " + pad(steps.length);
+                }
+            }
+
+            const timeline = gsap.timeline({
+                onUpdate: function () {
+                    field.setProgress(proxy.p);
+                    activate(Math.round(proxy.p));
+                    if (fill) {
+                        gsap.set(fill, { scaleX: timeline.progress() });
+                    }
+                }
+            });
+
+            timeline
+                .to(proxy, { p: 1, duration: 1, ease: "none" }, 0.5)
+                .to(proxy, { p: 2, duration: 1, ease: "none" }, 2)
+                .to(proxy, { p: 3, duration: 1, ease: "none" }, 3.5)
+                .to({}, { duration: 0.6 }, 4.5);
+
+            activate(0);
+
+            ScrollTrigger.create({
+                trigger: stage,
+                start: function () { return "top top+=" + navHeight(); },
+                end: function () { return "+=" + Math.round(window.innerHeight * 2.6); },
+                pin: true,
+                scrub: 0.8,
+                animation: timeline,
+                invalidateOnRefresh: true,
+                refreshPriority: 1
+            });
+        }
+
+
+        /* =====================================================
+           HEADINGS — masked line reveals
+        ====================================================== */
+
+        function maskLines(lines) {
+            lines.forEach(function (line) {
+                const mask = document.createElement("div");
+                mask.className = "line-mask";
+                line.parentNode.insertBefore(mask, line);
+                mask.appendChild(line);
+            });
+        }
+
+        function revealHeading(element) {
+
+            if (!hasSplit) {
+                gsap.from(element, {
+                    opacity: 0,
+                    y: 30,
+                    duration: 1,
+                    ease: "expo.out",
+                    scrollTrigger: { trigger: element, start: "top 88%", once: true }
+                });
+                return;
+            }
+
+            new SplitText(element, {
+                type: "lines",
+                linesClass: "split-line",
+                autoSplit: true,
+                onSplit: function (self) {
+
+                    maskLines(self.lines);
+
+                    if (element.dataset.revealed === "true") {
+                        return;
+                    }
+
+                    return gsap.from(self.lines, {
+                        yPercent: 110,
+                        duration: 1.1,
+                        ease: "expo.out",
+                        stagger: 0.1,
+                        scrollTrigger: {
+                            trigger: element,
+                            start: "top 88%",
+                            once: true,
+                            onEnter: function () {
+                                element.dataset.revealed = "true";
+                            }
+                        }
+                    });
+                }
+            });
+        }
+
+        document.querySelectorAll("[data-split]").forEach(revealHeading);
+
+
+        /* =====================================================
+           GENERIC REVEALS + COUNTERS
+        ====================================================== */
+
+        const revealElements = gsap.utils.toArray("[data-reveal]");
+
+        gsap.set(revealElements, { opacity: 0, y: 36 });
+
+        ScrollTrigger.batch(revealElements, {
+            start: "top 88%",
+            once: true,
+            onEnter: function (batch) {
+                gsap.to(batch, {
+                    opacity: 1,
+                    y: 0,
+                    duration: 1,
+                    ease: "expo.out",
+                    stagger: 0.09,
+                    overwrite: true
+                });
+            }
+        });
+
+        function formatCount(element, value) {
+            const decimals = parseInt(element.dataset.countDecimals, 10) || 0;
+            return element.dataset.countPrefix +
+                value.toLocaleString("en-US", {
+                    minimumFractionDigits: decimals,
+                    maximumFractionDigits: decimals,
+                    useGrouping: element.dataset.countGroup === "1"
+                }) +
+                element.dataset.countSuffix;
+        }
+
+        gsap.utils.toArray("[data-count]").forEach(function (element) {
+
+            const raw = element.textContent.trim();
+            const match = raw.match(/^([^\d]*)(\d[\d,]*(?:\.\d+)?)(.*)$/);
+
+            if (!match) {
+                return;
+            }
+
+            element.dataset.countPrefix = match[1];
+            element.dataset.countSuffix = match[3];
+            element.dataset.countDecimals = String((match[2].split(".")[1] || "").length);
+            element.dataset.countGroup = match[2].indexOf(",") !== -1 ? "1" : "0";
+            element.textContent = formatCount(element, 0);
+
+            const counter = { value: 0 };
+            const target = parseFloat(match[2].replace(/,/g, ""));
+
+            gsap.to(counter, {
+                value: target,
+                duration: 1.6,
+                ease: "power3.out",
+                delay: element.closest(".tb-hero") ? 0.9 : 0,
+                scrollTrigger: { trigger: element, start: "top 90%", once: true },
+                onUpdate: function () {
+                    element.textContent = formatCount(element, counter.value);
+                },
+                onComplete: function () {
+                    element.textContent = raw;
+                }
+            });
+        });
+
+
+        /* =====================================================
+           DASHBOARD PAGES — screenshots wipe in, insights follow
+        ====================================================== */
+
+        gsap.utils.toArray(".tb-shot").forEach(function (shot) {
+
+            const image = shot.querySelector("img");
+            const timeline = gsap.timeline({
+                scrollTrigger: { trigger: shot, start: "top 82%", once: true }
+            });
+
+            timeline.fromTo(shot,
+                { clipPath: "inset(0% 0% 100% 0%)" },
+                { clipPath: "inset(0% 0% 0% 0%)", duration: 1.2, ease: "expo.inOut", clearProps: "clipPath" },
+                0
+            );
+
+            if (image) {
+                timeline.fromTo(image,
+                    { scale: 1.16 },
+                    { scale: 1, duration: 1.6, ease: "expo.out", clearProps: "transform" },
+                    0.1
+                );
+            }
+        });
+
+        gsap.utils.toArray(".tb-page-copy").forEach(function (copy) {
+            gsap.from(copy.querySelectorAll(".tb-insights li"), {
+                opacity: 0,
+                y: 18,
+                duration: 0.8,
+                ease: "expo.out",
+                stagger: 0.08,
+                scrollTrigger: { trigger: copy, start: "top 75%", once: true }
+            });
+        });
+
+        const checks = gsap.utils.toArray(".tb-checks li");
+
+        if (checks.length) {
+            gsap.from(checks, {
+                opacity: 0,
+                x: -16,
+                duration: 0.7,
+                ease: "expo.out",
+                stagger: 0.08,
+                scrollTrigger: { trigger: ".tb-checks", start: "top 80%", once: true }
+            });
+        }
+
+
+        /* =====================================================
+           SECTION NAV — follows your position
+        ====================================================== */
+
+        const navInner = document.querySelector(".tb-nav-inner");
+        const navLinks = Array.prototype.slice.call(document.querySelectorAll(".tb-nav a[href^='#']"));
+        let activeId = null;
+
+        function setActive(id) {
+
+            if (id === activeId) {
+                return;
+            }
+
+            activeId = id;
+
+            navLinks.forEach(function (link) {
+
+                const on = link.getAttribute("href") === "#" + id;
+                link.classList.toggle("is-active", on);
+
+                if (on) {
+                    link.setAttribute("aria-current", "true");
+                    navInner.scrollTo({
+                        left: link.offsetLeft - navInner.clientWidth / 2 + link.offsetWidth / 2,
+                        behavior: "smooth"
+                    });
+                } else {
+                    link.removeAttribute("aria-current");
+                }
+            });
+        }
+
+        document.querySelectorAll("[data-nav]").forEach(function (section) {
+            ScrollTrigger.create({
+                trigger: section,
+                start: "top 45%",
+                end: "bottom 45%",
+                onToggle: function (self) {
+                    if (self.isActive) {
+                        setActive(section.id);
+                    }
+                }
+            });
+        });
+
+        ScrollTrigger.create({
+            trigger: "#main",
+            start: "top 45%",
+            onLeaveBack: function () {
+                setActive(null);
+            }
+        });
+
+
+        /* =====================================================
+           REFRESH + ARRIVING WITH A #HASH
+        ====================================================== */
+
+        fontsReady.then(function () {
+            ScrollTrigger.refresh();
+        });
+
+        window.addEventListener("load", function () {
+
+            ScrollTrigger.refresh();
+
+            const target = findTarget(window.location.hash);
+
+            if (target && window.location.hash !== "#top" && window.location.hash !== "#main") {
+                requestAnimationFrame(function () {
+                    scrollToTarget(target, true);
+                });
+            }
+        });
+
+    })();
+    </script>
 
 </body>
-
 </html>

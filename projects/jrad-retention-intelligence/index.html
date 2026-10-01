@@ -8,17 +8,33 @@
 
     <meta name="description"
           content="An end-to-end customer retention system for JRAD Retail Superstores: identity resolution on transfer payments, a validated detection rule, Telegram and email alerting, and a till-side recognition tool.">
-    <meta name="theme-color" content="#6338c7">
+    <meta name="theme-color" content="#17113f">
     <meta property="og:type" content="article">
     <meta property="og:title" content="JRAD Retention Intelligence | Sodiq Oluwatimileyin">
     <meta property="og:description"
           content="From an aggregate Power BI insight to a working system that alerts branch managers and recognizes repeat customers at the till.">
 
-    <link rel="stylesheet"
+       <link rel="stylesheet"
           href="../../assets/css/style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lenis@1.3.26/dist/lenis.css">
 
     <script>
         document.documentElement.classList.add("jrad-js");
+
+        if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+            document.documentElement.classList.add("jrad-motion");
+        }
+
+        window.setTimeout(function () {
+            if (!window.__jradMotionReady) {
+                document.documentElement.classList.remove("jrad-motion");
+            }
+        }, 4000);
     </script>
 
     <style>
@@ -2536,7 +2552,229 @@
                 animation: none !important;
             }
         }
+        /* =========================================================
+           MOTION EDITION — ALIGNMENT WITH THE REST OF THE SITE
+        ========================================================= */
 
+        :root {
+            --font-display: "Playfair Display", Georgia, "Times New Roman", serif;
+            --font-body: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+            --jrad-purple: #6847c7;
+            --jrad-purple-dark: #4a2fa0;
+            --jrad-purple-deep: #2a1c62;
+            --jrad-purple-light: #a68be0;
+            --jrad-lavender: #f5f2ff;
+            --jrad-bg: #faf9fd;
+            --jrad-text: #17152b;
+            --jrad-muted: #66627a;
+            --jrad-ink: #17113f;
+        }
+
+        body {
+            font-family: var(--font-body);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .jrad-hero {
+            background:
+                radial-gradient(circle at 15% 15%, rgba(166, 139, 224, 0.30), transparent 34%),
+                radial-gradient(circle at 85% 70%, rgba(124, 92, 214, 0.28), transparent 36%),
+                linear-gradient(135deg, #0c0828 0%, #17113f 50%, #2a1c62 100%);
+        }
+
+        .jrad-hero::before {
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            width: auto;
+            height: auto;
+            border-radius: 0;
+            filter: none;
+            animation: none;
+            opacity: 0.08;
+            background: none;
+            background-image:
+                linear-gradient(rgba(255, 255, 255, 0.25) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.25) 1px, transparent 1px);
+            background-size: 55px 55px;
+            -webkit-mask-image: linear-gradient(to bottom, #000, transparent 70%);
+            mask-image: linear-gradient(to bottom, #000, transparent 70%);
+        }
+
+        .jrad-hero::after { display: none; }
+
+        .jrad-hero h1 {
+            font-family: var(--font-display);
+            font-size: clamp(2.8rem, 6.4vw, 5.6rem);
+            font-weight: 700;
+            line-height: 0.98;
+            letter-spacing: -0.035em;
+        }
+
+        .jrad-hero h1 .jrad-char { display: inline-block; will-change: transform; }
+
+        .jrad-motion .jrad-hero h1 {
+            animation: none;
+            opacity: 1;
+            transform: none;
+            visibility: hidden;
+        }
+
+        .jrad-hero-subtitle {
+            color: #bca6ff;
+            font-family: var(--font-display);
+            font-weight: 600;
+        }
+
+        .jrad-hero-description { color: rgba(255, 255, 255, 0.72); }
+
+        .jrad-btn-primary { color: var(--jrad-ink); }
+        .jrad-btn-primary:hover { background: #bca6ff; }
+
+        .jrad-h2,
+        .jrad-glance h2,
+        .jrad-dashboard-copy h2,
+        .jrad-till-copy h2,
+        .jrad-final h2 {
+            font-family: var(--font-display);
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+
+        .jrad-h3,
+        .jrad-fix h3,
+        .jrad-lab h3,
+        .jrad-explain h3,
+        .jrad-decision h3,
+        .jrad-road h3 {
+            font-family: var(--font-display);
+            font-weight: 700;
+            letter-spacing: -0.01em;
+        }
+
+        .jrad-stat-number,
+        .jrad-fix-metric strong,
+        .jrad-funnel-value,
+        .jrad-ring-figure strong {
+            font-family: var(--font-display);
+            font-weight: 700;
+            letter-spacing: 0;
+        }
+
+        .jrad-funnel-value small { font-family: var(--font-body); }
+
+        .jrad-strategy,
+        .jrad-verdict[data-state="same"],
+        .jrad-flow-node.gold {
+            background: linear-gradient(135deg, var(--jrad-purple), var(--jrad-purple-deep));
+        }
+
+        .jrad-rule { background: linear-gradient(145deg, var(--jrad-ink), var(--jrad-purple-deep)); }
+
+        .jrad-device { background: linear-gradient(160deg, var(--jrad-purple-deep), #0d0928); }
+
+        .jrad-final {
+            background:
+                radial-gradient(circle at 20% 10%, rgba(166, 139, 224, 0.35), transparent 40%),
+                linear-gradient(135deg, var(--jrad-ink), var(--jrad-purple-deep));
+            box-shadow: 0 30px 70px rgba(23, 17, 63, 0.28);
+        }
+
+        .line-mask {
+            display: block;
+            overflow: hidden;
+            overflow: clip;
+            padding-bottom: 0.14em;
+            margin-bottom: -0.14em;
+        }
+
+        .split-line { display: block; }
+
+
+        /* =========================================================
+           THE FULL JRAD STORY
+        ========================================================= */
+
+        .jrad-chapters {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 14px;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .jrad-chapters a,
+        .jrad-chapters li > div {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            height: 100%;
+            padding: 24px;
+            border: 1px solid var(--jrad-border);
+            border-radius: 18px;
+            background: var(--jrad-surface);
+            color: inherit;
+            text-decoration: none;
+            box-shadow: var(--jrad-shadow-sm);
+            transition: border-color 0.25s ease, transform 0.25s ease;
+        }
+
+        .jrad-chapters a:hover {
+            border-color: var(--jrad-purple-light);
+            transform: translateY(-4px);
+        }
+
+        .jrad-chapters span {
+            color: var(--jrad-purple);
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 2px;
+        }
+
+        .jrad-chapters strong {
+            color: var(--jrad-ink);
+            font-family: var(--font-display);
+            font-size: 1.25rem;
+            line-height: 1.2;
+        }
+
+        .jrad-chapters em {
+            color: var(--jrad-muted);
+            font-size: 13px;
+            font-style: normal;
+            line-height: 1.6;
+        }
+
+        .jrad-chapters .is-current > div {
+            border-color: transparent;
+            background: linear-gradient(135deg, var(--jrad-ink), var(--jrad-purple-deep));
+        }
+
+        .jrad-chapters .is-current span,
+        .jrad-chapters .is-current > div::after { color: #bca6ff; }
+
+        .jrad-chapters .is-current strong { color: #fff; }
+        .jrad-chapters .is-current em { color: rgba(255, 255, 255, 0.72); }
+
+        .jrad-chapters .is-current > div::after {
+            content: "You are here";
+            margin-top: auto;
+            padding-top: 10px;
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 1px;
+        }
+
+        @media (max-width: 900px) {
+            .jrad-chapters { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        }
+
+        @media (max-width: 520px) {
+            .jrad-chapters { grid-template-columns: minmax(0, 1fr); }
+        }
+        
     </style>
 </head>
 
@@ -2624,7 +2862,7 @@
 
         <div class="jrad-nav-inner">
 
-            <a class="jrad-nav-home" href="../../index.html">← Portfolio</a>
+            <a class="jrad-nav-home" href="../../index.html#projects">← Portfolio</a>
             <a href="#overview">Overview</a>
             <a href="#gap">The Gap</a>
             <a href="#identity">Identity</a>
@@ -3799,7 +4037,61 @@
 
         </section>
 
+        <!-- =====================================================
+             THE FULL JRAD STORY
+        ====================================================== -->
 
+        <section class="jrad-page jrad-tight-top" aria-labelledby="story-title">
+
+            <div class="jrad-section-head center">
+
+                <div class="jrad-section-label">THE FULL JRAD STORY</div>
+
+                <h2 class="jrad-h2" id="story-title">Four projects, one business.</h2>
+
+                <p class="jrad-lead">
+                    This is the final chapter. Each project built on the one before it.
+                </p>
+
+            </div>
+
+            <ol class="jrad-chapters jrad-reveal">
+
+                <li>
+                    <a href="../jrad-retail-data-system/">
+                        <span>01</span>
+                        <strong>Data System</strong>
+                        <em>Designed the business and generated 1.8M+ transaction lines.</em>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="../jrad-retail-sql-analysis/">
+                        <span>02</span>
+                        <strong>SQL Analysis</strong>
+                        <em>Validated every row and asked the first business questions.</em>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="../jrad-retail-powerbi-dashboard/">
+                        <span>03</span>
+                        <strong>Power BI</strong>
+                        <em>Turned the findings into an executive dashboard.</em>
+                    </a>
+                </li>
+
+                <li class="is-current">
+                    <div aria-current="page">
+                        <span>04</span>
+                        <strong>Retention Intelligence</strong>
+                        <em>Turned the dashboard's recommendation into a working system.</em>
+                    </div>
+                </li>
+
+            </ol>
+
+        </section>
         <!-- =====================================================
              FINAL CTA
         ====================================================== -->
@@ -3823,7 +4115,7 @@
                         Revisit Version 1
                     </a>
 
-                    <a href="../../index.html" class="jrad-btn jrad-btn-secondary">
+                   <a href="../../index.html#projects" class="jrad-btn jrad-btn-secondary">
                         Back to Portfolio
                     </a>
 
@@ -4567,6 +4859,214 @@
         });
 
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/SplitText.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lenis@1.3.26/dist/lenis.min.js"></script>
 
+    <script>
+    (function () {
+
+        "use strict";
+
+        const root = document.documentElement;
+        const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        const hasGSAP = typeof window.gsap !== "undefined" && typeof window.ScrollTrigger !== "undefined";
+        const hasSplit = hasGSAP && typeof window.SplitText !== "undefined";
+
+        if (!hasGSAP || reduceMotion) {
+            root.classList.remove("jrad-motion");
+            return;
+        }
+
+        window.__jradMotionReady = true;
+
+        gsap.registerPlugin(ScrollTrigger);
+
+        if (hasSplit) {
+            gsap.registerPlugin(SplitText);
+        }
+
+        ScrollTrigger.config({ ignoreMobileResize: true });
+
+        const nav = document.querySelector(".jrad-nav");
+
+        function navHeight() {
+            return nav ? nav.offsetHeight : 0;
+        }
+
+
+        /* =====================================================
+           SMOOTH SCROLL
+        ====================================================== */
+
+        let lenis = null;
+
+        if (typeof window.Lenis !== "undefined") {
+
+            lenis = new Lenis({ lerp: 0.1, smoothWheel: true });
+            lenis.on("scroll", ScrollTrigger.update);
+
+            gsap.ticker.add(function (time) {
+                lenis.raf(time * 1000);
+            });
+
+            gsap.ticker.lagSmoothing(0);
+        }
+
+        if (lenis && "MutationObserver" in window) {
+            new MutationObserver(function () {
+                if (document.body.classList.contains("jrad-no-scroll")) {
+                    lenis.stop();
+                } else {
+                    lenis.start();
+                }
+            }).observe(document.body, { attributes: true, attributeFilter: ["class"] });
+        }
+
+        if (lenis) {
+
+            document.addEventListener("click", function (event) {
+
+                const link = event.target.closest('a[href^="#"]');
+
+                if (!link) {
+                    return;
+                }
+
+                const hash = link.getAttribute("href");
+
+                if (!hash || hash.length < 2) {
+                    return;
+                }
+
+                let target = null;
+
+                try {
+                    target = document.querySelector(hash);
+                } catch (error) {
+                    target = null;
+                }
+
+                if (!target) {
+                    return;
+                }
+
+                event.preventDefault();
+                lenis.scrollTo(target, { offset: -navHeight(), duration: 1.4, force: true });
+
+                if (window.history && window.history.replaceState) {
+                    window.history.replaceState(null, "", hash === "#top" ? window.location.pathname : hash);
+                }
+            });
+        }
+
+
+        /* =====================================================
+           HERO TITLE
+        ====================================================== */
+
+        const title = document.querySelector(".jrad-hero h1");
+
+        function introTitle() {
+
+            if (!title) {
+                return;
+            }
+
+            gsap.set(title, { visibility: "visible" });
+
+            if (hasSplit) {
+
+                const split = new SplitText(title, { type: "words,chars", charsClass: "jrad-char" });
+
+                gsap.from(split.chars, {
+                    yPercent: 80,
+                    rotateX: -85,
+                    opacity: 0,
+                    transformOrigin: "50% 100%",
+                    transformPerspective: 900,
+                    duration: 1.2,
+                    ease: "expo.out",
+                    stagger: 0.025
+                });
+
+            } else {
+
+                gsap.from(title, { y: 40, opacity: 0, duration: 1.1, ease: "expo.out" });
+            }
+        }
+
+        const fontsReady = document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve();
+
+        Promise.race([
+            fontsReady,
+            new Promise(function (resolve) { setTimeout(resolve, 1500); })
+        ]).then(introTitle);
+
+
+        /* =====================================================
+           HEADINGS — masked line reveals
+        ====================================================== */
+
+        function maskLines(lines) {
+            lines.forEach(function (line) {
+                const mask = document.createElement("div");
+                mask.className = "line-mask";
+                line.parentNode.insertBefore(mask, line);
+                mask.appendChild(line);
+            });
+        }
+
+        if (hasSplit) {
+
+            document.querySelectorAll(".jrad-h2, .jrad-glance h2, .jrad-dashboard-copy h2, .jrad-till-copy h2").forEach(function (element) {
+
+                new SplitText(element, {
+                    type: "lines",
+                    linesClass: "split-line",
+                    autoSplit: true,
+                    onSplit: function (self) {
+
+                        maskLines(self.lines);
+
+                        if (element.dataset.revealed === "true") {
+                            return;
+                        }
+
+                        return gsap.from(self.lines, {
+                            yPercent: 110,
+                            duration: 1.1,
+                            ease: "expo.out",
+                            stagger: 0.1,
+                            scrollTrigger: {
+                                trigger: element,
+                                start: "top 88%",
+                                once: true,
+                                onEnter: function () {
+                                    element.dataset.revealed = "true";
+                                }
+                            }
+                        });
+                    }
+                });
+            });
+        }
+
+
+        /* =====================================================
+           REFRESH
+        ====================================================== */
+
+        fontsReady.then(function () {
+            ScrollTrigger.refresh();
+        });
+
+        window.addEventListener("load", function () {
+            ScrollTrigger.refresh();
+        });
+
+    })();
+    </script>
 </body>
 </html>

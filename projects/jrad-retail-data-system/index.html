@@ -151,7 +151,7 @@
             gap: clamp(36px, 5vw, 64px);
             align-items: center;
         }
-
+        .ds-hero-grid > * { min-width: 0; }
         .ds-eyebrow {
             display: inline-flex;
             padding: 8px 16px;
@@ -260,7 +260,13 @@
             background: rgba(188, 166, 255, 0.22);
         }
 
-        .ds-term-bar span { margin-left: 6px; }
+        .ds-term-bar span {
+            min-width: 0;
+            margin-left: 6px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
 
         .ds-term-replay {
             margin-left: auto;
@@ -823,7 +829,7 @@
         ========================================================= */
 
         @media (max-width: 1000px) {
-            .ds-hero-grid { grid-template-columns: 1fr; }
+            .ds-hero-grid { grid-template-columns: minmax(0, 1fr); }
             .ds-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
             .ds-scope, .ds-skills { grid-template-columns: repeat(2, minmax(0, 1fr)); }
         }
@@ -832,10 +838,10 @@
 
             :root { --stack-step: 8px; }
 
-            .ds-problem, .ds-outcome { grid-template-columns: 1fr; }
+            .ds-problem, .ds-outcome { grid-template-columns: minmax(0, 1fr); }
 
-            .ds-card {
-                grid-template-columns: 1fr;
+                       .ds-card {
+                grid-template-columns: minmax(0, 1fr);
                 gap: 18px;
                 min-height: 0;
                 margin-bottom: 32px;
@@ -877,7 +883,7 @@
                 mask-image: linear-gradient(90deg, #000 85%, transparent);
             }
 
-            .ds-term-body { min-height: 0; font-size: 11px; }
+            .ds-term-body { min-height: 0; overflow-x: auto; font-size: 11px; }
         }
 
         @media (max-width: 600px) {

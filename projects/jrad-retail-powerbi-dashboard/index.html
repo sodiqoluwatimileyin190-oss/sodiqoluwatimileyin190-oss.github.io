@@ -6,1046 +6,1302 @@
 
     <title>JRAD Retail Power BI Dashboard | Sodiq Oluwatimileyin</title>
 
-    <link rel="stylesheet"
-          href="../../assets/css/style.css">
+    <meta name="description" content="A three-page executive Power BI report for JRAD Superstores: DAX, data modelling, time intelligence and custom Deneb visuals, with a guided tour and the Deneb visuals running live.">
+    <meta name="theme-color" content="#17113f">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="JRAD Retail Power BI: Executive Intelligence & Visual Engineering">
+    <meta property="og:description" content="A guided tour of a three-page executive Power BI report, with its custom Deneb visuals running live in the browser.">
+    <meta property="og:image" content="https://sodiqoluwatimileyin190-oss.github.io/projects/jrad-retail-powerbi-dashboard/images/executive-overview.png">
+    <meta property="og:url" content="https://sodiqoluwatimileyin190-oss.github.io/projects/jrad-retail-powerbi-dashboard/">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lenis@1.3.26/dist/lenis.css">
+
+    <script>
+        document.documentElement.classList.add("pbi-js");
+
+        window.setTimeout(function () {
+            if (!window.__pbiReady) {
+                document.documentElement.classList.remove("pbi-js");
+            }
+        }, 4000);
+    </script>
 
     <style>
 
         /* =========================================================
-           JRAD RETAIL POWER BI — EXECUTIVE CASE STUDY
-           Fast motion / Large dashboard presentation
+           JRAD RETAIL POWER BI — PROJECT 03 (MOTION EDITION)
         ========================================================= */
 
         :root {
-            --jrad-purple: #6338c7;
-            --jrad-purple-dark: #43218f;
-            --jrad-purple-light: #8e6be8;
-            --jrad-bg: #f8f7fb;
-            --jrad-text: #17151d;
-            --jrad-muted: #696574;
-            --jrad-border: rgba(99, 56, 199, 0.12);
+            --ink: #0d0928;
+            --ink-2: #17113f;
+            --ink-3: #2a1c62;
+            --purple: #7c5cd6;
+            --purple-deep: #6847c7;
+            --purple-light: #a68be0;
+            --lilac: #bca6ff;
+            --lavender: #f5f2ff;
+            --paper: #faf9fd;
+            --text: #17152b;
+            --text-soft: #66627a;
+            --text-faint: #8b879e;
+            --border: #e8e3f3;
+            --shadow-sm: 0 10px 30px rgba(35, 20, 80, 0.06);
+            --shadow-md: 0 25px 65px rgba(35, 20, 80, 0.12);
+            --font-display: "Playfair Display", Georgia, "Times New Roman", serif;
+            --font-body: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+            --mono: ui-monospace, "SFMono-Regular", "Cascadia Code", Menlo, Consolas, monospace;
+            --ease-out: cubic-bezier(.22, 1, .36, 1);
+            --nav-h: 58px;
         }
 
-        * {
+        *,
+        *::before,
+        *::after {
             box-sizing: border-box;
+        }
+
+        body, h1, h2, h3, p, ul, ol, dl, dd, figure {
+            margin: 0;
+            padding: 0;
         }
 
         html {
             scroll-behavior: smooth;
+            scroll-padding-top: calc(var(--nav-h) + 16px);
+            -webkit-text-size-adjust: 100%;
         }
 
         body {
-            margin: 0;
-            background: var(--jrad-bg);
-            color: var(--jrad-text);
+            font-family: var(--font-body);
+            font-size: 16px;
+            line-height: 1.7;
+            color: var(--text);
+            background: var(--paper);
             overflow-x: hidden;
+            overflow-x: clip;
+            -webkit-font-smoothing: antialiased;
         }
+
+        body.pbi-no-scroll {
+            overflow: hidden;
+        }
+
+        img {
+            display: block;
+            max-width: 100%;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        button {
+            font: inherit;
+            color: inherit;
+        }
+
+        ::selection {
+            background: var(--purple);
+            color: #fff;
+        }
+
+        :focus-visible {
+            outline: 3px solid var(--lilac);
+            outline-offset: 3px;
+        }
+
+        [tabindex="-1"]:focus {
+            outline: none;
+        }
+
+        section {
+            scroll-margin-top: var(--nav-h);
+        }
+
+        .pbi-wrap {
+            width: min(1180px, 90%);
+            margin-inline: auto;
+        }
+
+        .pbi-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            z-index: 1100;
+            background: linear-gradient(90deg, var(--purple-light), var(--purple), var(--lilac));
+            transform: scaleX(0);
+            transform-origin: left center;
+            pointer-events: none;
+        }
+
 
         /* =========================================================
            HERO
         ========================================================= */
 
-        .jrad-hero {
+        .pbi-hero {
             position: relative;
-            min-height: 720px;
-            padding: 72px 24px 0;
-            display: flex;
-            justify-content: center;
             overflow: hidden;
-
+            padding: 84px 0 96px;
+            color: #fff;
+            text-align: center;
             background:
-                radial-gradient(
-                    circle at 15% 20%,
-                    rgba(190, 157, 255, 0.95),
-                    transparent 34%
-                ),
-                radial-gradient(
-                    circle at 85% 85%,
-                    rgba(55, 23, 130, 0.85),
-                    transparent 45%
-                ),
-                linear-gradient(
-                    125deg,
-                    #a17ce8 0%,
-                    #754bd0 48%,
-                    #42238f 100%
-                );
-
-            color: white;
+                radial-gradient(circle at 15% 15%, rgba(166, 139, 224, 0.30), transparent 34%),
+                radial-gradient(circle at 85% 70%, rgba(124, 92, 214, 0.28), transparent 36%),
+                linear-gradient(135deg, #0c0828 0%, #17113f 50%, #2a1c62 100%);
         }
 
-        .jrad-hero::before,
-        .jrad-hero::after {
+        .pbi-hero::before {
             content: "";
             position: absolute;
-            border-radius: 50%;
+            inset: 0;
+            opacity: 0.08;
             pointer-events: none;
-            filter: blur(2px);
+            background-image:
+                linear-gradient(rgba(255, 255, 255, 0.25) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.25) 1px, transparent 1px);
+            background-size: 55px 55px;
+            -webkit-mask-image: linear-gradient(to bottom, #000, transparent 70%);
+            mask-image: linear-gradient(to bottom, #000, transparent 70%);
         }
 
-        .jrad-hero::before {
-            width: 360px;
-            height: 360px;
-            right: -110px;
-            top: -100px;
-            background: rgba(255,255,255,0.08);
-            animation: heroBlobOne 7s ease-in-out infinite alternate;
-        }
-
-        .jrad-hero::after {
-            width: 250px;
-            height: 250px;
-            left: -100px;
-            bottom: -110px;
-            background: rgba(255,255,255,0.07);
-            animation: heroBlobTwo 8s ease-in-out infinite alternate;
-        }
-
-        .jrad-hero-inner {
+        .pbi-hero-inner {
             position: relative;
             z-index: 2;
-            width: min(1180px, 100%);
-            text-align: center;
         }
 
-        .jrad-eyebrow {
-            display: inline-block;
-            margin-bottom: 18px;
+        .pbi-eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
             padding: 8px 16px;
-            border: 1px solid rgba(255,255,255,0.28);
+            border: 1px solid rgba(255, 255, 255, 0.18);
             border-radius: 999px;
-
+            background: rgba(255, 255, 255, 0.06);
+            backdrop-filter: blur(10px);
+            color: #e8e1ff;
             font-size: 11px;
-            font-weight: 800;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
-
-            background: rgba(255,255,255,0.08);
-            backdrop-filter: blur(8px);
-
-            opacity: 0;
-            transform: translateY(18px);
-            animation: heroIn 0.55s cubic-bezier(.2,.8,.2,1) forwards;
+            font-weight: 700;
+            letter-spacing: 2px;
         }
 
-        .jrad-hero h1 {
-            margin: 0;
-            font-size: clamp(48px, 6vw, 82px);
-            line-height: 0.98;
-            letter-spacing: -3px;
-            font-weight: 900;
-
-            opacity: 0;
-            transform: translateY(25px);
-            animation: heroIn 0.65s 0.08s cubic-bezier(.2,.8,.2,1) forwards;
+        .pbi-title {
+            margin-top: 26px;
+            font-family: var(--font-display);
+            font-size: clamp(3rem, 7.4vw, 6.2rem);
+            font-weight: 700;
+            line-height: 0.95;
+            letter-spacing: -0.035em;
         }
 
-        .jrad-hero-subtitle {
-            margin: 16px 0 18px;
-
-            font-size: clamp(21px, 2.4vw, 32px);
-            line-height: 1.1;
-            font-weight: 800;
-
-            opacity: 0;
-            transform: translateY(20px);
-            animation: heroIn 0.6s 0.16s cubic-bezier(.2,.8,.2,1) forwards;
+        .pbi-title .pbi-char {
+            display: inline-block;
+            will-change: transform;
         }
 
-        .jrad-hero-description {
-            width: min(760px, 100%);
-            margin: 0 auto;
-
-            font-size: 15px;
-            line-height: 1.8;
-            color: rgba(255,255,255,0.86);
-
-            opacity: 0;
-            transform: translateY(18px);
-            animation: heroIn 0.6s 0.24s cubic-bezier(.2,.8,.2,1) forwards;
+        .pbi-subtitle {
+            margin-top: 18px;
+            color: var(--lilac);
+            font-family: var(--font-display);
+            font-size: clamp(1.25rem, 2.4vw, 1.9rem);
+            font-weight: 600;
+            line-height: 1.3;
         }
 
-        .jrad-hero-actions {
-            margin-top: 25px;
+        .pbi-desc {
+            max-width: 680px;
+            margin: 20px auto 0;
+            color: rgba(255, 255, 255, 0.72);
+            font-size: 1.02rem;
+        }
 
+        .pbi-actions {
             display: flex;
             justify-content: center;
-            gap: 10px;
+            align-items: center;
             flex-wrap: wrap;
-
-            opacity: 0;
-            transform: translateY(18px);
-            animation: heroIn 0.55s 0.32s cubic-bezier(.2,.8,.2,1) forwards;
+            gap: 12px;
+            margin-top: 30px;
         }
 
-        .jrad-btn {
+        .pbi-btn {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-
+            gap: 9px;
+            min-height: 46px;
             padding: 12px 20px;
-            border-radius: 9px;
-
+            border: 1px solid transparent;
+            border-radius: 10px;
             font-size: 13px;
-            font-weight: 700;
-            text-decoration: none;
-
-            transition:
-                transform 0.2s ease,
-                box-shadow 0.2s ease,
-                background 0.2s ease;
+            font-weight: 800;
+            transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
         }
 
-        .jrad-btn-primary {
-            background: white;
-            color: var(--jrad-purple-dark);
+        .pbi-btn-primary {
+            background: #fff;
+            color: var(--ink-2);
         }
 
-        .jrad-btn-secondary {
-            color: white;
-            border: 1px solid rgba(255,255,255,0.35);
-            background: rgba(255,255,255,0.08);
+        .pbi-btn-primary:hover {
+            background: var(--lilac);
         }
 
-        .jrad-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 12px 25px rgba(0,0,0,0.18);
+        .pbi-btn-secondary {
+            border-color: rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.06);
+            color: #fff;
         }
 
-        /* =========================================================
-           HERO DASHBOARD
-        ========================================================= */
+        .pbi-btn-secondary:hover {
+            border-color: rgba(255, 255, 255, 0.7);
+            background: rgba(255, 255, 255, 0.12);
+        }
 
-        .jrad-hero-dashboard {
-            width: min(1050px, 100%);
-            margin: 45px auto 0;
+        .pbi-btn-ghost {
+            color: #fff;
+            text-decoration: underline;
+            text-underline-offset: 4px;
+            text-decoration-color: rgba(255, 255, 255, 0.45);
+        }
 
+        .pbi-btn-ghost:hover {
+            text-decoration-color: #fff;
+        }
+
+        .pbi-hero-stage {
+            width: min(1080px, 100%);
+            margin: 56px auto 0;
+            perspective: 1600px;
+        }
+
+        .pbi-hero-frame {
             position: relative;
-            z-index: 3;
-
-            opacity: 0;
-            transform:
-                perspective(1400px)
-                translateY(45px)
-                scale(0.94);
-
-            animation:
-                heroDashboardIn
-                0.85s
-                0.38s
-                cubic-bezier(.16,.84,.25,1)
-                forwards;
-
-            transform-origin: center bottom;
+            padding: 10px;
+            border-radius: 18px;
+            background: rgba(255, 255, 255, 0.96);
+            box-shadow:
+                0 50px 110px rgba(5, 2, 25, 0.55),
+                0 10px 30px rgba(5, 2, 25, 0.3);
+            transform-origin: 50% 0%;
         }
 
-        .jrad-hero-dashboard img {
-            display: block;
+        .pbi-hero-frame img {
             width: 100%;
             height: auto;
-
-            border-radius: 16px 16px 0 0;
-
-            box-shadow:
-                0 35px 80px rgba(32, 13, 83, 0.35),
-                0 8px 30px rgba(32, 13, 83, 0.18);
-
-            animation:
-                dashboardFloat
-                6s
-                1.4s
-                ease-in-out
-                infinite alternate;
+            border-radius: 11px;
         }
 
+        .pbi-hero-caption {
+            margin-top: 18px;
+            color: rgba(255, 255, 255, 0.55);
+            font-size: 12px;
+        }
+
+        @media (prefers-reduced-motion: no-preference) {
+
+            .pbi-js [data-hero-item] {
+                opacity: 0;
+                transform: translateY(24px);
+            }
+
+            .pbi-js .pbi-title {
+                visibility: hidden;
+            }
+        }
+
+
         /* =========================================================
-           MAIN CONTENT
+           SECTION NAV
         ========================================================= */
 
-        .jrad-page {
+        .pbi-nav {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: rgba(250, 249, 253, 0.9);
+            backdrop-filter: saturate(160%) blur(14px);
+            -webkit-backdrop-filter: saturate(160%) blur(14px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .pbi-nav-inner {
             position: relative;
             width: min(1180px, 92%);
+            height: var(--nav-h);
             margin: 0 auto;
-            padding: 95px 0;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            overflow-x: auto;
+            scrollbar-width: none;
         }
 
-        .jrad-page::before {
-            content: "";
-            position: absolute;
-
-            top: 50%;
-            left: 50%;
-
-            width: 700px;
-            height: 450px;
-
-            transform: translate(-50%, -50%);
-            border-radius: 50%;
-
-            background:
-                radial-gradient(
-                    circle,
-                    rgba(126, 81, 221, 0.14),
-                    transparent 70%
-                );
-
-            filter: blur(45px);
-
-            opacity: 0;
-            transition: opacity 0.7s ease;
-
-            pointer-events: none;
-            z-index: -1;
+        .pbi-nav-inner::-webkit-scrollbar {
+            display: none;
         }
 
-        .jrad-page.visible::before {
-            opacity: 1;
-        }
-
-        /* =========================================================
-           BACK LINK
-        ========================================================= */
-
-        .jrad-back {
-            width: min(1180px, 92%);
-            margin: 0 auto;
-            padding-top: 20px;
-        }
-
-        .jrad-back a {
-            color: var(--jrad-purple);
-            text-decoration: none;
+        .pbi-nav a {
+            flex: 0 0 auto;
+            padding: 8px 14px;
+            border-radius: 999px;
+            color: var(--text-soft);
             font-size: 13px;
             font-weight: 700;
+            white-space: nowrap;
+            transition: background 0.2s ease, color 0.2s ease;
         }
+
+        .pbi-nav a:hover {
+            color: var(--purple-deep);
+            background: rgba(124, 92, 214, 0.08);
+        }
+
+        .pbi-nav a.is-active {
+            color: #fff;
+            background: var(--purple-deep);
+        }
+
+        .pbi-nav a.pbi-nav-home {
+            margin-right: 8px;
+            padding-left: 0;
+            padding-right: 16px;
+            border-radius: 0;
+            border-right: 1px solid var(--border);
+            color: var(--purple-deep);
+        }
+
+        .pbi-nav a.pbi-nav-home:hover {
+            background: none;
+        }
+
+
+        /* =========================================================
+           SECTION SHELL
+        ========================================================= */
+
+        .pbi-section {
+            padding: clamp(84px, 10vw, 128px) 0;
+        }
+
+        .pbi-section.pbi-white {
+            background: #fff;
+        }
+
+        .pbi-head {
+            max-width: 760px;
+            margin-bottom: 52px;
+        }
+
+        .pbi-label {
+            display: block;
+            margin-bottom: 14px;
+            color: var(--purple);
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 2.2px;
+        }
+
+        .pbi-h2 {
+            color: var(--ink-2);
+            font-family: var(--font-display);
+            font-size: clamp(2.2rem, 4.6vw, 3.6rem);
+            font-weight: 700;
+            line-height: 1.06;
+            letter-spacing: -0.02em;
+        }
+
+        .pbi-lead {
+            max-width: 680px;
+            margin-top: 18px;
+            color: var(--text-soft);
+            font-size: 1.02rem;
+        }
+
+        .line-mask {
+            display: block;
+            overflow: hidden;
+            overflow: clip;
+            padding-bottom: 0.14em;
+            margin-bottom: -0.14em;
+        }
+
+        .split-line {
+            display: block;
+        }
+
 
         /* =========================================================
            PROJECT AT A GLANCE
         ========================================================= */
 
-        .jrad-glance {
-            padding: 75px 0 30px;
+        .pbi-stats {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 16px;
         }
 
-        .jrad-section-label {
-            color: var(--jrad-purple);
-            font-size: 11px;
-            font-weight: 900;
-            letter-spacing: 1.6px;
-            text-transform: uppercase;
-            margin-bottom: 15px;
+        .pbi-stat {
+            padding: 28px 24px;
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            background: #fff;
+            box-shadow: var(--shadow-sm);
         }
 
-        .jrad-glance h2 {
-            max-width: 760px;
-            margin: 0;
-
-            font-size: clamp(35px, 4vw, 55px);
-            line-height: 1.04;
-            letter-spacing: -2px;
+        .pbi-stat strong {
+            display: block;
+            color: var(--purple-deep);
+            font-family: var(--font-display);
+            font-size: clamp(1.9rem, 3vw, 2.6rem);
+            line-height: 1;
+            font-variant-numeric: tabular-nums;
         }
 
-        .jrad-glance-description {
-            max-width: 760px;
-            margin-top: 22px;
-
-            color: var(--jrad-muted);
-            font-size: 16px;
-            line-height: 1.8;
+        .pbi-stat span {
+            display: block;
+            margin-top: 10px;
+            color: var(--text-soft);
+            font-size: 13px;
+            font-weight: 600;
         }
+
 
         /* =========================================================
-           COUNTING FIGURES
+           GUIDED TOUR
         ========================================================= */
 
-        .jrad-stats {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 16px;
-
-            margin-top: 42px;
+        .pbi-tour {
+            padding: clamp(84px, 10vw, 128px) 0 40px;
+            background: linear-gradient(180deg, var(--paper), #f1edfb);
         }
 
-        .jrad-stat {
-            padding: 28px 24px;
+        .pbi-tour .pbi-head {
+            margin-bottom: 36px;
+        }
 
-            border: 1px solid var(--jrad-border);
-            border-radius: 16px;
+        .pbi-tour-stage {
+            padding: 12px 0 60px;
+        }
 
-            background: rgba(255,255,255,0.8);
+        .pbi-tour-inner {
+            margin-inline: auto;
+        }
 
+        .pbi-tour-frame {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 1349 / 756;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            background: #e4e1ec;
+            box-shadow: var(--shadow-md);
+        }
+
+        .pbi-tour-canvas {
+            position: absolute;
+            inset: 0;
+            transform-origin: 0 0;
+            will-change: transform;
+        }
+
+        .pbi-tour-canvas img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .pbi-tour-box {
+            position: absolute;
+            border: 2px solid var(--lilac);
+            border-radius: 10px;
             box-shadow:
-                0 10px 30px rgba(44, 21, 91, 0.06);
-
+                0 0 0 200vmax rgba(13, 9, 40, 0.32),
+                0 0 24px rgba(188, 166, 255, 0.6);
             opacity: 0;
-            transform: translateY(24px);
+            pointer-events: none;
         }
 
-        .jrad-stat.visible {
-            animation:
-                statReveal
-                0.5s
-                cubic-bezier(.2,.8,.2,1)
-                forwards;
+        .pbi-tour-bottom {
+            margin-top: 26px;
         }
 
-        .jrad-stat:nth-child(1).visible {
-            animation-delay: 0s;
+        .pbi-tour-steps {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 16px;
+            list-style: none;
         }
 
-        .jrad-stat:nth-child(2).visible {
-            animation-delay: 0.08s;
+        .pbi-tour-step {
+            padding: 20px 22px;
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            background: #fff;
         }
 
-        .jrad-stat:nth-child(3).visible {
-            animation-delay: 0.16s;
+        .pbi-tour-num {
+            display: block;
+            margin-bottom: 6px;
+            color: var(--purple);
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 2px;
         }
 
-        .jrad-stat:nth-child(4).visible {
-            animation-delay: 0.24s;
+        .pbi-tour-step h3 {
+            margin-bottom: 6px;
+            color: var(--ink-2);
+            font-family: var(--font-display);
+            font-size: 1.3rem;
+            line-height: 1.2;
         }
 
-        .jrad-stat-number {
-            color: var(--jrad-purple);
-            font-size: clamp(30px, 3vw, 43px);
-            line-height: 1;
-            font-weight: 900;
-            letter-spacing: -1px;
+        .pbi-tour-step p {
+            color: var(--text-soft);
+            font-size: 0.95rem;
+            line-height: 1.65;
         }
 
-        .jrad-stat-label {
+        .pbi-tour-meta {
+            display: none;
+        }
+
+        .pbi-tour-count {
+            color: var(--ink-2);
+            font-family: var(--font-display);
+            font-size: 1.4rem;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .pbi-tour-meter {
+            width: 140px;
+            height: 3px;
+            overflow: hidden;
+            border-radius: 3px;
+            background: #ddd5f3;
+        }
+
+        .pbi-tour-fill {
+            display: block;
+            height: 100%;
+            background: linear-gradient(90deg, var(--purple-light), var(--purple-deep));
+            transform: scaleX(0);
+            transform-origin: left center;
+        }
+
+        .pbi-tour.is-touring .pbi-tour-stage {
+            height: calc(100vh - var(--nav-h));
+            height: calc(100svh - var(--nav-h));
+            display: flex;
+            align-items: center;
+            padding: 0;
+        }
+
+        .pbi-tour.is-touring .pbi-tour-inner {
+            width: min(90%, calc((100vh - var(--nav-h) - 230px) * 1.7844));
+            width: min(90%, calc((100svh - var(--nav-h) - 230px) * 1.7844));
+        }
+
+        .pbi-tour.is-touring .pbi-tour-bottom {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) auto;
+            gap: 32px;
+            align-items: end;
+            margin-top: 22px;
+        }
+
+        .pbi-tour.is-touring .pbi-tour-steps {
+            grid-template-columns: 1fr;
+            gap: 0;
+            min-height: 132px;
+        }
+
+        .pbi-tour.is-touring .pbi-tour-step {
+            grid-area: 1 / 1;
+            padding: 0;
+            border: 0;
+            background: none;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(14px);
+            transition: opacity 0.45s ease, transform 0.55s var(--ease-out), visibility 0.45s;
+        }
+
+        .pbi-tour.is-touring .pbi-tour-step.is-active {
+            opacity: 1;
+            visibility: visible;
+            transform: none;
+        }
+
+        .pbi-tour.is-touring .pbi-tour-step p {
+            max-width: 64ch;
+        }
+
+        .pbi-tour.is-touring .pbi-tour-meta {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 10px;
+        }
+
+
+        /* =========================================================
+           DASHBOARD PAGES
+        ========================================================= */
+
+        .pbi-page {
+            display: grid;
+            grid-template-columns: minmax(0, 1.2fr) minmax(300px, 0.8fr);
+            gap: clamp(36px, 6vw, 72px);
+            align-items: center;
+        }
+
+        .pbi-page.reverse .pbi-shot {
+            order: 2;
+        }
+
+        .pbi-shot {
+            position: relative;
+            overflow: hidden;
+            padding: 8px;
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            background: #fff;
+            box-shadow: var(--shadow-md);
+        }
+
+        .pbi-zoom {
+            position: relative;
+            display: block;
+            width: 100%;
+            padding: 0;
+            overflow: hidden;
+            border: 0;
+            border-radius: 12px;
+            background: none;
+            cursor: zoom-in;
+        }
+
+        .pbi-zoom img {
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+        }
+
+        .pbi-zoom-hint {
+            position: absolute;
+            right: 12px;
+            bottom: 12px;
+            padding: 6px 10px;
+            border-radius: 999px;
+            background: rgba(23, 17, 63, 0.82);
+            color: #fff;
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            opacity: 0;
+            transform: translateY(4px);
+            transition: opacity 0.25s ease, transform 0.25s ease;
+        }
+
+        .pbi-zoom:hover .pbi-zoom-hint,
+        .pbi-zoom:focus-visible .pbi-zoom-hint {
+            opacity: 1;
+            transform: none;
+        }
+
+        .pbi-page-copy .pbi-h2 {
+            font-size: clamp(2rem, 3.6vw, 2.9rem);
+        }
+
+        .pbi-page-copy > p {
+            margin-top: 16px;
+            color: var(--text-soft);
+        }
+
+        .pbi-insights {
+            margin-top: 24px;
+            list-style: none;
+        }
+
+        .pbi-insights li {
+            display: flex;
+            gap: 13px;
+            padding: 14px 0;
+            border-bottom: 1px solid var(--border);
+            color: #4f4b5e;
+            font-size: 0.92rem;
+            line-height: 1.65;
+        }
+
+        .pbi-insights li::before {
+            content: "";
+            flex: 0 0 7px;
+            width: 7px;
+            height: 7px;
             margin-top: 9px;
-            color: var(--jrad-muted);
+            border-radius: 50%;
+            background: var(--purple);
+        }
+
+        .pbi-focus {
+            margin-top: 22px;
+            padding: 22px 24px;
+            border-radius: 16px;
+            color: #fff;
+            background: linear-gradient(135deg, var(--purple-deep), var(--ink-3));
+            box-shadow: 0 18px 40px rgba(60, 30, 130, 0.22);
+        }
+
+        .pbi-focus span {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: 1.6px;
+            opacity: 0.72;
+        }
+
+        .pbi-focus p {
+            font-size: 0.9rem;
+            font-weight: 600;
+            line-height: 1.65;
+        }
+
+        .pbi-next {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            margin-top: 16px;
+            padding: 16px 20px;
+            border: 1px dashed rgba(124, 92, 214, 0.45);
+            border-radius: 14px;
+            background: var(--lavender);
+            color: var(--ink-2);
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: border-color 0.25s ease, background 0.25s ease;
+        }
+
+        .pbi-next b {
+            color: var(--purple-deep);
+            white-space: nowrap;
+        }
+
+        .pbi-next:hover {
+            border-color: var(--purple-deep);
+            background: #ece5fd;
+        }
+
+
+        /* =========================================================
+           LIVE DENEB LAB
+        ========================================================= */
+
+        .pbi-live {
+            background:
+                radial-gradient(circle at 85% 10%, rgba(124, 92, 214, 0.25), transparent 40%),
+                var(--ink);
+            color: #fff;
+        }
+
+        .pbi-live .pbi-label {
+            color: var(--lilac);
+        }
+
+        .pbi-live .pbi-h2 {
+            color: #fff;
+        }
+
+        .pbi-live .pbi-lead {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .pbi-lab {
+            overflow: hidden;
+            border-radius: 22px;
+            background: #fff;
+            color: var(--text);
+            box-shadow: 0 40px 90px rgba(0, 0, 0, 0.35);
+        }
+
+        .pbi-lab-tabs {
+            display: flex;
+            gap: 6px;
+            padding: 10px;
+            overflow-x: auto;
+            scrollbar-width: none;
+            background: #f1edfb;
+        }
+
+        .pbi-lab-tabs::-webkit-scrollbar {
+            display: none;
+        }
+
+        .pbi-lab-tabs button {
+            flex: 1 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 2px;
+            padding: 12px 16px;
+            border: 0;
+            border-radius: 12px;
+            background: transparent;
+            color: var(--ink-2);
+            font-size: 14px;
+            font-weight: 800;
+            text-align: left;
+            cursor: pointer;
+            transition: background 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .pbi-lab-tabs button span {
+            color: var(--text-faint);
+            font-size: 10px;
+            font-weight: 800;
+            letter-spacing: 1.2px;
+        }
+
+        .pbi-lab-tabs button:hover {
+            background: rgba(124, 92, 214, 0.08);
+        }
+
+        .pbi-lab-tabs button[aria-selected="true"] {
+            background: #fff;
+            box-shadow: 0 6px 18px -8px rgba(40, 20, 90, 0.35);
+        }
+
+        .pbi-lab-panel {
+            padding: 28px 30px 30px;
+        }
+
+        .pbi-lab-panel[hidden] {
+            display: none;
+        }
+
+        .pbi-viz-scroll {
+            overflow-x: auto;
+        }
+
+        .pbi-viz {
+            width: 100%;
+            min-width: 720px;
+            min-height: 380px;
+        }
+
+        .pbi-viz-loading,
+        .pbi-viz-fallback {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 380px;
+            color: var(--text-faint);
+            font-size: 14px;
+            text-align: center;
+        }
+
+        .pbi-lab-info {
+            display: grid;
+            grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+            gap: 32px;
+            margin-top: 24px;
+            padding-top: 24px;
+            border-top: 1px solid var(--border);
+        }
+
+        .pbi-lab-info h3 {
+            color: var(--ink-2);
+            font-family: var(--font-display);
+            font-size: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .pbi-lab-info p {
+            margin-top: 10px;
+            color: var(--text-soft);
+            font-size: 0.95rem;
+        }
+
+        .pbi-chips {
+            display: grid;
+            gap: 10px;
+        }
+
+        .pbi-chips div {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            gap: 12px;
+            padding: 12px 14px;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            background: var(--paper);
+        }
+
+        .pbi-chips dt {
+            color: var(--text-faint);
             font-size: 12px;
             font-weight: 700;
         }
 
-        /* =========================================================
-           DASHBOARD SECTIONS
-        ========================================================= */
-
-        .jrad-dashboard-section {
-            display: grid;
-            grid-template-columns: minmax(0, 1.15fr) minmax(320px, 0.85fr);
-            gap: 70px;
-            align-items: center;
-
-            padding: 105px 0;
-        }
-
-        .jrad-dashboard-section.reverse {
-            grid-template-columns: minmax(320px, 0.85fr) minmax(0, 1.15fr);
-        }
-
-        .jrad-dashboard-section.reverse .jrad-dashboard-copy {
-            order: 2;
-        }
-
-        .jrad-dashboard-section.reverse .jrad-dashboard-visual {
-            order: 1;
-        }
-
-        /* =========================================================
-           DASHBOARD VISUAL
-        ========================================================= */
-
-        .jrad-dashboard-visual {
-            width: 100%;
-
-            opacity: 0;
-            transform:
-                translateY(28px)
-                scale(0.965);
-
-            transition:
-                transform 0.75s cubic-bezier(.16,.84,.25,1),
-                opacity 0.6s ease;
-        }
-
-        .jrad-dashboard-visual.visible {
-            opacity: 1;
-            transform:
-                translateY(0)
-                scale(1);
-        }
-
-        .jrad-dashboard-frame {
-            width: 100%;
-            padding: 10px;
-
-            border-radius: 18px;
-
-            background: rgba(255,255,255,0.88);
-
-            box-shadow:
-                0 25px 65px rgba(47, 25, 101, 0.14),
-                0 5px 18px rgba(47, 25, 101, 0.08);
-
-            transition:
-                transform 0.28s ease,
-                box-shadow 0.28s ease;
-        }
-
-        .jrad-dashboard-frame img {
-            display: block;
-            width: 100%;
-            height: auto;
-
-            border-radius: 11px;
-
-            transition:
-                transform 0.32s ease;
-        }
-
-        @media (hover: hover) and (pointer: fine) {
-
-            .jrad-dashboard-frame:hover {
-                transform: translateY(-9px);
-                box-shadow:
-                    0 35px 80px rgba(47, 25, 101, 0.20),
-                    0 8px 22px rgba(47, 25, 101, 0.10);
-            }
-
-            .jrad-dashboard-frame:hover img {
-                transform: scale(1.035);
-            }
-
-            .jrad-dashboard-frame:hover {
-                animation-play-state: paused;
-            }
-        }
-
-        /* =========================================================
-           DASHBOARD COPY
-        ========================================================= */
-
-        .jrad-dashboard-copy {
-            opacity: 0;
-            transform: translateY(25px);
-            transition:
-                opacity 0.55s ease,
-                transform 0.65s cubic-bezier(.2,.8,.2,1);
-        }
-
-        .jrad-dashboard-copy.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .jrad-dashboard-copy h2 {
-            margin: 0 0 12px;
-
-            font-size: clamp(30px, 3.2vw, 43px);
-            line-height: 1.05;
-            letter-spacing: -1.5px;
-        }
-
-        .jrad-dashboard-copy > p {
-            margin: 0 0 28px;
-
-            color: var(--jrad-muted);
-            font-size: 15px;
-            line-height: 1.75;
-        }
-
-        /* =========================================================
-           INSIGHTS
-        ========================================================= */
-
-        .jrad-insights {
-            margin: 0;
-            padding: 0;
-            list-style: none;
-        }
-
-        .jrad-insights li {
-            padding: 15px 0;
-            border-bottom: 1px solid rgba(99, 56, 199, 0.12);
-
-            display: flex;
-            gap: 13px;
-
-            color: #5c5865;
-            font-size: 13px;
-            line-height: 1.65;
-
-            opacity: 0;
-            transform: translateX(-14px);
-        }
-
-        .jrad-dashboard-copy.visible .jrad-insights li {
-            animation:
-                insightIn
-                0.42s
-                cubic-bezier(.2,.8,.2,1)
-                forwards;
-        }
-
-        .jrad-dashboard-copy.visible .jrad-insights li:nth-child(1) {
-            animation-delay: 0.08s;
-        }
-
-        .jrad-dashboard-copy.visible .jrad-insights li:nth-child(2) {
-            animation-delay: 0.16s;
-        }
-
-        .jrad-dashboard-copy.visible .jrad-insights li:nth-child(3) {
-            animation-delay: 0.24s;
-        }
-
-        .jrad-insights li::before {
-            content: "";
-            flex: 0 0 6px;
-            width: 6px;
-            height: 6px;
-            margin-top: 8px;
-
-            border-radius: 50%;
-            background: var(--jrad-purple);
-        }
-
-        /* =========================================================
-           STRATEGIC FOCUS
-        ========================================================= */
-
-        .jrad-strategy {
-            margin-top: 22px;
-            padding: 23px 25px;
-
-            border-radius: 15px;
-
-            color: white;
-
-            background:
-                linear-gradient(
-                    135deg,
-                    #6940ca,
-                    #4a2495
-                );
-
-            box-shadow:
-                0 18px 35px rgba(75, 35, 145, 0.22);
-
-            opacity: 0;
-            transform: translateY(16px) scale(0.98);
-        }
-
-        .jrad-dashboard-copy.visible .jrad-strategy {
-            animation:
-                strategyIn
-                0.55s
-                0.35s
-                cubic-bezier(.2,.8,.2,1)
-                forwards;
-        }
-
-        .jrad-strategy-label {
-            margin-bottom: 9px;
-
-            font-size: 10px;
-            font-weight: 900;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
-
-            opacity: 0.7;
-        }
-
-        .jrad-strategy p {
-            margin: 0;
-
-            font-size: 13px;
-            line-height: 1.65;
-            font-weight: 600;
-        }
-
-        /* =========================================================
-           MODEL ARCHITECTURE
-        ========================================================= */
-
-        .jrad-model {
-            padding: 110px 0;
-            text-align: center;
-        }
-
-        .jrad-model h2 {
-            margin: 0;
-
-            font-size: clamp(34px, 4vw, 50px);
-            letter-spacing: -1.7px;
-        }
-
-        .jrad-model > p {
-            max-width: 730px;
-            margin: 18px auto 35px;
-
-            color: var(--jrad-muted);
-            line-height: 1.75;
-            font-size: 15px;
-        }
-
-        .jrad-model-frame {
-            width: 100%;
-            padding: 12px;
-
-            border-radius: 18px;
-            background: white;
-
-            box-shadow:
-                0 25px 65px rgba(47, 25, 101, 0.12);
-
-            opacity: 0;
-            transform:
-                translateY(30px)
-                scale(0.94);
-
-            transition:
-                opacity 0.65s ease,
-                transform 0.75s cubic-bezier(.16,.84,.25,1);
-        }
-
-        .jrad-model-frame.visible {
-            opacity: 1;
-            transform:
-                translateY(0)
-                scale(1);
-        }
-
-        .jrad-model-frame img {
-            display: block;
-            width: 100%;
-            height: auto;
-            border-radius: 10px;
-        }
-
-        @media (hover: hover) and (pointer: fine) {
-
-            .jrad-model-frame:hover {
-                transform:
-                    translateY(-6px)
-                    scale(1.008);
-
-                box-shadow:
-                    0 35px 80px rgba(47, 25, 101, 0.17);
-            }
-        }
-
-        /* =========================================================
-           TECHNICAL PIPELINE
-        ========================================================= */
-
-        .jrad-tech {
-            padding: 100px 0;
-        }
-
-        .jrad-tech h2 {
-            margin: 0 0 35px;
-
-            font-size: clamp(34px, 4vw, 50px);
-            letter-spacing: -1.7px;
-        }
-
-        .jrad-tech-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 15px;
-        }
-
-        .jrad-tech-card {
-            padding: 24px;
-
-            border: 1px solid var(--jrad-border);
-            border-radius: 15px;
-
-            background: white;
-
-            box-shadow:
-                0 10px 30px rgba(47, 25, 101, 0.05);
-
-            opacity: 0;
-            transform: translateY(25px);
-        }
-
-        .jrad-tech-card.visible {
-            animation:
-                techIn
-                0.48s
-                cubic-bezier(.2,.8,.2,1)
-                forwards;
-        }
-
-        .jrad-tech-card:nth-child(1).visible {
-            animation-delay: 0s;
-        }
-
-        .jrad-tech-card:nth-child(2).visible {
-            animation-delay: 0.07s;
-        }
-
-        .jrad-tech-card:nth-child(3).visible {
-            animation-delay: 0.14s;
-        }
-
-        .jrad-tech-card:nth-child(4).visible {
-            animation-delay: 0.21s;
-        }
-
-        .jrad-tech-card:nth-child(5).visible {
-            animation-delay: 0.28s;
-        }
-
-        .jrad-tech-card:nth-child(6).visible {
-            animation-delay: 0.35s;
-        }
-
-        .jrad-tech-card strong {
-            display: block;
-            margin-bottom: 8px;
-
-            color: var(--jrad-purple);
+        .pbi-chips dd {
+            color: var(--ink-2);
             font-size: 14px;
+            font-weight: 800;
+            text-align: right;
+            font-variant-numeric: tabular-nums;
         }
 
-        .jrad-tech-card span {
-            color: var(--jrad-muted);
+        .pbi-spec {
+            margin-top: 22px;
+            border-radius: 14px;
+            background: var(--ink-2);
+            color: #e9e2ff;
+        }
+
+        .pbi-spec summary {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px 18px;
+            font-size: 13px;
+            font-weight: 800;
+            list-style: none;
+            cursor: pointer;
+        }
+
+        .pbi-spec summary::-webkit-details-marker {
+            display: none;
+        }
+
+        .pbi-spec summary::after {
+            content: "+";
+            font-size: 18px;
+            line-height: 1;
+        }
+
+        .pbi-spec[open] summary::after {
+            content: "\2212";
+        }
+
+        .pbi-spec pre {
+            max-height: 380px;
+            margin: 0;
+            padding: 0 18px 18px;
+            overflow: auto;
+            color: #d9cdfb;
+            font-family: var(--mono);
             font-size: 12px;
             line-height: 1.6;
+            white-space: pre;
         }
 
-        /* =========================================================
-           FINAL CTA
-        ========================================================= */
-
-        .jrad-final {
-            margin: 50px 0 100px;
-            padding: 55px 35px;
-
-            text-align: center;
-
-            border-radius: 22px;
-
-            color: white;
-
-            background:
-                linear-gradient(
-                    135deg,
-                    #7046d1,
-                    #43218f
-                );
-
-            box-shadow:
-                0 30px 70px rgba(63, 29, 126, 0.22);
-        }
-
-        .jrad-final h2 {
-            margin: 0 0 12px;
-
-            font-size: clamp(30px, 4vw, 48px);
-            letter-spacing: -1.5px;
-        }
-
-        .jrad-final p {
-            max-width: 680px;
-            margin: 0 auto 25px;
-
-            color: rgba(255,255,255,0.82);
+        .pbi-lab-note {
+            max-width: 80ch;
+            margin-top: 20px;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 13px;
             line-height: 1.7;
         }
 
+        #vg-tooltip-element.vg-tooltip {
+            padding: 8px 10px;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            box-shadow: 0 12px 30px rgba(35, 20, 80, 0.18);
+            font-family: var(--font-body);
+            font-size: 12px;
+        }
+
+
         /* =========================================================
-           ANIMATIONS
+           DATA MODEL
         ========================================================= */
 
-        @keyframes heroIn {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        .pbi-model-grid {
+            display: grid;
+            grid-template-columns: minmax(0, 1.4fr) minmax(260px, 0.6fr);
+            gap: 40px;
+            align-items: start;
         }
 
-        @keyframes heroDashboardIn {
-            0% {
-                opacity: 0;
-                transform:
-                    perspective(1400px)
-                    translateY(55px)
-                    scale(0.91)
-                    rotateX(3deg);
-            }
-
-            100% {
-                opacity: 1;
-                transform:
-                    perspective(1400px)
-                    translateY(0)
-                    scale(1)
-                    rotateX(0);
-            }
+        .pbi-model-list {
+            display: grid;
+            gap: 14px;
         }
 
-        @keyframes dashboardFloat {
-
-            0% {
-                transform: translateY(0);
-            }
-
-            100% {
-                transform: translateY(-7px);
-            }
+        .pbi-model-list div {
+            padding: 18px 20px;
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            background: #fff;
         }
 
-        @keyframes heroBlobOne {
-
-            0% {
-                transform: translate(0, 0) scale(1);
-            }
-
-            100% {
-                transform: translate(-35px, 25px) scale(1.08);
-            }
+        .pbi-model-list dt {
+            margin-bottom: 6px;
+            color: var(--purple);
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 1.6px;
         }
 
-        @keyframes heroBlobTwo {
-
-            0% {
-                transform: translate(0, 0);
-            }
-
-            100% {
-                transform: translate(30px, -20px) scale(1.05);
-            }
+        .pbi-model-list dd {
+            color: #4f4b5e;
+            font-size: 0.9rem;
+            line-height: 1.6;
         }
 
-        @keyframes statReveal {
 
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        /* =========================================================
+           TOOLS
+        ========================================================= */
+
+        .pbi-tools {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 16px;
         }
 
-        @keyframes insightIn {
-
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
+        .pbi-tool {
+            padding: 26px;
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            background: #fff;
+            box-shadow: var(--shadow-sm);
         }
 
-        @keyframes strategyIn {
-
-            to {
-                opacity: 1;
-                transform:
-                    translateY(0)
-                    scale(1);
-            }
+        .pbi-tool strong {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--purple-deep);
+            font-size: 15px;
         }
 
-        @keyframes techIn {
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        .pbi-tool span {
+            color: var(--text-soft);
+            font-size: 14px;
+            line-height: 1.65;
         }
+
+
+        /* =========================================================
+           FINAL CTA + FOOTER
+        ========================================================= */
+
+        .pbi-final {
+            padding: 64px 36px;
+            border-radius: 24px;
+            color: #fff;
+            text-align: center;
+            background:
+                radial-gradient(circle at 20% 10%, rgba(166, 139, 224, 0.35), transparent 40%),
+                linear-gradient(135deg, var(--ink-2), var(--ink-3));
+            box-shadow: 0 30px 70px rgba(23, 17, 63, 0.28);
+        }
+
+        .pbi-final h2 {
+            font-family: var(--font-display);
+            font-size: clamp(2rem, 4vw, 3.2rem);
+            line-height: 1.1;
+        }
+
+        .pbi-final p {
+            max-width: 640px;
+            margin: 16px auto 28px;
+            color: rgba(255, 255, 255, 0.75);
+        }
+
+        .pbi-footer {
+            padding: 34px 0 48px;
+            color: var(--text-faint);
+            font-size: 13px;
+        }
+
+        .pbi-footer a {
+            color: var(--purple-deep);
+            font-weight: 700;
+        }
+
+
+        /* =========================================================
+           LIGHTBOX
+        ========================================================= */
+
+        .pbi-lightbox {
+            position: fixed;
+            inset: 0;
+            z-index: 2000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 5vh 4vw;
+            background: rgba(13, 9, 40, 0.9);
+            backdrop-filter: blur(6px);
+        }
+
+        .pbi-lightbox.open {
+            display: flex;
+            animation: pbiFade 0.25s ease;
+        }
+
+        .pbi-lightbox img {
+            max-width: 100%;
+            max-height: 86vh;
+            border-radius: 12px;
+            box-shadow: 0 40px 90px rgba(0, 0, 0, 0.45);
+        }
+
+        .pbi-lightbox-close {
+            position: absolute;
+            top: 18px;
+            right: 18px;
+            padding: 10px 16px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 999px;
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            font-size: 13px;
+            font-weight: 700;
+            cursor: pointer;
+        }
+
+        .pbi-lightbox-caption {
+            position: absolute;
+            bottom: 18px;
+            left: 50%;
+            max-width: 90%;
+            transform: translateX(-50%);
+            color: rgba(255, 255, 255, 0.75);
+            font-size: 13px;
+            text-align: center;
+        }
+
+        @keyframes pbiFade {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
 
         /* =========================================================
            RESPONSIVE
         ========================================================= */
 
+        @media (max-width: 1000px) {
+
+            .pbi-stats {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .pbi-tools {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
         @media (max-width: 900px) {
 
-            .jrad-hero {
-                min-height: 620px;
-                padding-top: 55px;
-            }
-
-            .jrad-hero-dashboard {
-                margin-top: 35px;
-            }
-
-            .jrad-dashboard-section,
-            .jrad-dashboard-section.reverse {
+            .pbi-page,
+            .pbi-page.reverse {
                 grid-template-columns: 1fr;
-                gap: 40px;
-                padding: 75px 0;
             }
 
-            .jrad-dashboard-section.reverse .jrad-dashboard-copy,
-            .jrad-dashboard-section.reverse .jrad-dashboard-visual {
-                order: initial;
+            .pbi-page.reverse .pbi-shot {
+                order: 0;
             }
 
-            .jrad-stats {
-                grid-template-columns: repeat(2, 1fr);
+            .pbi-lab-info,
+            .pbi-model-grid,
+            .pbi-tour-steps {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 700px) {
+
+            .pbi-tour.is-touring .pbi-tour-bottom {
+                grid-template-columns: 1fr;
+                gap: 14px;
             }
 
-            .jrad-tech-grid {
-                grid-template-columns: repeat(2, 1fr);
+            .pbi-tour.is-touring .pbi-tour-meta {
+                order: -1;
+                flex-direction: row;
+                align-items: center;
+                justify-content: space-between;
+            }
+
+            .pbi-tour.is-touring .pbi-tour-steps {
+                min-height: 190px;
+            }
+
+            .pbi-tour-step h3 {
+                font-size: 1.15rem;
+            }
+
+            .pbi-tour-step p {
+                font-size: 0.9rem;
+            }
+
+            .pbi-lab-panel {
+                padding: 20px 18px 22px;
+            }
+
+            .pbi-nav-inner {
+                -webkit-mask-image: linear-gradient(90deg, #000 85%, transparent);
+                mask-image: linear-gradient(90deg, #000 85%, transparent);
             }
         }
 
         @media (max-width: 600px) {
 
-            .jrad-hero {
-                min-height: 550px;
-                padding: 45px 18px 0;
+            .pbi-hero {
+                padding: 64px 0 72px;
             }
 
-            .jrad-hero h1 {
-                letter-spacing: -2px;
+            .pbi-actions .pbi-btn {
+                width: 100%;
             }
 
-            .jrad-hero-dashboard {
-                margin-top: 30px;
-                transform: translateY(30px) scale(0.96);
-            }
-
-            .jrad-page {
-                width: 90%;
-                padding: 70px 0;
-            }
-
-            .jrad-stats {
-                grid-template-columns: 1fr 1fr;
+            .pbi-stats {
                 gap: 10px;
             }
 
-            .jrad-stat {
+            .pbi-stat {
                 padding: 20px 16px;
             }
 
-            .jrad-stat-number {
-                font-size: 30px;
-            }
-
-            .jrad-dashboard-section,
-            .jrad-dashboard-section.reverse {
-                padding: 65px 0;
-            }
-
-            .jrad-dashboard-copy h2 {
-                font-size: 31px;
-            }
-
-            .jrad-dashboard-frame {
-                padding: 7px;
-                border-radius: 13px;
-            }
-
-            .jrad-tech-grid {
+            .pbi-tools {
                 grid-template-columns: 1fr;
             }
 
-            .jrad-hero::before,
-            .jrad-hero::after {
-                display: none;
+            .pbi-final {
+                padding: 48px 22px;
             }
         }
 
-        /* =========================================================
-           REDUCED MOTION
-        ========================================================= */
+        @media (max-width: 480px) {
+
+            .pbi-title {
+                font-size: 12vw;
+            }
+
+            .pbi-eyebrow {
+                font-size: 9px;
+                letter-spacing: 1.3px;
+            }
+        }
 
         @media (prefers-reduced-motion: reduce) {
 
@@ -1060,23 +1316,6 @@
                 animation-iteration-count: 1 !important;
                 transition-duration: 0.01ms !important;
             }
-
-            .jrad-eyebrow,
-            .jrad-hero h1,
-            .jrad-hero-subtitle,
-            .jrad-hero-description,
-            .jrad-hero-actions,
-            .jrad-hero-dashboard,
-            .jrad-stat,
-            .jrad-dashboard-visual,
-            .jrad-dashboard-copy,
-            .jrad-insights li,
-            .jrad-strategy,
-            .jrad-model-frame,
-            .jrad-tech-card {
-                opacity: 1 !important;
-                transform: none !important;
-            }
         }
 
     </style>
@@ -1085,55 +1324,50 @@
 
 <body>
 
+    <div class="pbi-progress" aria-hidden="true"></div>
+
+
     <!-- =========================================================
          HERO
     ========================================================= -->
 
-    <header class="jrad-hero">
+    <header class="pbi-hero" id="top">
 
-        <div class="jrad-hero-inner">
+        <div class="pbi-wrap pbi-hero-inner">
 
-            <div class="jrad-eyebrow">
-                PROJECT 03 · RETAIL INTELLIGENCE
-            </div>
+            <div class="pbi-eyebrow" data-hero-item>PROJECT 03 · RETAIL INTELLIGENCE</div>
 
-            <h1>
-                JRAD Retail Power BI
-            </h1>
+            <h1 class="pbi-title">JRAD Retail Power BI</h1>
 
-            <div class="jrad-hero-subtitle">
-                Executive Intelligence & Visual Engineering
-            </div>
+            <p class="pbi-subtitle" data-hero-item>Executive Intelligence &amp; Visual Engineering</p>
 
-            <p class="jrad-hero-description">
+            <p class="pbi-desc" data-hero-item>
                 A 2026 retail intelligence solution built for JRAD Superstores,
                 transforming full-year transaction data into an executive view
-                of revenue performance, demand behavior and customer value.
+                of revenue performance, demand behaviour and customer value.
             </p>
 
-            <div class="jrad-hero-actions">
+            <div class="pbi-actions" data-hero-item>
 
-                <a
-                    href="#dashboard"
-                    class="jrad-btn jrad-btn-primary">
-                    Explore Dashboard
-                </a>
+                <a href="#tour" class="pbi-btn pbi-btn-primary">Take the Tour</a>
 
-                <a
-                    href="https://github.com/sodiqoluwatimileyin190-oss/sodiqoluwatimileyin190-oss.github.io/tree/main/projects/jrad-retail-powerbi-dashboard"
-                    target="_blank"
-                    rel="noopener"
-                    class="jrad-btn jrad-btn-secondary">
-                    View Project on GitHub
-                </a>
+                <a href="https://github.com/sodiqoluwatimileyin190-oss/sodiqoluwatimileyin190-oss.github.io/tree/main/projects/jrad-retail-powerbi-dashboard"
+                   target="_blank"
+                   rel="noopener"
+                   class="pbi-btn pbi-btn-secondary">View Project on GitHub</a>
+
+                <a href="#live" class="pbi-btn pbi-btn-ghost">See the Deneb visuals live</a>
 
             </div>
 
-            <div class="jrad-hero-dashboard">
+            <div class="pbi-hero-stage">
 
-                <img
-                    src="images/executive-overview.png"
-                    alt="JRAD Retail Power BI Executive Dashboard">
+                <div class="pbi-hero-frame" data-hero-item>
+                    <img src="images/executive-overview.png"
+                         alt="JRAD Retail Power BI executive performance overview">
+                </div>
+
+                <p class="pbi-hero-caption" data-hero-item>Executive Performance Overview · page 1 of 3</p>
 
             </div>
 
@@ -1143,111 +1377,73 @@
 
 
     <!-- =========================================================
-         BACK
+         SECTION NAV
     ========================================================= -->
 
-    <div class="jrad-back">
+    <nav class="pbi-nav" aria-label="Case study sections">
 
-        <a href="../../index.html">
-            ← Back to Portfolio
-        </a>
+        <div class="pbi-nav-inner">
 
-    </div>
+            <a class="pbi-nav-home" href="../../index.html#projects">← Portfolio</a>
+            <a href="#overview">Overview</a>
+            <a href="#tour">Executive</a>
+            <a href="#sales-time">Sales &amp; Time</a>
+            <a href="#segmentation">Segmentation</a>
+            <a href="#live">Live Visuals</a>
+            <a href="#model">Data Model</a>
+            <a href="#tools">Tools</a>
+
+        </div>
+
+    </nav>
 
 
-    <main>
+    <main id="main" tabindex="-1">
 
 
         <!-- =====================================================
              PROJECT AT A GLANCE
         ====================================================== -->
 
-        <section class="jrad-page jrad-glance">
+        <section class="pbi-section" id="overview" data-nav>
 
-            <div class="jrad-section-label">
-                PROJECT AT A GLANCE
-            </div>
+            <div class="pbi-wrap">
 
-            <h2>
-                Built to move from transactions to decisions.
-            </h2>
+                <div class="pbi-head">
 
-            <p class="jrad-glance-description">
-                A three-page executive Power BI solution designed to translate
-                large-scale retail transactions into clear business signals —
-                combining DAX, data modelling, time intelligence, Deneb and
-                custom visual engineering.
-            </p>
+                    <span class="pbi-label">PROJECT AT A GLANCE</span>
 
+                    <h2 class="pbi-h2" data-split>Built to move from transactions to decisions.</h2>
 
-            <!-- RESTORED COUNTING FIGURES -->
-
-            <div class="jrad-stats">
-
-                <div class="jrad-stat">
-
-                    <div
-                        class="jrad-stat-number"
-                        data-counter="2000000"
-                        data-prefix=""
-                        data-suffix="+">
-                        0+
-                    </div>
-
-                    <div class="jrad-stat-label">
-                        Retail Rows
-                    </div>
+                    <p class="pbi-lead" data-reveal>
+                        A three-page executive Power BI solution designed to translate
+                        large-scale retail transactions into clear business signals —
+                        combining DAX, data modelling, time intelligence, Deneb and
+                        custom visual engineering.
+                    </p>
 
                 </div>
 
+                <div class="pbi-stats">
 
-                <div class="jrad-stat">
-
-                    <div
-                        class="jrad-stat-number"
-                        data-counter="3"
-                        data-prefix=""
-                        data-suffix="">
-                        0
+                    <div class="pbi-stat" data-reveal>
+                        <strong data-count>2,000,000+</strong>
+                        <span>Retail Rows</span>
                     </div>
 
-                    <div class="jrad-stat-label">
-                        Executive Dashboard Pages
+                    <div class="pbi-stat" data-reveal>
+                        <strong data-count>3</strong>
+                        <span>Executive Dashboard Pages</span>
                     </div>
 
-                </div>
-
-
-                <div class="jrad-stat">
-
-                    <div
-                        class="jrad-stat-number"
-                        data-counter="12"
-                        data-prefix=""
-                        data-suffix="">
-                        0
+                    <div class="pbi-stat" data-reveal>
+                        <strong data-count>12</strong>
+                        <span>Months of Retail Performance</span>
                     </div>
 
-                    <div class="jrad-stat-label">
-                        Months of Retail Performance
-                    </div>
-
-                </div>
-
-
-                <div class="jrad-stat">
-
-                    <div
-                        class="jrad-stat-number"
-                        data-counter="17.8"
-                        data-decimals="1"
-                        data-prefix="+"
-                        data-suffix="%">
-                        +0%
-                    </div>
-
-                    <div class="jrad-stat-label">
-                        Event Revenue Uplift
+                    <div class="pbi-stat" data-reveal>
+                        <strong data-count>+17.8%</strong>
+                        <span>Event Revenue Uplift</span>
                     </div>
 
                 </div>
@@ -1257,400 +1453,530 @@
         </section>
 
 
-
         <!-- =====================================================
-             DASHBOARD 01
+             01 / EXECUTIVE — GUIDED TOUR
         ====================================================== -->
 
-        <section
-            class="jrad-page jrad-dashboard-section"
-            id="dashboard">
+        <section class="pbi-tour" id="tour" data-nav>
 
-            <div class="jrad-dashboard-visual">
+            <div class="pbi-wrap">
 
-                <div class="jrad-dashboard-frame">
+                <div class="pbi-head">
 
-                    <img
-                        src="images/executive-overview-page.png"
-                        alt="JRAD Retail Power BI Executive Performance Overview">
+                    <span class="pbi-label">01 / EXECUTIVE PERFORMANCE</span>
 
-                </div>
+                    <h2 class="pbi-h2" data-split>A guided tour of the overview page.</h2>
 
-            </div>
-
-
-            <div class="jrad-dashboard-copy">
-
-                <div class="jrad-section-label">
-                    01 / EXECUTIVE PERFORMANCE
-                </div>
-
-                <h2>
-                    Executive Performance Overview
-                </h2>
-
-                <p>
-                    A single-glance leadership view answering the central
-                    question: how is the business performing?
-                </p>
-
-                <ul class="jrad-insights">
-
-                    <li>
-                        December delivered ₦1.90bn in revenue —
-                        the strongest month of the year.
-                    </li>
-
-                    <li>
-                        June recorded the sharpest monthly decline,
-                        falling 12.7% before recovery.
-                    </li>
-
-                    <li>
-                        Company-wide growth remained strong despite
-                        uneven branch-level target achievement.
-                    </li>
-
-                </ul>
-
-                <div class="jrad-strategy">
-
-                    <div class="jrad-strategy-label">
-                        Strategic Focus
-                    </div>
-
-                    <p>
-                        Protect festive-season momentum, investigate the June
-                        slowdown, and tighten branch-level target setting to
-                        close the gap between company-wide growth and individual
-                        branch performance.
+                    <p class="pbi-lead" data-reveal>
+                        Scroll to read the page the way an executive would: headline
+                        numbers first, then the target, the trend, and where the
+                        performance came from.
                     </p>
 
                 </div>
 
             </div>
 
+            <div class="pbi-tour-stage">
+
+                <div class="pbi-wrap pbi-tour-inner">
+
+                    <div class="pbi-tour-frame">
+                        <div class="pbi-tour-canvas">
+                            <img src="images/executive-overview-page.png"
+                                 alt="JRAD Retail Power BI Executive Performance Overview page">
+                        </div>
+                    </div>
+
+                    <div class="pbi-tour-bottom">
+
+                        <ol class="pbi-tour-steps">
+
+                            <li class="pbi-tour-step" data-region="0 0 1349 756">
+                                <span class="pbi-tour-num">THE PAGE</span>
+                                <h3>One question: how is the business performing?</h3>
+                                <p>
+                                    A single-glance leadership view: headline numbers on
+                                    top, the target and the trend in the middle, and what
+                                    drove them underneath.
+                                </p>
+                            </li>
+
+                            <li class="pbi-tour-step" data-region="12 108 1338 220">
+                                <span class="pbi-tour-num">HEADLINE KPIS</span>
+                                <h3>The numbers come first.</h3>
+                                <p>
+                                    ₦15bn in revenue across 225K baskets, an average basket
+                                    of ₦68.0K, and 95.8% of the revenue target achieved.
+                                </p>
+                            </li>
+
+                            <li class="pbi-tour-step" data-region="12 224 364 490">
+                                <span class="pbi-tour-num">TARGET</span>
+                                <h3>Are we on track?</h3>
+                                <p>
+                                    ₦15.33bn against a ₦16.00bn target: 95.8% achievement
+                                    and a ₦668.5M gap, shown on a custom Deneb gauge with
+                                    status bands.
+                                </p>
+                            </li>
+
+                            <li class="pbi-tour-step" data-region="366 224 1088 490">
+                                <span class="pbi-tour-num">TREND</span>
+                                <h3>How revenue moved through 2026.</h3>
+                                <p>
+                                    December delivered ₦1.90bn, the strongest month of the
+                                    year. June recorded the sharpest decline, falling 12.7%
+                                    before recovery.
+                                </p>
+                            </li>
+
+                            <li class="pbi-tour-step" data-region="12 492 364 750">
+                                <span class="pbi-tour-num">BRANCHES</span>
+                                <h3>Growth wasn't evenly shared.</h3>
+                                <p>
+                                    Company-wide growth stayed strong while branch targets
+                                    split: Oju Ore beat its target by 4.8%, Ajah fell 22.4%
+                                    short.
+                                </p>
+                            </li>
+
+                            <li class="pbi-tour-step" data-region="366 492 1088 750">
+                                <span class="pbi-tour-num">DRIVERS</span>
+                                <h3>Where the revenue came from.</h3>
+                                <p>
+                                    Groceries drove ₦9.65bn, growing 14.2%. Family Shoppers
+                                    contributed 53.0% of all revenue, about ₦8.13bn.
+                                </p>
+                            </li>
+
+                            <li class="pbi-tour-step" data-region="0 0 1349 756">
+                                <span class="pbi-tour-num">STRATEGIC FOCUS</span>
+                                <h3>What leadership should do next.</h3>
+                                <p>
+                                    Protect festive-season momentum, investigate the June
+                                    slowdown, and tighten branch-level target setting to
+                                    close the gap between company-wide growth and individual
+                                    branch performance.
+                                </p>
+                            </li>
+
+                        </ol>
+
+                        <div class="pbi-tour-meta" aria-hidden="true">
+                            <span class="pbi-tour-count">01 / 07</span>
+                            <span class="pbi-tour-meter"><span class="pbi-tour-fill"></span></span>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
         </section>
 
 
-
         <!-- =====================================================
-             DASHBOARD 02
+             02 / SALES & TIME
         ====================================================== -->
 
-        <section
-            class="jrad-page jrad-dashboard-section reverse">
+        <section class="pbi-section pbi-white" id="sales-time" data-nav>
 
-            <div class="jrad-dashboard-copy">
+            <div class="pbi-wrap pbi-page reverse">
 
-                <div class="jrad-section-label">
-                    02 / SALES & TIME INTELLIGENCE
-                </div>
+                <div class="pbi-page-copy">
 
-                <h2>
-                    Sales & Time Intelligence
-                </h2>
+                    <span class="pbi-label">02 / SALES &amp; TIME INTELLIGENCE</span>
 
-                <p>
-                    A demand-timing layer explaining when customers spend,
-                    how basket value changes through the salary cycle,
-                    and how events influence revenue.
-                </p>
+                    <h2 class="pbi-h2" data-split>When customers spend, and why.</h2>
 
-                <ul class="jrad-insights">
+                    <p data-reveal>
+                        A demand-timing layer explaining when customers spend,
+                        how basket value changes through the salary cycle,
+                        and how events influence revenue.
+                    </p>
 
-                    <li>
-                        Spending is strongest during Salary Week,
-                        with average basket value around ₦79K.
-                    </li>
+                    <ul class="pbi-insights">
+                        <li>Spending is strongest during Salary Week, with average basket value around ₦79K.</li>
+                        <li>Demand peaks around 6 PM, concentrated within the 5–7 PM evening rush, with Saturday as the highest-demand day.</li>
+                        <li>Business events generated a combined ₦2.32bn uplift, approximately 17.8% above baseline.</li>
+                    </ul>
 
-                    <li>
-                        Demand peaks around 6 PM, concentrated within
-                        the 5–7 PM evening rush, with Saturday as the
-                        highest-demand day.
-                    </li>
-
-                    <li>
-                        Business events generated a combined ₦2.32bn uplift,
-                        representing approximately 17.8% above baseline.
-                    </li>
-
-                </ul>
-
-                <div class="jrad-strategy">
-
-                    <div class="jrad-strategy-label">
-                        Strategic Focus
+                    <div class="pbi-focus">
+                        <span>STRATEGIC FOCUS</span>
+                        <p>
+                            Prioritize peak-hour staffing, event-driven inventory
+                            planning, and salary-cycle promotions to meet demand
+                            where it is concentrated.
+                        </p>
                     </div>
 
-                    <p>
-                        Prioritize peak-hour staffing, event-driven inventory
-                        planning, and salary-cycle promotions to meet demand
-                        where it is concentrated.
+                </div>
+
+                <div class="pbi-shot">
+                    <button class="pbi-zoom" type="button" aria-label="Enlarge the Sales and Time Intelligence page">
+                        <img src="images/sales-time.png"
+                             alt="JRAD Retail Sales and Time Intelligence dashboard page"
+                             loading="lazy">
+                        <span class="pbi-zoom-hint">CLICK TO ENLARGE</span>
+                    </button>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             03 / CUSTOMER SEGMENTATION
+        ====================================================== -->
+
+        <section class="pbi-section" id="segmentation" data-nav>
+
+            <div class="pbi-wrap pbi-page">
+
+                <div class="pbi-shot">
+                    <button class="pbi-zoom" type="button" aria-label="Enlarge the Customer Segmentation page">
+                        <img src="images/customer-segmentation.png"
+                             alt="JRAD Retail Customer Segmentation dashboard page"
+                             loading="lazy">
+                        <span class="pbi-zoom-hint">CLICK TO ENLARGE</span>
+                    </button>
+                </div>
+
+                <div class="pbi-page-copy">
+
+                    <span class="pbi-label">03 / CUSTOMER SEGMENTATION</span>
+
+                    <h2 class="pbi-h2" data-split>Who shops, and where value concentrates.</h2>
+
+                    <p data-reveal>
+                        A customer-value layer explaining who shops, how they
+                        spend, how frequently they purchase, and where value
+                        concentrates.
+                    </p>
+
+                    <ul class="pbi-insights">
+                        <li>Premium and Family Shopper personas combine high basket value with strong purchase frequency, making them standout high-value segments.</li>
+                        <li>Weekly Grocery accounts for roughly 85% of shopping-mission revenue, making it the core driver of overall spend.</li>
+                        <li>Walk-in customers dominate the customer mix, creating an opportunity to convert frequent walk-ins into registered customers.</li>
+                    </ul>
+
+                    <div class="pbi-focus">
+                        <span>STRATEGIC FOCUS</span>
+                        <p>
+                            Prioritize Premium and Family Shopper segments, convert
+                            high-frequency walk-ins into registered customers, and
+                            reinforce Weekly Grocery as the core revenue driver.
+                        </p>
+                    </div>
+
+                    <a class="pbi-next" href="../jrad-retention-intelligence/">
+                        <span>That walk-in recommendation became Version 2.</span>
+                        <b>Retention Intelligence →</b>
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =====================================================
+             LIVE DENEB VISUALS
+        ====================================================== -->
+
+        <section class="pbi-section pbi-live" id="live" data-nav>
+
+            <div class="pbi-wrap">
+
+                <div class="pbi-head">
+
+                    <span class="pbi-label">UNDER THE HOOD</span>
+
+                    <h2 class="pbi-h2" data-split>The Deneb visuals, running live.</h2>
+
+                    <p class="pbi-lead" data-reveal>
+                        These are the actual Vega-Lite specifications from the report —
+                        the same JSON written in Deneb — rendered in your browser from the
+                        report's exported data. Hover the charts for exact values, and
+                        open any spec to read it.
                     </p>
 
                 </div>
 
-            </div>
+                <div class="pbi-lab" data-reveal>
 
+                    <div class="pbi-lab-tabs" role="tablist" aria-label="Live Deneb visuals">
+                        <button type="button" role="tab" id="tab-revenue" aria-controls="viz-revenue" aria-selected="true" data-viz="revenue"><span>EXECUTIVE OVERVIEW</span>Revenue trend</button>
+                        <button type="button" role="tab" id="tab-heatmap" aria-controls="viz-heatmap" aria-selected="false" tabindex="-1" data-viz="heatmap"><span>SALES &amp; TIME</span>Demand heatmap</button>
+                        <button type="button" role="tab" id="tab-waterfall" aria-controls="viz-waterfall" aria-selected="false" tabindex="-1" data-viz="waterfall"><span>SALES &amp; TIME</span>Event uplift</button>
+                        <button type="button" role="tab" id="tab-salary" aria-controls="viz-salary" aria-selected="false" tabindex="-1" data-viz="salary"><span>CUSTOMER SEGMENTATION</span>Salary cycle by persona</button>
+                    </div>
 
-            <div class="jrad-dashboard-visual">
+                    <div class="pbi-lab-panel" id="viz-revenue" role="tabpanel" aria-labelledby="tab-revenue">
+                        <div class="pbi-viz-scroll">
+                            <div class="pbi-viz" data-host="revenue"><p class="pbi-viz-loading">Loading the live chart…</p></div>
+                        </div>
+                        <div class="pbi-lab-info">
+                            <div>
+                                <h3>How did revenue move throughout 2026?</h3>
+                                <p>
+                                    December delivered ₦1.90bn — the strongest month of the
+                                    year, up 39.1% on November. June recorded the sharpest
+                                    decline, falling 12.7% before recovery. Shaded bands mark
+                                    Ramadan and Eid, Black Friday and the festive season.
+                                </p>
+                            </div>
+                            <dl class="pbi-chips">
+                                <div><dt>Peak month</dt><dd>December · ₦1.90bn</dd></div>
+                                <div><dt>Sharpest fall</dt><dd>June · −12.7%</dd></div>
+                                <div><dt>Full year</dt><dd>₦15.33bn</dd></div>
+                            </dl>
+                        </div>
+                        <details class="pbi-spec" data-spec="revenue">
+                            <summary>View the Deneb spec</summary>
+                            <pre data-lenis-prevent><code></code></pre>
+                        </details>
+                    </div>
 
-                <div class="jrad-dashboard-frame">
+                    <div class="pbi-lab-panel" id="viz-heatmap" role="tabpanel" aria-labelledby="tab-heatmap" hidden>
+                        <div class="pbi-viz-scroll">
+                            <div class="pbi-viz" data-host="heatmap"><p class="pbi-viz-loading">Loading the live chart…</p></div>
+                        </div>
+                        <div class="pbi-lab-info">
+                            <div>
+                                <h3>When does JRAD experience its high demand?</h3>
+                                <p>
+                                    Demand peaks around 6 PM, concentrated in the 5–7 PM
+                                    evening rush, with a second wave over lunch. Saturday is
+                                    the highest-demand day, carrying almost a quarter of all
+                                    receipts.
+                                </p>
+                            </div>
+                            <dl class="pbi-chips">
+                                <div><dt>Peak slot</dt><dd>Saturday, 6 PM · 6,870</dd></div>
+                                <div><dt>Busiest day</dt><dd>Saturday · 24.6%</dd></div>
+                                <div><dt>Busiest hour</dt><dd>6 PM · 27,834</dd></div>
+                            </dl>
+                        </div>
+                        <details class="pbi-spec" data-spec="heatmap">
+                            <summary>View the Deneb spec</summary>
+                            <pre data-lenis-prevent><code></code></pre>
+                        </details>
+                    </div>
 
-                    <img
-                        src="images/sales-time.png"
-                        alt="JRAD Retail Sales and Time Intelligence Dashboard">
+                    <div class="pbi-lab-panel" id="viz-waterfall" role="tabpanel" aria-labelledby="tab-waterfall" hidden>
+                        <div class="pbi-viz-scroll">
+                            <div class="pbi-viz" data-host="waterfall"><p class="pbi-viz-loading">Loading the live chart…</p></div>
+                        </div>
+                        <div class="pbi-lab-info">
+                            <div>
+                                <h3>Which business events drove abnormal revenue uplift?</h3>
+                                <p>
+                                    Business events added ₦2.32bn on top of the normal
+                                    trading baseline, 17.8% above it. Other Events, the
+                                    festive season and Easter contributed the most.
+                                </p>
+                            </div>
+                            <dl class="pbi-chips">
+                                <div><dt>Normal baseline</dt><dd>₦13.01bn</dd></div>
+                                <div><dt>Event uplift</dt><dd>+₦2.32bn · +17.8%</dd></div>
+                                <div><dt>Biggest named event</dt><dd>Festive Season · +₦498M</dd></div>
+                            </dl>
+                        </div>
+                        <details class="pbi-spec" data-spec="waterfall">
+                            <summary>View the Deneb spec</summary>
+                            <pre data-lenis-prevent><code></code></pre>
+                        </details>
+                    </div>
+
+                    <div class="pbi-lab-panel" id="viz-salary" role="tabpanel" aria-labelledby="tab-salary" hidden>
+                        <div class="pbi-viz-scroll">
+                            <div class="pbi-viz" data-host="salary"><p class="pbi-viz-loading">Loading the live chart…</p></div>
+                        </div>
+                        <div class="pbi-lab-info">
+                            <div>
+                                <h3>How does basket value change across the salary cycle?</h3>
+                                <p>
+                                    Basket value is highest in Salary Week for every persona
+                                    and lower by Budget Week. The fall is steepest for Health
+                                    Conscious shoppers, while Premium baskets hold up best.
+                                </p>
+                            </div>
+                            <dl class="pbi-chips">
+                                <div><dt>Highest basket</dt><dd>Premium · Salary Week · ₦161K</dd></div>
+                                <div><dt>Steepest fall</dt><dd>Health Conscious · −43.2%</dd></div>
+                                <div><dt>Family Shopper</dt><dd>₦135K → ₦95K</dd></div>
+                            </dl>
+                        </div>
+                        <details class="pbi-spec" data-spec="salary">
+                            <summary>View the Deneb spec</summary>
+                            <pre data-lenis-prevent><code></code></pre>
+                        </details>
+                    </div>
 
                 </div>
+
+                <p class="pbi-lab-note">
+                    Rendered with Vega-Lite 5. For the web, Segoe UI is swapped for Inter,
+                    chart heights are adjusted to fit this page, and the revenue trend gets
+                    hover tooltips. Everything else is the spec as it runs in Power BI.
+                </p>
 
             </div>
 
         </section>
 
 
-
         <!-- =====================================================
-             DASHBOARD 03
+             DATA MODEL
         ====================================================== -->
 
-        <section
-            class="jrad-page jrad-dashboard-section">
+        <section class="pbi-section pbi-white" id="model" data-nav>
 
-            <div class="jrad-dashboard-visual">
+            <div class="pbi-wrap">
 
-                <div class="jrad-dashboard-frame">
+                <div class="pbi-head">
 
-                    <img
-                        src="images/customer-segmentation.png"
-                        alt="JRAD Retail Customer Segmentation Dashboard">
+                    <span class="pbi-label">DATA MODEL</span>
 
-                </div>
+                    <h2 class="pbi-h2" data-split>The architecture behind the dashboard.</h2>
 
-            </div>
-
-
-            <div class="jrad-dashboard-copy">
-
-                <div class="jrad-section-label">
-                    03 / CUSTOMER SEGMENTATION
-                </div>
-
-                <h2>
-                    Customer Segmentation
-                </h2>
-
-                <p>
-                    A customer-value layer explaining who shops, how they
-                    spend, how frequently they purchase, and where value
-                    concentrates.
-                </p>
-
-                <ul class="jrad-insights">
-
-                    <li>
-                        Premium and Family Shopper personas combine high
-                        basket value with strong purchase frequency, making
-                        them standout high-value segments.
-                    </li>
-
-                    <li>
-                        Weekly Grocery accounts for roughly 85% of
-                        shopping-mission revenue, making it the core driver
-                        of overall spend.
-                    </li>
-
-                    <li>
-                        Walk-in customers dominate the customer mix,
-                        creating an opportunity to convert frequent walk-ins
-                        into registered customers.
-                    </li>
-
-                </ul>
-
-                <div class="jrad-strategy">
-
-                    <div class="jrad-strategy-label">
-                        Strategic Focus
-                    </div>
-
-                    <p>
-                        Prioritize Premium and Family Shopper segments,
-                        convert high-frequency walk-ins into registered
-                        customers, and reinforce Weekly Grocery as the
-                        core revenue driver.
+                    <p class="pbi-lead" data-reveal>
+                        A structured Power BI data model connecting transactional facts,
+                        behavioural dimensions, product intelligence, business events,
+                        payments and dedicated DAX measures.
                     </p>
 
                 </div>
 
+                <div class="pbi-model-grid">
+
+                    <div class="pbi-shot">
+                        <button class="pbi-zoom" type="button" aria-label="Enlarge the data model">
+                            <img src="images/data-model-architecture.png"
+                                 alt="JRAD Retail Power BI data model in model view"
+                                 loading="lazy">
+                            <span class="pbi-zoom-hint">CLICK TO ENLARGE</span>
+                        </button>
+                    </div>
+
+                    <dl class="pbi-model-list">
+
+                        <div data-reveal>
+                            <dt>FACT TABLES</dt>
+                            <dd>FactSales, FactPayments and FactInventory: the transactions, payments and stock positions everything else describes.</dd>
+                        </div>
+
+                        <div data-reveal>
+                            <dt>DIMENSIONS</dt>
+                            <dd>Branches, products, pricing history, customers, employees, dates, monthly shopping behaviour and business events.</dd>
+                        </div>
+
+                        <div data-reveal>
+                            <dt>SUPPORTING TABLES</dt>
+                            <dd>A dedicated _Measures table for DAX, monthly revenue targets, and tables shaped to feed the Deneb visuals, such as WaterfallEvents and BasketAnalysis.</dd>
+                        </div>
+
+                    </dl>
+
+                </div>
+
             </div>
 
         </section>
-
 
 
         <!-- =====================================================
-             DATA MODEL ARCHITECTURE
+             TOOLS & TECHNIQUES
         ====================================================== -->
 
-        <section class="jrad-page jrad-model">
+        <section class="pbi-section" id="tools" data-nav>
 
-            <div class="jrad-section-label">
-                DATA MODEL
-            </div>
+            <div class="pbi-wrap">
 
-            <h2>
-                The architecture behind the dashboard.
-            </h2>
+                <div class="pbi-head">
 
-            <p>
-                A structured Power BI data model connecting transactional
-                facts, behavioural dimensions, product intelligence,
-                business events, payments and dedicated DAX measures.
-            </p>
+                    <span class="pbi-label">TOOLS &amp; TECHNIQUES</span>
 
-            <div class="jrad-model-frame">
-
-                <img
-                    src="images/data-model-architecture.png"
-                    alt="JRAD Retail Power BI Data Model Architecture">
-
-            </div>
-
-        </section>
-
-
-
-        <!-- =====================================================
-             TECHNICAL PIPELINE
-        ====================================================== -->
-
-        <section class="jrad-page jrad-tech">
-
-            <div class="jrad-section-label">
-                TOOLS & TECHNIQUES
-            </div>
-
-            <h2>
-                From data model to executive story.
-            </h2>
-
-            <div class="jrad-tech-grid">
-
-                <div class="jrad-tech-card">
-
-                    <strong>
-                        Power BI
-                    </strong>
-
-                    <span>
-                        End-to-end dashboard development,
-                        modelling and executive reporting.
-                    </span>
+                    <h2 class="pbi-h2" data-split>From data model to executive story.</h2>
 
                 </div>
 
+                <div class="pbi-tools">
 
-                <div class="jrad-tech-card">
+                    <div class="pbi-tool" data-reveal>
+                        <strong>Power BI</strong>
+                        <span>End-to-end dashboard development, modelling and executive reporting.</span>
+                    </div>
 
-                    <strong>
-                        DAX & Time Intelligence
-                    </strong>
+                    <div class="pbi-tool" data-reveal>
+                        <strong>DAX &amp; Time Intelligence</strong>
+                        <span>Growth measures, targets, gauges, comparisons and dynamic business logic.</span>
+                    </div>
 
-                    <span>
-                        Growth measures, targets, gauges,
-                        comparisons and dynamic business logic.
-                    </span>
+                    <div class="pbi-tool" data-reveal>
+                        <strong>Deneb / Vega-Lite</strong>
+                        <span>Custom KPI cards, gauges, flow visuals and insight-callout components.</span>
+                    </div>
 
-                </div>
+                    <div class="pbi-tool" data-reveal>
+                        <strong>Star Schema</strong>
+                        <span>Fact and dimension architecture designed for scalable analytical performance.</span>
+                    </div>
 
+                    <div class="pbi-tool" data-reveal>
+                        <strong>Conditional Formatting</strong>
+                        <span>DAX-driven visual states that dynamically respond to changing business performance.</span>
+                    </div>
 
-                <div class="jrad-tech-card">
-
-                    <strong>
-                        Deneb / Vega-Lite
-                    </strong>
-
-                    <span>
-                        Custom KPI cards, gauges, flow visuals
-                        and insight-callout components.
-                    </span>
-
-                </div>
-
-
-                <div class="jrad-tech-card">
-
-                    <strong>
-                        Star Schema
-                    </strong>
-
-                    <span>
-                        Fact and dimension architecture designed
-                        for scalable analytical performance.
-                    </span>
-
-                </div>
-
-
-                <div class="jrad-tech-card">
-
-                    <strong>
-                        Conditional Formatting
-                    </strong>
-
-                    <span>
-                        DAX-driven visual states that dynamically
-                        respond to changing business performance.
-                    </span>
-
-                </div>
-
-
-                <div class="jrad-tech-card">
-
-                    <strong>
-                        Data Storytelling
-                    </strong>
-
-                    <span>
-                        Executive-focused visual hierarchy designed
-                        to turn analysis into actionable decisions.
-                    </span>
+                    <div class="pbi-tool" data-reveal>
+                        <strong>Data Storytelling</strong>
+                        <span>Executive-focused visual hierarchy designed to turn analysis into actionable decisions.</span>
+                    </div>
 
                 </div>
 
             </div>
 
         </section>
-
 
 
         <!-- =====================================================
              FINAL CTA
         ====================================================== -->
 
-        <section class="jrad-page">
+        <section class="pbi-section" style="padding-top: 0">
 
-            <div class="jrad-final">
+            <div class="pbi-wrap">
 
-                <h2>
-                    Built for decisions, not just dashboards.
-                </h2>
+                <div class="pbi-final" data-reveal>
 
-                <p>
-                    Explore the complete project, including the Power BI
-                    model, DAX logic, Deneb specifications and supporting
-                    analytical assets.
-                </p>
+                    <h2>Built for decisions, not just dashboards.</h2>
 
-                <a
-                    href="https://github.com/sodiqoluwatimileyin190-oss/sodiqoluwatimileyin190-oss.github.io/tree/main/projects/jrad-retail-powerbi-dashboard"
-                    target="_blank"
-                    rel="noopener"
-                    class="jrad-btn jrad-btn-primary">
-                    View Project on GitHub
-                </a>
+                    <p>
+                        The report ended with a recommendation: convert frequent
+                        walk-ins into registered customers. Version 2 turned that
+                        recommendation into a working system.
+                    </p>
+
+                    <div class="pbi-actions">
+
+                        <a href="../jrad-retention-intelligence/" class="pbi-btn pbi-btn-primary">See Version 2</a>
+
+                        <a href="https://github.com/sodiqoluwatimileyin190-oss/sodiqoluwatimileyin190-oss.github.io/tree/main/projects/jrad-retail-powerbi-dashboard"
+                           target="_blank"
+                           rel="noopener"
+                           class="pbi-btn pbi-btn-secondary">View Project on GitHub</a>
+
+                        <a href="../../index.html#projects" class="pbi-btn pbi-btn-ghost">Back to Portfolio</a>
+
+                    </div>
+
+                </div>
 
             </div>
 
@@ -1659,262 +1985,1014 @@
     </main>
 
 
+    <footer class="pbi-footer">
+        <div class="pbi-wrap">
+            <a href="../../index.html#projects">← Back to portfolio</a>
+            &nbsp;·&nbsp; JRAD Superstores · Power BI Executive Intelligence · 2026
+        </div>
+    </footer>
+
 
     <!-- =========================================================
-         JAVASCRIPT
+         LIGHTBOX
+    ========================================================= -->
+
+    <div class="pbi-lightbox" role="dialog" aria-modal="true" aria-label="Enlarged image" aria-hidden="true">
+        <button class="pbi-lightbox-close" type="button">Close</button>
+        <img src="" alt="">
+        <div class="pbi-lightbox-caption"></div>
+    </div>
+
+
+    <!-- =========================================================
+         MOTION LIBRARIES
+    ========================================================= -->
+
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrollTrigger.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/SplitText.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lenis@1.3.26/dist/lenis.min.js"></script>
+
+
+     <!-- =========================================================
+         PAGE SCRIPT
     ========================================================= -->
 
     <script>
+    (function () {
 
-        document.addEventListener("DOMContentLoaded", function () {
+        "use strict";
 
-            /*
-             * =====================================================
-             * INTERSECTION OBSERVER
-             * =====================================================
-             */
+        window.__pbiReady = true;
 
-            const observerOptions = {
-                threshold: 0.12,
-                rootMargin: "0px 0px -60px 0px"
-            };
+        const root = document.documentElement;
+        const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        const hasGSAP = typeof window.gsap !== "undefined" && typeof window.ScrollTrigger !== "undefined";
+        const hasSplit = hasGSAP && typeof window.SplitText !== "undefined";
+        const motion = hasGSAP && !reduceMotion;
+        const nav = document.querySelector(".pbi-nav");
+
+        function navHeight() {
+            return nav ? nav.offsetHeight : 0;
+        }
+
+        function clamp(value, min, max) {
+            return Math.min(max, Math.max(min, value));
+        }
+
+        if (!hasGSAP) {
+            root.classList.remove("pbi-js");
+        }
 
 
-            const revealObserver =
-                new IntersectionObserver(function (entries) {
+        /* =====================================================
+           REPORT DATA — exported from the Power BI report
+        ====================================================== */
 
-                    entries.forEach(function (entry) {
+        const MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
-                        if (!entry.isIntersecting) {
-                            return;
-                        }
+        const MONTHLY_REVENUE = [
+            1174932046.33, 1109647841.58, 1162468829.40, 1162956606.95,
+            1274889628.72, 1112636851.10, 1274419916.71, 1310559710.57,
+            1198130180.38, 1281355071.75, 1367202433.85, 1902313617.10
+        ];
 
-                        entry.target.classList.add("visible");
+        const HOURS = [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20];
 
-                        revealObserver.unobserve(entry.target);
+        const DAYS = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
 
+        const RECEIPTS = [
+            [424, 383, 423, 458, 520, 1007, 795],
+            [1014, 963, 1013, 1113, 1426, 2454, 1905],
+            [1467, 1338, 1456, 1561, 1878, 3363, 2656],
+            [1750, 1556, 1635, 1817, 2221, 3815, 2994],
+            [2543, 2447, 2535, 2648, 3319, 5746, 4582],
+            [2616, 2507, 2705, 2936, 3552, 6440, 4960],
+            [2339, 2222, 2257, 2452, 2999, 5400, 4306],
+            [1636, 1564, 1709, 1759, 2247, 3929, 3101],
+            [1456, 1361, 1425, 1580, 1957, 3446, 2675],
+            [2309, 2053, 2246, 2339, 2979, 5208, 4248],
+            [2884, 2699, 2902, 3084, 3967, 6870, 5428],
+            [2448, 2286, 2484, 2622, 3285, 5786, 4654],
+            [812, 782, 819, 908, 1112, 1934, 1590]
+        ];
+
+        const EVENTS = [
+            ["Normal Trading Baseline", 13014448260.487753],
+            ["Ramadan / Eid", 19650676.263894975],
+            ["Easter", 156682145.71894756],
+            ["Other Events", 1534864731.4682734],
+            ["Black Friday", 108302366.21085647],
+            ["Christmas / Festive Season", 497564554.29028654],
+            ["Actual Revenue", 15331512734.440012]
+        ];
+
+        const PERSONAS = ["Busy Professional", "Convenience Shopper", "Family Shopper", "Health Conscious", "Premium Shopper", "Student"];
+
+        const WEEKS = ["Salary Week", "Stable Week", "Top-Up Week", "Budget Week"];
+
+        const BASKETS = [
+            [22149.2, 17906.3, 17912.6, 17040.4],
+            [13583.2, 11404.9, 11314.9, 11263.9],
+            [135215.8, 132153.7, 116061.4, 95296.2],
+            [114135.5, 89827.0, 75444.4, 64823.6],
+            [161148.4, 153177.8, 136692.7, 131050.1],
+            [13550.5, 10778.6, 10664.1, 11114.1]
+        ];
+
+        const DATA = {
+            revenue: MONTHLY_REVENUE.map(function (value, i) {
+                return { "Month Number": i + 1, "Month Short": MONTHS[i], "Total Revenue": value };
+            }),
+            heatmap: [],
+            waterfall: EVENTS.map(function (event) {
+                return { "Waterfall_Event": event[0], "Waterfall Value": event[1] };
+            }),
+            salary: []
+        };
+
+        HOURS.forEach(function (hour, i) {
+            DAYS.forEach(function (day, j) {
+                DATA.heatmap.push({ "Transaction Hour": hour, "Day Name": day, "Total Receipts": RECEIPTS[i][j] });
+            });
+        });
+
+        PERSONAS.forEach(function (persona, i) {
+            WEEKS.forEach(function (week, j) {
+                DATA.salary.push({ "Persona": persona, "Week_Name": week, "Average Basket Value": BASKETS[i][j] });
+            });
+        });
+
+
+        /* =====================================================
+           DENEB SPECS — as written in the report
+        ====================================================== */
+
+        const SPECS = {
+            revenue: {"$schema":"https://vega.github.io/schema/vega-lite/v5.json","background":null,"width":"1030","height":"container","data":{"name":"dataset"},"datasets":{"events":[{"EventName":"Ramadan / Eid Season","Label":"Ramadan /\nEid Season","StartMonth":2.5,"EndMonth":3.5,"MidMonth":3,"Icon":"data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 3a9 9 0 1 0 9 9 7 7 0 0 1-9-9z' fill='%232E7D32'/%3E%3C/svg%3E"},{"EventName":"Black Friday","Label":"Black\nFriday","StartMonth":10.5,"EndMonth":11.5,"MidMonth":11,"Icon":"data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M2 11V4a2 2 0 0 1 2-2h7l11 11-9 9L2 11z' fill='%23C2410C'/%3E%3Ccircle cx='7' cy='7' r='1.5' fill='white'/%3E%3C/svg%3E"},{"EventName":"Xmas & Festive Season","Label":"Xmas &\nFestive Season","StartMonth":11.5,"EndMonth":12.5,"MidMonth":12}]},"transform":[{"calculate":"'₦' + format(datum['Total Revenue'] / 1000000000, '.2f') + 'B'","as":"Revenue Label"}],"layer":[{"data":{"name":"events"},"mark":{"type":"rect","cornerRadius":2},"encoding":{"x":{"field":"StartMonth","type":"quantitative"},"x2":{"field":"EndMonth"},"y":{"datum":800000000,"type":"quantitative"},"y2":{"datum":2000000000},"color":{"field":"EventName","type":"nominal","scale":{"domain":["Ramadan / Eid Season","Black Friday","Xmas & Festive Season"],"range":["#DCC9F5","#DCC9F5","#9F75E8"]},"legend":null}}},{"mark":{"type":"area","interpolate":"monotone","color":{"x1":0,"y1":0,"x2":0,"y2":1,"gradient":"linear","stops":[{"offset":0,"color":"rgba(108,60,201,0.35)"},{"offset":1,"color":"rgba(108,60,201,0)"}]}},"encoding":{"x":{"field":"Month Number","type":"quantitative"},"y":{"field":"Total Revenue","type":"quantitative"}}},{"mark":{"type":"line","interpolate":"monotone","color":"#6C3CC9","strokeWidth":2,"point":{"filled":true,"fill":"#6C3CC9","size":50}},"encoding":{"x":{"field":"Month Number","type":"quantitative","scale":{"domain":[0.5,12.5]},"axis":{"title":null,"grid":false,"values":[1,2,3,4,5,6,7,8,9,10,11,12],"labelExpr":"['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][datum.value - 1]","labelAngle":0,"labelColor":"#000000","labelFontSize":13,"labelFontWeight":"bold","labelPadding":0,"domain":false,"domainColor":"#9CA3AF","domainWidth":1,"ticks":false,"tickColor":"#9CA3AF","tickSize":0}},"y":{"field":"Total Revenue","type":"quantitative","scale":{"domain":[800000000,2000000000],"nice":false},"axis":{"title":null,"grid":false,"domain":false,"domainColor":"#000000","domainWidth":0,"ticks":true,"tickColor":"#9CA3AF","tickSize":0,"labelColor":"#000000","labelFontSize":0,"labelPadding":0,"values":[2000000000],"labelExpr":"'₦' + format(datum.value / 1000000000, '.1f') + 'B'"}}}},{"mark":{"type":"text","dy":-16,"fontSize":14,"fontWeight":"bold","color":"#374151"},"encoding":{"x":{"field":"Month Number","type":"quantitative"},"y":{"field":"Total Revenue","type":"quantitative"},"text":{"field":"Revenue Label","type":"nominal"}}},{"data":{"name":"events"},"mark":{"type":"image","width":30,"height":20,"align":"center","baseline":"bottom"},"encoding":{"x":{"field":"MidMonth","type":"quantitative"},"y":{"datum":1950000000,"type":"quantitative"},"url":{"field":"Icon","type":"nominal"}}},{"data":{"name":"events"},"mark":{"type":"text","fontSize":12,"fontWeight":"bold","align":"center","baseline":"top","dy":2,"lineBreak":"\n","lineHeight":12,"color":"#374151"},"encoding":{"x":{"field":"MidMonth","type":"quantitative"},"y":{"datum":1950000000,"type":"quantitative"},"text":{"field":"Label","type":"nominal"}}}],"config":{"view":{"stroke":null}}},
+
+            heatmap: {"$schema":"https://vega.github.io/schema/vega-lite/v5.json","data":{"name":"dataset"},"width":"container","height":155,"padding":{"top":40,"right":6,"bottom":4,"left":6},"layer":[{"mark":{"type":"rect","cornerRadius":2,"stroke":"#FFFFFF","strokeWidth":1},"encoding":{"x":{"field":"Transaction Hour","type":"ordinal","sort":"ascending","title":"Hour of Day","axis":{"labelAngle":0,"labelFont":"Segoe UI Semibold","labelFontSize":10,"labelColor":"#000000","titleFont":"Segoe UI Semibold","titleFontSize":12,"titleColor":"#000000","titlePadding":7,"ticks":false,"domain":false}},"y":{"field":"Day Name","type":"nominal","sort":["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],"title":null,"axis":{"labelFont":"Segoe UI Semibold","labelFontSize":10,"labelColor":"#000000","ticks":false,"domain":false}},"color":{"field":"Total Receipts","type":"quantitative","scale":{"range":["#F2EEFC","#DDD2F5","#BBA3E8","#8D69D1","#5B2FB4"]},"legend":{"title":null,"orient":"top","direction":"horizontal","gradientLength":85,"gradientThickness":8,"labelFont":"Segoe UI Semibold","labelFontSize":10,"labelColor":"#000000","offset":6,"padding":0}},"tooltip":[{"field":"Day Name","type":"nominal","title":"Day"},{"field":"Transaction Hour","type":"ordinal","title":"Hour"},{"field":"Total Receipts","type":"quantitative","title":"Distinct Receipts","format":","}]}},{"mark":{"type":"rect","fillOpacity":0,"stroke":"#6C3CC9","strokeWidth":1.5,"strokeDash":[5,4],"cornerRadius":4},"encoding":{"x":{"datum":12,"type":"ordinal"},"x2":{"datum":14},"y":{"datum":"Monday","type":"nominal"},"y2":{"datum":"Sunday"}}},{"mark":{"type":"rect","fillOpacity":0,"stroke":"#6C3CC9","strokeWidth":1.5,"strokeDash":[5,4],"cornerRadius":4},"encoding":{"x":{"datum":17,"type":"ordinal"},"x2":{"datum":19},"y":{"datum":"Monday","type":"nominal"},"y2":{"datum":"Sunday"}}}],"config":{"view":{"stroke":null},"font":"Segoe UI","axis":{"grid":false,"domain":false,"ticks":false}}},
+
+            waterfall: {"$schema":"https://vega.github.io/schema/vega-lite/v5.json","data":{"name":"dataset"},"width":"container","height":"container","padding":{"top":18,"right":8,"bottom":4,"left":4},"transform":[{"calculate":"indexof(['Normal Trading Baseline','Ramadan / Eid','Easter','Other Events','Black Friday','Christmas / Festive Season','Actual Revenue'], datum.Waterfall_Event)","as":"sortOrder"},{"window":[{"op":"sum","field":"Waterfall Value","as":"running"}],"sort":[{"field":"sortOrder","order":"ascending"}]},{"calculate":"datum.Waterfall_Event === 'Normal Trading Baseline' || datum.Waterfall_Event === 'Actual Revenue' ? 0 : datum.running - datum['Waterfall Value']","as":"start"},{"calculate":"datum.Waterfall_Event === 'Normal Trading Baseline' || datum.Waterfall_Event === 'Actual Revenue' ? datum['Waterfall Value'] : datum.running","as":"end"},{"calculate":"datum.Waterfall_Event === 'Normal Trading Baseline' || datum.Waterfall_Event === 'Actual Revenue' ? format(datum['Waterfall Value']/1000000000, '.1f') + 'bn' : datum['Waterfall Value'] >= 1000000000 ? '+' + format(datum['Waterfall Value']/1000000000, '.2f') + 'bn' : '+' + format(datum['Waterfall Value']/1000000, '.0f') + 'M'","as":"valueLabel"},{"calculate":"datum.Waterfall_Event === 'Normal Trading Baseline' || datum.Waterfall_Event === 'Actual Revenue' ? '' : '(' + format(datum['Waterfall Value']/13014448260.487753*100, '.1f') + '%)'","as":"pctLabel"},{"calculate":"datum.Waterfall_Event === 'Normal Trading Baseline' || datum.Waterfall_Event === 'Actual Revenue' ? datum.valueLabel : datum.valueLabel + ' ' + datum.pctLabel","as":"combinedLabel"},{"calculate":"datum.sortOrder + 0.34","as":"connectorStart"},{"calculate":"datum.sortOrder + 0.66","as":"connectorEnd"}],"layer":[{"mark":{"type":"bar","size":54,"cornerRadiusTopLeft":3,"cornerRadiusTopRight":3},"encoding":{"x":{"field":"sortOrder","type":"quantitative","scale":{"domain":[-0.5,6.5]},"axis":{"title":null,"values":[0,1,2,3,4,5,6],"labelExpr":"['Normal Baseline','Ramadan','Easter','Other Events','Black Friday','Festive Season','Actual Revenue'][datum.value]","labelAngle":0,"labelFontSize":11,"labelLimit":105,"labelPadding":7,"ticks":false,"grid":false,"domain":false,"labelColor":"#000000"}},"y":{"field":"start","type":"quantitative","scale":{"domain":[0,16500000000],"zero":true},"axis":{"title":null,"values":[0,5000000000,10000000000,15000000000],"labelExpr":"'₦' + format(datum.value/1000000000, '.0f') + 'bn'","grid":false,"domain":false,"ticks":false,"labelFontSize":11,"labelColor":"#000000"}},"y2":{"field":"end"},"color":{"condition":[{"test":"datum.Waterfall_Event === 'Normal Trading Baseline' || datum.Waterfall_Event === 'Actual Revenue'","value":"rgba(108,60,201,0.70)"}],"value":"#78B95A"},"stroke":{"condition":[{"test":"datum.Waterfall_Event === 'Normal Trading Baseline' || datum.Waterfall_Event === 'Actual Revenue'","value":"#6C3CC9"}],"value":"#65A348"},"strokeWidth":1,"tooltip":[{"field":"Waterfall_Event","type":"nominal","title":"Event"},{"field":"Waterfall Value","type":"quantitative","title":"Revenue Impact","format":",.2f"}]}},{"transform":[{"filter":"datum.sortOrder < 6"}],"mark":{"type":"rule","stroke":"#78B95A","strokeWidth":1.5,"strokeDash":[2,2]},"encoding":{"x":{"field":"connectorStart","type":"quantitative","scale":{"domain":[-0.5,6.5]}},"x2":{"field":"connectorEnd"},"y":{"field":"end","type":"quantitative"}}},{"mark":{"type":"text","dy":-8,"fontSize":11,"fontWeight":"bold","color":"#000000","font":"Segoe UI Semibold"},"encoding":{"x":{"field":"sortOrder","type":"quantitative"},"y":{"field":"end","type":"quantitative"},"text":{"field":"combinedLabel","type":"nominal"}}}],"config":{"view":{"stroke":null},"axis":{"labelColor":"#000000","titleColor":"#000000","domain":false,"grid":false,"ticks":false,"labelFont":"Segoe UI Semibold","titleFont":"Segoe UI Semibold"},"legend":{"labelColor":"#000000","titleColor":"#000000","labelFont":"Segoe UI Semibold","titleFont":"Segoe UI Semibold"},"text":{"font":"Segoe UI Semibold","color":"#000000"},"font":"Segoe UI Semibold"}},
+
+            salary: {"$schema":"https://vega.github.io/schema/vega-lite/v5.json","data":{"name":"dataset"},"width":"container","height":150,"padding":{"left":4,"right":8,"top":30,"bottom":4},"transform":[{"aggregate":[{"op":"mean","field":"Average Basket Value","as":"avg_value"}],"groupby":["Persona","Week_Name"]},{"calculate":"isValid(datum.avg_value) ? (datum.avg_value < 1000 ? format(datum.avg_value, '.0f') : format(datum.avg_value / 1000, '.0f') + 'K') : ''","as":"valueLabel"},{"calculate":"isValid(datum.avg_value) ? '₦' + format(datum.avg_value, ',.0f') : 'No data'","as":"tooltipValue"}],"encoding":{"x":{"field":"Week_Name","type":"ordinal","sort":["Salary Week","Stable Week","Top-Up Week","Budget Week"],"axis":{"orient":"top","title":null,"ticks":false,"domain":false,"grid":false,"labelAngle":0,"labelAlign":"center","labelBaseline":"bottom","labelFontSize":12,"labelFontWeight":"","labelColor":"#000000","labelFont":"Segoe UI","labelPadding":8}},"y":{"field":"Persona","type":"ordinal","sort":["Family Shopper","Premium Shopper","Health Conscious","Busy Professional","Convenience Shopper","Student"],"axis":{"orient":"left","title":null,"ticks":false,"domain":true,"domainColor":"#CCCCCC","domainWidth":1,"grid":false,"labelAngle":0,"labelAlign":"right","labelBaseline":"middle","labelFontSize":12,"labelColor":"#000000","labelFont":"Segoe UI","labelPadding":10,"labelLimit":170}}},"layer":[{"mark":{"type":"rect","cornerRadius":0,"stroke":"#FFFFFF","strokeWidth":0.4},"encoding":{"color":{"field":"avg_value","type":"quantitative","scale":{"range":["#F3EEFC","#D9C7F5","#F3EEFC","#F3EEFC","#F3EEFC","#B192E8"]},"legend":false},"tooltip":[{"field":"Persona","type":"nominal","title":"Persona"},{"field":"Week_Name","type":"nominal","title":"Week"},{"field":"tooltipValue","type":"nominal","title":"Average Basket Value"}]}},{"mark":{"type":"text","font":"Segoe UI","fontSize":11,"fontWeight":"bold","baseline":"middle","align":"center","color":"#000000"},"encoding":{"text":{"field":"valueLabel","type":"nominal"}}}],"config":{"view":{"stroke":null},"font":"Segoe UI"}}
+        };
+
+        const WEB_SIZE = {
+            revenue: { width: "container", height: 300 },
+            heatmap: { height: 250 },
+            waterfall: { height: 320 },
+            salary: { height: 300 }
+        };
+
+        function webSpec(key) {
+
+            const spec = JSON.parse(
+                JSON.stringify(SPECS[key]).replace(/Segoe UI Semibold|Segoe UI/g, "Inter")
+            );
+
+            spec.data = { values: DATA[key] };
+            spec.background = null;
+            Object.assign(spec, WEB_SIZE[key]);
+            spec.config = spec.config || {};
+            spec.config.font = "Inter";
+
+            if (key === "revenue") {
+                spec.layer.push({
+                    mark: { type: "point", filled: true, size: 700, opacity: 0.01 },
+                    encoding: {
+                        x: { field: "Month Number", type: "quantitative" },
+                        y: { field: "Total Revenue", type: "quantitative" },
+                        tooltip: [
+                            { field: "Month Short", type: "nominal", title: "Month" },
+                            { field: "Total Revenue", type: "quantitative", title: "Revenue (₦)", format: ",.0f" }
+                        ]
+                    }
+                });
+            }
+
+            return spec;
+        }
+
+
+        /* =====================================================
+           LIVE LAB — Vega loads only when the lab is near
+        ====================================================== */
+
+        const VEGA_SOURCES = [
+            "https://cdn.jsdelivr.net/npm/vega@5",
+            "https://cdn.jsdelivr.net/npm/vega-lite@5",
+            "https://cdn.jsdelivr.net/npm/vega-embed@6"
+        ];
+
+        let vegaLoading = null;
+        const rendered = {};
+
+        function loadScript(src) {
+            return new Promise(function (resolve, reject) {
+                const script = document.createElement("script");
+                script.src = src;
+                script.async = false;
+                script.onload = resolve;
+                script.onerror = function () {
+                    reject(new Error("Failed to load " + src));
+                };
+                document.head.appendChild(script);
+            });
+        }
+
+        function loadVega() {
+            if (!vegaLoading) {
+                vegaLoading = VEGA_SOURCES.reduce(function (chain, src) {
+                    return chain.then(function () {
+                        return loadScript(src);
                     });
+                }, Promise.resolve());
+            }
+            return vegaLoading;
+        }
 
-                }, observerOptions);
+        let refreshTimer = 0;
 
+        function queueRefresh() {
+            if (!hasGSAP) {
+                return;
+            }
+            clearTimeout(refreshTimer);
+            refreshTimer = setTimeout(function () {
+                ScrollTrigger.refresh();
+            }, 200);
+        }
 
-            /*
-             * =====================================================
-             * ELEMENTS THAT SHOULD REVEAL
-             * =====================================================
-             */
+        function wipe(host) {
+            if (!motion) {
+                return;
+            }
+            gsap.fromTo(host,
+                { clipPath: "inset(0% 100% 0% 0%)" },
+                { clipPath: "inset(0% 0% 0% 0%)", duration: 1.5, ease: "power3.inOut", clearProps: "clipPath" }
+            );
+        }
 
-            document
-                .querySelectorAll(
-                    ".jrad-page, " +
-                    ".jrad-dashboard-visual, " +
-                    ".jrad-dashboard-copy, " +
-                    ".jrad-stat, " +
-                    ".jrad-model-frame, " +
-                    ".jrad-tech-card"
-                )
-                .forEach(function (element) {
+        function renderViz(key) {
 
-                    revealObserver.observe(element);
+            const host = document.querySelector('[data-host="' + key + '"]');
 
+            if (!host) {
+                return Promise.resolve();
+            }
+
+            if (rendered[key]) {
+                if (host.classList.contains("is-ready")) {
+                    wipe(host);
+                }
+                return rendered[key];
+            }
+
+            rendered[key] = loadVega()
+                .then(function () {
+                    host.innerHTML = "";
+                    return window.vegaEmbed(host, webSpec(key), { actions: false, renderer: "svg" });
+                })
+                .then(function () {
+                    host.classList.add("is-ready");
+                    wipe(host);
+                    queueRefresh();
+                })
+                .catch(function () {
+                    rendered[key] = null;
+                    host.innerHTML = '<p class="pbi-viz-fallback">The live chart couldn\'t load right now. The same visual appears in the dashboard pages above.</p>';
                 });
 
+            return rendered[key];
+        }
 
-            /*
-             * =====================================================
-             * COUNT-UP ENGINE
-             * =====================================================
-             */
+        const lab = document.querySelector(".pbi-lab");
 
-            const counters =
-                document.querySelectorAll("[data-counter]");
+        if (lab) {
+
+            const tabs = Array.prototype.slice.call(lab.querySelectorAll('[role="tab"]'));
+            let labVisible = false;
+
+            function select(tab, focus) {
+
+                tabs.forEach(function (other) {
+                    const on = other === tab;
+                    other.setAttribute("aria-selected", on ? "true" : "false");
+                    other.tabIndex = on ? 0 : -1;
+                    const panel = document.getElementById(other.getAttribute("aria-controls"));
+                    if (panel) {
+                        panel.hidden = !on;
+                    }
+                });
+
+                if (focus) {
+                    tab.focus();
+                }
+
+                if (labVisible) {
+                    renderViz(tab.dataset.viz);
+                }
+
+                queueRefresh();
+            }
+
+            tabs.forEach(function (tab, i) {
+
+                tab.addEventListener("click", function () {
+                    select(tab, false);
+                });
+
+                tab.addEventListener("keydown", function (event) {
+                    let next = null;
+                    if (event.key === "ArrowRight" || event.key === "ArrowDown") {
+                        next = tabs[(i + 1) % tabs.length];
+                    }
+                    if (event.key === "ArrowLeft" || event.key === "ArrowUp") {
+                        next = tabs[(i - 1 + tabs.length) % tabs.length];
+                    }
+                    if (next) {
+                        event.preventDefault();
+                        select(next, true);
+                    }
+                });
+            });
+
+            function activeTab() {
+                return tabs.filter(function (tab) {
+                    return tab.getAttribute("aria-selected") === "true";
+                })[0] || tabs[0];
+            }
+
+            if ("IntersectionObserver" in window) {
+
+                const preload = new IntersectionObserver(function (entries) {
+                    if (entries[0].isIntersecting) {
+                        preload.disconnect();
+                        loadVega().catch(function () {});
+                    }
+                }, { rootMargin: "900px 0px" });
+
+                const reveal = new IntersectionObserver(function (entries) {
+                    if (entries[0].isIntersecting) {
+                        reveal.disconnect();
+                        labVisible = true;
+                        renderViz(activeTab().dataset.viz);
+                    }
+                }, { threshold: 0.25 });
+
+                preload.observe(lab);
+                reveal.observe(lab);
+
+            } else {
+
+                labVisible = true;
+                renderViz(activeTab().dataset.viz);
+            }
+
+            lab.querySelectorAll(".pbi-spec").forEach(function (details) {
+                details.addEventListener("toggle", function () {
+                    const code = details.querySelector("code");
+                    if (details.open && code && !code.textContent) {
+                        code.textContent = JSON.stringify(SPECS[details.dataset.spec], null, 2);
+                    }
+                    queueRefresh();
+                });
+            });
+        }
 
 
-            function animateCounter(element) {
+        /* =====================================================
+           LIGHTBOX
+        ====================================================== */
 
-                if (element.dataset.counted === "true") {
+        let lenis = null;
+
+        const lightbox = document.querySelector(".pbi-lightbox");
+        const lightboxImage = lightbox.querySelector("img");
+        const lightboxCaption = lightbox.querySelector(".pbi-lightbox-caption");
+        const lightboxClose = lightbox.querySelector(".pbi-lightbox-close");
+        let lastFocused = null;
+
+        function openLightbox(trigger) {
+            const image = trigger.querySelector("img");
+            lastFocused = trigger;
+            lightboxImage.src = image.currentSrc || image.src;
+            lightboxImage.alt = image.alt;
+            lightboxCaption.textContent = image.alt;
+            lightbox.classList.add("open");
+            lightbox.setAttribute("aria-hidden", "false");
+            document.body.classList.add("pbi-no-scroll");
+            if (lenis) {
+                lenis.stop();
+            }
+            lightboxClose.focus();
+        }
+
+        function closeLightbox() {
+            lightbox.classList.remove("open");
+            lightbox.setAttribute("aria-hidden", "true");
+            document.body.classList.remove("pbi-no-scroll");
+            if (lenis) {
+                lenis.start();
+            }
+            if (lastFocused) {
+                lastFocused.focus();
+            }
+        }
+
+        document.querySelectorAll(".pbi-zoom").forEach(function (trigger) {
+            trigger.addEventListener("click", function () {
+                openLightbox(trigger);
+            });
+        });
+
+        lightboxClose.addEventListener("click", closeLightbox);
+
+        lightbox.addEventListener("click", function (event) {
+            if (event.target === lightbox) {
+                closeLightbox();
+            }
+        });
+
+        document.addEventListener("keydown", function (event) {
+            if (event.key === "Escape" && lightbox.classList.contains("open")) {
+                closeLightbox();
+            }
+            if (event.key === "Tab" && lightbox.classList.contains("open")) {
+                event.preventDefault();
+                lightboxClose.focus();
+            }
+        });
+
+
+        /* =====================================================
+           READING PROGRESS
+        ====================================================== */
+
+        const progressBar = document.querySelector(".pbi-progress");
+        let progressTicking = false;
+
+        function updateProgress() {
+            const max = document.documentElement.scrollHeight - window.innerHeight;
+            const ratio = max > 0 ? clamp(window.scrollY / max, 0, 1) : 0;
+            progressBar.style.transform = "scaleX(" + ratio + ")";
+            progressTicking = false;
+        }
+
+        window.addEventListener("scroll", function () {
+            if (!progressTicking) {
+                requestAnimationFrame(updateProgress);
+                progressTicking = true;
+            }
+        }, { passive: true });
+
+        updateProgress();
+
+
+        /* =====================================================
+           EVERYTHING BELOW NEEDS GSAP AND MOTION
+        ====================================================== */
+
+        if (!motion) {
+            return;
+        }
+
+        gsap.registerPlugin(ScrollTrigger);
+
+        if (hasSplit) {
+            gsap.registerPlugin(SplitText);
+        }
+
+        ScrollTrigger.config({ ignoreMobileResize: true });
+
+
+        /* =====================================================
+           SMOOTH SCROLL + ANCHORS
+        ====================================================== */
+
+        if (typeof window.Lenis !== "undefined") {
+
+            lenis = new Lenis({ lerp: 0.1, smoothWheel: true });
+            lenis.on("scroll", ScrollTrigger.update);
+
+            gsap.ticker.add(function (time) {
+                lenis.raf(time * 1000);
+            });
+
+            gsap.ticker.lagSmoothing(0);
+
+        } else {
+
+            root.style.scrollBehavior = "auto";
+        }
+
+        function scrollToTarget(target, immediate) {
+
+            const offset = -navHeight();
+
+            if (lenis) {
+                lenis.scrollTo(target, { offset: offset, duration: 1.4, immediate: !!immediate, force: true });
+                return;
+            }
+
+            const top = target.getBoundingClientRect().top + window.scrollY + offset;
+            window.scrollTo({ top: top, behavior: immediate ? "auto" : "smooth" });
+        }
+
+        function findTarget(hash) {
+            if (!hash || hash.length < 2) {
+                return null;
+            }
+            try {
+                return document.querySelector(hash);
+            } catch (error) {
+                return null;
+            }
+        }
+
+        document.addEventListener("click", function (event) {
+
+            const link = event.target.closest('a[href^="#"]');
+
+            if (!link) {
+                return;
+            }
+
+            const hash = link.getAttribute("href");
+            const target = findTarget(hash);
+
+            if (!target) {
+                return;
+            }
+
+            event.preventDefault();
+            scrollToTarget(target, false);
+
+            if (window.history && window.history.replaceState) {
+                window.history.replaceState(null, "", hash === "#top" ? window.location.pathname : hash);
+            }
+        });
+
+
+        /* =====================================================
+           HERO — intro, then the screen settles as you scroll
+        ====================================================== */
+
+        const hero = document.querySelector(".pbi-hero");
+        const heroFrame = document.querySelector(".pbi-hero-frame");
+
+        function introHero() {
+
+            const title = document.querySelector(".pbi-title");
+            const items = document.querySelectorAll("[data-hero-item]");
+            const timeline = gsap.timeline({ defaults: { ease: "expo.out" } });
+
+            if (title) {
+
+                if (hasSplit) {
+
+                    const split = new SplitText(title, { type: "words,chars", charsClass: "pbi-char" });
+
+                    timeline.from(split.chars, {
+                        yPercent: 80,
+                        rotateX: -85,
+                        opacity: 0,
+                        transformOrigin: "50% 100%",
+                        transformPerspective: 900,
+                        duration: 1.2,
+                        stagger: 0.03
+                    }, 0.1);
+
+                } else {
+
+                    timeline.from(title, { y: 40, opacity: 0, duration: 1.1 }, 0.1);
+                }
+
+                gsap.set(title, { visibility: "visible" });
+            }
+
+            timeline.to(items, { opacity: 1, y: 0, duration: 1.1, stagger: 0.08 }, 0.35);
+        }
+
+        if (heroFrame && hero) {
+            gsap.fromTo(heroFrame,
+                { rotateX: 24, scale: 0.92 },
+                {
+                    rotateX: 0,
+                    scale: 1,
+                    ease: "none",
+                    scrollTrigger: {
+                        trigger: hero,
+                        start: "top top",
+                        end: "bottom 35%",
+                        scrub: 0.6
+                    }
+                }
+            );
+        }
+
+        const fontsReady = document.fonts && document.fonts.ready ? document.fonts.ready : Promise.resolve();
+
+        Promise.race([
+            fontsReady,
+            new Promise(function (resolve) { setTimeout(resolve, 1500); })
+        ]).then(introHero);
+
+
+        /* =====================================================
+           GUIDED TOUR — the camera moves across the page
+        ====================================================== */
+
+        const tour = document.querySelector(".pbi-tour");
+
+        if (tour) {
+
+            const stage = tour.querySelector(".pbi-tour-stage");
+            const frame = tour.querySelector(".pbi-tour-frame");
+            const canvas = tour.querySelector(".pbi-tour-canvas");
+            const steps = gsap.utils.toArray(".pbi-tour-step");
+            const counter = tour.querySelector(".pbi-tour-count");
+            const fill = tour.querySelector(".pbi-tour-fill");
+            const IW = 1349;
+            const IH = 756;
+
+            tour.classList.add("is-touring");
+
+            const regions = steps.map(function (step) {
+                return step.dataset.region.split(/\s+/).map(Number);
+            });
+
+            function isFull(r) {
+                return r[0] <= 0 && r[1] <= 0 && r[2] >= IW && r[3] >= IH;
+            }
+
+            const boxes = regions.map(function (r) {
+
+                if (isFull(r)) {
+                    return null;
+                }
+
+                const box = document.createElement("span");
+                box.className = "pbi-tour-box";
+                box.style.left = (r[0] / IW * 100) + "%";
+                box.style.top = (r[1] / IH * 100) + "%";
+                box.style.width = ((r[2] - r[0]) / IW * 100) + "%";
+                box.style.height = ((r[3] - r[1]) / IH * 100) + "%";
+                canvas.appendChild(box);
+                return box;
+            });
+
+            function view(r) {
+
+                const W = frame.clientWidth;
+                const H = frame.clientHeight;
+
+                if (isFull(r)) {
+                    return { x: 0, y: 0, s: 1 };
+                }
+
+                const fx0 = r[0] / IW;
+                const fy0 = r[1] / IH;
+                const fx1 = r[2] / IW;
+                const fy1 = r[3] / IH;
+                const s = clamp(Math.min(1 / (fx1 - fx0), 1 / (fy1 - fy0)) * 0.9, 1, 3.2);
+                const cx = (fx0 + fx1) / 2 * W;
+                const cy = (fy0 + fy1) / 2 * H;
+
+                return {
+                    x: clamp(W / 2 - s * cx, W - s * W, 0),
+                    y: clamp(H / 2 - s * cy, H - s * H, 0),
+                    s: s
+                };
+            }
+
+            gsap.set(canvas, { transformOrigin: "0 0", x: 0, y: 0, scale: 1 });
+
+            let current = -1;
+            const stopTimes = [0];
+
+            function pad(n) {
+                return (n < 10 ? "0" : "") + n;
+            }
+
+            function activate(index) {
+                if (index === current) {
+                    return;
+                }
+                current = index;
+                steps.forEach(function (step, i) {
+                    step.classList.toggle("is-active", i === index);
+                });
+                if (counter) {
+                    counter.textContent = pad(index + 1) + " / " + pad(steps.length);
+                }
+            }
+
+            const timeline = gsap.timeline({
+                defaults: { ease: "power2.inOut" },
+                onUpdate: function () {
+                    const time = timeline.time();
+                    let nearest = 0;
+                    stopTimes.forEach(function (stop, i) {
+                        if (Math.abs(stop - time) < Math.abs(stopTimes[nearest] - time)) {
+                            nearest = i;
+                        }
+                    });
+                    activate(nearest);
+                    if (fill) {
+                        gsap.set(fill, { scaleX: timeline.progress() });
+                    }
+                }
+            });
+
+            let t = 0;
+
+            regions.forEach(function (r, i) {
+
+                if (i === 0) {
                     return;
                 }
 
-                element.dataset.counted = "true";
+                t += 0.6;
 
+                timeline.to(canvas, {
+                    x: function () { return view(r).x; },
+                    y: function () { return view(r).y; },
+                    scale: function () { return view(r).s; },
+                    duration: 1
+                }, t);
 
-                const target =
-                    parseFloat(
-                        element.dataset.counter
-                    );
-
-
-                const decimals =
-                    parseInt(
-                        element.dataset.decimals || "0",
-                        10
-                    );
-
-
-                const prefix =
-                    element.dataset.prefix || "";
-
-
-                const suffix =
-                    element.dataset.suffix || "";
-
-
-                /*
-                 * Faster but still smooth.
-                 * 900ms feels much more responsive than
-                 * the previous slow count-up.
-                 */
-
-                const duration = 900;
-
-                const startTime = performance.now();
-
-
-                function updateCounter(currentTime) {
-
-                    const elapsed =
-                        currentTime - startTime;
-
-
-                    const progress =
-                        Math.min(
-                            elapsed / duration,
-                            1
-                        );
-
-
-                    /*
-                     * Ease-out curve
-                     */
-
-                    const eased =
-                        1 -
-                        Math.pow(
-                            1 - progress,
-                            3
-                        );
-
-
-                    const current =
-                        target * eased;
-
-
-                    element.textContent =
-                        prefix +
-                        current.toLocaleString(
-                            "en-NG",
-                            {
-                                minimumFractionDigits:
-                                    decimals,
-                                maximumFractionDigits:
-                                    decimals
-                            }
-                        ) +
-                        suffix;
-
-
-                    if (progress < 1) {
-
-                        requestAnimationFrame(
-                            updateCounter
-                        );
-
-                    } else {
-
-                        element.textContent =
-                            prefix +
-                            target.toLocaleString(
-                                "en-NG",
-                                {
-                                    minimumFractionDigits:
-                                        decimals,
-                                    maximumFractionDigits:
-                                        decimals
-                                }
-                            ) +
-                            suffix;
-
-                    }
-
+                if (boxes[i - 1]) {
+                    timeline.to(boxes[i - 1], { opacity: 0, duration: 0.35 }, t);
                 }
 
+                if (boxes[i]) {
+                    timeline.to(boxes[i], { opacity: 1, duration: 0.45 }, t + 0.55);
+                }
 
-                requestAnimationFrame(
-                    updateCounter
-                );
-
-            }
-
-
-            /*
-             * =====================================================
-             * COUNTER OBSERVER
-             * =====================================================
-             */
-
-            const counterObserver =
-                new IntersectionObserver(
-                    function (entries) {
-
-                        entries.forEach(function (entry) {
-
-                            if (!entry.isIntersecting) {
-                                return;
-                            }
-
-                            animateCounter(
-                                entry.target
-                            );
-
-                            counterObserver.unobserve(
-                                entry.target
-                            );
-
-                        });
-
-                    },
-                    {
-                        threshold: 0.4
-                    }
-                );
-
-
-            counters.forEach(function (counter) {
-
-                counterObserver.observe(counter);
-
+                t += 1;
+                stopTimes.push(t);
             });
 
+            timeline.to({}, { duration: 0.6 }, t);
 
-            /*
-             * =====================================================
-             * HERO FALLBACK
-             *
-             * Makes sure the hero always finishes in its
-             * final state even if the browser has unusual
-             * animation behaviour.
-             * =====================================================
-             */
+            activate(0);
 
-            setTimeout(function () {
+            ScrollTrigger.create({
+                trigger: stage,
+                start: function () { return "top top+=" + navHeight(); },
+                end: function () { return "+=" + Math.round(window.innerHeight * 0.55 * steps.length); },
+                pin: true,
+                scrub: 0.8,
+                animation: timeline,
+                invalidateOnRefresh: true,
+                refreshPriority: 1
+            });
+        }
 
-                const heroDashboard =
-                    document.querySelector(
-                        ".jrad-hero-dashboard"
-                    );
 
-                if (heroDashboard) {
+        /* =====================================================
+           HEADINGS — masked line reveals
+        ====================================================== */
 
-                    heroDashboard.style.opacity = "1";
+        function maskLines(lines) {
+            lines.forEach(function (line) {
+                const mask = document.createElement("div");
+                mask.className = "line-mask";
+                line.parentNode.insertBefore(mask, line);
+                mask.appendChild(line);
+            });
+        }
 
+        function revealHeading(element) {
+
+            if (!hasSplit) {
+                gsap.from(element, {
+                    opacity: 0,
+                    y: 30,
+                    duration: 1,
+                    ease: "expo.out",
+                    scrollTrigger: { trigger: element, start: "top 88%", once: true }
+                });
+                return;
+            }
+
+            new SplitText(element, {
+                type: "lines",
+                linesClass: "split-line",
+                autoSplit: true,
+                onSplit: function (self) {
+
+                    maskLines(self.lines);
+
+                    if (element.dataset.revealed === "true") {
+                        return;
+                    }
+
+                    return gsap.from(self.lines, {
+                        yPercent: 110,
+                        duration: 1.1,
+                        ease: "expo.out",
+                        stagger: 0.1,
+                        scrollTrigger: {
+                            trigger: element,
+                            start: "top 88%",
+                            once: true,
+                            onEnter: function () {
+                                element.dataset.revealed = "true";
+                            }
+                        }
+                    });
                 }
+            });
+        }
 
-            }, 1400);
+        document.querySelectorAll("[data-split]").forEach(revealHeading);
 
 
+        /* =====================================================
+           GENERIC REVEALS + COUNTERS
+        ====================================================== */
+
+        const revealElements = gsap.utils.toArray("[data-reveal]");
+
+        gsap.set(revealElements, { opacity: 0, y: 36 });
+
+        ScrollTrigger.batch(revealElements, {
+            start: "top 88%",
+            once: true,
+            onEnter: function (batch) {
+                gsap.to(batch, {
+                    opacity: 1,
+                    y: 0,
+                    duration: 1,
+                    ease: "expo.out",
+                    stagger: 0.09,
+                    overwrite: true
+                });
+            }
         });
 
+        function formatCount(element, value) {
+            const decimals = parseInt(element.dataset.countDecimals, 10) || 0;
+            return element.dataset.countPrefix +
+                value.toLocaleString("en-US", {
+                    minimumFractionDigits: decimals,
+                    maximumFractionDigits: decimals,
+                    useGrouping: element.dataset.countGroup === "1"
+                }) +
+                element.dataset.countSuffix;
+        }
+
+        gsap.utils.toArray("[data-count]").forEach(function (element) {
+
+            const raw = element.textContent.trim();
+            const match = raw.match(/^([^\d]*)(\d[\d,]*(?:\.\d+)?)(.*)$/);
+
+            if (!match) {
+                return;
+            }
+
+            element.dataset.countPrefix = match[1];
+            element.dataset.countSuffix = match[3];
+            element.dataset.countDecimals = String((match[2].split(".")[1] || "").length);
+            element.dataset.countGroup = match[2].indexOf(",") !== -1 ? "1" : "0";
+            element.textContent = formatCount(element, 0);
+
+            const counter = { value: 0 };
+            const target = parseFloat(match[2].replace(/,/g, ""));
+
+            gsap.to(counter, {
+                value: target,
+                duration: 1.6,
+                ease: "power3.out",
+                scrollTrigger: { trigger: element, start: "top 90%", once: true },
+                onUpdate: function () {
+                    element.textContent = formatCount(element, counter.value);
+                },
+                onComplete: function () {
+                    element.textContent = raw;
+                }
+            });
+        });
+
+
+        /* =====================================================
+           DASHBOARD PAGES — screenshots wipe in, insights follow
+        ====================================================== */
+
+        gsap.utils.toArray(".pbi-shot").forEach(function (shot) {
+
+            const image = shot.querySelector("img");
+            const timeline = gsap.timeline({
+                scrollTrigger: { trigger: shot, start: "top 82%", once: true }
+            });
+
+            timeline.fromTo(shot,
+                { clipPath: "inset(0% 0% 100% 0%)" },
+                { clipPath: "inset(0% 0% 0% 0%)", duration: 1.2, ease: "expo.inOut", clearProps: "clipPath" },
+                0
+            );
+
+            if (image) {
+                timeline.fromTo(image,
+                    { scale: 1.16 },
+                    { scale: 1, duration: 1.6, ease: "expo.out", clearProps: "transform" },
+                    0.1
+                );
+            }
+        });
+
+        gsap.utils.toArray(".pbi-page-copy").forEach(function (copy) {
+            gsap.from(copy.querySelectorAll(".pbi-insights li, .pbi-focus, .pbi-next"), {
+                opacity: 0,
+                y: 18,
+                duration: 0.8,
+                ease: "expo.out",
+                stagger: 0.08,
+                scrollTrigger: { trigger: copy, start: "top 75%", once: true }
+            });
+        });
+
+
+        /* =====================================================
+           SECTION NAV — follows your position
+        ====================================================== */
+
+        const navInner = document.querySelector(".pbi-nav-inner");
+        const navLinks = Array.prototype.slice.call(document.querySelectorAll(".pbi-nav a[href^='#']"));
+        let activeId = null;
+
+        function setActive(id) {
+
+            if (id === activeId) {
+                return;
+            }
+
+            activeId = id;
+
+            navLinks.forEach(function (link) {
+
+                const on = link.getAttribute("href") === "#" + id;
+                link.classList.toggle("is-active", on);
+
+                if (on) {
+                    link.setAttribute("aria-current", "true");
+                    navInner.scrollTo({
+                        left: link.offsetLeft - navInner.clientWidth / 2 + link.offsetWidth / 2,
+                        behavior: "smooth"
+                    });
+                } else {
+                    link.removeAttribute("aria-current");
+                }
+            });
+        }
+
+        document.querySelectorAll("[data-nav]").forEach(function (section) {
+            ScrollTrigger.create({
+                trigger: section,
+                start: "top 45%",
+                end: "bottom 45%",
+                onToggle: function (self) {
+                    if (self.isActive) {
+                        setActive(section.id);
+                    }
+                }
+            });
+        });
+
+        ScrollTrigger.create({
+            trigger: "#main",
+            start: "top 45%",
+            onLeaveBack: function () {
+                setActive(null);
+            }
+        });
+
+
+        /* =====================================================
+           REFRESH + ARRIVING WITH A #HASH
+        ====================================================== */
+
+        fontsReady.then(function () {
+            ScrollTrigger.refresh();
+        });
+
+        window.addEventListener("load", function () {
+
+            ScrollTrigger.refresh();
+
+            const target = findTarget(window.location.hash);
+
+            if (target && window.location.hash !== "#top" && window.location.hash !== "#main") {
+                requestAnimationFrame(function () {
+                    scrollToTarget(target, true);
+                });
+            }
+        });
+
+    })();
     </script>
 
 </body>
